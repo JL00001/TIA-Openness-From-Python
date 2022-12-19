@@ -38,11 +38,25 @@ class SclObject(xmlHeader):
         self.tab = self.tab - 3
         
     def addGlobalVariable(self,GlobalVariable):
+        import re
         Access = self.createSubElement(self.StructuredText,"Access","UId")
         Access.set("Scope","GlobalVariable")
         Symbol = self.createSubElement(Access,"Symbol","UId")
         for x in GlobalVariable.split("."):
-            self.createSubElement(Symbol,"Component","UId").set("Name",str(x))
+            if re.search("\[[0-9{1,6}]\]",x):
+                Component = self.createSubElement(Symbol,"Component","UId")
+                Component.set("Name",re.split("\[[0-9{1,6}]\]",x)[0])
+                Token = self.createSubElement(Component,"Token","UId")
+                Token.set("Text",'[')
+                Access = self.createSubElement(Component,"Access","UId")
+                Access.set("Scope","LiteralConstant")
+                Constant = self.createSubElement(Access,"Constant","UId")
+                ConstantValue = self.createSubElement(Constant,"ConstantValue","UId")
+                ConstantValue.text = re.search("\[[0-9{1,6}]\]",x).group()[1:-1]
+                Token = self.createSubElement(Component,"Token","UId")
+                Token.set("Text",']')
+            else:
+                self.createSubElement(Symbol,"Component","UId").set("Name",str(x))
             Token = self.createSubElement(Symbol,"Token","UId")
             Token.set("Text",'.')
         Symbol.remove(Token)

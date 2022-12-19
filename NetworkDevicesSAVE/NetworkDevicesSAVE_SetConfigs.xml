@@ -1,0 +1,3126 @@
+<?xml version="1.0" ?>
+<Document>
+	<SW.Blocks.FC ID="1">
+		<AttributeList>
+			<AutoNumber>true</AutoNumber>
+			<MemoryLayout>Optimized</MemoryLayout>
+			<Name>NetworkDevicesSAVE_SetConfigs</Name>
+			<ProgrammingLanguage>SCL</ProgrammingLanguage>
+		</AttributeList>
+		<ObjectList>
+			<SW.Blocks.CompileUnit ID="2" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+							<Token UId="14" Text="REGION"/>
+							<Blank UId="15"/>
+							<Text UId="16">U350000_Conn_Box_1</Text>
+							<Blank UId="17" Num="3"/>
+							<NewLine UId="18"/>
+							<Blank UId="19" Num="3"/>
+							<Access UId="20" Scope="GlobalVariable">
+								<Symbol UId="21">
+									<Component UId="22" Name="HMI"/>
+									<Token UId="23" Text="."/>
+									<Component UId="24" Name="ConnectionPoints">
+										<Token UId="25" Text="["/>
+										<Access UId="26" Scope="LiteralConstant">
+											<Constant UId="27">
+												<ConstantValue UId="28">1</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="29" Text="]"/>
+									</Component>
+									<Token UId="30" Text="."/>
+									<Component UId="31" Name="connectionId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="33"/>
+							<Token UId="34" Text=":="/>
+							<Blank UId="35"/>
+							<Access UId="36" Scope="LiteralConstant">
+								<Constant UId="37">
+									<ConstantValue UId="38">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="39" Text=";"/>
+							<NewLine UId="40"/>
+							<Blank UId="41" Num="3"/>
+							<Access UId="42" Scope="GlobalVariable">
+								<Symbol UId="43">
+									<Component UId="44" Name="HMI"/>
+									<Token UId="45" Text="."/>
+									<Component UId="46" Name="ConnectionPoints">
+										<Token UId="47" Text="["/>
+										<Access UId="48" Scope="LiteralConstant">
+											<Constant UId="49">
+												<ConstantValue UId="50">1</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="51" Text="]"/>
+									</Component>
+									<Token UId="52" Text="."/>
+									<Component UId="53" Name="controlZone"/>
+									<Token UId="54" Text="."/>
+									<Component UId="55" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="57"/>
+							<Token UId="58" Text=":="/>
+							<Blank UId="59"/>
+							<Access UId="60" Scope="LiteralConstant">
+								<Constant UId="61">
+									<ConstantValue UId="62">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="63" Text=";"/>
+							<NewLine UId="64"/>
+							<Blank UId="65" Num="3"/>
+							<NewLine UId="66"/>
+							<Token UId="67" Text="END_REGION"/>
+							<NewLine UId="68"/>
+							<Token UId="80" Text="REGION"/>
+							<Blank UId="81"/>
+							<Text UId="82">U350355_Conn_Box_1</Text>
+							<Blank UId="83" Num="3"/>
+							<NewLine UId="84"/>
+							<Blank UId="85" Num="3"/>
+							<Access UId="86" Scope="GlobalVariable">
+								<Symbol UId="87">
+									<Component UId="88" Name="HMI"/>
+									<Token UId="89" Text="."/>
+									<Component UId="90" Name="ConnectionPoints">
+										<Token UId="91" Text="["/>
+										<Access UId="92" Scope="LiteralConstant">
+											<Constant UId="93">
+												<ConstantValue UId="94">1</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="95" Text="]"/>
+									</Component>
+									<Token UId="96" Text="."/>
+									<Component UId="97" Name="connectionId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="99"/>
+							<Token UId="100" Text=":="/>
+							<Blank UId="101"/>
+							<Access UId="102" Scope="LiteralConstant">
+								<Constant UId="103">
+									<ConstantValue UId="104">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="105" Text=";"/>
+							<NewLine UId="106"/>
+							<Blank UId="107" Num="3"/>
+							<Access UId="108" Scope="GlobalVariable">
+								<Symbol UId="109">
+									<Component UId="110" Name="HMI"/>
+									<Token UId="111" Text="."/>
+									<Component UId="112" Name="ConnectionPoints">
+										<Token UId="113" Text="["/>
+										<Access UId="114" Scope="LiteralConstant">
+											<Constant UId="115">
+												<ConstantValue UId="116">1</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="117" Text="]"/>
+									</Component>
+									<Token UId="118" Text="."/>
+									<Component UId="119" Name="controlZone"/>
+									<Token UId="120" Text="."/>
+									<Component UId="121" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="123"/>
+							<Token UId="124" Text=":="/>
+							<Blank UId="125"/>
+							<Access UId="126" Scope="LiteralConstant">
+								<Constant UId="127">
+									<ConstantValue UId="128">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="129" Text=";"/>
+							<NewLine UId="130"/>
+							<Blank UId="131" Num="3"/>
+							<NewLine UId="132"/>
+							<Token UId="133" Text="END_REGION"/>
+							<NewLine UId="134"/>
+							<Token UId="146" Text="REGION"/>
+							<Blank UId="147"/>
+							<Text UId="148">U350755_Conn_Box_2</Text>
+							<Blank UId="149" Num="3"/>
+							<NewLine UId="150"/>
+							<Blank UId="151" Num="3"/>
+							<Access UId="152" Scope="GlobalVariable">
+								<Symbol UId="153">
+									<Component UId="154" Name="HMI"/>
+									<Token UId="155" Text="."/>
+									<Component UId="156" Name="ConnectionPoints">
+										<Token UId="157" Text="["/>
+										<Access UId="158" Scope="LiteralConstant">
+											<Constant UId="159">
+												<ConstantValue UId="160">2</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="161" Text="]"/>
+									</Component>
+									<Token UId="162" Text="."/>
+									<Component UId="163" Name="connectionId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="165"/>
+							<Token UId="166" Text=":="/>
+							<Blank UId="167"/>
+							<Access UId="168" Scope="LiteralConstant">
+								<Constant UId="169">
+									<ConstantValue UId="170">2</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="171" Text=";"/>
+							<NewLine UId="172"/>
+							<Blank UId="173" Num="3"/>
+							<Access UId="174" Scope="GlobalVariable">
+								<Symbol UId="175">
+									<Component UId="176" Name="HMI"/>
+									<Token UId="177" Text="."/>
+									<Component UId="178" Name="ConnectionPoints">
+										<Token UId="179" Text="["/>
+										<Access UId="180" Scope="LiteralConstant">
+											<Constant UId="181">
+												<ConstantValue UId="182">2</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="183" Text="]"/>
+									</Component>
+									<Token UId="184" Text="."/>
+									<Component UId="185" Name="controlZone"/>
+									<Token UId="186" Text="."/>
+									<Component UId="187" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="189"/>
+							<Token UId="190" Text=":="/>
+							<Blank UId="191"/>
+							<Access UId="192" Scope="LiteralConstant">
+								<Constant UId="193">
+									<ConstantValue UId="194">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="195" Text=";"/>
+							<NewLine UId="196"/>
+							<Blank UId="197" Num="3"/>
+							<NewLine UId="198"/>
+							<Token UId="199" Text="END_REGION"/>
+							<NewLine UId="200"/>
+							<Token UId="212" Text="REGION"/>
+							<Blank UId="213"/>
+							<Text UId="214">U351155_Conn_Box_3</Text>
+							<Blank UId="215" Num="3"/>
+							<NewLine UId="216"/>
+							<Blank UId="217" Num="3"/>
+							<Access UId="218" Scope="GlobalVariable">
+								<Symbol UId="219">
+									<Component UId="220" Name="HMI"/>
+									<Token UId="221" Text="."/>
+									<Component UId="222" Name="ConnectionPoints">
+										<Token UId="223" Text="["/>
+										<Access UId="224" Scope="LiteralConstant">
+											<Constant UId="225">
+												<ConstantValue UId="226">3</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="227" Text="]"/>
+									</Component>
+									<Token UId="228" Text="."/>
+									<Component UId="229" Name="connectionId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="231"/>
+							<Token UId="232" Text=":="/>
+							<Blank UId="233"/>
+							<Access UId="234" Scope="LiteralConstant">
+								<Constant UId="235">
+									<ConstantValue UId="236">3</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="237" Text=";"/>
+							<NewLine UId="238"/>
+							<Blank UId="239" Num="3"/>
+							<Access UId="240" Scope="GlobalVariable">
+								<Symbol UId="241">
+									<Component UId="242" Name="HMI"/>
+									<Token UId="243" Text="."/>
+									<Component UId="244" Name="ConnectionPoints">
+										<Token UId="245" Text="["/>
+										<Access UId="246" Scope="LiteralConstant">
+											<Constant UId="247">
+												<ConstantValue UId="248">3</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="249" Text="]"/>
+									</Component>
+									<Token UId="250" Text="."/>
+									<Component UId="251" Name="controlZone"/>
+									<Token UId="252" Text="."/>
+									<Component UId="253" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="255"/>
+							<Token UId="256" Text=":="/>
+							<Blank UId="257"/>
+							<Access UId="258" Scope="LiteralConstant">
+								<Constant UId="259">
+									<ConstantValue UId="260">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="261" Text=";"/>
+							<NewLine UId="262"/>
+							<Blank UId="263" Num="3"/>
+							<NewLine UId="264"/>
+							<Token UId="265" Text="END_REGION"/>
+							<NewLine UId="266"/>
+							<Token UId="278" Text="REGION"/>
+							<Blank UId="279"/>
+							<Text UId="280">U351555_Conn_Box_4</Text>
+							<Blank UId="281" Num="3"/>
+							<NewLine UId="282"/>
+							<Blank UId="283" Num="3"/>
+							<Access UId="284" Scope="GlobalVariable">
+								<Symbol UId="285">
+									<Component UId="286" Name="HMI"/>
+									<Token UId="287" Text="."/>
+									<Component UId="288" Name="ConnectionPoints">
+										<Token UId="289" Text="["/>
+										<Access UId="290" Scope="LiteralConstant">
+											<Constant UId="291">
+												<ConstantValue UId="292">4</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="293" Text="]"/>
+									</Component>
+									<Token UId="294" Text="."/>
+									<Component UId="295" Name="connectionId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="297"/>
+							<Token UId="298" Text=":="/>
+							<Blank UId="299"/>
+							<Access UId="300" Scope="LiteralConstant">
+								<Constant UId="301">
+									<ConstantValue UId="302">4</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="303" Text=";"/>
+							<NewLine UId="304"/>
+							<Blank UId="305" Num="3"/>
+							<Access UId="306" Scope="GlobalVariable">
+								<Symbol UId="307">
+									<Component UId="308" Name="HMI"/>
+									<Token UId="309" Text="."/>
+									<Component UId="310" Name="ConnectionPoints">
+										<Token UId="311" Text="["/>
+										<Access UId="312" Scope="LiteralConstant">
+											<Constant UId="313">
+												<ConstantValue UId="314">4</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="315" Text="]"/>
+									</Component>
+									<Token UId="316" Text="."/>
+									<Component UId="317" Name="controlZone"/>
+									<Token UId="318" Text="."/>
+									<Component UId="319" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="321"/>
+							<Token UId="322" Text=":="/>
+							<Blank UId="323"/>
+							<Access UId="324" Scope="LiteralConstant">
+								<Constant UId="325">
+									<ConstantValue UId="326">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="327" Text=";"/>
+							<NewLine UId="328"/>
+							<Blank UId="329" Num="3"/>
+							<NewLine UId="330"/>
+							<Token UId="331" Text="END_REGION"/>
+							<NewLine UId="332"/>
+							<Token UId="357" Text="REGION"/>
+							<Blank UId="358"/>
+							<Text UId="359">InstU370050_E_Z2_Scanner</Text>
+							<Blank UId="360" Num="3"/>
+							<NewLine UId="361"/>
+							<Blank UId="362" Num="3"/>
+							<Access UId="363" Scope="GlobalVariable">
+								<Symbol UId="364">
+									<Component UId="365" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="366" Text="."/>
+									<Component UId="367" Name="inConfig"/>
+									<Token UId="368" Text="."/>
+									<Component UId="369" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="371"/>
+							<Token UId="372" Text=":="/>
+							<Blank UId="373"/>
+							<Access UId="374" Scope="LiteralConstant">
+								<Constant UId="375">
+									<ConstantValue UId="376">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="377" Text=";"/>
+							<NewLine UId="378"/>
+							<Blank UId="379" Num="3"/>
+							<Access UId="380" Scope="GlobalVariable">
+								<Symbol UId="381">
+									<Component UId="382" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="383" Text="."/>
+									<Component UId="384" Name="inConfig"/>
+									<Token UId="385" Text="."/>
+									<Component UId="386" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="388"/>
+							<Token UId="389" Text=":="/>
+							<Blank UId="390"/>
+							<Access UId="391" Scope="LiteralConstant">
+								<Constant UId="392">
+									<ConstantValue UId="393">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="394" Text=";"/>
+							<NewLine UId="395"/>
+							<Blank UId="396" Num="3"/>
+							<Access UId="397" Scope="GlobalVariable">
+								<Symbol UId="398">
+									<Component UId="399" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="400" Text="."/>
+									<Component UId="401" Name="inConfig"/>
+									<Token UId="402" Text="."/>
+									<Component UId="403" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="405"/>
+							<Token UId="406" Text=":="/>
+							<Blank UId="407"/>
+							<Access UId="408" Scope="TypedConstant">
+								<Constant UId="409">
+									<ConstantValue UId="410">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="411" Text=";"/>
+							<NewLine UId="412"/>
+							<Blank UId="413" Num="3"/>
+							<Access UId="414" Scope="GlobalVariable">
+								<Symbol UId="415">
+									<Component UId="416" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="417" Text="."/>
+									<Component UId="418" Name="inConfig"/>
+									<Token UId="419" Text="."/>
+									<Component UId="420" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="422"/>
+							<Token UId="423" Text=":="/>
+							<Blank UId="424"/>
+							<Access UId="425" Scope="TypedConstant">
+								<Constant UId="426">
+									<ConstantValue UId="427">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="428" Text=";"/>
+							<NewLine UId="429"/>
+							<Blank UId="430" Num="3"/>
+							<Access UId="431" Scope="GlobalVariable">
+								<Symbol UId="432">
+									<Component UId="433" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="434" Text="."/>
+									<Component UId="435" Name="inConfig"/>
+									<Token UId="436" Text="."/>
+									<Component UId="437" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="439"/>
+							<Token UId="440" Text=":="/>
+							<Blank UId="441"/>
+							<Access UId="442" Scope="LiteralConstant">
+								<Constant UId="443">
+									<ConstantValue UId="444">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="445" Text=";"/>
+							<NewLine UId="446"/>
+							<Blank UId="447" Num="3"/>
+							<Access UId="448" Scope="GlobalVariable">
+								<Symbol UId="449">
+									<Component UId="450" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="451" Text="."/>
+									<Component UId="452" Name="inConfig"/>
+									<Token UId="453" Text="."/>
+									<Component UId="454" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="456"/>
+							<Token UId="457" Text=":="/>
+							<Blank UId="458"/>
+							<Access UId="459" Scope="LiteralConstant">
+								<Constant UId="460">
+									<ConstantValue UId="461">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="462" Text=";"/>
+							<NewLine UId="463"/>
+							<Blank UId="464" Num="3"/>
+							<Access UId="465" Scope="GlobalVariable">
+								<Symbol UId="466">
+									<Component UId="467" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="468" Text="."/>
+									<Component UId="469" Name="inConfig"/>
+									<Token UId="470" Text="."/>
+									<Component UId="471" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="473"/>
+							<Token UId="474" Text=":="/>
+							<Blank UId="475"/>
+							<Access UId="476" Scope="LiteralConstant">
+								<Constant UId="477">
+									<ConstantValue UId="478">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="479" Text=";"/>
+							<NewLine UId="480"/>
+							<Blank UId="481" Num="3"/>
+							<Access UId="482" Scope="GlobalVariable">
+								<Symbol UId="483">
+									<Component UId="484" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="485" Text="."/>
+									<Component UId="486" Name="inConfig"/>
+									<Token UId="487" Text="."/>
+									<Component UId="488" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="490"/>
+							<Token UId="491" Text=":="/>
+							<Blank UId="492"/>
+							<Access UId="493" Scope="LiteralConstant">
+								<Constant UId="494">
+									<ConstantValue UId="495">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="496" Text=";"/>
+							<NewLine UId="497"/>
+							<Blank UId="498" Num="3"/>
+							<Access UId="499" Scope="GlobalVariable">
+								<Symbol UId="500">
+									<Component UId="501" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="502" Text="."/>
+									<Component UId="503" Name="inConfig"/>
+									<Token UId="504" Text="."/>
+									<Component UId="505" Name="hmiControlZones"/>
+									<Token UId="506" Text="."/>
+									<Component UId="507" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="509"/>
+							<Token UId="510" Text=":="/>
+							<Blank UId="511"/>
+							<Access UId="512" Scope="TypedConstant">
+								<Constant UId="513">
+									<ConstantValue UId="514">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="515" Text=";"/>
+							<NewLine UId="516"/>
+							<Blank UId="517" Num="3"/>
+							<Access UId="518" Scope="GlobalVariable">
+								<Symbol UId="519">
+									<Component UId="520" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="521" Text="."/>
+									<Component UId="522" Name="inConfig"/>
+									<Token UId="523" Text="."/>
+									<Component UId="524" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="526"/>
+							<Token UId="527" Text=":="/>
+							<Blank UId="528"/>
+							<Access UId="529" Scope="TypedConstant">
+								<Constant UId="530">
+									<ConstantValue UId="531">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="532" Text=";"/>
+							<NewLine UId="533"/>
+							<Blank UId="534" Num="3"/>
+							<Access UId="535" Scope="GlobalVariable">
+								<Symbol UId="536">
+									<Component UId="537" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="538" Text="."/>
+									<Component UId="539" Name="inConfig"/>
+									<Token UId="540" Text="."/>
+									<Component UId="541" Name="jamPresets"/>
+									<Token UId="542" Text="."/>
+									<Component UId="543" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="545"/>
+							<Token UId="546" Text=":="/>
+							<Blank UId="547"/>
+							<Access UId="548" Scope="LiteralConstant">
+								<Constant UId="549">
+									<ConstantValue UId="550">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="551" Text=";"/>
+							<NewLine UId="552"/>
+							<Blank UId="553" Num="3"/>
+							<Access UId="554" Scope="GlobalVariable">
+								<Symbol UId="555">
+									<Component UId="556" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="557" Text="."/>
+									<Component UId="558" Name="inConfig"/>
+									<Token UId="559" Text="."/>
+									<Component UId="560" Name="jamPresets"/>
+									<Token UId="561" Text="."/>
+									<Component UId="562" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="564"/>
+							<Token UId="565" Text=":="/>
+							<Blank UId="566"/>
+							<Access UId="567" Scope="TypedConstant">
+								<Constant UId="568">
+									<ConstantValue UId="569">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="570" Text=";"/>
+							<NewLine UId="571"/>
+							<Blank UId="572" Num="3"/>
+							<Access UId="573" Scope="GlobalVariable">
+								<Symbol UId="574">
+									<Component UId="575" Name="InstU370050_E_Z2_Scanner"/>
+									<Token UId="576" Text="."/>
+									<Component UId="577" Name="inConfig"/>
+									<Token UId="578" Text="."/>
+									<Component UId="579" Name="jamPresets"/>
+									<Token UId="580" Text="."/>
+									<Component UId="581" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="583"/>
+							<Token UId="584" Text=":="/>
+							<Blank UId="585"/>
+							<Access UId="586" Scope="TypedConstant">
+								<Constant UId="587">
+									<ConstantValue UId="588">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="589" Text=";"/>
+							<NewLine UId="590"/>
+							<Blank UId="591" Num="3"/>
+							<NewLine UId="592"/>
+							<Token UId="593" Text="END_REGION"/>
+							<NewLine UId="594"/>
+							<Token UId="619" Text="REGION"/>
+							<Blank UId="620"/>
+							<Text UId="621">InstU350157_E2_Z2_Scanner</Text>
+							<Blank UId="622" Num="3"/>
+							<NewLine UId="623"/>
+							<Blank UId="624" Num="3"/>
+							<Access UId="625" Scope="GlobalVariable">
+								<Symbol UId="626">
+									<Component UId="627" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="628" Text="."/>
+									<Component UId="629" Name="inConfig"/>
+									<Token UId="630" Text="."/>
+									<Component UId="631" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="633"/>
+							<Token UId="634" Text=":="/>
+							<Blank UId="635"/>
+							<Access UId="636" Scope="LiteralConstant">
+								<Constant UId="637">
+									<ConstantValue UId="638">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="639" Text=";"/>
+							<NewLine UId="640"/>
+							<Blank UId="641" Num="3"/>
+							<Access UId="642" Scope="GlobalVariable">
+								<Symbol UId="643">
+									<Component UId="644" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="645" Text="."/>
+									<Component UId="646" Name="inConfig"/>
+									<Token UId="647" Text="."/>
+									<Component UId="648" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="650"/>
+							<Token UId="651" Text=":="/>
+							<Blank UId="652"/>
+							<Access UId="653" Scope="LiteralConstant">
+								<Constant UId="654">
+									<ConstantValue UId="655">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="656" Text=";"/>
+							<NewLine UId="657"/>
+							<Blank UId="658" Num="3"/>
+							<Access UId="659" Scope="GlobalVariable">
+								<Symbol UId="660">
+									<Component UId="661" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="662" Text="."/>
+									<Component UId="663" Name="inConfig"/>
+									<Token UId="664" Text="."/>
+									<Component UId="665" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="667"/>
+							<Token UId="668" Text=":="/>
+							<Blank UId="669"/>
+							<Access UId="670" Scope="TypedConstant">
+								<Constant UId="671">
+									<ConstantValue UId="672">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="673" Text=";"/>
+							<NewLine UId="674"/>
+							<Blank UId="675" Num="3"/>
+							<Access UId="676" Scope="GlobalVariable">
+								<Symbol UId="677">
+									<Component UId="678" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="679" Text="."/>
+									<Component UId="680" Name="inConfig"/>
+									<Token UId="681" Text="."/>
+									<Component UId="682" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="684"/>
+							<Token UId="685" Text=":="/>
+							<Blank UId="686"/>
+							<Access UId="687" Scope="TypedConstant">
+								<Constant UId="688">
+									<ConstantValue UId="689">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="690" Text=";"/>
+							<NewLine UId="691"/>
+							<Blank UId="692" Num="3"/>
+							<Access UId="693" Scope="GlobalVariable">
+								<Symbol UId="694">
+									<Component UId="695" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="696" Text="."/>
+									<Component UId="697" Name="inConfig"/>
+									<Token UId="698" Text="."/>
+									<Component UId="699" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="701"/>
+							<Token UId="702" Text=":="/>
+							<Blank UId="703"/>
+							<Access UId="704" Scope="LiteralConstant">
+								<Constant UId="705">
+									<ConstantValue UId="706">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="707" Text=";"/>
+							<NewLine UId="708"/>
+							<Blank UId="709" Num="3"/>
+							<Access UId="710" Scope="GlobalVariable">
+								<Symbol UId="711">
+									<Component UId="712" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="713" Text="."/>
+									<Component UId="714" Name="inConfig"/>
+									<Token UId="715" Text="."/>
+									<Component UId="716" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="718"/>
+							<Token UId="719" Text=":="/>
+							<Blank UId="720"/>
+							<Access UId="721" Scope="LiteralConstant">
+								<Constant UId="722">
+									<ConstantValue UId="723">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="724" Text=";"/>
+							<NewLine UId="725"/>
+							<Blank UId="726" Num="3"/>
+							<Access UId="727" Scope="GlobalVariable">
+								<Symbol UId="728">
+									<Component UId="729" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="730" Text="."/>
+									<Component UId="731" Name="inConfig"/>
+									<Token UId="732" Text="."/>
+									<Component UId="733" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="735"/>
+							<Token UId="736" Text=":="/>
+							<Blank UId="737"/>
+							<Access UId="738" Scope="LiteralConstant">
+								<Constant UId="739">
+									<ConstantValue UId="740">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="741" Text=";"/>
+							<NewLine UId="742"/>
+							<Blank UId="743" Num="3"/>
+							<Access UId="744" Scope="GlobalVariable">
+								<Symbol UId="745">
+									<Component UId="746" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="747" Text="."/>
+									<Component UId="748" Name="inConfig"/>
+									<Token UId="749" Text="."/>
+									<Component UId="750" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="752"/>
+							<Token UId="753" Text=":="/>
+							<Blank UId="754"/>
+							<Access UId="755" Scope="LiteralConstant">
+								<Constant UId="756">
+									<ConstantValue UId="757">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="758" Text=";"/>
+							<NewLine UId="759"/>
+							<Blank UId="760" Num="3"/>
+							<Access UId="761" Scope="GlobalVariable">
+								<Symbol UId="762">
+									<Component UId="763" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="764" Text="."/>
+									<Component UId="765" Name="inConfig"/>
+									<Token UId="766" Text="."/>
+									<Component UId="767" Name="hmiControlZones"/>
+									<Token UId="768" Text="."/>
+									<Component UId="769" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="771"/>
+							<Token UId="772" Text=":="/>
+							<Blank UId="773"/>
+							<Access UId="774" Scope="TypedConstant">
+								<Constant UId="775">
+									<ConstantValue UId="776">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="777" Text=";"/>
+							<NewLine UId="778"/>
+							<Blank UId="779" Num="3"/>
+							<Access UId="780" Scope="GlobalVariable">
+								<Symbol UId="781">
+									<Component UId="782" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="783" Text="."/>
+									<Component UId="784" Name="inConfig"/>
+									<Token UId="785" Text="."/>
+									<Component UId="786" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="788"/>
+							<Token UId="789" Text=":="/>
+							<Blank UId="790"/>
+							<Access UId="791" Scope="TypedConstant">
+								<Constant UId="792">
+									<ConstantValue UId="793">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="794" Text=";"/>
+							<NewLine UId="795"/>
+							<Blank UId="796" Num="3"/>
+							<Access UId="797" Scope="GlobalVariable">
+								<Symbol UId="798">
+									<Component UId="799" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="800" Text="."/>
+									<Component UId="801" Name="inConfig"/>
+									<Token UId="802" Text="."/>
+									<Component UId="803" Name="jamPresets"/>
+									<Token UId="804" Text="."/>
+									<Component UId="805" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="807"/>
+							<Token UId="808" Text=":="/>
+							<Blank UId="809"/>
+							<Access UId="810" Scope="LiteralConstant">
+								<Constant UId="811">
+									<ConstantValue UId="812">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="813" Text=";"/>
+							<NewLine UId="814"/>
+							<Blank UId="815" Num="3"/>
+							<Access UId="816" Scope="GlobalVariable">
+								<Symbol UId="817">
+									<Component UId="818" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="819" Text="."/>
+									<Component UId="820" Name="inConfig"/>
+									<Token UId="821" Text="."/>
+									<Component UId="822" Name="jamPresets"/>
+									<Token UId="823" Text="."/>
+									<Component UId="824" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="826"/>
+							<Token UId="827" Text=":="/>
+							<Blank UId="828"/>
+							<Access UId="829" Scope="TypedConstant">
+								<Constant UId="830">
+									<ConstantValue UId="831">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="832" Text=";"/>
+							<NewLine UId="833"/>
+							<Blank UId="834" Num="3"/>
+							<Access UId="835" Scope="GlobalVariable">
+								<Symbol UId="836">
+									<Component UId="837" Name="InstU350157_E2_Z2_Scanner"/>
+									<Token UId="838" Text="."/>
+									<Component UId="839" Name="inConfig"/>
+									<Token UId="840" Text="."/>
+									<Component UId="841" Name="jamPresets"/>
+									<Token UId="842" Text="."/>
+									<Component UId="843" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="845"/>
+							<Token UId="846" Text=":="/>
+							<Blank UId="847"/>
+							<Access UId="848" Scope="TypedConstant">
+								<Constant UId="849">
+									<ConstantValue UId="850">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="851" Text=";"/>
+							<NewLine UId="852"/>
+							<Blank UId="853" Num="3"/>
+							<NewLine UId="854"/>
+							<Token UId="855" Text="END_REGION"/>
+							<NewLine UId="856"/>
+							<Token UId="881" Text="REGION"/>
+							<Blank UId="882"/>
+							<Text UId="883">InstU350355_E2_Z2_Scanner</Text>
+							<Blank UId="884" Num="3"/>
+							<NewLine UId="885"/>
+							<Blank UId="886" Num="3"/>
+							<Access UId="887" Scope="GlobalVariable">
+								<Symbol UId="888">
+									<Component UId="889" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="890" Text="."/>
+									<Component UId="891" Name="inConfig"/>
+									<Token UId="892" Text="."/>
+									<Component UId="893" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="895"/>
+							<Token UId="896" Text=":="/>
+							<Blank UId="897"/>
+							<Access UId="898" Scope="LiteralConstant">
+								<Constant UId="899">
+									<ConstantValue UId="900">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="901" Text=";"/>
+							<NewLine UId="902"/>
+							<Blank UId="903" Num="3"/>
+							<Access UId="904" Scope="GlobalVariable">
+								<Symbol UId="905">
+									<Component UId="906" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="907" Text="."/>
+									<Component UId="908" Name="inConfig"/>
+									<Token UId="909" Text="."/>
+									<Component UId="910" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="912"/>
+							<Token UId="913" Text=":="/>
+							<Blank UId="914"/>
+							<Access UId="915" Scope="LiteralConstant">
+								<Constant UId="916">
+									<ConstantValue UId="917">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="918" Text=";"/>
+							<NewLine UId="919"/>
+							<Blank UId="920" Num="3"/>
+							<Access UId="921" Scope="GlobalVariable">
+								<Symbol UId="922">
+									<Component UId="923" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="924" Text="."/>
+									<Component UId="925" Name="inConfig"/>
+									<Token UId="926" Text="."/>
+									<Component UId="927" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="929"/>
+							<Token UId="930" Text=":="/>
+							<Blank UId="931"/>
+							<Access UId="932" Scope="TypedConstant">
+								<Constant UId="933">
+									<ConstantValue UId="934">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="935" Text=";"/>
+							<NewLine UId="936"/>
+							<Blank UId="937" Num="3"/>
+							<Access UId="938" Scope="GlobalVariable">
+								<Symbol UId="939">
+									<Component UId="940" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="941" Text="."/>
+									<Component UId="942" Name="inConfig"/>
+									<Token UId="943" Text="."/>
+									<Component UId="944" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="946"/>
+							<Token UId="947" Text=":="/>
+							<Blank UId="948"/>
+							<Access UId="949" Scope="TypedConstant">
+								<Constant UId="950">
+									<ConstantValue UId="951">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="952" Text=";"/>
+							<NewLine UId="953"/>
+							<Blank UId="954" Num="3"/>
+							<Access UId="955" Scope="GlobalVariable">
+								<Symbol UId="956">
+									<Component UId="957" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="958" Text="."/>
+									<Component UId="959" Name="inConfig"/>
+									<Token UId="960" Text="."/>
+									<Component UId="961" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="963"/>
+							<Token UId="964" Text=":="/>
+							<Blank UId="965"/>
+							<Access UId="966" Scope="LiteralConstant">
+								<Constant UId="967">
+									<ConstantValue UId="968">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="969" Text=";"/>
+							<NewLine UId="970"/>
+							<Blank UId="971" Num="3"/>
+							<Access UId="972" Scope="GlobalVariable">
+								<Symbol UId="973">
+									<Component UId="974" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="975" Text="."/>
+									<Component UId="976" Name="inConfig"/>
+									<Token UId="977" Text="."/>
+									<Component UId="978" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="980"/>
+							<Token UId="981" Text=":="/>
+							<Blank UId="982"/>
+							<Access UId="983" Scope="LiteralConstant">
+								<Constant UId="984">
+									<ConstantValue UId="985">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="986" Text=";"/>
+							<NewLine UId="987"/>
+							<Blank UId="988" Num="3"/>
+							<Access UId="989" Scope="GlobalVariable">
+								<Symbol UId="990">
+									<Component UId="991" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="992" Text="."/>
+									<Component UId="993" Name="inConfig"/>
+									<Token UId="994" Text="."/>
+									<Component UId="995" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="997"/>
+							<Token UId="998" Text=":="/>
+							<Blank UId="999"/>
+							<Access UId="1000" Scope="LiteralConstant">
+								<Constant UId="1001">
+									<ConstantValue UId="1002">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1003" Text=";"/>
+							<NewLine UId="1004"/>
+							<Blank UId="1005" Num="3"/>
+							<Access UId="1006" Scope="GlobalVariable">
+								<Symbol UId="1007">
+									<Component UId="1008" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="1009" Text="."/>
+									<Component UId="1010" Name="inConfig"/>
+									<Token UId="1011" Text="."/>
+									<Component UId="1012" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1014"/>
+							<Token UId="1015" Text=":="/>
+							<Blank UId="1016"/>
+							<Access UId="1017" Scope="LiteralConstant">
+								<Constant UId="1018">
+									<ConstantValue UId="1019">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1020" Text=";"/>
+							<NewLine UId="1021"/>
+							<Blank UId="1022" Num="3"/>
+							<Access UId="1023" Scope="GlobalVariable">
+								<Symbol UId="1024">
+									<Component UId="1025" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="1026" Text="."/>
+									<Component UId="1027" Name="inConfig"/>
+									<Token UId="1028" Text="."/>
+									<Component UId="1029" Name="hmiControlZones"/>
+									<Token UId="1030" Text="."/>
+									<Component UId="1031" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1033"/>
+							<Token UId="1034" Text=":="/>
+							<Blank UId="1035"/>
+							<Access UId="1036" Scope="TypedConstant">
+								<Constant UId="1037">
+									<ConstantValue UId="1038">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1039" Text=";"/>
+							<NewLine UId="1040"/>
+							<Blank UId="1041" Num="3"/>
+							<Access UId="1042" Scope="GlobalVariable">
+								<Symbol UId="1043">
+									<Component UId="1044" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="1045" Text="."/>
+									<Component UId="1046" Name="inConfig"/>
+									<Token UId="1047" Text="."/>
+									<Component UId="1048" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1050"/>
+							<Token UId="1051" Text=":="/>
+							<Blank UId="1052"/>
+							<Access UId="1053" Scope="TypedConstant">
+								<Constant UId="1054">
+									<ConstantValue UId="1055">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1056" Text=";"/>
+							<NewLine UId="1057"/>
+							<Blank UId="1058" Num="3"/>
+							<Access UId="1059" Scope="GlobalVariable">
+								<Symbol UId="1060">
+									<Component UId="1061" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="1062" Text="."/>
+									<Component UId="1063" Name="inConfig"/>
+									<Token UId="1064" Text="."/>
+									<Component UId="1065" Name="jamPresets"/>
+									<Token UId="1066" Text="."/>
+									<Component UId="1067" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1069"/>
+							<Token UId="1070" Text=":="/>
+							<Blank UId="1071"/>
+							<Access UId="1072" Scope="LiteralConstant">
+								<Constant UId="1073">
+									<ConstantValue UId="1074">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1075" Text=";"/>
+							<NewLine UId="1076"/>
+							<Blank UId="1077" Num="3"/>
+							<Access UId="1078" Scope="GlobalVariable">
+								<Symbol UId="1079">
+									<Component UId="1080" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="1081" Text="."/>
+									<Component UId="1082" Name="inConfig"/>
+									<Token UId="1083" Text="."/>
+									<Component UId="1084" Name="jamPresets"/>
+									<Token UId="1085" Text="."/>
+									<Component UId="1086" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1088"/>
+							<Token UId="1089" Text=":="/>
+							<Blank UId="1090"/>
+							<Access UId="1091" Scope="TypedConstant">
+								<Constant UId="1092">
+									<ConstantValue UId="1093">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1094" Text=";"/>
+							<NewLine UId="1095"/>
+							<Blank UId="1096" Num="3"/>
+							<Access UId="1097" Scope="GlobalVariable">
+								<Symbol UId="1098">
+									<Component UId="1099" Name="InstU350355_E2_Z2_Scanner"/>
+									<Token UId="1100" Text="."/>
+									<Component UId="1101" Name="inConfig"/>
+									<Token UId="1102" Text="."/>
+									<Component UId="1103" Name="jamPresets"/>
+									<Token UId="1104" Text="."/>
+									<Component UId="1105" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1107"/>
+							<Token UId="1108" Text=":="/>
+							<Blank UId="1109"/>
+							<Access UId="1110" Scope="TypedConstant">
+								<Constant UId="1111">
+									<ConstantValue UId="1112">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1113" Text=";"/>
+							<NewLine UId="1114"/>
+							<Blank UId="1115" Num="3"/>
+							<NewLine UId="1116"/>
+							<Token UId="1117" Text="END_REGION"/>
+							<NewLine UId="1118"/>
+							<Token UId="1143" Text="REGION"/>
+							<Blank UId="1144"/>
+							<Text UId="1145">InstU350555_E2_Z2_Scanner</Text>
+							<Blank UId="1146" Num="3"/>
+							<NewLine UId="1147"/>
+							<Blank UId="1148" Num="3"/>
+							<Access UId="1149" Scope="GlobalVariable">
+								<Symbol UId="1150">
+									<Component UId="1151" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1152" Text="."/>
+									<Component UId="1153" Name="inConfig"/>
+									<Token UId="1154" Text="."/>
+									<Component UId="1155" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1157"/>
+							<Token UId="1158" Text=":="/>
+							<Blank UId="1159"/>
+							<Access UId="1160" Scope="LiteralConstant">
+								<Constant UId="1161">
+									<ConstantValue UId="1162">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1163" Text=";"/>
+							<NewLine UId="1164"/>
+							<Blank UId="1165" Num="3"/>
+							<Access UId="1166" Scope="GlobalVariable">
+								<Symbol UId="1167">
+									<Component UId="1168" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1169" Text="."/>
+									<Component UId="1170" Name="inConfig"/>
+									<Token UId="1171" Text="."/>
+									<Component UId="1172" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1174"/>
+							<Token UId="1175" Text=":="/>
+							<Blank UId="1176"/>
+							<Access UId="1177" Scope="LiteralConstant">
+								<Constant UId="1178">
+									<ConstantValue UId="1179">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1180" Text=";"/>
+							<NewLine UId="1181"/>
+							<Blank UId="1182" Num="3"/>
+							<Access UId="1183" Scope="GlobalVariable">
+								<Symbol UId="1184">
+									<Component UId="1185" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1186" Text="."/>
+									<Component UId="1187" Name="inConfig"/>
+									<Token UId="1188" Text="."/>
+									<Component UId="1189" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1191"/>
+							<Token UId="1192" Text=":="/>
+							<Blank UId="1193"/>
+							<Access UId="1194" Scope="TypedConstant">
+								<Constant UId="1195">
+									<ConstantValue UId="1196">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1197" Text=";"/>
+							<NewLine UId="1198"/>
+							<Blank UId="1199" Num="3"/>
+							<Access UId="1200" Scope="GlobalVariable">
+								<Symbol UId="1201">
+									<Component UId="1202" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1203" Text="."/>
+									<Component UId="1204" Name="inConfig"/>
+									<Token UId="1205" Text="."/>
+									<Component UId="1206" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1208"/>
+							<Token UId="1209" Text=":="/>
+							<Blank UId="1210"/>
+							<Access UId="1211" Scope="TypedConstant">
+								<Constant UId="1212">
+									<ConstantValue UId="1213">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1214" Text=";"/>
+							<NewLine UId="1215"/>
+							<Blank UId="1216" Num="3"/>
+							<Access UId="1217" Scope="GlobalVariable">
+								<Symbol UId="1218">
+									<Component UId="1219" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1220" Text="."/>
+									<Component UId="1221" Name="inConfig"/>
+									<Token UId="1222" Text="."/>
+									<Component UId="1223" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1225"/>
+							<Token UId="1226" Text=":="/>
+							<Blank UId="1227"/>
+							<Access UId="1228" Scope="LiteralConstant">
+								<Constant UId="1229">
+									<ConstantValue UId="1230">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1231" Text=";"/>
+							<NewLine UId="1232"/>
+							<Blank UId="1233" Num="3"/>
+							<Access UId="1234" Scope="GlobalVariable">
+								<Symbol UId="1235">
+									<Component UId="1236" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1237" Text="."/>
+									<Component UId="1238" Name="inConfig"/>
+									<Token UId="1239" Text="."/>
+									<Component UId="1240" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1242"/>
+							<Token UId="1243" Text=":="/>
+							<Blank UId="1244"/>
+							<Access UId="1245" Scope="LiteralConstant">
+								<Constant UId="1246">
+									<ConstantValue UId="1247">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1248" Text=";"/>
+							<NewLine UId="1249"/>
+							<Blank UId="1250" Num="3"/>
+							<Access UId="1251" Scope="GlobalVariable">
+								<Symbol UId="1252">
+									<Component UId="1253" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1254" Text="."/>
+									<Component UId="1255" Name="inConfig"/>
+									<Token UId="1256" Text="."/>
+									<Component UId="1257" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1259"/>
+							<Token UId="1260" Text=":="/>
+							<Blank UId="1261"/>
+							<Access UId="1262" Scope="LiteralConstant">
+								<Constant UId="1263">
+									<ConstantValue UId="1264">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1265" Text=";"/>
+							<NewLine UId="1266"/>
+							<Blank UId="1267" Num="3"/>
+							<Access UId="1268" Scope="GlobalVariable">
+								<Symbol UId="1269">
+									<Component UId="1270" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1271" Text="."/>
+									<Component UId="1272" Name="inConfig"/>
+									<Token UId="1273" Text="."/>
+									<Component UId="1274" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1276"/>
+							<Token UId="1277" Text=":="/>
+							<Blank UId="1278"/>
+							<Access UId="1279" Scope="LiteralConstant">
+								<Constant UId="1280">
+									<ConstantValue UId="1281">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1282" Text=";"/>
+							<NewLine UId="1283"/>
+							<Blank UId="1284" Num="3"/>
+							<Access UId="1285" Scope="GlobalVariable">
+								<Symbol UId="1286">
+									<Component UId="1287" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1288" Text="."/>
+									<Component UId="1289" Name="inConfig"/>
+									<Token UId="1290" Text="."/>
+									<Component UId="1291" Name="hmiControlZones"/>
+									<Token UId="1292" Text="."/>
+									<Component UId="1293" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1295"/>
+							<Token UId="1296" Text=":="/>
+							<Blank UId="1297"/>
+							<Access UId="1298" Scope="TypedConstant">
+								<Constant UId="1299">
+									<ConstantValue UId="1300">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1301" Text=";"/>
+							<NewLine UId="1302"/>
+							<Blank UId="1303" Num="3"/>
+							<Access UId="1304" Scope="GlobalVariable">
+								<Symbol UId="1305">
+									<Component UId="1306" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1307" Text="."/>
+									<Component UId="1308" Name="inConfig"/>
+									<Token UId="1309" Text="."/>
+									<Component UId="1310" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1312"/>
+							<Token UId="1313" Text=":="/>
+							<Blank UId="1314"/>
+							<Access UId="1315" Scope="TypedConstant">
+								<Constant UId="1316">
+									<ConstantValue UId="1317">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1318" Text=";"/>
+							<NewLine UId="1319"/>
+							<Blank UId="1320" Num="3"/>
+							<Access UId="1321" Scope="GlobalVariable">
+								<Symbol UId="1322">
+									<Component UId="1323" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1324" Text="."/>
+									<Component UId="1325" Name="inConfig"/>
+									<Token UId="1326" Text="."/>
+									<Component UId="1327" Name="jamPresets"/>
+									<Token UId="1328" Text="."/>
+									<Component UId="1329" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1331"/>
+							<Token UId="1332" Text=":="/>
+							<Blank UId="1333"/>
+							<Access UId="1334" Scope="LiteralConstant">
+								<Constant UId="1335">
+									<ConstantValue UId="1336">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1337" Text=";"/>
+							<NewLine UId="1338"/>
+							<Blank UId="1339" Num="3"/>
+							<Access UId="1340" Scope="GlobalVariable">
+								<Symbol UId="1341">
+									<Component UId="1342" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1343" Text="."/>
+									<Component UId="1344" Name="inConfig"/>
+									<Token UId="1345" Text="."/>
+									<Component UId="1346" Name="jamPresets"/>
+									<Token UId="1347" Text="."/>
+									<Component UId="1348" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1350"/>
+							<Token UId="1351" Text=":="/>
+							<Blank UId="1352"/>
+							<Access UId="1353" Scope="TypedConstant">
+								<Constant UId="1354">
+									<ConstantValue UId="1355">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1356" Text=";"/>
+							<NewLine UId="1357"/>
+							<Blank UId="1358" Num="3"/>
+							<Access UId="1359" Scope="GlobalVariable">
+								<Symbol UId="1360">
+									<Component UId="1361" Name="InstU350555_E2_Z2_Scanner"/>
+									<Token UId="1362" Text="."/>
+									<Component UId="1363" Name="inConfig"/>
+									<Token UId="1364" Text="."/>
+									<Component UId="1365" Name="jamPresets"/>
+									<Token UId="1366" Text="."/>
+									<Component UId="1367" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1369"/>
+							<Token UId="1370" Text=":="/>
+							<Blank UId="1371"/>
+							<Access UId="1372" Scope="TypedConstant">
+								<Constant UId="1373">
+									<ConstantValue UId="1374">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1375" Text=";"/>
+							<NewLine UId="1376"/>
+							<Blank UId="1377" Num="3"/>
+							<NewLine UId="1378"/>
+							<Token UId="1379" Text="END_REGION"/>
+							<NewLine UId="1380"/>
+							<Token UId="1405" Text="REGION"/>
+							<Blank UId="1406"/>
+							<Text UId="1407">InstU350755_E2_Z2_Scanner</Text>
+							<Blank UId="1408" Num="3"/>
+							<NewLine UId="1409"/>
+							<Blank UId="1410" Num="3"/>
+							<Access UId="1411" Scope="GlobalVariable">
+								<Symbol UId="1412">
+									<Component UId="1413" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1414" Text="."/>
+									<Component UId="1415" Name="inConfig"/>
+									<Token UId="1416" Text="."/>
+									<Component UId="1417" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1419"/>
+							<Token UId="1420" Text=":="/>
+							<Blank UId="1421"/>
+							<Access UId="1422" Scope="LiteralConstant">
+								<Constant UId="1423">
+									<ConstantValue UId="1424">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1425" Text=";"/>
+							<NewLine UId="1426"/>
+							<Blank UId="1427" Num="3"/>
+							<Access UId="1428" Scope="GlobalVariable">
+								<Symbol UId="1429">
+									<Component UId="1430" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1431" Text="."/>
+									<Component UId="1432" Name="inConfig"/>
+									<Token UId="1433" Text="."/>
+									<Component UId="1434" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1436"/>
+							<Token UId="1437" Text=":="/>
+							<Blank UId="1438"/>
+							<Access UId="1439" Scope="LiteralConstant">
+								<Constant UId="1440">
+									<ConstantValue UId="1441">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1442" Text=";"/>
+							<NewLine UId="1443"/>
+							<Blank UId="1444" Num="3"/>
+							<Access UId="1445" Scope="GlobalVariable">
+								<Symbol UId="1446">
+									<Component UId="1447" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1448" Text="."/>
+									<Component UId="1449" Name="inConfig"/>
+									<Token UId="1450" Text="."/>
+									<Component UId="1451" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1453"/>
+							<Token UId="1454" Text=":="/>
+							<Blank UId="1455"/>
+							<Access UId="1456" Scope="TypedConstant">
+								<Constant UId="1457">
+									<ConstantValue UId="1458">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1459" Text=";"/>
+							<NewLine UId="1460"/>
+							<Blank UId="1461" Num="3"/>
+							<Access UId="1462" Scope="GlobalVariable">
+								<Symbol UId="1463">
+									<Component UId="1464" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1465" Text="."/>
+									<Component UId="1466" Name="inConfig"/>
+									<Token UId="1467" Text="."/>
+									<Component UId="1468" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1470"/>
+							<Token UId="1471" Text=":="/>
+							<Blank UId="1472"/>
+							<Access UId="1473" Scope="TypedConstant">
+								<Constant UId="1474">
+									<ConstantValue UId="1475">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1476" Text=";"/>
+							<NewLine UId="1477"/>
+							<Blank UId="1478" Num="3"/>
+							<Access UId="1479" Scope="GlobalVariable">
+								<Symbol UId="1480">
+									<Component UId="1481" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1482" Text="."/>
+									<Component UId="1483" Name="inConfig"/>
+									<Token UId="1484" Text="."/>
+									<Component UId="1485" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1487"/>
+							<Token UId="1488" Text=":="/>
+							<Blank UId="1489"/>
+							<Access UId="1490" Scope="LiteralConstant">
+								<Constant UId="1491">
+									<ConstantValue UId="1492">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1493" Text=";"/>
+							<NewLine UId="1494"/>
+							<Blank UId="1495" Num="3"/>
+							<Access UId="1496" Scope="GlobalVariable">
+								<Symbol UId="1497">
+									<Component UId="1498" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1499" Text="."/>
+									<Component UId="1500" Name="inConfig"/>
+									<Token UId="1501" Text="."/>
+									<Component UId="1502" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1504"/>
+							<Token UId="1505" Text=":="/>
+							<Blank UId="1506"/>
+							<Access UId="1507" Scope="LiteralConstant">
+								<Constant UId="1508">
+									<ConstantValue UId="1509">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1510" Text=";"/>
+							<NewLine UId="1511"/>
+							<Blank UId="1512" Num="3"/>
+							<Access UId="1513" Scope="GlobalVariable">
+								<Symbol UId="1514">
+									<Component UId="1515" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1516" Text="."/>
+									<Component UId="1517" Name="inConfig"/>
+									<Token UId="1518" Text="."/>
+									<Component UId="1519" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1521"/>
+							<Token UId="1522" Text=":="/>
+							<Blank UId="1523"/>
+							<Access UId="1524" Scope="LiteralConstant">
+								<Constant UId="1525">
+									<ConstantValue UId="1526">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1527" Text=";"/>
+							<NewLine UId="1528"/>
+							<Blank UId="1529" Num="3"/>
+							<Access UId="1530" Scope="GlobalVariable">
+								<Symbol UId="1531">
+									<Component UId="1532" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1533" Text="."/>
+									<Component UId="1534" Name="inConfig"/>
+									<Token UId="1535" Text="."/>
+									<Component UId="1536" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1538"/>
+							<Token UId="1539" Text=":="/>
+							<Blank UId="1540"/>
+							<Access UId="1541" Scope="LiteralConstant">
+								<Constant UId="1542">
+									<ConstantValue UId="1543">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1544" Text=";"/>
+							<NewLine UId="1545"/>
+							<Blank UId="1546" Num="3"/>
+							<Access UId="1547" Scope="GlobalVariable">
+								<Symbol UId="1548">
+									<Component UId="1549" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1550" Text="."/>
+									<Component UId="1551" Name="inConfig"/>
+									<Token UId="1552" Text="."/>
+									<Component UId="1553" Name="hmiControlZones"/>
+									<Token UId="1554" Text="."/>
+									<Component UId="1555" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1557"/>
+							<Token UId="1558" Text=":="/>
+							<Blank UId="1559"/>
+							<Access UId="1560" Scope="TypedConstant">
+								<Constant UId="1561">
+									<ConstantValue UId="1562">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1563" Text=";"/>
+							<NewLine UId="1564"/>
+							<Blank UId="1565" Num="3"/>
+							<Access UId="1566" Scope="GlobalVariable">
+								<Symbol UId="1567">
+									<Component UId="1568" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1569" Text="."/>
+									<Component UId="1570" Name="inConfig"/>
+									<Token UId="1571" Text="."/>
+									<Component UId="1572" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1574"/>
+							<Token UId="1575" Text=":="/>
+							<Blank UId="1576"/>
+							<Access UId="1577" Scope="TypedConstant">
+								<Constant UId="1578">
+									<ConstantValue UId="1579">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1580" Text=";"/>
+							<NewLine UId="1581"/>
+							<Blank UId="1582" Num="3"/>
+							<Access UId="1583" Scope="GlobalVariable">
+								<Symbol UId="1584">
+									<Component UId="1585" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1586" Text="."/>
+									<Component UId="1587" Name="inConfig"/>
+									<Token UId="1588" Text="."/>
+									<Component UId="1589" Name="jamPresets"/>
+									<Token UId="1590" Text="."/>
+									<Component UId="1591" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1593"/>
+							<Token UId="1594" Text=":="/>
+							<Blank UId="1595"/>
+							<Access UId="1596" Scope="LiteralConstant">
+								<Constant UId="1597">
+									<ConstantValue UId="1598">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1599" Text=";"/>
+							<NewLine UId="1600"/>
+							<Blank UId="1601" Num="3"/>
+							<Access UId="1602" Scope="GlobalVariable">
+								<Symbol UId="1603">
+									<Component UId="1604" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1605" Text="."/>
+									<Component UId="1606" Name="inConfig"/>
+									<Token UId="1607" Text="."/>
+									<Component UId="1608" Name="jamPresets"/>
+									<Token UId="1609" Text="."/>
+									<Component UId="1610" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1612"/>
+							<Token UId="1613" Text=":="/>
+							<Blank UId="1614"/>
+							<Access UId="1615" Scope="TypedConstant">
+								<Constant UId="1616">
+									<ConstantValue UId="1617">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1618" Text=";"/>
+							<NewLine UId="1619"/>
+							<Blank UId="1620" Num="3"/>
+							<Access UId="1621" Scope="GlobalVariable">
+								<Symbol UId="1622">
+									<Component UId="1623" Name="InstU350755_E2_Z2_Scanner"/>
+									<Token UId="1624" Text="."/>
+									<Component UId="1625" Name="inConfig"/>
+									<Token UId="1626" Text="."/>
+									<Component UId="1627" Name="jamPresets"/>
+									<Token UId="1628" Text="."/>
+									<Component UId="1629" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1631"/>
+							<Token UId="1632" Text=":="/>
+							<Blank UId="1633"/>
+							<Access UId="1634" Scope="TypedConstant">
+								<Constant UId="1635">
+									<ConstantValue UId="1636">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1637" Text=";"/>
+							<NewLine UId="1638"/>
+							<Blank UId="1639" Num="3"/>
+							<NewLine UId="1640"/>
+							<Token UId="1641" Text="END_REGION"/>
+							<NewLine UId="1642"/>
+							<Token UId="1667" Text="REGION"/>
+							<Blank UId="1668"/>
+							<Text UId="1669">InstU350955_E2_Z2_Scanner</Text>
+							<Blank UId="1670" Num="3"/>
+							<NewLine UId="1671"/>
+							<Blank UId="1672" Num="3"/>
+							<Access UId="1673" Scope="GlobalVariable">
+								<Symbol UId="1674">
+									<Component UId="1675" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1676" Text="."/>
+									<Component UId="1677" Name="inConfig"/>
+									<Token UId="1678" Text="."/>
+									<Component UId="1679" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1681"/>
+							<Token UId="1682" Text=":="/>
+							<Blank UId="1683"/>
+							<Access UId="1684" Scope="LiteralConstant">
+								<Constant UId="1685">
+									<ConstantValue UId="1686">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1687" Text=";"/>
+							<NewLine UId="1688"/>
+							<Blank UId="1689" Num="3"/>
+							<Access UId="1690" Scope="GlobalVariable">
+								<Symbol UId="1691">
+									<Component UId="1692" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1693" Text="."/>
+									<Component UId="1694" Name="inConfig"/>
+									<Token UId="1695" Text="."/>
+									<Component UId="1696" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1698"/>
+							<Token UId="1699" Text=":="/>
+							<Blank UId="1700"/>
+							<Access UId="1701" Scope="LiteralConstant">
+								<Constant UId="1702">
+									<ConstantValue UId="1703">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1704" Text=";"/>
+							<NewLine UId="1705"/>
+							<Blank UId="1706" Num="3"/>
+							<Access UId="1707" Scope="GlobalVariable">
+								<Symbol UId="1708">
+									<Component UId="1709" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1710" Text="."/>
+									<Component UId="1711" Name="inConfig"/>
+									<Token UId="1712" Text="."/>
+									<Component UId="1713" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1715"/>
+							<Token UId="1716" Text=":="/>
+							<Blank UId="1717"/>
+							<Access UId="1718" Scope="TypedConstant">
+								<Constant UId="1719">
+									<ConstantValue UId="1720">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1721" Text=";"/>
+							<NewLine UId="1722"/>
+							<Blank UId="1723" Num="3"/>
+							<Access UId="1724" Scope="GlobalVariable">
+								<Symbol UId="1725">
+									<Component UId="1726" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1727" Text="."/>
+									<Component UId="1728" Name="inConfig"/>
+									<Token UId="1729" Text="."/>
+									<Component UId="1730" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1732"/>
+							<Token UId="1733" Text=":="/>
+							<Blank UId="1734"/>
+							<Access UId="1735" Scope="TypedConstant">
+								<Constant UId="1736">
+									<ConstantValue UId="1737">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1738" Text=";"/>
+							<NewLine UId="1739"/>
+							<Blank UId="1740" Num="3"/>
+							<Access UId="1741" Scope="GlobalVariable">
+								<Symbol UId="1742">
+									<Component UId="1743" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1744" Text="."/>
+									<Component UId="1745" Name="inConfig"/>
+									<Token UId="1746" Text="."/>
+									<Component UId="1747" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1749"/>
+							<Token UId="1750" Text=":="/>
+							<Blank UId="1751"/>
+							<Access UId="1752" Scope="LiteralConstant">
+								<Constant UId="1753">
+									<ConstantValue UId="1754">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1755" Text=";"/>
+							<NewLine UId="1756"/>
+							<Blank UId="1757" Num="3"/>
+							<Access UId="1758" Scope="GlobalVariable">
+								<Symbol UId="1759">
+									<Component UId="1760" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1761" Text="."/>
+									<Component UId="1762" Name="inConfig"/>
+									<Token UId="1763" Text="."/>
+									<Component UId="1764" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1766"/>
+							<Token UId="1767" Text=":="/>
+							<Blank UId="1768"/>
+							<Access UId="1769" Scope="LiteralConstant">
+								<Constant UId="1770">
+									<ConstantValue UId="1771">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1772" Text=";"/>
+							<NewLine UId="1773"/>
+							<Blank UId="1774" Num="3"/>
+							<Access UId="1775" Scope="GlobalVariable">
+								<Symbol UId="1776">
+									<Component UId="1777" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1778" Text="."/>
+									<Component UId="1779" Name="inConfig"/>
+									<Token UId="1780" Text="."/>
+									<Component UId="1781" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1783"/>
+							<Token UId="1784" Text=":="/>
+							<Blank UId="1785"/>
+							<Access UId="1786" Scope="LiteralConstant">
+								<Constant UId="1787">
+									<ConstantValue UId="1788">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1789" Text=";"/>
+							<NewLine UId="1790"/>
+							<Blank UId="1791" Num="3"/>
+							<Access UId="1792" Scope="GlobalVariable">
+								<Symbol UId="1793">
+									<Component UId="1794" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1795" Text="."/>
+									<Component UId="1796" Name="inConfig"/>
+									<Token UId="1797" Text="."/>
+									<Component UId="1798" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1800"/>
+							<Token UId="1801" Text=":="/>
+							<Blank UId="1802"/>
+							<Access UId="1803" Scope="LiteralConstant">
+								<Constant UId="1804">
+									<ConstantValue UId="1805">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1806" Text=";"/>
+							<NewLine UId="1807"/>
+							<Blank UId="1808" Num="3"/>
+							<Access UId="1809" Scope="GlobalVariable">
+								<Symbol UId="1810">
+									<Component UId="1811" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1812" Text="."/>
+									<Component UId="1813" Name="inConfig"/>
+									<Token UId="1814" Text="."/>
+									<Component UId="1815" Name="hmiControlZones"/>
+									<Token UId="1816" Text="."/>
+									<Component UId="1817" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1819"/>
+							<Token UId="1820" Text=":="/>
+							<Blank UId="1821"/>
+							<Access UId="1822" Scope="TypedConstant">
+								<Constant UId="1823">
+									<ConstantValue UId="1824">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1825" Text=";"/>
+							<NewLine UId="1826"/>
+							<Blank UId="1827" Num="3"/>
+							<Access UId="1828" Scope="GlobalVariable">
+								<Symbol UId="1829">
+									<Component UId="1830" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1831" Text="."/>
+									<Component UId="1832" Name="inConfig"/>
+									<Token UId="1833" Text="."/>
+									<Component UId="1834" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1836"/>
+							<Token UId="1837" Text=":="/>
+							<Blank UId="1838"/>
+							<Access UId="1839" Scope="TypedConstant">
+								<Constant UId="1840">
+									<ConstantValue UId="1841">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1842" Text=";"/>
+							<NewLine UId="1843"/>
+							<Blank UId="1844" Num="3"/>
+							<Access UId="1845" Scope="GlobalVariable">
+								<Symbol UId="1846">
+									<Component UId="1847" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1848" Text="."/>
+									<Component UId="1849" Name="inConfig"/>
+									<Token UId="1850" Text="."/>
+									<Component UId="1851" Name="jamPresets"/>
+									<Token UId="1852" Text="."/>
+									<Component UId="1853" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1855"/>
+							<Token UId="1856" Text=":="/>
+							<Blank UId="1857"/>
+							<Access UId="1858" Scope="LiteralConstant">
+								<Constant UId="1859">
+									<ConstantValue UId="1860">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1861" Text=";"/>
+							<NewLine UId="1862"/>
+							<Blank UId="1863" Num="3"/>
+							<Access UId="1864" Scope="GlobalVariable">
+								<Symbol UId="1865">
+									<Component UId="1866" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1867" Text="."/>
+									<Component UId="1868" Name="inConfig"/>
+									<Token UId="1869" Text="."/>
+									<Component UId="1870" Name="jamPresets"/>
+									<Token UId="1871" Text="."/>
+									<Component UId="1872" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1874"/>
+							<Token UId="1875" Text=":="/>
+							<Blank UId="1876"/>
+							<Access UId="1877" Scope="TypedConstant">
+								<Constant UId="1878">
+									<ConstantValue UId="1879">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1880" Text=";"/>
+							<NewLine UId="1881"/>
+							<Blank UId="1882" Num="3"/>
+							<Access UId="1883" Scope="GlobalVariable">
+								<Symbol UId="1884">
+									<Component UId="1885" Name="InstU350955_E2_Z2_Scanner"/>
+									<Token UId="1886" Text="."/>
+									<Component UId="1887" Name="inConfig"/>
+									<Token UId="1888" Text="."/>
+									<Component UId="1889" Name="jamPresets"/>
+									<Token UId="1890" Text="."/>
+									<Component UId="1891" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1893"/>
+							<Token UId="1894" Text=":="/>
+							<Blank UId="1895"/>
+							<Access UId="1896" Scope="TypedConstant">
+								<Constant UId="1897">
+									<ConstantValue UId="1898">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1899" Text=";"/>
+							<NewLine UId="1900"/>
+							<Blank UId="1901" Num="3"/>
+							<NewLine UId="1902"/>
+							<Token UId="1903" Text="END_REGION"/>
+							<NewLine UId="1904"/>
+							<Token UId="1929" Text="REGION"/>
+							<Blank UId="1930"/>
+							<Text UId="1931">InstU351155_E2_Z2_Scanner</Text>
+							<Blank UId="1932" Num="3"/>
+							<NewLine UId="1933"/>
+							<Blank UId="1934" Num="3"/>
+							<Access UId="1935" Scope="GlobalVariable">
+								<Symbol UId="1936">
+									<Component UId="1937" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="1938" Text="."/>
+									<Component UId="1939" Name="inConfig"/>
+									<Token UId="1940" Text="."/>
+									<Component UId="1941" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1943"/>
+							<Token UId="1944" Text=":="/>
+							<Blank UId="1945"/>
+							<Access UId="1946" Scope="LiteralConstant">
+								<Constant UId="1947">
+									<ConstantValue UId="1948">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1949" Text=";"/>
+							<NewLine UId="1950"/>
+							<Blank UId="1951" Num="3"/>
+							<Access UId="1952" Scope="GlobalVariable">
+								<Symbol UId="1953">
+									<Component UId="1954" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="1955" Text="."/>
+									<Component UId="1956" Name="inConfig"/>
+									<Token UId="1957" Text="."/>
+									<Component UId="1958" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1960"/>
+							<Token UId="1961" Text=":="/>
+							<Blank UId="1962"/>
+							<Access UId="1963" Scope="LiteralConstant">
+								<Constant UId="1964">
+									<ConstantValue UId="1965">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1966" Text=";"/>
+							<NewLine UId="1967"/>
+							<Blank UId="1968" Num="3"/>
+							<Access UId="1969" Scope="GlobalVariable">
+								<Symbol UId="1970">
+									<Component UId="1971" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="1972" Text="."/>
+									<Component UId="1973" Name="inConfig"/>
+									<Token UId="1974" Text="."/>
+									<Component UId="1975" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1977"/>
+							<Token UId="1978" Text=":="/>
+							<Blank UId="1979"/>
+							<Access UId="1980" Scope="TypedConstant">
+								<Constant UId="1981">
+									<ConstantValue UId="1982">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1983" Text=";"/>
+							<NewLine UId="1984"/>
+							<Blank UId="1985" Num="3"/>
+							<Access UId="1986" Scope="GlobalVariable">
+								<Symbol UId="1987">
+									<Component UId="1988" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="1989" Text="."/>
+									<Component UId="1990" Name="inConfig"/>
+									<Token UId="1991" Text="."/>
+									<Component UId="1992" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1994"/>
+							<Token UId="1995" Text=":="/>
+							<Blank UId="1996"/>
+							<Access UId="1997" Scope="TypedConstant">
+								<Constant UId="1998">
+									<ConstantValue UId="1999">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2000" Text=";"/>
+							<NewLine UId="2001"/>
+							<Blank UId="2002" Num="3"/>
+							<Access UId="2003" Scope="GlobalVariable">
+								<Symbol UId="2004">
+									<Component UId="2005" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2006" Text="."/>
+									<Component UId="2007" Name="inConfig"/>
+									<Token UId="2008" Text="."/>
+									<Component UId="2009" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2011"/>
+							<Token UId="2012" Text=":="/>
+							<Blank UId="2013"/>
+							<Access UId="2014" Scope="LiteralConstant">
+								<Constant UId="2015">
+									<ConstantValue UId="2016">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2017" Text=";"/>
+							<NewLine UId="2018"/>
+							<Blank UId="2019" Num="3"/>
+							<Access UId="2020" Scope="GlobalVariable">
+								<Symbol UId="2021">
+									<Component UId="2022" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2023" Text="."/>
+									<Component UId="2024" Name="inConfig"/>
+									<Token UId="2025" Text="."/>
+									<Component UId="2026" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2028"/>
+							<Token UId="2029" Text=":="/>
+							<Blank UId="2030"/>
+							<Access UId="2031" Scope="LiteralConstant">
+								<Constant UId="2032">
+									<ConstantValue UId="2033">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2034" Text=";"/>
+							<NewLine UId="2035"/>
+							<Blank UId="2036" Num="3"/>
+							<Access UId="2037" Scope="GlobalVariable">
+								<Symbol UId="2038">
+									<Component UId="2039" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2040" Text="."/>
+									<Component UId="2041" Name="inConfig"/>
+									<Token UId="2042" Text="."/>
+									<Component UId="2043" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2045"/>
+							<Token UId="2046" Text=":="/>
+							<Blank UId="2047"/>
+							<Access UId="2048" Scope="LiteralConstant">
+								<Constant UId="2049">
+									<ConstantValue UId="2050">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2051" Text=";"/>
+							<NewLine UId="2052"/>
+							<Blank UId="2053" Num="3"/>
+							<Access UId="2054" Scope="GlobalVariable">
+								<Symbol UId="2055">
+									<Component UId="2056" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2057" Text="."/>
+									<Component UId="2058" Name="inConfig"/>
+									<Token UId="2059" Text="."/>
+									<Component UId="2060" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2062"/>
+							<Token UId="2063" Text=":="/>
+							<Blank UId="2064"/>
+							<Access UId="2065" Scope="LiteralConstant">
+								<Constant UId="2066">
+									<ConstantValue UId="2067">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2068" Text=";"/>
+							<NewLine UId="2069"/>
+							<Blank UId="2070" Num="3"/>
+							<Access UId="2071" Scope="GlobalVariable">
+								<Symbol UId="2072">
+									<Component UId="2073" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2074" Text="."/>
+									<Component UId="2075" Name="inConfig"/>
+									<Token UId="2076" Text="."/>
+									<Component UId="2077" Name="hmiControlZones"/>
+									<Token UId="2078" Text="."/>
+									<Component UId="2079" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2081"/>
+							<Token UId="2082" Text=":="/>
+							<Blank UId="2083"/>
+							<Access UId="2084" Scope="TypedConstant">
+								<Constant UId="2085">
+									<ConstantValue UId="2086">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2087" Text=";"/>
+							<NewLine UId="2088"/>
+							<Blank UId="2089" Num="3"/>
+							<Access UId="2090" Scope="GlobalVariable">
+								<Symbol UId="2091">
+									<Component UId="2092" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2093" Text="."/>
+									<Component UId="2094" Name="inConfig"/>
+									<Token UId="2095" Text="."/>
+									<Component UId="2096" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2098"/>
+							<Token UId="2099" Text=":="/>
+							<Blank UId="2100"/>
+							<Access UId="2101" Scope="TypedConstant">
+								<Constant UId="2102">
+									<ConstantValue UId="2103">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2104" Text=";"/>
+							<NewLine UId="2105"/>
+							<Blank UId="2106" Num="3"/>
+							<Access UId="2107" Scope="GlobalVariable">
+								<Symbol UId="2108">
+									<Component UId="2109" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2110" Text="."/>
+									<Component UId="2111" Name="inConfig"/>
+									<Token UId="2112" Text="."/>
+									<Component UId="2113" Name="jamPresets"/>
+									<Token UId="2114" Text="."/>
+									<Component UId="2115" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2117"/>
+							<Token UId="2118" Text=":="/>
+							<Blank UId="2119"/>
+							<Access UId="2120" Scope="LiteralConstant">
+								<Constant UId="2121">
+									<ConstantValue UId="2122">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2123" Text=";"/>
+							<NewLine UId="2124"/>
+							<Blank UId="2125" Num="3"/>
+							<Access UId="2126" Scope="GlobalVariable">
+								<Symbol UId="2127">
+									<Component UId="2128" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2129" Text="."/>
+									<Component UId="2130" Name="inConfig"/>
+									<Token UId="2131" Text="."/>
+									<Component UId="2132" Name="jamPresets"/>
+									<Token UId="2133" Text="."/>
+									<Component UId="2134" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2136"/>
+							<Token UId="2137" Text=":="/>
+							<Blank UId="2138"/>
+							<Access UId="2139" Scope="TypedConstant">
+								<Constant UId="2140">
+									<ConstantValue UId="2141">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2142" Text=";"/>
+							<NewLine UId="2143"/>
+							<Blank UId="2144" Num="3"/>
+							<Access UId="2145" Scope="GlobalVariable">
+								<Symbol UId="2146">
+									<Component UId="2147" Name="InstU351155_E2_Z2_Scanner"/>
+									<Token UId="2148" Text="."/>
+									<Component UId="2149" Name="inConfig"/>
+									<Token UId="2150" Text="."/>
+									<Component UId="2151" Name="jamPresets"/>
+									<Token UId="2152" Text="."/>
+									<Component UId="2153" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2155"/>
+							<Token UId="2156" Text=":="/>
+							<Blank UId="2157"/>
+							<Access UId="2158" Scope="TypedConstant">
+								<Constant UId="2159">
+									<ConstantValue UId="2160">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2161" Text=";"/>
+							<NewLine UId="2162"/>
+							<Blank UId="2163" Num="3"/>
+							<NewLine UId="2164"/>
+							<Token UId="2165" Text="END_REGION"/>
+							<NewLine UId="2166"/>
+							<Token UId="2191" Text="REGION"/>
+							<Blank UId="2192"/>
+							<Text UId="2193">InstU351355_E2_Z2_Scanner</Text>
+							<Blank UId="2194" Num="3"/>
+							<NewLine UId="2195"/>
+							<Blank UId="2196" Num="3"/>
+							<Access UId="2197" Scope="GlobalVariable">
+								<Symbol UId="2198">
+									<Component UId="2199" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2200" Text="."/>
+									<Component UId="2201" Name="inConfig"/>
+									<Token UId="2202" Text="."/>
+									<Component UId="2203" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2205"/>
+							<Token UId="2206" Text=":="/>
+							<Blank UId="2207"/>
+							<Access UId="2208" Scope="LiteralConstant">
+								<Constant UId="2209">
+									<ConstantValue UId="2210">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2211" Text=";"/>
+							<NewLine UId="2212"/>
+							<Blank UId="2213" Num="3"/>
+							<Access UId="2214" Scope="GlobalVariable">
+								<Symbol UId="2215">
+									<Component UId="2216" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2217" Text="."/>
+									<Component UId="2218" Name="inConfig"/>
+									<Token UId="2219" Text="."/>
+									<Component UId="2220" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2222"/>
+							<Token UId="2223" Text=":="/>
+							<Blank UId="2224"/>
+							<Access UId="2225" Scope="LiteralConstant">
+								<Constant UId="2226">
+									<ConstantValue UId="2227">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2228" Text=";"/>
+							<NewLine UId="2229"/>
+							<Blank UId="2230" Num="3"/>
+							<Access UId="2231" Scope="GlobalVariable">
+								<Symbol UId="2232">
+									<Component UId="2233" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2234" Text="."/>
+									<Component UId="2235" Name="inConfig"/>
+									<Token UId="2236" Text="."/>
+									<Component UId="2237" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2239"/>
+							<Token UId="2240" Text=":="/>
+							<Blank UId="2241"/>
+							<Access UId="2242" Scope="TypedConstant">
+								<Constant UId="2243">
+									<ConstantValue UId="2244">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2245" Text=";"/>
+							<NewLine UId="2246"/>
+							<Blank UId="2247" Num="3"/>
+							<Access UId="2248" Scope="GlobalVariable">
+								<Symbol UId="2249">
+									<Component UId="2250" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2251" Text="."/>
+									<Component UId="2252" Name="inConfig"/>
+									<Token UId="2253" Text="."/>
+									<Component UId="2254" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2256"/>
+							<Token UId="2257" Text=":="/>
+							<Blank UId="2258"/>
+							<Access UId="2259" Scope="TypedConstant">
+								<Constant UId="2260">
+									<ConstantValue UId="2261">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2262" Text=";"/>
+							<NewLine UId="2263"/>
+							<Blank UId="2264" Num="3"/>
+							<Access UId="2265" Scope="GlobalVariable">
+								<Symbol UId="2266">
+									<Component UId="2267" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2268" Text="."/>
+									<Component UId="2269" Name="inConfig"/>
+									<Token UId="2270" Text="."/>
+									<Component UId="2271" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2273"/>
+							<Token UId="2274" Text=":="/>
+							<Blank UId="2275"/>
+							<Access UId="2276" Scope="LiteralConstant">
+								<Constant UId="2277">
+									<ConstantValue UId="2278">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2279" Text=";"/>
+							<NewLine UId="2280"/>
+							<Blank UId="2281" Num="3"/>
+							<Access UId="2282" Scope="GlobalVariable">
+								<Symbol UId="2283">
+									<Component UId="2284" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2285" Text="."/>
+									<Component UId="2286" Name="inConfig"/>
+									<Token UId="2287" Text="."/>
+									<Component UId="2288" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2290"/>
+							<Token UId="2291" Text=":="/>
+							<Blank UId="2292"/>
+							<Access UId="2293" Scope="LiteralConstant">
+								<Constant UId="2294">
+									<ConstantValue UId="2295">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2296" Text=";"/>
+							<NewLine UId="2297"/>
+							<Blank UId="2298" Num="3"/>
+							<Access UId="2299" Scope="GlobalVariable">
+								<Symbol UId="2300">
+									<Component UId="2301" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2302" Text="."/>
+									<Component UId="2303" Name="inConfig"/>
+									<Token UId="2304" Text="."/>
+									<Component UId="2305" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2307"/>
+							<Token UId="2308" Text=":="/>
+							<Blank UId="2309"/>
+							<Access UId="2310" Scope="LiteralConstant">
+								<Constant UId="2311">
+									<ConstantValue UId="2312">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2313" Text=";"/>
+							<NewLine UId="2314"/>
+							<Blank UId="2315" Num="3"/>
+							<Access UId="2316" Scope="GlobalVariable">
+								<Symbol UId="2317">
+									<Component UId="2318" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2319" Text="."/>
+									<Component UId="2320" Name="inConfig"/>
+									<Token UId="2321" Text="."/>
+									<Component UId="2322" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2324"/>
+							<Token UId="2325" Text=":="/>
+							<Blank UId="2326"/>
+							<Access UId="2327" Scope="LiteralConstant">
+								<Constant UId="2328">
+									<ConstantValue UId="2329">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2330" Text=";"/>
+							<NewLine UId="2331"/>
+							<Blank UId="2332" Num="3"/>
+							<Access UId="2333" Scope="GlobalVariable">
+								<Symbol UId="2334">
+									<Component UId="2335" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2336" Text="."/>
+									<Component UId="2337" Name="inConfig"/>
+									<Token UId="2338" Text="."/>
+									<Component UId="2339" Name="hmiControlZones"/>
+									<Token UId="2340" Text="."/>
+									<Component UId="2341" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2343"/>
+							<Token UId="2344" Text=":="/>
+							<Blank UId="2345"/>
+							<Access UId="2346" Scope="TypedConstant">
+								<Constant UId="2347">
+									<ConstantValue UId="2348">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2349" Text=";"/>
+							<NewLine UId="2350"/>
+							<Blank UId="2351" Num="3"/>
+							<Access UId="2352" Scope="GlobalVariable">
+								<Symbol UId="2353">
+									<Component UId="2354" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2355" Text="."/>
+									<Component UId="2356" Name="inConfig"/>
+									<Token UId="2357" Text="."/>
+									<Component UId="2358" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2360"/>
+							<Token UId="2361" Text=":="/>
+							<Blank UId="2362"/>
+							<Access UId="2363" Scope="TypedConstant">
+								<Constant UId="2364">
+									<ConstantValue UId="2365">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2366" Text=";"/>
+							<NewLine UId="2367"/>
+							<Blank UId="2368" Num="3"/>
+							<Access UId="2369" Scope="GlobalVariable">
+								<Symbol UId="2370">
+									<Component UId="2371" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2372" Text="."/>
+									<Component UId="2373" Name="inConfig"/>
+									<Token UId="2374" Text="."/>
+									<Component UId="2375" Name="jamPresets"/>
+									<Token UId="2376" Text="."/>
+									<Component UId="2377" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2379"/>
+							<Token UId="2380" Text=":="/>
+							<Blank UId="2381"/>
+							<Access UId="2382" Scope="LiteralConstant">
+								<Constant UId="2383">
+									<ConstantValue UId="2384">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2385" Text=";"/>
+							<NewLine UId="2386"/>
+							<Blank UId="2387" Num="3"/>
+							<Access UId="2388" Scope="GlobalVariable">
+								<Symbol UId="2389">
+									<Component UId="2390" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2391" Text="."/>
+									<Component UId="2392" Name="inConfig"/>
+									<Token UId="2393" Text="."/>
+									<Component UId="2394" Name="jamPresets"/>
+									<Token UId="2395" Text="."/>
+									<Component UId="2396" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2398"/>
+							<Token UId="2399" Text=":="/>
+							<Blank UId="2400"/>
+							<Access UId="2401" Scope="TypedConstant">
+								<Constant UId="2402">
+									<ConstantValue UId="2403">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2404" Text=";"/>
+							<NewLine UId="2405"/>
+							<Blank UId="2406" Num="3"/>
+							<Access UId="2407" Scope="GlobalVariable">
+								<Symbol UId="2408">
+									<Component UId="2409" Name="InstU351355_E2_Z2_Scanner"/>
+									<Token UId="2410" Text="."/>
+									<Component UId="2411" Name="inConfig"/>
+									<Token UId="2412" Text="."/>
+									<Component UId="2413" Name="jamPresets"/>
+									<Token UId="2414" Text="."/>
+									<Component UId="2415" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2417"/>
+							<Token UId="2418" Text=":="/>
+							<Blank UId="2419"/>
+							<Access UId="2420" Scope="TypedConstant">
+								<Constant UId="2421">
+									<ConstantValue UId="2422">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2423" Text=";"/>
+							<NewLine UId="2424"/>
+							<Blank UId="2425" Num="3"/>
+							<NewLine UId="2426"/>
+							<Token UId="2427" Text="END_REGION"/>
+							<NewLine UId="2428"/>
+							<Token UId="2453" Text="REGION"/>
+							<Blank UId="2454"/>
+							<Text UId="2455">InstU351555_E2_Z2_Scanner</Text>
+							<Blank UId="2456" Num="3"/>
+							<NewLine UId="2457"/>
+							<Blank UId="2458" Num="3"/>
+							<Access UId="2459" Scope="GlobalVariable">
+								<Symbol UId="2460">
+									<Component UId="2461" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2462" Text="."/>
+									<Component UId="2463" Name="inConfig"/>
+									<Token UId="2464" Text="."/>
+									<Component UId="2465" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2467"/>
+							<Token UId="2468" Text=":="/>
+							<Blank UId="2469"/>
+							<Access UId="2470" Scope="LiteralConstant">
+								<Constant UId="2471">
+									<ConstantValue UId="2472">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2473" Text=";"/>
+							<NewLine UId="2474"/>
+							<Blank UId="2475" Num="3"/>
+							<Access UId="2476" Scope="GlobalVariable">
+								<Symbol UId="2477">
+									<Component UId="2478" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2479" Text="."/>
+									<Component UId="2480" Name="inConfig"/>
+									<Token UId="2481" Text="."/>
+									<Component UId="2482" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2484"/>
+							<Token UId="2485" Text=":="/>
+							<Blank UId="2486"/>
+							<Access UId="2487" Scope="LiteralConstant">
+								<Constant UId="2488">
+									<ConstantValue UId="2489">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2490" Text=";"/>
+							<NewLine UId="2491"/>
+							<Blank UId="2492" Num="3"/>
+							<Access UId="2493" Scope="GlobalVariable">
+								<Symbol UId="2494">
+									<Component UId="2495" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2496" Text="."/>
+									<Component UId="2497" Name="inConfig"/>
+									<Token UId="2498" Text="."/>
+									<Component UId="2499" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2501"/>
+							<Token UId="2502" Text=":="/>
+							<Blank UId="2503"/>
+							<Access UId="2504" Scope="TypedConstant">
+								<Constant UId="2505">
+									<ConstantValue UId="2506">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2507" Text=";"/>
+							<NewLine UId="2508"/>
+							<Blank UId="2509" Num="3"/>
+							<Access UId="2510" Scope="GlobalVariable">
+								<Symbol UId="2511">
+									<Component UId="2512" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2513" Text="."/>
+									<Component UId="2514" Name="inConfig"/>
+									<Token UId="2515" Text="."/>
+									<Component UId="2516" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2518"/>
+							<Token UId="2519" Text=":="/>
+							<Blank UId="2520"/>
+							<Access UId="2521" Scope="TypedConstant">
+								<Constant UId="2522">
+									<ConstantValue UId="2523">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2524" Text=";"/>
+							<NewLine UId="2525"/>
+							<Blank UId="2526" Num="3"/>
+							<Access UId="2527" Scope="GlobalVariable">
+								<Symbol UId="2528">
+									<Component UId="2529" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2530" Text="."/>
+									<Component UId="2531" Name="inConfig"/>
+									<Token UId="2532" Text="."/>
+									<Component UId="2533" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2535"/>
+							<Token UId="2536" Text=":="/>
+							<Blank UId="2537"/>
+							<Access UId="2538" Scope="LiteralConstant">
+								<Constant UId="2539">
+									<ConstantValue UId="2540">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2541" Text=";"/>
+							<NewLine UId="2542"/>
+							<Blank UId="2543" Num="3"/>
+							<Access UId="2544" Scope="GlobalVariable">
+								<Symbol UId="2545">
+									<Component UId="2546" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2547" Text="."/>
+									<Component UId="2548" Name="inConfig"/>
+									<Token UId="2549" Text="."/>
+									<Component UId="2550" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2552"/>
+							<Token UId="2553" Text=":="/>
+							<Blank UId="2554"/>
+							<Access UId="2555" Scope="LiteralConstant">
+								<Constant UId="2556">
+									<ConstantValue UId="2557">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2558" Text=";"/>
+							<NewLine UId="2559"/>
+							<Blank UId="2560" Num="3"/>
+							<Access UId="2561" Scope="GlobalVariable">
+								<Symbol UId="2562">
+									<Component UId="2563" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2564" Text="."/>
+									<Component UId="2565" Name="inConfig"/>
+									<Token UId="2566" Text="."/>
+									<Component UId="2567" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2569"/>
+							<Token UId="2570" Text=":="/>
+							<Blank UId="2571"/>
+							<Access UId="2572" Scope="LiteralConstant">
+								<Constant UId="2573">
+									<ConstantValue UId="2574">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2575" Text=";"/>
+							<NewLine UId="2576"/>
+							<Blank UId="2577" Num="3"/>
+							<Access UId="2578" Scope="GlobalVariable">
+								<Symbol UId="2579">
+									<Component UId="2580" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2581" Text="."/>
+									<Component UId="2582" Name="inConfig"/>
+									<Token UId="2583" Text="."/>
+									<Component UId="2584" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2586"/>
+							<Token UId="2587" Text=":="/>
+							<Blank UId="2588"/>
+							<Access UId="2589" Scope="LiteralConstant">
+								<Constant UId="2590">
+									<ConstantValue UId="2591">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2592" Text=";"/>
+							<NewLine UId="2593"/>
+							<Blank UId="2594" Num="3"/>
+							<Access UId="2595" Scope="GlobalVariable">
+								<Symbol UId="2596">
+									<Component UId="2597" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2598" Text="."/>
+									<Component UId="2599" Name="inConfig"/>
+									<Token UId="2600" Text="."/>
+									<Component UId="2601" Name="hmiControlZones"/>
+									<Token UId="2602" Text="."/>
+									<Component UId="2603" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2605"/>
+							<Token UId="2606" Text=":="/>
+							<Blank UId="2607"/>
+							<Access UId="2608" Scope="TypedConstant">
+								<Constant UId="2609">
+									<ConstantValue UId="2610">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2611" Text=";"/>
+							<NewLine UId="2612"/>
+							<Blank UId="2613" Num="3"/>
+							<Access UId="2614" Scope="GlobalVariable">
+								<Symbol UId="2615">
+									<Component UId="2616" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2617" Text="."/>
+									<Component UId="2618" Name="inConfig"/>
+									<Token UId="2619" Text="."/>
+									<Component UId="2620" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2622"/>
+							<Token UId="2623" Text=":="/>
+							<Blank UId="2624"/>
+							<Access UId="2625" Scope="TypedConstant">
+								<Constant UId="2626">
+									<ConstantValue UId="2627">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2628" Text=";"/>
+							<NewLine UId="2629"/>
+							<Blank UId="2630" Num="3"/>
+							<Access UId="2631" Scope="GlobalVariable">
+								<Symbol UId="2632">
+									<Component UId="2633" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2634" Text="."/>
+									<Component UId="2635" Name="inConfig"/>
+									<Token UId="2636" Text="."/>
+									<Component UId="2637" Name="jamPresets"/>
+									<Token UId="2638" Text="."/>
+									<Component UId="2639" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2641"/>
+							<Token UId="2642" Text=":="/>
+							<Blank UId="2643"/>
+							<Access UId="2644" Scope="LiteralConstant">
+								<Constant UId="2645">
+									<ConstantValue UId="2646">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2647" Text=";"/>
+							<NewLine UId="2648"/>
+							<Blank UId="2649" Num="3"/>
+							<Access UId="2650" Scope="GlobalVariable">
+								<Symbol UId="2651">
+									<Component UId="2652" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2653" Text="."/>
+									<Component UId="2654" Name="inConfig"/>
+									<Token UId="2655" Text="."/>
+									<Component UId="2656" Name="jamPresets"/>
+									<Token UId="2657" Text="."/>
+									<Component UId="2658" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2660"/>
+							<Token UId="2661" Text=":="/>
+							<Blank UId="2662"/>
+							<Access UId="2663" Scope="TypedConstant">
+								<Constant UId="2664">
+									<ConstantValue UId="2665">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2666" Text=";"/>
+							<NewLine UId="2667"/>
+							<Blank UId="2668" Num="3"/>
+							<Access UId="2669" Scope="GlobalVariable">
+								<Symbol UId="2670">
+									<Component UId="2671" Name="InstU351555_E2_Z2_Scanner"/>
+									<Token UId="2672" Text="."/>
+									<Component UId="2673" Name="inConfig"/>
+									<Token UId="2674" Text="."/>
+									<Component UId="2675" Name="jamPresets"/>
+									<Token UId="2676" Text="."/>
+									<Component UId="2677" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2679"/>
+							<Token UId="2680" Text=":="/>
+							<Blank UId="2681"/>
+							<Access UId="2682" Scope="TypedConstant">
+								<Constant UId="2683">
+									<ConstantValue UId="2684">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2685" Text=";"/>
+							<NewLine UId="2686"/>
+							<Blank UId="2687" Num="3"/>
+							<NewLine UId="2688"/>
+							<Token UId="2689" Text="END_REGION"/>
+							<NewLine UId="2690"/>
+							<Token UId="2715" Text="REGION"/>
+							<Blank UId="2716"/>
+							<Text UId="2717">InstU351755_E2_Z2_Scanner</Text>
+							<Blank UId="2718" Num="3"/>
+							<NewLine UId="2719"/>
+							<Blank UId="2720" Num="3"/>
+							<Access UId="2721" Scope="GlobalVariable">
+								<Symbol UId="2722">
+									<Component UId="2723" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2724" Text="."/>
+									<Component UId="2725" Name="inConfig"/>
+									<Token UId="2726" Text="."/>
+									<Component UId="2727" Name="scannerId"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2729"/>
+							<Token UId="2730" Text=":="/>
+							<Blank UId="2731"/>
+							<Access UId="2732" Scope="LiteralConstant">
+								<Constant UId="2733">
+									<ConstantValue UId="2734">'0'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2735" Text=";"/>
+							<NewLine UId="2736"/>
+							<Blank UId="2737" Num="3"/>
+							<Access UId="2738" Scope="GlobalVariable">
+								<Symbol UId="2739">
+									<Component UId="2740" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2741" Text="."/>
+									<Component UId="2742" Name="inConfig"/>
+									<Token UId="2743" Text="."/>
+									<Component UId="2744" Name="dataLength"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2746"/>
+							<Token UId="2747" Text=":="/>
+							<Blank UId="2748"/>
+							<Access UId="2749" Scope="LiteralConstant">
+								<Constant UId="2750">
+									<ConstantValue UId="2751">10</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2752" Text=";"/>
+							<NewLine UId="2753"/>
+							<Blank UId="2754" Num="3"/>
+							<Access UId="2755" Scope="GlobalVariable">
+								<Symbol UId="2756">
+									<Component UId="2757" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2758" Text="."/>
+									<Component UId="2759" Name="inConfig"/>
+									<Token UId="2760" Text="."/>
+									<Component UId="2761" Name="noReadTimeout"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2763"/>
+							<Token UId="2764" Text=":="/>
+							<Blank UId="2765"/>
+							<Access UId="2766" Scope="TypedConstant">
+								<Constant UId="2767">
+									<ConstantValue UId="2768">T#4S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2769" Text=";"/>
+							<NewLine UId="2770"/>
+							<Blank UId="2771" Num="3"/>
+							<Access UId="2772" Scope="GlobalVariable">
+								<Symbol UId="2773">
+									<Component UId="2774" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2775" Text="."/>
+									<Component UId="2776" Name="inConfig"/>
+									<Token UId="2777" Text="."/>
+									<Component UId="2778" Name="retainTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2780"/>
+							<Token UId="2781" Text=":="/>
+							<Blank UId="2782"/>
+							<Access UId="2783" Scope="TypedConstant">
+								<Constant UId="2784">
+									<ConstantValue UId="2785">T#0s</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2786" Text=";"/>
+							<NewLine UId="2787"/>
+							<Blank UId="2788" Num="3"/>
+							<Access UId="2789" Scope="GlobalVariable">
+								<Symbol UId="2790">
+									<Component UId="2791" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2792" Text="."/>
+									<Component UId="2793" Name="inConfig"/>
+									<Token UId="2794" Text="."/>
+									<Component UId="2795" Name="triggerControl"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2797"/>
+							<Token UId="2798" Text=":="/>
+							<Blank UId="2799"/>
+							<Access UId="2800" Scope="LiteralConstant">
+								<Constant UId="2801">
+									<ConstantValue UId="2802">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2803" Text=";"/>
+							<NewLine UId="2804"/>
+							<Blank UId="2805" Num="3"/>
+							<Access UId="2806" Scope="GlobalVariable">
+								<Symbol UId="2807">
+									<Component UId="2808" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2809" Text="."/>
+									<Component UId="2810" Name="inConfig"/>
+									<Token UId="2811" Text="."/>
+									<Component UId="2812" Name="canBusEnabled"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2814"/>
+							<Token UId="2815" Text=":="/>
+							<Blank UId="2816"/>
+							<Access UId="2817" Scope="LiteralConstant">
+								<Constant UId="2818">
+									<ConstantValue UId="2819">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2820" Text=";"/>
+							<NewLine UId="2821"/>
+							<Blank UId="2822" Num="3"/>
+							<Access UId="2823" Scope="GlobalVariable">
+								<Symbol UId="2824">
+									<Component UId="2825" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2826" Text="."/>
+									<Component UId="2827" Name="inConfig"/>
+									<Token UId="2828" Text="."/>
+									<Component UId="2829" Name="noReadFaultLimit"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2831"/>
+							<Token UId="2832" Text=":="/>
+							<Blank UId="2833"/>
+							<Access UId="2834" Scope="LiteralConstant">
+								<Constant UId="2835">
+									<ConstantValue UId="2836">'3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2837" Text=";"/>
+							<NewLine UId="2838"/>
+							<Blank UId="2839" Num="3"/>
+							<Access UId="2840" Scope="GlobalVariable">
+								<Symbol UId="2841">
+									<Component UId="2842" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2843" Text="."/>
+									<Component UId="2844" Name="inConfig"/>
+									<Token UId="2845" Text="."/>
+									<Component UId="2846" Name="successfulReadThreshold"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2848"/>
+							<Token UId="2849" Text=":="/>
+							<Blank UId="2850"/>
+							<Access UId="2851" Scope="LiteralConstant">
+								<Constant UId="2852">
+									<ConstantValue UId="2853">80</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2854" Text=";"/>
+							<NewLine UId="2855"/>
+							<Blank UId="2856" Num="3"/>
+							<Access UId="2857" Scope="GlobalVariable">
+								<Symbol UId="2858">
+									<Component UId="2859" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2860" Text="."/>
+									<Component UId="2861" Name="inConfig"/>
+									<Token UId="2862" Text="."/>
+									<Component UId="2863" Name="hmiControlZones"/>
+									<Token UId="2864" Text="."/>
+									<Component UId="2865" Name="controlMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2867"/>
+							<Token UId="2868" Text=":="/>
+							<Blank UId="2869"/>
+							<Access UId="2870" Scope="TypedConstant">
+								<Constant UId="2871">
+									<ConstantValue UId="2872">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2873" Text=";"/>
+							<NewLine UId="2874"/>
+							<Blank UId="2875" Num="3"/>
+							<Access UId="2876" Scope="GlobalVariable">
+								<Symbol UId="2877">
+									<Component UId="2878" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2879" Text="."/>
+									<Component UId="2880" Name="inConfig"/>
+									<Token UId="2881" Text="."/>
+									<Component UId="2882" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2884"/>
+							<Token UId="2885" Text=":="/>
+							<Blank UId="2886"/>
+							<Access UId="2887" Scope="TypedConstant">
+								<Constant UId="2888">
+									<ConstantValue UId="2889">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2890" Text=";"/>
+							<NewLine UId="2891"/>
+							<Blank UId="2892" Num="3"/>
+							<Access UId="2893" Scope="GlobalVariable">
+								<Symbol UId="2894">
+									<Component UId="2895" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2896" Text="."/>
+									<Component UId="2897" Name="inConfig"/>
+									<Token UId="2898" Text="."/>
+									<Component UId="2899" Name="jamPresets"/>
+									<Token UId="2900" Text="."/>
+									<Component UId="2901" Name="autoResetEnable"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2903"/>
+							<Token UId="2904" Text=":="/>
+							<Blank UId="2905"/>
+							<Access UId="2906" Scope="LiteralConstant">
+								<Constant UId="2907">
+									<ConstantValue UId="2908">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2909" Text=";"/>
+							<NewLine UId="2910"/>
+							<Blank UId="2911" Num="3"/>
+							<Access UId="2912" Scope="GlobalVariable">
+								<Symbol UId="2913">
+									<Component UId="2914" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2915" Text="."/>
+									<Component UId="2916" Name="inConfig"/>
+									<Token UId="2917" Text="."/>
+									<Component UId="2918" Name="jamPresets"/>
+									<Token UId="2919" Text="."/>
+									<Component UId="2920" Name="jamTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2922"/>
+							<Token UId="2923" Text=":="/>
+							<Blank UId="2924"/>
+							<Access UId="2925" Scope="TypedConstant">
+								<Constant UId="2926">
+									<ConstantValue UId="2927">T#3S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2928" Text=";"/>
+							<NewLine UId="2929"/>
+							<Blank UId="2930" Num="3"/>
+							<Access UId="2931" Scope="GlobalVariable">
+								<Symbol UId="2932">
+									<Component UId="2933" Name="InstU351755_E2_Z2_Scanner"/>
+									<Token UId="2934" Text="."/>
+									<Component UId="2935" Name="inConfig"/>
+									<Token UId="2936" Text="."/>
+									<Component UId="2937" Name="jamPresets"/>
+									<Token UId="2938" Text="."/>
+									<Component UId="2939" Name="autoResetTime"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2941"/>
+							<Token UId="2942" Text=":="/>
+							<Blank UId="2943"/>
+							<Access UId="2944" Scope="TypedConstant">
+								<Constant UId="2945">
+									<ConstantValue UId="2946">T#5S</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2947" Text=";"/>
+							<NewLine UId="2948"/>
+							<Blank UId="2949" Num="3"/>
+							<NewLine UId="2950"/>
+							<Token UId="2951" Text="END_REGION"/>
+							<NewLine UId="2952"/>
+						</StructuredText>
+					</NetworkSource>
+				</AttributeList>
+			</SW.Blocks.CompileUnit>
+		</ObjectList>
+	</SW.Blocks.FC>
+</Document>

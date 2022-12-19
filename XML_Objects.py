@@ -1,39 +1,35 @@
 from fb_block import fb_block
 
 class AbbAcs380Drive(fb_block):
-    def __init__(self,unitNumber,ObjectList,scl=None,zone=""):
+    def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
         self.addCall()
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + unitName + "_Drive1")
-        unitName = unitName + " FMD"
         self.CallInfo.set("Name","AbbAcs380Drive")
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inDriveStatus" Section="Input" Type="&quot;typeABBACS380InputsPP04&quot;" />',unitName + "_In")
-        self.loadParameterStr('<Parameter Name="inConveyorStatus" Section="Input" Type="&quot;typePortStatus1Unit&quot;" />',"Inst" + unitNumber + ".outStatus")
-        self.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;" />',"Inst" + unitNumber + ".outPort12Motor")
-        self.loadParameterStr('<Parameter Name="outDriveCommand" Section="Output" Type="&quot;typeABBACS380OutputsPP04&quot;" />',unitName + "_Out")
+        self.Comment.text = unitName + "_Drive1"
+        
+        self.loadParameterStr('<Parameter Name="inDriveStatus" Section="Input" Type="&quot;typeABBACS380InputsPP04&quot;" />',unitName + "_FMD_In")
+        self.loadParameterStr('<Parameter Name="inConveyorStatus" Section="Input" Type="&quot;typePortStatus1Unit&quot;" />',"Inst" + unitName + ".outStatus")
+        self.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;" />',"Inst" + unitName + ".outPort12Motor")
+        self.loadParameterStr('<Parameter Name="outDriveCommand" Section="Output" Type="&quot;typeABBACS380OutputsPP04&quot;" />',unitName + "_FMD_Out")
         
         if scl != None:
             #SCL ConFig
             pass
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class AsiABBDriveNAType01(fb_block):
-    def __init__(self,unitNumber,ObjectList,scl = None,zone=""):
+    def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
         self.addCall()
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + unitName + "_Drive1")
         self.CallInfo.set("Name","AsiABBDriveNAType01")
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inAlarmSignals" Section="Input" Type="&quot;typeSystemAlarms&quot;"/>',"GlobalData.inGlobalData.alarms")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inChecksumPulse" Section="Input" Type="Bool"/>',"GlobalData.inGlobalData.checksumPulse")
         self.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;"/>',"Inst" + unitName + ".outPort12Motor")
         self.loadParameterStr('<Parameter Name="inAutoManSw" Section="Input" Type="Bool"/>',"Inst" + unitName + "_SS_AUT")
         self.loadParameterStr('<Parameter Name="inDriveRunning" Section="Input" Type="Bool"/>',"Inst" + unitName + "_RNG")
@@ -49,8 +45,11 @@ class AsiABBDriveNAType01(fb_block):
             scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.driveIndex","1")
             scl.endRegion()
             
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+            
 class MoviMot(fb_block):
-    def __init__(self,unitNumber,ObjectList,scl = None,zone=""):
+    def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
         self.addCall()
@@ -69,23 +68,19 @@ class MoviMot(fb_block):
             scl.addRegion(self.Component.get("Name"))
             scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.driveIndex","1")
             scl.endRegion()
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class ScannerSickCLV6xx(fb_block):
-    def __init__(self,unitNumber,ObjectList,scl = None,zone=""):
+    def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
         self.addCall()
         self.addEN(self.CallId,"en")
-        self.Component.set("Name","Inst" + unitNumber + "_Scanner")
+        self.Component.set("Name","Inst" + unitName + "_Scanner")
         self.CallInfo.set("Name","ScannerSickCLV6xx")
-        
-        
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;" />',"Alarms.faultBuffer")
-        self.loadParameterStr('<Parameter Name="inoutWarningBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;" />',"Alarms.warningBuffer")
-        
+        self.Comment.text = unitName + "_Scanner"      
         
         self.loadParameterStr('<Parameter Name="inScannerStatusWord" Section="Input" Type="&quot;typeScannerSickStatusInput&quot;" />',unitNumber + "_Scanner_StatusWord")
         self.loadParameterStr('<Parameter Name="inScannerData" Section="Input" Type="&quot;typeScannerSickDataInput&quot;" />',unitNumber + "_Scanner_Data_IN")
@@ -103,22 +98,32 @@ class ScannerSickCLV6xx(fb_block):
         if scl != None:
             #SCL ConFig
             scl.addRegion(self.Component.get("Name"))
-            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.noReadBarcode","NOREAD")
-            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.noDataTimeout","T#10s")
-            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.readDualBarcodes","FALSE")
-            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.configuration.noReadFaultLimit","1")
-            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.configuration.successfulReadThreshold","80")
-            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.earlyTriggerEnd","T#10s")
+            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.scannerId",'0')
+            scl.GlobalVariableEqualConstant(self.Component.get("Name") + ".inConfig.dataLength","10")
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.noReadTimeout","T#4S")
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.retainTime","T#0s")
+            scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.triggerControl",True)            
+            scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.canBusEnabled",False)
+            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.noReadFaultLimit","3")
+            scl.GlobalVariableEqualConstant(self.Component.get("Name") + ".inConfig.successfulReadThreshold","80")
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.hmiControlZones.controlMask","2#0000_0000_0000_0000_0000_0000_0000_0001")
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMask","2#0000_0000_0000_0000_0000_0000_0000_0001")
+            scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.jamPresets.autoResetEnable",False)
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.jamPresets.jamTime","T#3S")
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.jamPresets.autoResetTime","T#5S")
             scl.endRegion()
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class FortressGate(fb_block):
-    def __init__(self,unitNumber,Failsafe_FIODBName,ObjectList,scl=None,zone=""):
-        FortressGateSwitch(unitNumber,ObjectList,scl,zone)
-        FortressGateSwitchSafety(unitNumber,ObjectList,Failsafe_FIODBName,scl,zone)
-        FortressGateSwitchVis(unitNumber,ObjectList,scl,zone)
+    def __init__(self,unitNumber,Failsafe_FIODBName,ObjectList,zone="",scl=None,software=None):
+        FortressGateSwitch(unitNumber,ObjectList,zone,scl,software)
+        FortressGateSwitchSafety(unitNumber,ObjectList,Failsafe_FIODBName,zone,scl,software)
+        FortressGateSwitchVis(unitNumber,ObjectList,zone,scl,software)
         
 class FortressGateSwitch(fb_block):
-    def __init__(self,unitNumber,ObjectList,scl=None,zone=""):
+    def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone + "_GS"
         self.addCall()
@@ -126,7 +131,6 @@ class FortressGateSwitch(fb_block):
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + unitName)
         self.CallInfo.set("Name","FortressGateSwitch")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
         self.loadParameterStr('<Parameter Name="inRequestAccess" Section="Input" Type="Bool"/>',unitName + "_RQ_PB")
         self.loadParameterStr('<Parameter Name="inAccessGranted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
         self.loadParameterStr('<Parameter Name="inUnlockSwitch" Section="Input" Type="Bool"/>',unitName + "_G_SW")
@@ -140,15 +144,18 @@ class FortressGateSwitch(fb_block):
         if scl != None:
             #SCL ConFig
             pass
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
            
 class FortressGateSwitchSafety(fb_block):
-    def __init__(self,unitNumber,ObjectList,Failsafe_FIODBName,scl=None,zone=""):
+    def __init__(self,unitNumber,ObjectList,Failsafe_FIODBName,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         unitName = unitNumber + zone + "_GS"
         self.Comment.text = unitName.split("_")[0] + " Safety"
         self.addEN(self.CallId,"en")
-        self.Component.set("Name","Inst" + unitNumber + " Gate Switch Safety")
+        self.Component.set("Name","Inst" + unitName + " Gate Switch Safety")
         self.CallInfo.set("Name","FortressGateSwitchSafety")
         self.loadParameterStr('<Parameter Name="inEstopPB1" Section="Input" Type="Bool"/>',unitName + "_Estop_1")
         self.loadParameterStr('<Parameter Name="inEstopPB2" Section="Input" Type="Bool"/>',unitName + "_Estop_2")
@@ -161,9 +168,12 @@ class FortressGateSwitchSafety(fb_block):
         if scl != None:
             #SCL ConFig
             pass
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class FortressGateSwitchVis(fb_block):
-    def __init__(self,unitNumber,ObjectList,scl=None,zone=""):
+    def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         unitName = unitNumber + zone + "_GS"
@@ -172,10 +182,6 @@ class FortressGateSwitchVis(fb_block):
         self.Component.set("Name","Inst" + unitName + " Vis")
         
         self.CallInfo.set("Name","EmergencyStop")
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;" />',"Alarms.faultBuffer")
         self.addParameter("inEStopStatus","Input","Bool")
         self.loadParameterStr('<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
         self.loadParameterStr('<Parameter Name="inLocation" Section="Input" Type="String[14]"/>','',"LiteralConstant","String",unitNumber)
@@ -194,9 +200,12 @@ class FortressGateSwitchVis(fb_block):
         if scl != None:
             #SCL ConFig
             pass
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class EStopVis(fb_block):
-    def __init__(self,Pnag,Ezc,unitName,ObjectList,scl=None):
+    def __init__(self,ControlArea,Pnag,Ezc,unitName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         
         inAsiBusFault = 'Inst{0}.outVisuInterface.status.summary'.format(Pnag)
@@ -207,12 +216,8 @@ class EStopVis(fb_block):
         
         self.CallInfo.set("Name","EmergencyStop")
         self.Comment.text = unitName + "_Vis"
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;" />',"Alarms.faultBuffer")
         self.addParameter("inEStopStatus","Input","Bool")
-        self.loadParameterStr('<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>','Inst' + Ezc + '.outEStopHealthy')
+        self.loadParameterStr('<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>','Inst' + ControlArea + Ezc + '_FC.outEStopHealthy')
         self.loadParameterStr('<Parameter Name="inLocation" Section="Input" Type="String[14]"/>','',"LiteralConstant","String",unitName.split("_")[0])
         self.loadParameterStr('<Parameter Name="inConfigContactType" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
         self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',inAsiBusFault)
@@ -233,7 +238,7 @@ class EStopVis(fb_block):
         
         c = self.spawnPart(self.Component.get("Name") + ".outEstopLamp","Contact",True)
         self.addEN(c,"in")
-        d = self.spawnPart(unitName + "_LT_R","Contact")
+        d = self.spawnPart(unitName + "_NONSAFE","Contact")
         e = self.spawnPart(unitName + "_LT_G","Coil")
         self.addConnection(c,"out",d,"in")
         self.addConnection(d,"out",e,"in")
@@ -241,6 +246,9 @@ class EStopVis(fb_block):
         if scl != None:
             #SCL ConFig
             pass
+        
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class CallSetConfig(fb_block):
     def __init__(self,Name,ObjectList):
@@ -255,20 +263,24 @@ class CallSetConfig(fb_block):
         self.addConnection(id,"out",self.CallId,"en")
         self.Comment.text = "Call " + Name
         
-class Area(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl=None):
-        #super().__init__(ObjectList)
-        Plc(CabnetNumber,ObjectList,scl)
+class CC():
+    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl=None,software=None):
+        Plc(CabnetNumber,EZCName,ObjectList,scl,software)
         
+        for x in range(len(ControlArea)):
+            CA(CabnetNumber,ControlArea[x],EZCName[x],Dps[x],Aux[x],Pnag[x],Pncg[x],Estops[x],EstopsAsi[x],ObjectList,scl,software)
+        
+class CA():
+    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl=None,software=None):
         for x in Pncg:
-            PncgBox(CabnetNumber,x,ObjectList,scl)
+            PncgBox(CabnetNumber,ControlArea,x,ObjectList,scl,software)
         
         for x in Pnag:
-            PnagBox(CabnetNumber,ControlArea,x,ObjectList,scl)
+            PnagBox(CabnetNumber,ControlArea,x,ObjectList,scl,software)
         
         list = []
         for x in range(len(EZCName)):
-            list.append(EzcBox(CabnetNumber,ControlArea,EZCName[x],Dps[x],Aux[x],Estops[x],EstopsAsi[x],Pnag,ObjectList,scl))
+            list.append(EzcBox(CabnetNumber,ControlArea,EZCName[x],Dps[x],Aux[x],Estops[x],EstopsAsi[x],Pnag,ObjectList,scl,software))
             
         for x in list:
             x.createDps()
@@ -280,7 +292,7 @@ class Area(fb_block):
             x.createEstop()
         
 class Plc(fb_block):
-    def __init__(self,CabnetNumber,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,EZCName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         self.Comment.text = CabnetNumber
@@ -291,8 +303,20 @@ class Plc(fb_block):
         self.loadParameterStr('<Parameter Name="inWcsCommsHealthy" Section="Input" Type="Bool" />',"InstDciManager.outConnected")
         self.loadParameterStr('<Parameter Name="inSafetyStatusToPlc" Section="Input" Type="&quot;typeSafetyStatusToMainPanel&quot;" />',"DataFromSafety.SafetyStatusToPLC")
         
+        if scl != None:
+            #SCL ConFig
+            scl.addRegion(self.Component.get("Name"))
+            scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.resetConveyorsFromPanel",True)
+            scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.disableCompressedAirAlarm",False)
+            for x in range(len(EZCName)):
+                scl.GlobalVariableEqualBool("{0}.inConfig.enableEzc[{1}]".format(self.Component.get("Name"),str(x + 1)),True)
+            scl.endRegion()
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
 class PnagBox(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,PnagName,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,ControlArea,PnagName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         blockA = self.CallId
@@ -302,14 +326,12 @@ class PnagBox(fb_block):
         self.CallInfo.set("Name","ProfinetDeviceHealthSelector")
         self.loadParameterStr('<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>',"ProfinetDeviceHealth_DB.outData")
         self.loadParameterStr('<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>',PnagName + "~PN-IO")
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
         self.addCall()
         self.Component.set("Name","Inst" + PnagName)
         self.CallInfo.set("Name","PnagBox")
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;"/>',"Alarms.faultBuffer")
         self.addParameter("inAsiGatewayBusFault","Input","Bool")
         self.loadParameterStr('<Parameter Name="inMainPanelToPnag" Section="Input" Type="Bool"/>','Inst' + CabnetNumber + '.outPlcStatus')
         self.loadParameterStr('<Parameter Name="inAsiCmdReceive" Section="Input" Type="&quot;typeAsiCommandReceive&quot;"/>',PnagName + 'CommandIn')
@@ -317,7 +339,6 @@ class PnagBox(fb_block):
         self.loadParameterStr('<Parameter Name="inFlagsChn1" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>',PnagName + 'FlagsChn1')
         self.loadParameterStr('<Parameter Name="outAsiCmdSend" Section="Output" Type="&quot;typeAsiCommandSend&quot;"/>',PnagName + 'CommandOut')
         self.loadParameterStr('<Parameter Name="outGlobalFaultReset" Section="Output" Type="Bool"/>', PnagName + "GlobalFaultReset")
-        
         self.addConnection(blockA,"eno",self.CallId,"en")
         
         a = self.spawnPart("Inst" + PnagName + "_Health.outFaulty","Contact")
@@ -341,9 +362,12 @@ class PnagBox(fb_block):
             scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.asiGatewayDiag.enableChn0",True)
             scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.asiGatewayDiag.enableChn1",True)
             scl.endRegion()
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
     
 class EzcBox(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Estops,EstopsAsi,Pnag,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Estops,EstopsAsi,Pnag,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.CabnetNumber = CabnetNumber
         self.ControlArea = ControlArea
@@ -354,6 +378,7 @@ class EzcBox(fb_block):
         self.EstopsAsi = EstopsAsi
         self.Pnag = Pnag
         self.ObjectList = ObjectList
+        self.software = software
         self.scl = scl
         self.EZCNumber = str(int(self.EZCName[3:]))
         self.addCall()
@@ -361,10 +386,6 @@ class EzcBox(fb_block):
         self.Component.set("Name","Inst" + self.ControlArea + self.EZCName)
         self.CallInfo.set("Name","EzcBox")
         self.Comment.text = self.ControlArea + ' ' + self.EZCName
-        
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
         
         if len(self.Dps) > 0:
             self.addParameter("inPowerSupplyGroupStarted","Input","Bool")
@@ -384,7 +405,7 @@ class EzcBox(fb_block):
             self.addParameter("inSupplyAuxOk","Input","Bool")
             list = []
             for x in range(len(self.Aux)):
-                id = self.spawnPart("Inst" + self.ControlArea + self.Aux[x] + ".outDpsToZca.AllStarted","Contact")
+                id = self.spawnPart("Inst" + self.ControlArea + self.Aux[x] + ".outFault","Contact")
                 list.append(id)
                 if x == 0:
                     self.addEN(id,"in")
@@ -395,10 +416,10 @@ class EzcBox(fb_block):
             self.loadParameterStr('<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
         self.loadParameterStr('<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
         self.loadParameterStr('<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>','Inst' + self.CabnetNumber + '.outPlcStatus')
-        self.loadParameterStr('<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>','DataFromSafety.EZCxSafetyStatusToPowerGroup[' + self.EZCNumber + ']')
+        self.loadParameterStr('<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>','DataFromSafety.' + ControlArea +'EZCxSafetyStatusToPowerGroup[' + self.EZCNumber + ']')
         self.loadParameterStr('<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
         self.loadParameterStr('<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>','Inst' + self.CabnetNumber + '.inEzcToPlc[' + self.EZCNumber + ']')
-        self.loadParameterStr('<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>','DataToSafety.EZCxPowerGroupToSafetyStatus[' + self.EZCNumber + ']')
+        self.loadParameterStr('<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>','DataToSafety.' + ControlArea +'EZCxPowerGroupToSafetyStatus[' + self.EZCNumber + ']')
         
         if self.scl != None:
             #SCL ConFig
@@ -406,15 +427,18 @@ class EzcBox(fb_block):
             scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.ezcName",self.EZCName)
             scl.GlobalVariableEqualConstant(self.Component.get("Name") + ".inConfig.panelNumber","1")
             scl.endRegion()
+        
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
     
     def createDps(self):
         for x in self.Dps:
-            DpsBox(self.CabnetNumber,self.ControlArea,self.EZCNumber,x,self.EZCName,self.ObjectList,self.scl)
+            DpsBox(self.CabnetNumber,self.ControlArea,self.EZCNumber,x,self.EZCName,self.ObjectList,self.scl,self.software)
+            
             
     def createAux(self): 
         for x in self.Aux:
-            #Add support for Aux
-            pass
+            AuxBox(self.CabnetNumber,self.ControlArea,self.EZCName,x,self.ObjectList,self.scl,self.software)
             
     def createEstop(self):
         for x in range(len(self.Estops)):
@@ -423,31 +447,36 @@ class EzcBox(fb_block):
             networkLetter = split[1][:1]
             for y in self.Pnag:
                 if networkLetter == y.split("_")[2]:
-                    EStopVis(y,self.EZCName,self.Estops[x],self.ObjectList,self.scl)
+                    EStopVis(self.ControlArea,y,self.EZCName,self.Estops[x],self.ObjectList,self.scl,self.software)
 
 class DpsBox(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,EZCNumber,DpsName,EZCName,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,ControlArea,EZCNumber,DpsName,EZCName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         self.addEN(self.CallId,"en")
         self.Comment.text = ControlArea + ' ' + DpsName
         self.Component.set("Name","Inst" + ControlArea + DpsName)
         self.CallInfo.set("Name","DpsBox")
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;" />',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;" />',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;" />',"GlobalData.inGlobalData")
         self.loadParameterStr('<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>',ControlArea + DpsName + '_CR_ESM')
         self.loadParameterStr('<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>','Inst' + ControlArea + EZCName +'.outEzcToPowerSupply')
+        self.loadParameterStr('<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        self.loadParameterStr('<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        self.loadParameterStr('<Parameter Name="inPncgZone2Ready" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        self.loadParameterStr('<Parameter Name="inPncgZone2Active" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
         
         if scl != None:
             #SCL ConFig
             scl.addRegion(self.Component.get("Name"))
             scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.splitPowergroupCommandZones",False)
             scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.panelName", DpsName)
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
             scl.endRegion()
+            
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class PncgBox(fb_block):
-    def __init__(self,ControlArea,PncgName,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,ControlArea,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         blockA = self.CallId
@@ -458,14 +487,14 @@ class PncgBox(fb_block):
         self.loadParameterStr('<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>',"ProfinetDeviceHealth_DB.outData")
         self.loadParameterStr('<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>',PncgName + "~PNCG")
         
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
         self.addCall()
         self.Component.set("Name","Inst" + PncgName)
         self.CallInfo.set("Name","Pncg")
         
         self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;"/>',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;"/>',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;"/>',"Alarms.faultBuffer")
         
         self.loadParameterStr('<Parameter Name="inMandatoryStatus" Section="Input" Type="&quot;typeMandatoryInput&quot;"/>',PncgName + "ManStatus")
         self.loadParameterStr('<Parameter Name="inMandatoryHandshake" Section="Input" Type="&quot;typeMandatoryHandShake&quot;"/>',PncgName + "ManHSin")
@@ -474,8 +503,13 @@ class PncgBox(fb_block):
         self.loadParameterStr('<Parameter Name="inStatusInfo" Section="Input" Type="&quot;typeEccStatus&quot;"/>',PncgName + "VisuStatus")
         self.loadParameterStr('<Parameter Name="inWarningsInfo" Section="Input" Type="&quot;typeEccWarning&quot;"/>',PncgName + "VisuWarnings")
         self.loadParameterStr('<Parameter Name="inFaultsInfo" Section="Input" Type="&quot;typeEccFault&quot;"/>',PncgName + "VisuFaults")
-        self.loadParameterStr('<Parameter Name="inCommandArea1" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + "CmdArea1In")
-        self.loadParameterStr('<Parameter Name="inResetFault" Section="Input" Type="Bool"/>','Inst' + ControlArea + '.outPlcStatus.resetZoneFault')
+        self.loadParameterStr('<Parameter Name="inCommandArea1" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + 'CmdArea1In')
+        self.loadParameterStr('<Parameter Name="inCommandArea2" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + 'CmdArea2In')
+        self.loadParameterStr('<Parameter Name="inCommandArea3" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + 'CmdArea3In')
+        self.loadParameterStr('<Parameter Name="inCommandArea4" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + 'CmdArea4In')
+        self.loadParameterStr('<Parameter Name="inCommandArea5" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + 'CmdArea5In')
+        self.loadParameterStr('<Parameter Name="inCommandArea6" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',PncgName + 'CmdArea6In')
+        self.loadParameterStr('<Parameter Name="inResetFault" Section="Input" Type="Bool"/>','Inst' + CabnetNumber + '.outPlcStatus.resetZoneFault')
         self.loadParameterStr('<Parameter Name="inCanChannel" Section="Input" Type="&quot;typeCANChannelInput&quot;"/>',PncgName + "CANChannelIn")
         self.addParameter("inBusSlaveOk","Input","Bool")
         
@@ -498,7 +532,12 @@ class PncgBox(fb_block):
         self.loadParameterStr('<Parameter Name="outCanChannel" Section="Output" Type="&quot;typeCANChannelOutput&quot;"/>',PncgName + "CANChannelOut")
         self.loadParameterStr('<Parameter Name="outMandatoryCmd" Section="Output" Type="&quot;typeMandatoryOutput&quot;"/>',PncgName + "ManCommand")
         self.loadParameterStr('<Parameter Name="outMandatoryHandshake" Section="Output" Type="&quot;typeMandatoryHandShake&quot;"/>',PncgName + "ManHSOut")
-        self.loadParameterStr('<Parameter Name="outCommandArea1" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + "CmdArea1Out")
+        self.loadParameterStr('<Parameter Name="outCommandArea1" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + 'CmdArea1Out')
+        self.loadParameterStr('<Parameter Name="outCommandArea2" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + 'CmdArea2Out')
+        self.loadParameterStr('<Parameter Name="outCommandArea3" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + 'CmdArea3Out')
+        self.loadParameterStr('<Parameter Name="outCommandArea4" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + 'CmdArea4Out')
+        self.loadParameterStr('<Parameter Name="outCommandArea5" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + 'CmdArea5Out')
+        self.loadParameterStr('<Parameter Name="outCommandArea6" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',PncgName + 'CmdArea6Out')
         self.loadParameterStr('<Parameter Name="inoutParameterData" Section="InOut" Type="&quot;typeNodeParameters&quot;"/>',"dbPncgParameterData." + PncgName)
         
         if scl != None:
@@ -506,10 +545,20 @@ class PncgBox(fb_block):
             scl.addRegion(self.Component.get("Name"))
             scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.name", PncgName[8:])
             scl.GlobalVariableEqualConstant(self.Component.get("Name") + ".inConfig.numberOfEccs", "0")
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskPncg", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskCommandArea1", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskCommandArea2", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskCommandArea3", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskCommandArea4", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskCommandArea5", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMaskCommandArea6", '2#0000_0000_0000_0000_0000_0000_0000_0001')
             scl.endRegion()
         
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
 class RptrBox(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,RptrName,PncgName,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,ControlArea,RptrName,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         self.Comment.text = ControlArea + ' ' + RptrName
@@ -517,10 +566,6 @@ class RptrBox(fb_block):
         self.Component.set("Name","Inst" + RptrName)
         self.CallInfo.set("Name","RptrBox")
         
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;"/>',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;"/>',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;"/>',"Alarms.faultBuffer")
         self.loadParameterStr('<Parameter Name="inTemperatureRptrOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
         self.loadParameterStr('<Parameter Name="inPnagToRptr" Section="Input" Type="&quot;typePnagToRptr;"/>',"Inst" + PncgName + ".outPnagToRptr")
         self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + PncgName + ".outVisuInterface.status.summary")
@@ -529,21 +574,83 @@ class RptrBox(fb_block):
             #SCL ConFig
             scl.addRegion(self.Component.get("Name"))
             scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.rptrName", RptrName.replace("_", ""))
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
             scl.endRegion()
         
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
 class AuxBox(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,RptrName,PncgName,ObjectList,scl=None):
+    def __init__(self,CabnetNumber,ControlArea,EZCName,AuxBoxName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
-        self.Comment.text = ControlArea + ' ' + RptrName
+        self.Comment.text = ControlArea + ' ' + AuxBoxName
         self.addEN(self.CallId,"en")
-        self.Component.set("Name","Inst" + RptrName)
+        self.Component.set("Name","Inst" + ControlArea + AuxBoxName)
         self.CallInfo.set("Name","AuxBox")
         
-        self.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>',"GlobalData.inoutGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutLoggingDB" Section="InOut" Type="&quot;typeLoggingDB&quot;"/>',"LoggingOptimizedDB.loggingDB")
-        self.loadParameterStr('<Parameter Name="inGlobalData" Section="Input" Type="&quot;typeInGlobalData&quot;"/>',"GlobalData.inGlobalData")
-        self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;"/>',"Alarms.faultBuffer")
+        self.loadParameterStr('<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>',ControlArea + AuxBoxName +'_CR_ESM')
+        self.loadParameterStr('<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>',"Inst" + ControlArea + EZCName +'.outEzcToAux')
+        
+        if scl != None:
+            scl.addRegion(self.Component.get("Name"))
+            scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.auxName",self.Component.get("Name"))
+            scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+        
+        if software != None:
+            software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
+class ResetPanelBox(fb_block):
+    def __init__(self,ControlArea,LineName,ASiNetwork,PBs,BCs,ObjectList,scl=None,software=None):
+        super().__init__(ObjectList)
+        self.addCall()
+        self.Comment.text = ControlArea + ' ' + LineName + ' ' + 'Reset'
+        self.addEN(self.CallId,"en")
+        self.Component.set("Name","InstResetPanel_" + LineName)
+        self.CallInfo.set("Name","ResetPanelBox")
+        
+        network  = {"A":"U253110_PNAG_A","B":"U252310_PNAG_B","C":"U251910_PNAG_C"}
+        
+        
+        if len(PBs) > 0:
+            self.addParameter("inResetButton","Input","Bool")
+            self.OR(PBs,self.CallId,"inPowerSupplyGroupStarted")
+        else:
+            self.loadParameterStr('<Parameter Name="inResetButton" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        
+        self.addParameter("inAsiGatewayConnected","Input","Bool")
+        x = self.spawnPart("Inst" + network[ASiNetwork[:1]] + "outVisuInterface.faults.asiGatewayBus","Contact",True)
+        self.addEN(x,"in")
+        y = self.spawnPart(network[ASiNetwork[:1]] + "FlagsChn" + str(int(ASiNetwork[1:])-1) + ".noNormalOperation","Contact",True)
+        self.addConnection(x,"out",y,"in")
+        self.addConnection(y,"out",self.CallId,"inAsiGatewayConnected")
+        
+        self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + network[ASiNetwork[:1]] + "outVisuInterface.status.summary")
+        
+        BCs.insert(0, self.Component.get("Name") + ".outIndicatorLight")
+        """
+        for x in range(len(BCs)):
+            id  = 
+            if x == 0:
+                
+        """
+        
+class ConnectionBox(fb_block):
+    def __init__(self,Name,ConnectionNumber,ObjectList,zone="",scl=None,software=None):
+        super().__init__(ObjectList)
+        x = self.spawnPart("DeleteMe","Contact")
+        self.addEN(x,"in")
+        y = self.spawnPart("DeleteMe","Coil")
+        self.addConnection(x,"out",y,"in")
+        if scl != None:
+            #SCL ConFig
+            scl.addRegion(Name)
+            scl.GlobalVariableEqualConstant('HMI.ConnectionPoints[{0}].connectionId'.format(ConnectionNumber),ConnectionNumber)
+            scl.GlobalVariableEqualConstant('HMI.ConnectionPoints[{0}].controlZone.controlMask'.format(ConnectionNumber),"2#0000_0000_0000_0000_0000_0000_0000_0001")
+            scl.endRegion()
+        
+        if software != None:
+            pass
         
 class Test(fb_block):
     def __init__(self,ObjectList,scl=None):

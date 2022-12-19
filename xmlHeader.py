@@ -14,22 +14,22 @@ class father():
         return child
         
     def save(self):
-        with open(self.folder + "/" + self.unitName + ".xml", "w") as file:
+        with open(self.folder + "/" + self.Name + ".xml", "w") as file:
             file.write(minidom.parseString(ET.tostring(self.root)).toprettyxml(indent = "\t"))
         
     def __str__(self):
         return minidom.parseString(ET.tostring(self.root)).toprettyxml(indent = "\t")
 
 class xmlHeader(father):
-    def __init__(self,unitName,folder):
-        self.unitName = unitName
+    def __init__(self,Name,folder):
+        self.Name = Name
         self.folder = folder
         self.root = ET.Element("Document")
         SWBlocksFC = self.createSubElement(self.root, "SW.Blocks.FC","ID")
         AttributeList = self.createSubElement(SWBlocksFC,"AttributeList")
         self.createSubElement(AttributeList,"AutoNumber").text = "true"
         self.createSubElement(AttributeList,"MemoryLayout").text = "Optimized"
-        self.createSubElement(AttributeList,"Name").text = str(self.unitName)
+        self.createSubElement(AttributeList,"Name").text = str(self.Name)
         self.ProgrammingLanguage = self.createSubElement(AttributeList,"ProgrammingLanguage")
         self.ProgrammingLanguage.text = "LAD"
         self.ObjectList = self.createSubElement(SWBlocksFC,"ObjectList")
