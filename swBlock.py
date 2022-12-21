@@ -1,7 +1,7 @@
 from xmlHeader import xmlHeader
 import xml.etree.cElementTree as ET
 
-class fb_block(xmlHeader):
+class swBlock(xmlHeader):
     def __init__(self,ObjectList):
         SWBlocksCompileUnit = self.createSubElement(ObjectList, "SW.Blocks.CompileUnit","ID")
         SWBlocksCompileUnit.set("CompositionName", "CompileUnits")

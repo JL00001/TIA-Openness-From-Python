@@ -1,0 +1,217 @@
+<?xml version="1.0" ?>
+<Document>
+	<SW.Blocks.FC ID="1">
+		<AttributeList>
+			<AutoNumber>true</AutoNumber>
+			<MemoryLayout>Optimized</MemoryLayout>
+			<Name>Jacob's Magic_SetConfigs</Name>
+			<ProgrammingLanguage>SCL</ProgrammingLanguage>
+		</AttributeList>
+		<ObjectList>
+			<SW.Blocks.CompileUnit ID="2" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
+							<Token UId="27" Text="REGION"/>
+							<Blank UId="28"/>
+							<Text UId="29">InstCA121CA121EZC1</Text>
+							<Blank UId="30" Num="3"/>
+							<NewLine UId="31"/>
+							<Blank UId="32" Num="3"/>
+							<Access UId="33" Scope="GlobalVariable">
+								<Symbol UId="34">
+									<Component UId="35" Name="InstCA121CA121EZC1"/>
+									<Token UId="36" Text="."/>
+									<Component UId="37" Name="inConfig"/>
+									<Token UId="38" Text="."/>
+									<Component UId="39" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="41"/>
+							<Token UId="42" Text=":="/>
+							<Blank UId="43"/>
+							<Access UId="44" Scope="LiteralConstant">
+								<Constant UId="45">
+									<ConstantValue UId="46">'CA121EZC1'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="47" Text=";"/>
+							<NewLine UId="48"/>
+							<Blank UId="49" Num="3"/>
+							<Access UId="50" Scope="GlobalVariable">
+								<Symbol UId="51">
+									<Component UId="52" Name="InstCA121CA121EZC1"/>
+									<Token UId="53" Text="."/>
+									<Component UId="54" Name="inConfig"/>
+									<Token UId="55" Text="."/>
+									<Component UId="56" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="58"/>
+							<Token UId="59" Text=":="/>
+							<Blank UId="60"/>
+							<Access UId="61" Scope="LiteralConstant">
+								<Constant UId="62">
+									<ConstantValue UId="63">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="64" Text=";"/>
+							<NewLine UId="65"/>
+							<Blank UId="66" Num="3"/>
+							<NewLine UId="67"/>
+							<Token UId="68" Text="END_REGION"/>
+							<NewLine UId="69"/>
+							<Token UId="94" Text="REGION"/>
+							<Blank UId="95"/>
+							<Text UId="96">InstCA121CA121EZC2</Text>
+							<Blank UId="97" Num="3"/>
+							<NewLine UId="98"/>
+							<Blank UId="99" Num="3"/>
+							<Access UId="100" Scope="GlobalVariable">
+								<Symbol UId="101">
+									<Component UId="102" Name="InstCA121CA121EZC2"/>
+									<Token UId="103" Text="."/>
+									<Component UId="104" Name="inConfig"/>
+									<Token UId="105" Text="."/>
+									<Component UId="106" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="108"/>
+							<Token UId="109" Text=":="/>
+							<Blank UId="110"/>
+							<Access UId="111" Scope="LiteralConstant">
+								<Constant UId="112">
+									<ConstantValue UId="113">'CA121EZC2'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="114" Text=";"/>
+							<NewLine UId="115"/>
+							<Blank UId="116" Num="3"/>
+							<Access UId="117" Scope="GlobalVariable">
+								<Symbol UId="118">
+									<Component UId="119" Name="InstCA121CA121EZC2"/>
+									<Token UId="120" Text="."/>
+									<Component UId="121" Name="inConfig"/>
+									<Token UId="122" Text="."/>
+									<Component UId="123" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="125"/>
+							<Token UId="126" Text=":="/>
+							<Blank UId="127"/>
+							<Access UId="128" Scope="LiteralConstant">
+								<Constant UId="129">
+									<ConstantValue UId="130">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="131" Text=";"/>
+							<NewLine UId="132"/>
+							<Blank UId="133" Num="3"/>
+							<NewLine UId="134"/>
+							<Token UId="135" Text="END_REGION"/>
+							<NewLine UId="136"/>
+							<Token UId="161" Text="REGION"/>
+							<Blank UId="162"/>
+							<Text UId="163">InstCA121CA121EZC3</Text>
+							<Blank UId="164" Num="3"/>
+							<NewLine UId="165"/>
+							<Blank UId="166" Num="3"/>
+							<Access UId="167" Scope="GlobalVariable">
+								<Symbol UId="168">
+									<Component UId="169" Name="InstCA121CA121EZC3"/>
+									<Token UId="170" Text="."/>
+									<Component UId="171" Name="inConfig"/>
+									<Token UId="172" Text="."/>
+									<Component UId="173" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="175"/>
+							<Token UId="176" Text=":="/>
+							<Blank UId="177"/>
+							<Access UId="178" Scope="LiteralConstant">
+								<Constant UId="179">
+									<ConstantValue UId="180">'CA121EZC3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="181" Text=";"/>
+							<NewLine UId="182"/>
+							<Blank UId="183" Num="3"/>
+							<Access UId="184" Scope="GlobalVariable">
+								<Symbol UId="185">
+									<Component UId="186" Name="InstCA121CA121EZC3"/>
+									<Token UId="187" Text="."/>
+									<Component UId="188" Name="inConfig"/>
+									<Token UId="189" Text="."/>
+									<Component UId="190" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="192"/>
+							<Token UId="193" Text=":="/>
+							<Blank UId="194"/>
+							<Access UId="195" Scope="LiteralConstant">
+								<Constant UId="196">
+									<ConstantValue UId="197">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="198" Text=";"/>
+							<NewLine UId="199"/>
+							<Blank UId="200" Num="3"/>
+							<NewLine UId="201"/>
+							<Token UId="202" Text="END_REGION"/>
+							<NewLine UId="203"/>
+							<Token UId="228" Text="REGION"/>
+							<Blank UId="229"/>
+							<Text UId="230">InstCA121CA121EZC4</Text>
+							<Blank UId="231" Num="3"/>
+							<NewLine UId="232"/>
+							<Blank UId="233" Num="3"/>
+							<Access UId="234" Scope="GlobalVariable">
+								<Symbol UId="235">
+									<Component UId="236" Name="InstCA121CA121EZC4"/>
+									<Token UId="237" Text="."/>
+									<Component UId="238" Name="inConfig"/>
+									<Token UId="239" Text="."/>
+									<Component UId="240" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="242"/>
+							<Token UId="243" Text=":="/>
+							<Blank UId="244"/>
+							<Access UId="245" Scope="LiteralConstant">
+								<Constant UId="246">
+									<ConstantValue UId="247">'CA121EZC4'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="248" Text=";"/>
+							<NewLine UId="249"/>
+							<Blank UId="250" Num="3"/>
+							<Access UId="251" Scope="GlobalVariable">
+								<Symbol UId="252">
+									<Component UId="253" Name="InstCA121CA121EZC4"/>
+									<Token UId="254" Text="."/>
+									<Component UId="255" Name="inConfig"/>
+									<Token UId="256" Text="."/>
+									<Component UId="257" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="259"/>
+							<Token UId="260" Text=":="/>
+							<Blank UId="261"/>
+							<Access UId="262" Scope="LiteralConstant">
+								<Constant UId="263">
+									<ConstantValue UId="264">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="265" Text=";"/>
+							<NewLine UId="266"/>
+							<Blank UId="267" Num="3"/>
+							<NewLine UId="268"/>
+							<Token UId="269" Text="END_REGION"/>
+							<NewLine UId="270"/>
+						</StructuredText>
+					</NetworkSource>
+				</AttributeList>
+			</SW.Blocks.CompileUnit>
+		</ObjectList>
+	</SW.Blocks.FC>
+</Document>

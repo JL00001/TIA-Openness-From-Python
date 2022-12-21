@@ -6,7 +6,7 @@ import xml.etree.cElementTree as ET
 
 global id
 id = 0
-
+"""
 class fbObject():
     def __init__(self,plcSoftwareContainer,Name):
         self.fileName = Name
@@ -37,6 +37,8 @@ class fbObject():
         fcImport = self.softwareContainer.Blocks.Find(self.fileName)
         ICompilable = Siemens.Engineering.IEngineeringServiceProvider(fcImport).GetService[Siemens.Engineering.Compiler.ICompilable]()
         ICompilable.Compile()
+        
+
         
 class xmlDocument():
     def __init__(self,fileName):
@@ -163,7 +165,8 @@ class fcBlock(xmlDocument):
             self.addParameterWire(document.get("Name"),document.get("Section"),document.get("Type"))
         else:
             self.addParameterAccessWire(connectionName,document.get("Name"),document.get("Section"),document.get("Type"))
-        
+ 
+
 class AbbAcs380Drive(fcBlock):
      def __init__(self,unitName):
         super().__init__()
@@ -179,6 +182,7 @@ class AbbAcs380Drive(fcBlock):
         self.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;" />',"Inst" + unitName + ".outPort12Motor")
         self.loadParameterStr('<Parameter Name="outDriveCommand" Section="Output" Type="&quot;typeABBACS380OutputsPP04&quot;" />',unitName + "_OUT")
         
+
 class AsiABBDriveNAType01(fcBlock):
     def __init__(self,unitName):
         super().__init__()
@@ -197,6 +201,7 @@ class AsiABBDriveNAType01(fcBlock):
         self.addParameterAccessWire("Inst" + unitName + "_REF_1","outMotorFast","Output","Bool;")
         self.addParameterAccessWire("Inst" + unitName + "_CLR_FLT","outMotorFaultReset","Output","Bool;")
         
+
 class ScannerSickCLV62x(fcBlock):
     def __init__(self,unitName,zone):
         super().__init__()
@@ -214,7 +219,6 @@ class ScannerSickCLV62x(fcBlock):
         self.loadParameterStr('<Parameter Name="inoutFaultBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;" />',"Alarms.faultBuffer")
         self.loadParameterStr('<Parameter Name="inoutWarningBuffer" Section="InOut" Type="Array[*] of &quot;typeAlarmBufferEntry&quot;" />',"Alarms.warningBuffer")
         
-        """
         REGION SB253510_Z4Scanner
          "InstSB253510_Z4Scanner".inConfig.dataLength := 10;
          "InstSB253510_Z4Scanner".inConfig.noReadBarcode := '00000000';
@@ -222,8 +226,8 @@ class ScannerSickCLV62x(fcBlock):
          "InstSB253510_Z4Scanner".inConfig.configuration.noReadFaultLimit := 3;
          "InstSB253510_Z4Scanner".inConfig.configuration.successfulReadThreshold := 80;
       END_REGION
-        """
 
 
 #test = xmlDocument("Test")
 #print(test)
+"""

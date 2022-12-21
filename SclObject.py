@@ -1,8 +1,8 @@
 from xmlHeader import xmlHeader
 
-class SclObject(xmlHeader):
-    def __init__(self,unitName,folder):
-        super().__init__(unitName,folder)
+class sclObject(xmlHeader):
+    def __init__(self,unitName):
+        super().__init__(unitName)
         SWBlocksCompileUnit = self.createSubElement(self.ObjectList, "SW.Blocks.CompileUnit","ID")
         self.ProgrammingLanguage.text = "SCL"
         SWBlocksCompileUnit.set("CompositionName", "CompileUnits")

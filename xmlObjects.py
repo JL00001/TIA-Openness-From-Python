@@ -1,6 +1,6 @@
-from fb_block import fb_block
+from swBlock import swBlock
 
-class AbbAcs380Drive(fb_block):
+class AbbAcs380Drive(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
@@ -22,7 +22,7 @@ class AbbAcs380Drive(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class AsiABBDriveNAType01(fb_block):
+class AsiABBDriveNAType01(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
@@ -48,7 +48,7 @@ class AsiABBDriveNAType01(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
             
-class MoviMot(fb_block):
+class MoviMot(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
@@ -72,7 +72,7 @@ class MoviMot(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class ScannerSickCLV6xx(fb_block):
+class ScannerSickCLV6xx(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone
@@ -116,13 +116,13 @@ class ScannerSickCLV6xx(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class FortressGate(fb_block):
+class FortressGate(swBlock):
     def __init__(self,unitNumber,Failsafe_FIODBName,ObjectList,zone="",scl=None,software=None):
         FortressGateSwitch(unitNumber,ObjectList,zone,scl,software)
         FortressGateSwitchSafety(unitNumber,ObjectList,Failsafe_FIODBName,zone,scl,software)
         FortressGateSwitchVis(unitNumber,ObjectList,zone,scl,software)
         
-class FortressGateSwitch(fb_block):
+class FortressGateSwitch(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         unitName = unitNumber + zone + "_GS"
@@ -148,7 +148,7 @@ class FortressGateSwitch(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
            
-class FortressGateSwitchSafety(fb_block):
+class FortressGateSwitchSafety(swBlock):
     def __init__(self,unitNumber,ObjectList,Failsafe_FIODBName,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -172,7 +172,7 @@ class FortressGateSwitchSafety(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class FortressGateSwitchVis(fb_block):
+class FortressGateSwitchVis(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -204,7 +204,7 @@ class FortressGateSwitchVis(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class EStopVis(fb_block):
+class EStopVis(swBlock):
     def __init__(self,ControlArea,Pnag,Ezc,unitName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         
@@ -250,7 +250,7 @@ class EStopVis(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class CallSetConfig(fb_block):
+class CallSetConfig(swBlock):
     def __init__(self,Name,ObjectList):
         super().__init__(ObjectList)
         Call = self.createSubElement(self.Parts,"Call","UId")
@@ -291,7 +291,7 @@ class CA():
         for x in list:
             x.createEstop()
         
-class Plc(fb_block):
+class Plc(swBlock):
     def __init__(self,CabnetNumber,EZCName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -315,7 +315,7 @@ class Plc(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class PnagBox(fb_block):
+class PnagBox(swBlock):
     def __init__(self,CabnetNumber,ControlArea,PnagName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -366,21 +366,20 @@ class PnagBox(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
     
-class EzcBox(fb_block):
-    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Estops,EstopsAsi,Pnag,ObjectList,scl=None,software=None):
+class EzcBox(swBlock):
+    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
+        import re
         self.CabnetNumber = CabnetNumber
         self.ControlArea = ControlArea
         self.EZCName = EZCName
         self.Dps = Dps
         self.Aux = Aux
-        self.Estops = Estops
-        self.EstopsAsi = EstopsAsi
-        self.Pnag = Pnag
         self.ObjectList = ObjectList
         self.software = software
         self.scl = scl
-        self.EZCNumber = str(int(self.EZCName[3:]))
+        if re.search("EZC[0-9]{1,3}",EZCName):
+            self.EZCNumber = re.findall("[0-9]{1,3}$", EZCName)[0]
         self.addCall()
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + self.ControlArea + self.EZCName)
@@ -439,17 +438,8 @@ class EzcBox(fb_block):
     def createAux(self): 
         for x in self.Aux:
             AuxBox(self.CabnetNumber,self.ControlArea,self.EZCName,x,self.ObjectList,self.scl,self.software)
-            
-    def createEstop(self):
-        for x in range(len(self.Estops)):
-            address = self.EstopsAsi[x]
-            split = address.split("_")
-            networkLetter = split[1][:1]
-            for y in self.Pnag:
-                if networkLetter == y.split("_")[2]:
-                    EStopVis(self.ControlArea,y,self.EZCName,self.Estops[x],self.ObjectList,self.scl,self.software)
 
-class DpsBox(fb_block):
+class DpsBox(swBlock):
     def __init__(self,CabnetNumber,ControlArea,EZCNumber,DpsName,EZCName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -475,7 +465,7 @@ class DpsBox(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class PncgBox(fb_block):
+class PncgBox(swBlock):
     def __init__(self,CabnetNumber,ControlArea,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -557,7 +547,7 @@ class PncgBox(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class RptrBox(fb_block):
+class RptrBox(swBlock):
     def __init__(self,CabnetNumber,ControlArea,RptrName,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -580,7 +570,7 @@ class RptrBox(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class AuxBox(fb_block):
+class AuxBox(swBlock):
     def __init__(self,CabnetNumber,ControlArea,EZCName,AuxBoxName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -600,7 +590,7 @@ class AuxBox(fb_block):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
-class ResetPanelBox(fb_block):
+class ResetPanelBox(swBlock):
     def __init__(self,ControlArea,LineName,ASiNetwork,PBs,BCs,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
@@ -635,7 +625,7 @@ class ResetPanelBox(fb_block):
                 
         """
         
-class ConnectionBox(fb_block):
+class ConnectionBox(swBlock):
     def __init__(self,Name,ConnectionNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
         x = self.spawnPart("DeleteMe","Contact")
@@ -652,7 +642,7 @@ class ConnectionBox(fb_block):
         if software != None:
             pass
         
-class Test(fb_block):
+class Test(swBlock):
     def __init__(self,ObjectList,scl=None):
         super().__init__(ObjectList)
         dps = 1

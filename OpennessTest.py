@@ -4,9 +4,9 @@ import Siemens.Engineering
 import System
 import ipaddress
 import anytree
-import XML_Objects
+import xmlObjects
 from xmlHeader import xmlHeader
-from SclObject import SclObject
+from sclObject import sclObject
 from Global_DB import Global_DB
 import os
 import ctypes
@@ -74,12 +74,19 @@ class GsdDevice():
             
     def getNetworkInterface(self,object):
         self.checkIECV22LLDPMode(object)
+        #self.checkMediaRedundancyRole(object)
         self.networkInterface = Siemens.Engineering.IEngineeringServiceProvider(object).GetService[Siemens.Engineering.HW.Features.NetworkInterface]()
         return self.networkInterface
         
     def checkIECV22LLDPMode(self,object):
         try:
             self.testThenSetAttribute("IECV22LLDPMode",System.Boolean(True),object,False)
+        except Siemens.Engineering.EngineeringNotSupportedException:
+            pass
+            
+    def checkMediaRedundancyRole(self,object):
+        try:
+            self.testThenSetAttribute("MediaRedundancyRole",Siemens.Engineering.HW.MediaRedundancyRole.Client,object,False)
         except Siemens.Engineering.EngineeringNotSupportedException:
             pass
     
@@ -192,7 +199,7 @@ class groupedDevice(GsdDevice):
                 
         super().__init__(Device)
 
-class tagManager():
+class tags():
     def __init__(self,software):
         self.TagTables = software.TagTableGroup.TagTables
         self.data = {}
@@ -252,7 +259,7 @@ class tagManager():
             print("Name '{0}' Already In Use At This Address '{1}'".format(name,self.data["name"][name]))        
 
 class createAbbAcs380Drive():
-    def __init__(self,project,tagManager,unitNumber,ip,subnet,zone = ""):
+    def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + zone + "_FMD"
         #Set Type Identifier
         typeIdentifier = "GSD:GSDML-V2.33-ABB-FPNO-20180516.XML"
@@ -274,11 +281,11 @@ class createAbbAcs380Drive():
         outStart = Object.Objects["PPO Type 4_1"]["PPO4 Data Object"]["Object"].Addresses[1].StartAddress
         
         #Create Two Tags For The Drive IN and OUT From Thoses Addresses
-        tagManager.addTag(unitName+"_In","In","{0}.0".format(inStart),"typeABBACS380InputsPP04","PP04 Inputs For Drive Flags","FMD PPO Tags")
-        tagManager.addTag(unitName+"_Out","Out","{0}.0".format(outStart),"typeABBACS380OutputsPP04","PP04 Outputs For Drive Control","FMD PPO Tags")
+        tags.addTag(unitName+"_In","In","{0}.0".format(inStart),"typeABBACS380InputsPP04","PP04 Inputs For Drive Flags","FMD PPO Tags")
+        tags.addTag(unitName+"_Out","Out","{0}.0".format(outStart),"typeABBACS380OutputsPP04","PP04 Outputs For Drive Control","FMD PPO Tags")
   
 class createScannerSickCLV6xx():
-    def __init__(self,project,tagManager,unitNumber,ip,subnet,zone = ""):
+    def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + zone
         typeIdentifier = "GSD:GSDML-V2.3-SICK-CLV62XCLV65X_VIA_CDF600-20150312.XML"
         Object = ungroupedDevice(project,typeIdentifier + "/DAP",unitNumber + "_SC")
@@ -289,13 +296,13 @@ class createScannerSickCLV6xx():
         Byte_Input_1 = Object.Objects[" 32 Byte Input_1"][" 32 Byte Input"]["Object"].Addresses[0].StartAddress
         Byte_Output_1 = Object.Objects[" 32 Byte Output_1"][" 32 Byte Output"]["Object"].Addresses[0].StartAddress
         if Ctrl_Bits_in_1 != -1 and Ctrl_Bits_out_1 != -1 and Byte_Input_1 != -1 and Byte_Output_1 != -1:
-            tagManager.addTag(unitName + "_Scanner_StatusWord","In","{0}.0".format(Ctrl_Bits_in_1),"typeScannerSickStatusInput","Scanner Status Signals","Scanner Tags")
-            tagManager.addTag(unitName + "_Scanner_CtrlWord","Out","{0}.0".format(Ctrl_Bits_out_1),"typeScannerSickCtrlOutput","Scanner Ctrl Signals","Scanner Tags")
-            tagManager.addTag(unitName + "_Scanner_Data_IN","In","{0}.0".format(Byte_Input_1),"typeScannerSickDataInput","Scanner Data Input","Scanner Tags")
-            tagManager.addTag(unitName + "_Scanner_Data_OUT","Out","{0}.0".format(Byte_Output_1),"typeScannerSickDataOutput","Scanner Data Output","Scanner Tags")
+            tags.addTag(unitName + "_Scanner_StatusWord","In","{0}.0".format(Ctrl_Bits_in_1),"typeScannerSickStatusInput","Scanner Status Signals","Scanner Tags")
+            tags.addTag(unitName + "_Scanner_CtrlWord","Out","{0}.0".format(Ctrl_Bits_out_1),"typeScannerSickCtrlOutput","Scanner Ctrl Signals","Scanner Tags")
+            tags.addTag(unitName + "_Scanner_Data_IN","In","{0}.0".format(Byte_Input_1),"typeScannerSickDataInput","Scanner Data Input","Scanner Tags")
+            tags.addTag(unitName + "_Scanner_Data_OUT","Out","{0}.0".format(Byte_Output_1),"typeScannerSickDataOutput","Scanner Data Output","Scanner Tags")
         
-class createPNPN():
-    def __init__(self,project,tagManager,unitNumber,ip,subnet,zone = ""):
+class createPnpn():
+    def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + "_PNPN"
         typeIdentifier = "OrderNumber:6ES7 158-3AD10-0XA0"
         Object = ungroupedDevice(project,typeIdentifier + "/V4.2",unitName,unitName)
@@ -303,14 +310,14 @@ class createPNPN():
         Object.setIp(ip,subnet)
         
 class createConnectionBox():
-    def __init__(self,project,tagManager,unitName,ip,subnet,zone = ""):
+    def __init__(self,project,tags,unitName,ip,subnet,zone = ""):
         typeIdentifier = "OrderNumber:6AV2 125-2AE23-0AX0"
         Object = ungroupedDevice(project,typeIdentifier + "/V5.2",unitName)
         Object.getNetworkInterface(Object.Objects[unitName]["SCALANCE interface_1"]["Object"])
         Object.setIp(ip,subnet)
         
-class createHMI():
-    def __init__(self,project,tagManager,Name,ip,subnet,zone = ""):
+class createHmi():
+    def __init__(self,project,tags,Name,ip,subnet,zone = ""):
         Object = GsdDevice(project.Devices.CreateFrom(project.ProjectLibrary.MasterCopyFolder.MasterCopies.Find("Systems-HMI1")))
         Object.Device.SetAttribute("Name",Name)
         Object.startDiscovery()
@@ -318,9 +325,9 @@ class createHMI():
         Object.networkInterface.SetAttribute("InterfaceOperatingMode",2)
         Object.setIp(ip,subnet)
         
-class createMOVIMOT():
-    def __init__(self,project,tagManager,unitNumber,ip,subnet,zone = ""):
-        unitName = unitName + "_MMD"
+class createMoviMot():
+    def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
+        unitName = unitNumber + "_MMD"
         typeIdentifier = "GSD:GSDML-V2.25-SEW-MFE52A-20161017-102525.XML"
         Object = ungroupedDevice(project,typeIdentifier + "/DAP/MFE PDEV MRP 3MM",unitName)
         Object.deleteModule("Slot not used_3")
@@ -331,14 +338,14 @@ class createMOVIMOT():
         MM3PDin = Object.Objects["MOVIMOT 3PD_1"]["MOVIMOT 3PD"]["Object"].Addresses[0].StartAddress
         MM3PDout = Object.Objects["MOVIMOT 3PD_1"]["MOVIMOT 3PD"]["Object"].Addresses[1].StartAddress
         if IOin != -1 and MM3PDin != -1 and MM3PDout != -1:
-            tagManager.addTag(unitNumber + "_PE_P","In","{0}.0".format(IOin),"Bool","4/6 DI Input 1","MMD Tags")
-            tagManager.addTag(unitName + "_In","In","{0}.0".format(MM3PDin),"typeProfinetMoviMotInputs","Input Commands","MMD Tags")
-            tagManager.addTag(unitName + "_Out","Out","{0}.0".format(MM3PDout),"typeProfinetMoviMotOutputs","Output Flags","MMD Tags")
+            tags.addTag(unitNumber + "_PE_P","In","{0}.0".format(IOin),"Bool","4/6 DI Input 1","MMD Tags")
+            tags.addTag(unitName + "_In","In","{0}.0".format(MM3PDin),"typeProfinetMoviMotInputs","Input Commands","MMD Tags")
+            tags.addTag(unitName + "_Out","Out","{0}.0".format(MM3PDout),"typeProfinetMoviMotOutputs","Output Flags","MMD Tags")
         self.LAD = False
         self.SCL = False
 
 class createFortressGate():
-    def __init__(self,project,tagManager,unitNumber,ip,subnet,zone = ""):
+    def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + zone + "_GS"
         typeIdentifier = "GSD:GSDML-V2.35-FORTRESS-PROLOK-20190704.XML"
         self.Object = ungroupedDevice(project,typeIdentifier + "/DAP",unitName)
@@ -348,54 +355,53 @@ class createFortressGate():
         self.Object.setIp(ip,subnet)
         safetyModuleIn = self.Object.Objects["Safety Module_1"]["Safety Module"]["Object"].Addresses[0].StartAddress
         if safetyModuleIn != -1:
-            tagManager.addTag(unitName+"_Sol_1","In","{0}.0".format(safetyModuleIn),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_Sol_2","In","{0}.1".format(safetyModuleIn),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_Estop_1","In","{0}.4".format(safetyModuleIn),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_Estop_2","In","{0}.5".format(safetyModuleIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_Sol_1","In","{0}.0".format(safetyModuleIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_Sol_2","In","{0}.1".format(safetyModuleIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_Estop_1","In","{0}.4".format(safetyModuleIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_Estop_2","In","{0}.5".format(safetyModuleIn),"Bool","","E Stop Devices")
             
         lampsOut = self.Object.Objects["Unsafe IO Data_1"]["IO Lamps"]["Object"].Addresses[0].StartAddress
         if lampsOut != -1:
-            tagManager.addTag(unitName+"_ST_LT","Out","{0}.0".format(lampsOut),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_G_LT","Out","{0}.1".format(lampsOut),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_ES_LT","Out","{0}.3".format(lampsOut),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_RQ_LT","Out","{0}.4".format(lampsOut),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_RS_LT","Out","{0}.5".format(lampsOut),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_ST_LT","Out","{0}.0".format(lampsOut),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_G_LT","Out","{0}.1".format(lampsOut),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_ES_LT","Out","{0}.3".format(lampsOut),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_RQ_LT","Out","{0}.4".format(lampsOut),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_RS_LT","Out","{0}.5".format(lampsOut),"Bool","","E Stop Devices")
             
         switchesIn = self.Object.Objects["Unsafe IO Data_1"]["IO Switches"]["Object"].Addresses[0].StartAddress
         if switchesIn != -1:
-            tagManager.addTag(unitName+"_ST_PVB","In","{0}.0".format(switchesIn),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_G_SW","In","{0}.1".format(switchesIn),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_RQ_PB","In","{0}.4".format(switchesIn),"Bool","","E Stop Devices")
-            tagManager.addTag(unitName+"_RS_PB","In","{0}.5".format(switchesIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_ST_PVB","In","{0}.0".format(switchesIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_G_SW","In","{0}.1".format(switchesIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_RQ_PB","In","{0}.4".format(switchesIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_RS_PB","In","{0}.5".format(switchesIn),"Bool","","E Stop Devices")
             
         solenoidOut = self.Object.Objects["Unsafe IO Data_1"]["Solenoid Drive"]["Object"].Addresses[0].StartAddress
         if solenoidOut != -1:
-            tagManager.addTag(unitName+"_Sol_Drive","Out","{0}.0".format(solenoidOut),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_Sol_Drive","Out","{0}.0".format(solenoidOut),"Bool","","E Stop Devices")
             
         gateIn = self.Object.Objects["Unsafe IO Data_1"]["Gate Monitor"]["Object"].Addresses[0].StartAddress
         if gateIn != -1:
-            tagManager.addTag(unitName+"_GateMon","In","{0}.0".format(gateIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_GateMon","In","{0}.0".format(gateIn),"Bool","","E Stop Devices")
             
         solenoidIn = self.Object.Objects["Unsafe IO Data_1"]["Solenoid Monitor"]["Object"].Addresses[0].StartAddress
         if solenoidIn != -1:
-            tagManager.addTag(unitName+"_SolMon","In","{0}.0".format(solenoidIn),"Bool","","E Stop Devices")
+            tags.addTag(unitName+"_SolMon","In","{0}.0".format(solenoidIn),"Bool","","E Stop Devices")
         self.LAD = True
         self.SCL = False
         self.Failsafe_FIODBName = self.Object.Objects["Safety Module_1"]["Safety Module"]["Object"].GetAttribute("Failsafe_FIODBName")
 
-class PLC(GsdDevice):
+class createPlc(GsdDevice):
     def __init__(self,plc):
         super().__init__(plc)
         self.cpu = plc.DeviceItems[1]
         self.software = Siemens.Engineering.IEngineeringServiceProvider(self.cpu).GetService[Siemens.Engineering.HW.Features.SoftwareContainer]().Software
-        self.checkIECV22LLDPMode(self.Objects[self.cpu.Name]["PROFINET interface_1"]["Object"])
-        self.checkIECV22LLDPMode(self.Objects[self.cpu.Name]["PROFINET interface_2"]["Object"])
-        self.setConfig()
+        
         
     def setConfig(self):
+        self.checkIECV22LLDPMode(self.Objects[self.cpu.Name]["PROFINET interface_1"]["Object"])
+        self.checkIECV22LLDPMode(self.Objects[self.cpu.Name]["PROFINET interface_2"]["Object"])
+        
         cpuHardware = Siemens.Engineering.IEngineeringServiceProvider(self.cpu).GetService[Siemens.Engineering.HW.Features.PlcAccessLevelProvider]()
-        #secret = Siemens.Engineering.IEngineeringServiceProvider(self.cpu).GetService[Siemens.Engineering.HW.Features.PlcMasterSecretConfigurator]()
-        #secret.Unprotect(System.Security.SecureString("dematic"))
         
         self.CentralFSourceAddress = self.cpu.GetAttribute("Failsafe_CentralFSourceAddress")
         self.testThenSetAttribute("Failsafe_CentralFSourceAddress",System.UInt64(1),cpuHardware)
@@ -405,6 +411,8 @@ class PLC(GsdDevice):
         self.testThenSetAttribute("WebserverActivate",System.Boolean(False),cpuHardware)
         self.testThenSetAttribute("ProtectionEnablePutGetCommunication",System.Boolean(False),cpuHardware)
         self.testThenSetAttribute("TimeOfDayLocalTimeZone",System.UInt64(11),cpuHardware)
+        
+        self.Objects[self.cpu.Name]["PROFINET interface_1"]["Object"].SetAttribute("MediaRedundancyRole",Siemens.Engineering.HW.MediaRedundancyRole.Manager)
         
         #DNS
         if self.testThenSetAttribute("PnDnsConfigNameResolve",Siemens.Engineering.HW.PnDnsConfigNameResolve.Project,self.cpu):
@@ -440,9 +448,9 @@ class PLC(GsdDevice):
         self.cpu.GetAttribute("Name")
         
 class Pnag(GsdDevice):
-    def __init__(self,Device,tagManager):
+    def __init__(self,Device,tags):
         super().__init__(Device)
-        self.tagManager = tagManager
+        self.tags = tags
         self.Circuit1AInAddress = self.Objects["C1: 16 Bytes DIO (0-31)"]["C1: 16 Bytes DIO (0-31)"]["Object"].Addresses[0].StartAddress
         self.Circuit1AOutAddress = self.Objects["C1: 16 Bytes DIO (0-31)"]["C1: 16 Bytes DIO (0-31)"]["Object"].Addresses[1].StartAddress
         self.Circuit1BInAddress = self.Objects["C1: 16 Bytes DIO (0B-31B)"]["C1: 16 Bytes DIO (0-31)"]["Object"].Addresses[0].StartAddress
@@ -464,19 +472,19 @@ class Pnag(GsdDevice):
     def createTags(self):
         print("Creating Needed Tags For {0}".format(self.Device.Name))
         if self.Circuit1AInAddress != -1 and self.Circuit1AOutAddress != -1 and self.Circuit1BInAddress != -1 and self.Circuit1BInAddress != -1:
-            self.tagManager.addTag(self.Device.Name+"1_A_In","In","{0}.0".format(self.Circuit1AInAddress),"typeAsiAIn","{0} Circuit 1A Inputs".format(self.Device.Name),self.Device.Name,True)
-            self.tagManager.addTag(self.Device.Name+"1_A_Out","Out","{0}.0".format(self.Circuit1AOutAddress),"typeAsiAOut","{0} Circuit 1A Outputs".format(self.Device.Name),self.Device.Name,True)
-            self.tagManager.addTag(self.Device.Name+"1_B_In","In","{0}.0".format(self.Circuit1BInAddress),"typeAsiBIn","{0} Circuit 1B Inputs".format(self.Device.Name),self.Device.Name,True)
-            self.tagManager.addTag(self.Device.Name+"1_B_Out","Out","{0}.0".format(self.Circuit1BOutAddress),"typeAsiBOut","{0} Circuit 1B Outputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"1_A_In","In","{0}.0".format(self.Circuit1AInAddress),"typeAsiAIn","{0} Circuit 1A Inputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"1_A_Out","Out","{0}.0".format(self.Circuit1AOutAddress),"typeAsiAOut","{0} Circuit 1A Outputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"1_B_In","In","{0}.0".format(self.Circuit1BInAddress),"typeAsiBIn","{0} Circuit 1B Inputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"1_B_Out","Out","{0}.0".format(self.Circuit1BOutAddress),"typeAsiBOut","{0} Circuit 1B Outputs".format(self.Device.Name),self.Device.Name,True)
             
         if self.Circuit2AInAddress != -1 and self.Circuit2AOutAddress != -1 and self.Circuit2BInAddress != -1 and self.Circuit2BOutAddress != -1:
-            self.tagManager.addTag(self.Device.Name+"2_A_In","In","{0}.0".format(self.Circuit2AInAddress),"typeAsiAIn","{0} Circuit 2A Inputs".format(self.Device.Name),self.Device.Name,True)
-            self.tagManager.addTag(self.Device.Name+"2_A_Out","Out","{0}.0".format(self.Circuit2AOutAddress),"typeAsiAOut","{0} Circuit 2A Outputs".format(self.Device.Name),self.Device.Name,True)
-            self.tagManager.addTag(self.Device.Name+"2_B_In","In","{0}.0".format(self.Circuit2BInAddress),"typeAsiBIn","{0} Circuit 2B Inputs".format(self.Device.Name),self.Device.Name,True)
-            self.tagManager.addTag(self.Device.Name+"2_B_Out","Out","{0}.0".format(self.Circuit2BOutAddress),"typeAsiBOut","{0} Circuit 2B Outputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"2_A_In","In","{0}.0".format(self.Circuit2AInAddress),"typeAsiAIn","{0} Circuit 2A Inputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"2_A_Out","Out","{0}.0".format(self.Circuit2AOutAddress),"typeAsiAOut","{0} Circuit 2A Outputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"2_B_In","In","{0}.0".format(self.Circuit2BInAddress),"typeAsiBIn","{0} Circuit 2B Inputs".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"2_B_Out","Out","{0}.0".format(self.Circuit2BOutAddress),"typeAsiBOut","{0} Circuit 2B Outputs".format(self.Device.Name),self.Device.Name,True)
             
         if self.FieldBusBitsAddress != -1:
-            self.tagManager.addTag(self.Device.Name+"GlobalFaultReset","Out","{0}.4".format(self.FieldBusBitsAddress),"Bool","{0} ASi Gateway Global Fault Reset".format(self.Device.Name),self.Device.Name,True)
+            self.tags.addTag(self.Device.Name+"GlobalFaultReset","Out","{0}.4".format(self.FieldBusBitsAddress),"Bool","{0} ASi Gateway Global Fault Reset".format(self.Device.Name),self.Device.Name,True)
             
     def addHalfNodeASI(self,tagName,address):
         split = address.split("_")
@@ -538,34 +546,34 @@ class Pnag(GsdDevice):
                 memoryLocation = str(moduleAddress + int(node/2))
             logicalAddress = "{memoryLocation}.{memorybitOffSet}".format(memoryLocation=memoryLocation,memorybitOffSet=memorybitOffSet)
             
-            self.tagManager.addTag(name,InOrOut,logicalAddress,"Bool",comment,"AS-i I/O")
+            self.tags.addTag(name,InOrOut,logicalAddress,"Bool",comment,"AS-i I/O")
         
 class Pncg(GsdDevice):
-    def __init__(self,Device,tagManager):
+    def __init__(self,Device,tags):
         super().__init__(Device)
-        self.tagManager = tagManager
+        self.tags = tags
         #self.createTags()
         
     def createTags(self):
         print("Creating Needed Tags For {0}".format(self.Device.Name))
         self.CANChannelIn = self.Objects["CAN Channel Module_1"]["CAN Channel Submodule"]["Object"].Addresses[0].StartAddress
         self.CANChannelOut = self.Objects["CAN Channel Module_1"]["CAN Channel Submodule"]["Object"].Addresses[1].StartAddress
-        self.tagManager.addTag(self.Device.Name+"CANChannelIn","In","{0}.0".format(self.CANChannelIn),"Bool","{0} PNCG CAN Channel Input".format(self.Device.Name),self.Device.Name,True)
-        self.tagManager.addTag(self.Device.Name+"CANChannelOut","Out","{0}.0".format(self.CANChannelOut),"Bool","{0} PNCG CAN Channel Output".format(self.Device.Name),self.Device.Name,True)
+        self.tags.addTag(self.Device.Name+"CANChannelIn","In","{0}.0".format(self.CANChannelIn),"Bool","{0} PNCG CAN Channel Input".format(self.Device.Name),self.Device.Name,True)
+        self.tags.addTag(self.Device.Name+"CANChannelOut","Out","{0}.0".format(self.CANChannelOut),"Bool","{0} PNCG CAN Channel Output".format(self.Device.Name),self.Device.Name,True)
         for x in range(1,7):
             if "Command Module_{0}".format(x) not in self.Objects:
                 newSlot = self.addModule("GSD:GSDML-V2.33-DEMATIC-PNCG-20171211.XML/M/Command","Command Module_{0}".format(str(x)))
                 inAddress = newSlot.DeviceItems[0].Addresses[0].StartAddress
                 outAddress = newSlot.DeviceItems[0].Addresses[1].StartAddress
-                self.tagManager.addTag("{0}CmdArea{1}In".format(self.Device.Name,str(x)),"In","{0}.0".format(inAddress),"typeCommandAreaInput","{0} PNCG Command Area {1} Input".format(self.Device.Name,str(x)),self.Device.Name,True)
-                self.tagManager.addTag("{0}CmdArea{1}Out".format(self.Device.Name,str(x)),"Out","{0}.0".format(outAddress),"typeCommandAreaOutput","{0} PNCG Command Area {1} Output".format(self.Device.Name,str(x)),self.Device.Name,True)
+                self.tags.addTag("{0}CmdArea{1}In".format(self.Device.Name,str(x)),"In","{0}.0".format(inAddress),"typeCommandAreaInput","{0} PNCG Command Area {1} Input".format(self.Device.Name,str(x)),self.Device.Name,True)
+                self.tags.addTag("{0}CmdArea{1}Out".format(self.Device.Name,str(x)),"Out","{0}.0".format(outAddress),"typeCommandAreaOutput","{0} PNCG Command Area {1} Output".format(self.Device.Name,str(x)),self.Device.Name,True)
         
 class object():
     def __init__(self):
         self.project = Siemens.Engineering.TiaPortal.GetProcesses()[0].Attach().Projects[0]
         for x in self.project.Devices:
             if x.TypeIdentifier != None and 'S71500' in x.TypeIdentifier:
-                self.PLC = PLC(x)
+                self.PLC = createPlc(x)
                 break
                     
         try:
@@ -573,7 +581,6 @@ class object():
         except AttributeError:
             print("No PLC Detected")
             quit()
-        self.PLC.setName("CC210")
         quit()
             
         if self.project.Subnets.Count > 0:
@@ -587,7 +594,7 @@ class object():
             print("ERROR: No Subnet Detected")
             quit()
             
-        self.tags = tagManager(self.PLC.software)
+        self.tags = tags(self.PLC.software)
         
         self.networkDevice = {}
         for x in self.project.Devices:
@@ -625,7 +632,7 @@ class object():
         os.mkdir(Line)
         xml = xmlHeader(Line,Line)
         ObjectList = xml.ObjectList
-        scl = SclObject(Line + "_SetConfigs",Line)
+        scl = sclObject(Line + "_SetConfigs",Line)
         blockGroup = self.PLC.software.BlockGroup.Groups.Find("Project").Groups.Find(Line)
         if blockGroup != None:
             blockGroup.Delete()
@@ -637,37 +644,37 @@ class object():
         for x in range(len(Name)):
             if Type[x] == "AbbAcs380Drive":
                 createAbbAcs380Drive(self.project,self.tags,Name[x],Address[x],self.subnet)
-                XML_Objects.AbbAcs380Drive(Name[x],ObjectList,Zone[x],scl,software)
+                xmlObjects.AbbAcs380Drive(Name[x],ObjectList,Zone[x],scl,software)
                 
             elif Type[x] == "AsiABBDriveNAType01":
-                XML_Objects.AsiABBDriveNAType01(Name[x],ObjectList,Zone[x],scl,software)
+                xmlObjects.AsiABBDriveNAType01(Name[x],ObjectList,Zone[x],scl,software)
                 
             elif Type[x] == "ScannerSickCLV6xx":
                 createScannerSickCLV6xx(self.project,self.tags,Name[x],Address[x],self.subnet)
-                XML_Objects.ScannerSickCLV6xx(Name[x],ObjectList,Zone[x],scl,software)
+                xmlObjects.ScannerSickCLV6xx(Name[x],ObjectList,Zone[x],scl,software)
                 
             elif Type[x] == "FortressGate":
                 gate = createFortressGate(self.project,self.tags,Name[x],Address[x],self.subnet)
-                XML_Objects.FortressGate(Name[x],gate.Failsafe_FIODBName,ObjectList,Zone[x],scl,software)
+                xmlObjects.FortressGate(Name[x],gate.Failsafe_FIODBName,ObjectList,Zone[x],scl,software)
                 
             elif Type[x] == "MOVIMOT":
                 createMOVIMOT(self.project,self.tags,Name[x],Address[x],self.subnet)
-                XML_Objects.MoviMot(Name[x],ObjectList,Zone[x],scl,software)
+                xmlObjects.MoviMot(Name[x],ObjectList,Zone[x],scl,software)
                 
             elif Type[x] == "HMI":
-                createHMI(self.project,self.tags,Name[x],Address[x],self.subnet)
+                createHmi(self.project,self.tags,Name[x],Address[x],self.subnet)
                 #Find and create block for this
                 
             elif Type[x] == "ConnectionBox":
                 createConnectionBox(self.project,self.tags,Name[x],Address[x],self.subnet)
                 connectionNumber = re.search("U[0-9]{6}_Conn_Box_[0-9]{1}",Name[x]).group()[-1:]
-                XML_Objects.ConnectionBox(Name[x],connectionNumber,ObjectList,Zone[x],scl,software)
+                xmlObjects.ConnectionBox(Name[x],connectionNumber,ObjectList,Zone[x],scl,software)
                 
             elif Type[x] == "PNPN":
-                createPNPN(self.project,self.tags,Name[x],Address[x],self.subnet,Zone[x])
+                createPnpn(self.project,self.tags,Name[x],Address[x],self.subnet,Zone[x])
                 #Find and create block for this create
                 
-        XML_Objects.CallSetConfig(Line + "_SetConfigs", ObjectList)
+        xmlObjects.CallSetConfig(Line + "_SetConfigs", ObjectList)
         xml.save()
         scl.save()
         if "HMI" in Type:
@@ -688,7 +695,7 @@ class object():
             os.mkdir(x)
         xml = xmlHeader(Line,Line)
         ObjectList = xml.ObjectList
-        scl = SclObject(Line + "_SetConfigs",Line)
+        scl = sclObject(Line + "_SetConfigs",Line)
         
         
         CabnetNumber = "CC210"
@@ -805,8 +812,8 @@ class object():
             blockGroup.Delete()
         LineSoftware = self.PLC.software.BlockGroup.Groups.Find("Project").Groups.Create(Line)
         
-        XML_Objects.CC(CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl,LineSoftware)
-        XML_Objects.CallSetConfig(Line + "_SetConfigs", ObjectList)
+        xmlObjects.CC(CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl,LineSoftware)
+        xmlObjects.CallSetConfig(Line + "_SetConfigs", ObjectList)
     
         DefaultDBs = self.PLC.software.BlockGroup.Groups.Find("Project").Groups.Find("DefaultDBs")
         if DefaultDBs == None:
@@ -857,7 +864,7 @@ class object():
         os.mkdir(Line)
         xml = xmlHeader(Line,Line)
         ObjectList = xml.ObjectList
-        scl = SclObject(Line + "_SetConfigs",Line)
+        scl = sclObject(Line + "_SetConfigs",Line)
         blockGroup = self.PLC.software.BlockGroup.Groups.Find("Project").Groups.Find(Line)
         if blockGroup != None:
             blockGroup.Delete()
@@ -872,23 +879,17 @@ class object():
             if Type[x] == "EStopVis":
                 node = Asi[x].split("_")[2]
                 #inAsiBusFault = 'Inst{0}.outVisuInterface.status.summary'.format(self.networkDevice[networkDevice].Device.Name)
-                block = XML_Objects.EStopVis(self.networkDevice[networkDevice].Device.Name,Name[x],ObjectList,scl)
+                block = xmlObjects.EStopVis(self.networkDevice[networkDevice].Device.Name,Name[x],ObjectList,scl)
                 instanceDB = software.Blocks.CreateInstanceDB(block.Component.get('Name'),True,1,block.CallInfo.get("Name"))
                 self.networkDevice[networkDevice].addHalfNode(Name[x] + "_NONSAFE",circuit,node,"A",1,"In")
                 self.networkDevice[networkDevice].addHalfNode(Name[x] + "_LT_R",circuit,node,"A",1,"Out")
                 self.networkDevice[networkDevice].addHalfNode(Name[x] + "_LT_G",circuit,node,"A",2,"Out")
         
-        XML_Objects.CallSetConfig(Line + "_SetConfigs", ObjectList)
+        xmlObjects.CallSetConfig(Line + "_SetConfigs", ObjectList)
         xml.save()
         scl.save()
         for x in os.listdir(fileStr):
             software.Blocks.Import(System.IO.FileInfo(fileStr + "/" +x),Siemens.Engineering.ImportOptions.Override)
-    
-    def UpdateUngroupedDevicesGroupsDic(self):
-        self.UngroupedDevicesGroupsDic = {}
-        for x in self.project.UngroupedDevicesGroup.Devices:
-            self.UngroupedDevicesGroupsDic[x.Name] = x
-        print(self.UngroupedDevicesGroupsDic)
         
     def test(self):
         name = ["U000000","U000010","U000020","U000030","U000040","U000050","U000060"]
@@ -908,7 +909,7 @@ class object():
 def main():
     test = object()
     
-main()
+#main()
 
 """
 import clr
