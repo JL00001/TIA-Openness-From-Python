@@ -127,7 +127,7 @@ class FortressGateSwitch(swBlock):
         super().__init__(ObjectList)
         unitName = unitNumber + zone + "_GS"
         self.addCall()
-        self.Comment.text = unitName.split("_")[0] + " Gate Switch"
+        self.Comment.text = unitName.split("_")[0] + "_GS"
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + unitName)
         self.CallInfo.set("Name","FortressGateSwitch")
@@ -153,7 +153,7 @@ class FortressGateSwitchSafety(swBlock):
         super().__init__(ObjectList)
         self.addCall()
         unitName = unitNumber + zone + "_GS"
-        self.Comment.text = unitName.split("_")[0] + " Safety"
+        self.Comment.text = unitName + "_FS"
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + unitName + " Gate Switch Safety")
         self.CallInfo.set("Name","FortressGateSwitchSafety")
@@ -177,9 +177,9 @@ class FortressGateSwitchVis(swBlock):
         super().__init__(ObjectList)
         self.addCall()
         unitName = unitNumber + zone + "_GS"
-        self.Comment.text = unitName + " Vis"
+        self.Comment.text = unitName + "_Vis"
         self.addEN(self.CallId,"en")
-        self.Component.set("Name","Inst" + unitName + " Vis")
+        self.Component.set("Name","Inst" + unitName + "_Vis")
         
         self.CallInfo.set("Name","EmergencyStop")
         self.addParameter("inEStopStatus","Input","Bool")
@@ -263,34 +263,6 @@ class CallSetConfig(swBlock):
         self.addConnection(id,"out",self.CallId,"en")
         self.Comment.text = "Call " + Name
         
-class CC():
-    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl=None,software=None):
-        Plc(CabnetNumber,EZCName,ObjectList,scl,software)
-        
-        for x in range(len(ControlArea)):
-            CA(CabnetNumber,ControlArea[x],EZCName[x],Dps[x],Aux[x],Pnag[x],Pncg[x],Estops[x],EstopsAsi[x],ObjectList,scl,software)
-        
-class CA():
-    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,Pnag,Pncg,Estops,EstopsAsi,ObjectList,scl=None,software=None):
-        for x in Pncg:
-            PncgBox(CabnetNumber,ControlArea,x,ObjectList,scl,software)
-        
-        for x in Pnag:
-            PnagBox(CabnetNumber,ControlArea,x,ObjectList,scl,software)
-        
-        list = []
-        for x in range(len(EZCName)):
-            list.append(EzcBox(CabnetNumber,ControlArea,EZCName[x],Dps[x],Aux[x],Estops[x],EstopsAsi[x],Pnag,ObjectList,scl,software))
-            
-        for x in list:
-            x.createDps()
-            
-        for x in list:
-            x.createAux()
-            
-        for x in list:
-            x.createEstop()
-        
 class Plc(swBlock):
     def __init__(self,CabnetNumber,EZCName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
@@ -316,11 +288,11 @@ class Plc(swBlock):
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class PnagBox(swBlock):
-    def __init__(self,CabnetNumber,ControlArea,PnagName,ObjectList,scl=None,software=None):
+    def __init__(self,CabnetNumber,PnagName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         blockA = self.CallId
-        self.Comment.text = ControlArea + ' ' + PnagName
+        self.Comment.text = PnagName
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + PnagName + "_Health")
         self.CallInfo.set("Name","ProfinetDeviceHealthSelector")
@@ -367,7 +339,7 @@ class PnagBox(swBlock):
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
     
 class EzcBox(swBlock):
-    def __init__(self,CabnetNumber,ControlArea,EZCName,Dps,Aux,ObjectList,scl=None,software=None):
+    def __init__(self,CabnetNumber,ControlArea,EZCName,PnagName,Dps,Aux,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         import re
         self.CabnetNumber = CabnetNumber
@@ -378,25 +350,34 @@ class EzcBox(swBlock):
         self.ObjectList = ObjectList
         self.software = software
         self.scl = scl
-        if re.search("EZC[0-9]{1,3}",EZCName):
+        if re.search("^CA[0-9]{1,3}EZC[0-9]{1,3}$",EZCName):
             self.EZCNumber = re.findall("[0-9]{1,3}$", EZCName)[0]
         self.addCall()
         self.addEN(self.CallId,"en")
-        self.Component.set("Name","Inst" + self.ControlArea + self.EZCName)
+        self.Component.set("Name","Inst" + self.EZCName)
         self.CallInfo.set("Name","EzcBox")
-        self.Comment.text = self.ControlArea + ' ' + self.EZCName
+        self.Comment.text = self.EZCName
         
         if len(self.Dps) > 0:
             self.addParameter("inPowerSupplyGroupStarted","Input","Bool")
             self.addParameter("inPowerSupplyGroupAllStarted","Input","Bool")
-            list = []
-            for x in range(len(self.Dps)):
-                list.append("Inst" + self.ControlArea + self.Dps[x] + ".outDpsToZca.started")
-            self.OR(list,self.CallId,"inPowerSupplyGroupStarted")
-            list = []
-            for x in range(len(self.Dps)):
-                list.append("Inst" + self.ControlArea + self.Dps[x] + ".outDpsToZca.AllStarted")
-            self.AND(list,self.CallId,"inPowerSupplyGroupAllStarted")
+            if len(self.Dps) > 1:
+                list = []
+                for x in self.Dps:
+                    list.append("Inst" + x + ".outDpsToZca.started")
+                self.OR(list,self.CallId,"inPowerSupplyGroupStarted")
+                list = []
+                for x in self.Dps:
+                    list.append("Inst" + x + ".outDpsToZca.AllStarted")
+                self.AND(list,self.CallId,"inPowerSupplyGroupAllStarted")
+            else:
+                id = self.spawnPart("Inst" + self.Dps[0] + ".outDpsToZca.started","Contact")
+                self.addEN(id,"in")
+                self.addConnection(id,"out",self.CallId,"inPowerSupplyGroupStarted")
+                
+                id = self.spawnPart("Inst" + self.Dps[0] + ".outDpsToZca.AllStarted","Contact")
+                self.addEN(id,"in")
+                self.addConnection(id,"out",self.CallId,"inPowerSupplyGroupAllStarted")
         else:
             self.loadParameterStr('<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
             self.loadParameterStr('<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
@@ -404,7 +385,7 @@ class EzcBox(swBlock):
             self.addParameter("inSupplyAuxOk","Input","Bool")
             list = []
             for x in range(len(self.Aux)):
-                id = self.spawnPart("Inst" + self.ControlArea + self.Aux[x] + ".outFault","Contact")
+                id = self.spawnPart("Inst" + self.Aux[x] + ".outFault","Contact")
                 list.append(id)
                 if x == 0:
                     self.addEN(id,"in")
@@ -413,7 +394,8 @@ class EzcBox(swBlock):
             self.addConnection(list[-1],"out",self.CallId,"inSupplyAuxOk")
         else:
             self.loadParameterStr('<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
-        self.loadParameterStr('<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        self.loadParameterStr('<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>',EZCName + "_CR_ESM")
+        self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + PnagName + ".outVisuInterface.status.summary")
         self.loadParameterStr('<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>','Inst' + self.CabnetNumber + '.outPlcStatus')
         self.loadParameterStr('<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>','DataFromSafety.' + ControlArea +'EZCxSafetyStatusToPowerGroup[' + self.EZCNumber + ']')
         self.loadParameterStr('<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
@@ -423,7 +405,7 @@ class EzcBox(swBlock):
         if self.scl != None:
             #SCL ConFig
             scl.addRegion(self.Component.get("Name"))
-            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.ezcName",self.EZCName)
+            scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.ezcName",re.findall("EZC[0-9]{1,3}$", self.EZCName)[0])
             scl.GlobalVariableEqualConstant(self.Component.get("Name") + ".inConfig.panelNumber","1")
             scl.endRegion()
         
@@ -440,16 +422,17 @@ class EzcBox(swBlock):
             AuxBox(self.CabnetNumber,self.ControlArea,self.EZCName,x,self.ObjectList,self.scl,self.software)
 
 class DpsBox(swBlock):
-    def __init__(self,CabnetNumber,ControlArea,EZCNumber,DpsName,EZCName,ObjectList,scl=None,software=None):
+    def __init__(self,CabnetNumber,ControlArea,EZCName,DpsName,PnagName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         self.addEN(self.CallId,"en")
-        self.Comment.text = ControlArea + ' ' + DpsName
-        self.Component.set("Name","Inst" + ControlArea + DpsName)
+        self.Comment.text = DpsName
+        self.Component.set("Name","Inst" + DpsName)
         self.CallInfo.set("Name","DpsBox")
-        self.loadParameterStr('<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>',ControlArea + DpsName + '_CR_ESM')
-        self.loadParameterStr('<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>','Inst' + ControlArea + EZCName +'.outEzcToPowerSupply')
+        self.loadParameterStr('<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>', DpsName + '_CR_ESM')
+        self.loadParameterStr('<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>','Inst' + EZCName +'.outEzcToPowerSupply')
         self.loadParameterStr('<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + PnagName + ".outVisuInterface.status.summary")
         self.loadParameterStr('<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
         self.loadParameterStr('<Parameter Name="inPncgZone2Ready" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
         self.loadParameterStr('<Parameter Name="inPncgZone2Active" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
@@ -466,11 +449,11 @@ class DpsBox(swBlock):
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class PncgBox(swBlock):
-    def __init__(self,CabnetNumber,ControlArea,PncgName,ObjectList,scl=None,software=None):
+    def __init__(self,CabnetNumber,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
         blockA = self.CallId
-        self.Comment.text = ControlArea + ' ' + PncgName
+        self.Comment.text = PncgName
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + PncgName + "_Health")
         self.CallInfo.set("Name","ProfinetDeviceHealthSelector")
@@ -548,10 +531,10 @@ class PncgBox(swBlock):
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class RptrBox(swBlock):
-    def __init__(self,CabnetNumber,ControlArea,RptrName,PncgName,ObjectList,scl=None,software=None):
+    def __init__(self,RptrName,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
-        self.Comment.text = ControlArea + ' ' + RptrName
+        self.Comment.text = RptrName
         self.addEN(self.CallId,"en")
         self.Component.set("Name","Inst" + RptrName)
         self.CallInfo.set("Name","RptrBox")
@@ -571,21 +554,24 @@ class RptrBox(swBlock):
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
 class AuxBox(swBlock):
-    def __init__(self,CabnetNumber,ControlArea,EZCName,AuxBoxName,ObjectList,scl=None,software=None):
+    def __init__(self,CabnetNumber,ControlArea,EZCName,AuxBoxName,PnagName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
         self.addCall()
-        self.Comment.text = ControlArea + ' ' + AuxBoxName
+        self.Comment.text = AuxBoxName
         self.addEN(self.CallId,"en")
-        self.Component.set("Name","Inst" + ControlArea + AuxBoxName)
+        self.Component.set("Name","Inst" + AuxBoxName)
         self.CallInfo.set("Name","AuxBox")
         
-        self.loadParameterStr('<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>',ControlArea + AuxBoxName +'_CR_ESM')
-        self.loadParameterStr('<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>',"Inst" + ControlArea + EZCName +'.outEzcToAux')
+        self.loadParameterStr('<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>',AuxBoxName +'_CR_ESM')
+        self.loadParameterStr('<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>',"Inst" + EZCName +'.outEzcToAux')
+        self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + PnagName + ".outVisuInterface.status.summary")
+        
         
         if scl != None:
             scl.addRegion(self.Component.get("Name"))
             scl.GlobalVariableEqualBool(self.Component.get("Name") + ".inConfig.auxName",self.Component.get("Name"))
             scl.GlobalVariableEqualTypedConstant(self.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            scl.endRegion()
         
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))

@@ -7,7 +7,7 @@ import anytree
 import xmlObjects
 from xmlHeader import xmlHeader
 from sclObject import sclObject
-from Global_DB import Global_DB
+from globalDB import globalDB
 import os
 import ctypes
         
@@ -258,6 +258,7 @@ class tags():
         else:
             print("Name '{0}' Already In Use At This Address '{1}'".format(name,self.data["name"][name]))        
 
+"""
 class createAbbAcs380Drive():
     def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + zone + "_FMD"
@@ -283,6 +284,8 @@ class createAbbAcs380Drive():
         #Create Two Tags For The Drive IN and OUT From Thoses Addresses
         tags.addTag(unitName+"_In","In","{0}.0".format(inStart),"typeABBACS380InputsPP04","PP04 Inputs For Drive Flags","FMD PPO Tags")
         tags.addTag(unitName+"_Out","Out","{0}.0".format(outStart),"typeABBACS380OutputsPP04","PP04 Outputs For Drive Control","FMD PPO Tags")
+        
+"""
   
 class createScannerSickCLV6xx():
     def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
@@ -447,6 +450,7 @@ class createPlc(GsdDevice):
     def getName(self,name):
         self.cpu.GetAttribute("Name")
         
+        """
 class Pnag(GsdDevice):
     def __init__(self,Device,tags):
         super().__init__(Device)
@@ -468,7 +472,7 @@ class Pnag(GsdDevice):
         self.CommandIfIn = self.Objects["34 Bytes Command If"]["34 Bytes Command If"]["Object"].Addresses[0].StartAddress
         self.CommandIfOut = self.Objects["34 Bytes Command If"]["34 Bytes Command If"]["Object"].Addresses[1].StartAddress
         #self.createTags()
-                    
+        
     def createTags(self):
         print("Creating Needed Tags For {0}".format(self.Device.Name))
         if self.Circuit1AInAddress != -1 and self.Circuit1AOutAddress != -1 and self.Circuit1BInAddress != -1 and self.Circuit1BInAddress != -1:
@@ -487,21 +491,25 @@ class Pnag(GsdDevice):
             self.tags.addTag(self.Device.Name+"GlobalFaultReset","Out","{0}.4".format(self.FieldBusBitsAddress),"Bool","{0} ASi Gateway Global Fault Reset".format(self.Device.Name),self.Device.Name,True)
             
     def addHalfNodeASI(self,tagName,address):
-        split = address.split("_")
-        circuit = split[1][-1:]
-        node = split[2][:-1]
-        AorB = split[2][-1:]
-        bitOffSet = split[3][-1:]
-        InOrOut = split[3][:-1]
-        if InOrOut == "I":
-            InOrOut = "In"
-        if InOrOut == "O":
-            InOrOut = "Out"
-        
-        self.addHalfNode(tagName,circuit,node,AorB,bitOffSet,InOrOut)
+        import re
+        if re.search("^ASI_[A-Z][1-2]_([0-9]|[0-2][0-9]|3[01])[A-B]_(I|O)[1-4]$",address) != None:
+            split = address.split("_")
+            circuit = split[1][-1:]
+            node = split[2][:-1]
+            AorB = split[2][-1:]
+            bitOffSet = split[3][-1:]
+            InOrOut = split[3][:-1]
+            if InOrOut == "I":
+                InOrOut = "In"
+            if InOrOut == "O":
+                InOrOut = "Out"
             
-    def addHalfNode(self,name,circuit,node,AorB,bitOffSet,InOrOut):
-        """
+            self._addHalfNode(tagName,circuit,node,AorB,bitOffSet,InOrOut)
+        else:
+            raise ValueError("Malformed ASI Address")
+            
+    def _addHalfNode(self,name,circuit,node,AorB,bitOffSet,InOrOut):
+      
         Circuit is 1 or 2
         Node is Node
         AorB is A or B
@@ -509,7 +517,7 @@ class Pnag(GsdDevice):
         
         This function will add a tag given the node address
         (name,logicalAddress,dataType,comment,tagTable):
-        """
+ 
         if self.Circuit1AInAddress != 1 and self.Circuit1AOutAddress != 1 and self.Circuit1BInAddress != 1 and self.Circuit1BInAddress != 1 and self.Circuit2AInAddress != 1 and self.Circuit2AOutAddress != 1 and self.Circuit2BInAddress != 1 and self.Circuit2BOutAddress != 1:
             try:
                 memorybitOffSet = bitOffSet - 1
@@ -547,7 +555,12 @@ class Pnag(GsdDevice):
             logicalAddress = "{memoryLocation}.{memorybitOffSet}".format(memoryLocation=memoryLocation,memorybitOffSet=memorybitOffSet)
             
             self.tags.addTag(name,InOrOut,logicalAddress,"Bool",comment,"AS-i I/O")
+            
+    def export(self):
+        pass
+        """
         
+        """
 class Pncg(GsdDevice):
     def __init__(self,Device,tags):
         super().__init__(Device)
@@ -568,6 +581,9 @@ class Pncg(GsdDevice):
                 self.tags.addTag("{0}CmdArea{1}In".format(self.Device.Name,str(x)),"In","{0}.0".format(inAddress),"typeCommandAreaInput","{0} PNCG Command Area {1} Input".format(self.Device.Name,str(x)),self.Device.Name,True)
                 self.tags.addTag("{0}CmdArea{1}Out".format(self.Device.Name,str(x)),"Out","{0}.0".format(outAddress),"typeCommandAreaOutput","{0} PNCG Command Area {1} Output".format(self.Device.Name,str(x)),self.Device.Name,True)
         
+    def export(self):
+        pass
+        """
 class object():
     def __init__(self):
         self.project = Siemens.Engineering.TiaPortal.GetProcesses()[0].Attach().Projects[0]

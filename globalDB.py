@@ -1,9 +1,13 @@
 from xmlHeader import father
 import xml.etree.cElementTree as ET
+import os
+import System
+import Siemens.Engineering
 
-class Global_DB(father):
-    def __init__(self,Name):
+class globalDB(father):
+    def __init__(self,Name,software):
         self.Name = Name
+        self.software = software
         self.folder = "DefaultDBs"
         self.root = ET.Element("Document")
         SWBlocksGlobalDB = self.createSubElement(self.root, "SW.Blocks.GlobalDB","ID")
@@ -40,3 +44,8 @@ class Global_DB(father):
         BooleanAttribute.text = "false"
         BooleanAttribute.set("Name","SetPoint")
         BooleanAttribute.set("SystemDefined","true")
+        
+    def save(self):
+        super().save()
+        self.software.Blocks.Import(System.IO.FileInfo("{0}/{1}.xml".format(os.getcwd(),self.Name)),Siemens.Engineering.ImportOptions.Override)
+        

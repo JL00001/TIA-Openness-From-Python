@@ -8,662 +8,502 @@
 			<ProgrammingLanguage>LAD</ProgrammingLanguage>
 		</AttributeList>
 		<ObjectList>
-			<SW.Blocks.CompileUnit ID="3" CompositionName="CompileUnits">
+			<SW.Blocks.CompileUnit ID="6" CompositionName="CompileUnits">
 				<AttributeList>
 					<NetworkSource>
 						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
 							<Parts>
-								<Call UId="7">
-									<CallInfo BlockType="FB" Name="EzcBox">
-										<Instance UId="8" Scope="GlobalVariable">
-											<Component Name="InstCA121CA121EZC1"/>
+								<Call UId="10">
+									<CallInfo BlockType="FB" Name="Plc">
+										<Instance UId="11" Scope="GlobalVariable">
+											<Component Name="InstCC110"/>
 										</Instance>
-										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
-										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
-										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
-										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
-										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
-										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
-										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
+										<Parameter Name="inWcsCommsHealthy" Section="Input" Type="Bool"/>
+										<Parameter Name="inSafetyStatusToPlc" Section="Input" Type="&quot;typeSafetyStatusToMainPanel&quot;"/>
 									</CallInfo>
 								</Call>
-								<Access UId="9" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="11" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="13" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="15" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="17" Scope="GlobalVariable">
+								<Access UId="12" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="outPlcStatus"/>
+										<Component Name="InstDciManager"/>
+										<Component Name="outConnected"/>
 									</Symbol>
 								</Access>
-								<Access UId="19" Scope="GlobalVariable">
+								<Access UId="14" Scope="GlobalVariable">
 									<Symbol>
 										<Component Name="DataFromSafety"/>
-										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>1</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="21" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="23" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="inEzcToPlc" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>1</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="25" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataToSafety"/>
-										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>1</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
+										<Component Name="SafetyStatusToPLC"/>
 									</Symbol>
 								</Access>
 							</Parts>
 							<Wires>
-								<Wire UId="4">
+								<Wire UId="7">
 									<Powerrail/>
-									<NameCon UId="7" Name="en"/>
+									<NameCon UId="10" Name="en"/>
 								</Wire>
-								<Wire UId="10">
-									<IdentCon UId="9"/>
-									<NameCon UId="7" Name="inPowerSupplyGroupStarted"/>
+								<Wire UId="13">
+									<IdentCon UId="12"/>
+									<NameCon UId="10" Name="inWcsCommsHealthy"/>
 								</Wire>
-								<Wire UId="12">
-									<IdentCon UId="11"/>
-									<NameCon UId="7" Name="inPowerSupplyGroupAllStarted"/>
-								</Wire>
-								<Wire UId="14">
-									<IdentCon UId="13"/>
-									<NameCon UId="7" Name="inSupplyAuxOk"/>
-								</Wire>
-								<Wire UId="16">
-									<IdentCon UId="15"/>
-									<NameCon UId="7" Name="inSupplyEzcDCOk"/>
-								</Wire>
-								<Wire UId="18">
-									<IdentCon UId="17"/>
-									<NameCon UId="7" Name="inMainPanelToEzc"/>
-								</Wire>
-								<Wire UId="20">
-									<IdentCon UId="19"/>
-									<NameCon UId="7" Name="inPowerGroupSafetyStatusToEzc"/>
-								</Wire>
-								<Wire UId="22">
-									<IdentCon UId="21"/>
-									<NameCon UId="7" Name="inConvStartWarning"/>
-								</Wire>
-								<Wire UId="24">
-									<IdentCon UId="23"/>
-									<NameCon UId="7" Name="outEzcToMainPanel"/>
-								</Wire>
-								<Wire UId="26">
-									<IdentCon UId="25"/>
-									<NameCon UId="7" Name="outEzcStatusToSafety"/>
+								<Wire UId="15">
+									<IdentCon UId="14"/>
+									<NameCon UId="10" Name="inSafetyStatusToPlc"/>
 								</Wire>
 							</Wires>
 						</FlgNet>
 					</NetworkSource>
 				</AttributeList>
 				<ObjectList>
-					<MultilingualText ID="5" CompositionName="Title">
+					<MultilingualText ID="8" CompositionName="Title">
 						<ObjectList>
-							<MultilingualTextItem ID="6" CompositionName="Items">
+							<MultilingualTextItem ID="9" CompositionName="Items">
 								<AttributeList>
 									<Culture>en-US</Culture>
-									<Text>CA121 CA121EZC1</Text>
+									<Text>CC110</Text>
 								</AttributeList>
 							</MultilingualTextItem>
 						</ObjectList>
 					</MultilingualText>
 				</ObjectList>
 			</SW.Blocks.CompileUnit>
-			<SW.Blocks.CompileUnit ID="70" CompositionName="CompileUnits">
+			<SW.Blocks.CompileUnit ID="274" CompositionName="CompileUnits">
 				<AttributeList>
 					<NetworkSource>
 						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
 							<Parts>
-								<Call UId="74">
+								<Call UId="278">
 									<CallInfo BlockType="FB" Name="EzcBox">
-										<Instance UId="75" Scope="GlobalVariable">
-											<Component Name="InstCA121CA121EZC2"/>
+										<Instance UId="279" Scope="GlobalVariable">
+											<Component Name="InstCA121EZC1"/>
 										</Instance>
 										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
 										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
 										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
 										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
-										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
-										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
-										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
-										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
-									</CallInfo>
-								</Call>
-								<Access UId="76" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="78" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="80" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="82" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="84" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="outPlcStatus"/>
-									</Symbol>
-								</Access>
-								<Access UId="86" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataFromSafety"/>
-										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>2</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="88" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="90" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="inEzcToPlc" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>2</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="92" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataToSafety"/>
-										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>2</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-							</Parts>
-							<Wires>
-								<Wire UId="71">
-									<Powerrail/>
-									<NameCon UId="74" Name="en"/>
-								</Wire>
-								<Wire UId="77">
-									<IdentCon UId="76"/>
-									<NameCon UId="74" Name="inPowerSupplyGroupStarted"/>
-								</Wire>
-								<Wire UId="79">
-									<IdentCon UId="78"/>
-									<NameCon UId="74" Name="inPowerSupplyGroupAllStarted"/>
-								</Wire>
-								<Wire UId="81">
-									<IdentCon UId="80"/>
-									<NameCon UId="74" Name="inSupplyAuxOk"/>
-								</Wire>
-								<Wire UId="83">
-									<IdentCon UId="82"/>
-									<NameCon UId="74" Name="inSupplyEzcDCOk"/>
-								</Wire>
-								<Wire UId="85">
-									<IdentCon UId="84"/>
-									<NameCon UId="74" Name="inMainPanelToEzc"/>
-								</Wire>
-								<Wire UId="87">
-									<IdentCon UId="86"/>
-									<NameCon UId="74" Name="inPowerGroupSafetyStatusToEzc"/>
-								</Wire>
-								<Wire UId="89">
-									<IdentCon UId="88"/>
-									<NameCon UId="74" Name="inConvStartWarning"/>
-								</Wire>
-								<Wire UId="91">
-									<IdentCon UId="90"/>
-									<NameCon UId="74" Name="outEzcToMainPanel"/>
-								</Wire>
-								<Wire UId="93">
-									<IdentCon UId="92"/>
-									<NameCon UId="74" Name="outEzcStatusToSafety"/>
-								</Wire>
-							</Wires>
-						</FlgNet>
-					</NetworkSource>
-				</AttributeList>
-				<ObjectList>
-					<MultilingualText ID="72" CompositionName="Title">
-						<ObjectList>
-							<MultilingualTextItem ID="73" CompositionName="Items">
-								<AttributeList>
-									<Culture>en-US</Culture>
-									<Text>CA121 CA121EZC2</Text>
-								</AttributeList>
-							</MultilingualTextItem>
-						</ObjectList>
-					</MultilingualText>
-				</ObjectList>
-			</SW.Blocks.CompileUnit>
-			<SW.Blocks.CompileUnit ID="137" CompositionName="CompileUnits">
-				<AttributeList>
-					<NetworkSource>
-						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
-							<Parts>
-								<Call UId="141">
-									<CallInfo BlockType="FB" Name="EzcBox">
-										<Instance UId="142" Scope="GlobalVariable">
-											<Component Name="InstCA121CA121EZC3"/>
-										</Instance>
-										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
-										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
-										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
-										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
-										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
-										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
-										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
-									</CallInfo>
-								</Call>
-								<Access UId="143" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="145" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="147" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="149" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="151" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="outPlcStatus"/>
-									</Symbol>
-								</Access>
-								<Access UId="153" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataFromSafety"/>
-										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>3</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="155" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="157" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="inEzcToPlc" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>3</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="159" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataToSafety"/>
-										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>3</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-							</Parts>
-							<Wires>
-								<Wire UId="138">
-									<Powerrail/>
-									<NameCon UId="141" Name="en"/>
-								</Wire>
-								<Wire UId="144">
-									<IdentCon UId="143"/>
-									<NameCon UId="141" Name="inPowerSupplyGroupStarted"/>
-								</Wire>
-								<Wire UId="146">
-									<IdentCon UId="145"/>
-									<NameCon UId="141" Name="inPowerSupplyGroupAllStarted"/>
-								</Wire>
-								<Wire UId="148">
-									<IdentCon UId="147"/>
-									<NameCon UId="141" Name="inSupplyAuxOk"/>
-								</Wire>
-								<Wire UId="150">
-									<IdentCon UId="149"/>
-									<NameCon UId="141" Name="inSupplyEzcDCOk"/>
-								</Wire>
-								<Wire UId="152">
-									<IdentCon UId="151"/>
-									<NameCon UId="141" Name="inMainPanelToEzc"/>
-								</Wire>
-								<Wire UId="154">
-									<IdentCon UId="153"/>
-									<NameCon UId="141" Name="inPowerGroupSafetyStatusToEzc"/>
-								</Wire>
-								<Wire UId="156">
-									<IdentCon UId="155"/>
-									<NameCon UId="141" Name="inConvStartWarning"/>
-								</Wire>
-								<Wire UId="158">
-									<IdentCon UId="157"/>
-									<NameCon UId="141" Name="outEzcToMainPanel"/>
-								</Wire>
-								<Wire UId="160">
-									<IdentCon UId="159"/>
-									<NameCon UId="141" Name="outEzcStatusToSafety"/>
-								</Wire>
-							</Wires>
-						</FlgNet>
-					</NetworkSource>
-				</AttributeList>
-				<ObjectList>
-					<MultilingualText ID="139" CompositionName="Title">
-						<ObjectList>
-							<MultilingualTextItem ID="140" CompositionName="Items">
-								<AttributeList>
-									<Culture>en-US</Culture>
-									<Text>CA121 CA121EZC3</Text>
-								</AttributeList>
-							</MultilingualTextItem>
-						</ObjectList>
-					</MultilingualText>
-				</ObjectList>
-			</SW.Blocks.CompileUnit>
-			<SW.Blocks.CompileUnit ID="204" CompositionName="CompileUnits">
-				<AttributeList>
-					<NetworkSource>
-						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
-							<Parts>
-								<Call UId="208">
-									<CallInfo BlockType="FB" Name="EzcBox">
-										<Instance UId="209" Scope="GlobalVariable">
-											<Component Name="InstCA121CA121EZC4"/>
-										</Instance>
-										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
-										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
-										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
-										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
-										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
-										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
-										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
-										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
-									</CallInfo>
-								</Call>
-								<Access UId="210" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="212" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="214" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="216" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="218" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="outPlcStatus"/>
-									</Symbol>
-								</Access>
-								<Access UId="220" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataFromSafety"/>
-										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>4</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="222" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>true</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="224" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCC120"/>
-										<Component Name="inEzcToPlc" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>4</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-								<Access UId="226" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="DataToSafety"/>
-										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
-											<Access Scope="LiteralConstant">
-												<Constant>
-													<ConstantType>DInt</ConstantType>
-													<ConstantValue>4</ConstantValue>
-												</Constant>
-											</Access>
-										</Component>
-									</Symbol>
-								</Access>
-							</Parts>
-							<Wires>
-								<Wire UId="205">
-									<Powerrail/>
-									<NameCon UId="208" Name="en"/>
-								</Wire>
-								<Wire UId="211">
-									<IdentCon UId="210"/>
-									<NameCon UId="208" Name="inPowerSupplyGroupStarted"/>
-								</Wire>
-								<Wire UId="213">
-									<IdentCon UId="212"/>
-									<NameCon UId="208" Name="inPowerSupplyGroupAllStarted"/>
-								</Wire>
-								<Wire UId="215">
-									<IdentCon UId="214"/>
-									<NameCon UId="208" Name="inSupplyAuxOk"/>
-								</Wire>
-								<Wire UId="217">
-									<IdentCon UId="216"/>
-									<NameCon UId="208" Name="inSupplyEzcDCOk"/>
-								</Wire>
-								<Wire UId="219">
-									<IdentCon UId="218"/>
-									<NameCon UId="208" Name="inMainPanelToEzc"/>
-								</Wire>
-								<Wire UId="221">
-									<IdentCon UId="220"/>
-									<NameCon UId="208" Name="inPowerGroupSafetyStatusToEzc"/>
-								</Wire>
-								<Wire UId="223">
-									<IdentCon UId="222"/>
-									<NameCon UId="208" Name="inConvStartWarning"/>
-								</Wire>
-								<Wire UId="225">
-									<IdentCon UId="224"/>
-									<NameCon UId="208" Name="outEzcToMainPanel"/>
-								</Wire>
-								<Wire UId="227">
-									<IdentCon UId="226"/>
-									<NameCon UId="208" Name="outEzcStatusToSafety"/>
-								</Wire>
-							</Wires>
-						</FlgNet>
-					</NetworkSource>
-				</AttributeList>
-				<ObjectList>
-					<MultilingualText ID="206" CompositionName="Title">
-						<ObjectList>
-							<MultilingualTextItem ID="207" CompositionName="Items">
-								<AttributeList>
-									<Culture>en-US</Culture>
-									<Text>CA121 CA121EZC4</Text>
-								</AttributeList>
-							</MultilingualTextItem>
-						</ObjectList>
-					</MultilingualText>
-				</ObjectList>
-			</SW.Blocks.CompileUnit>
-			<SW.Blocks.CompileUnit ID="271" CompositionName="CompileUnits">
-				<AttributeList>
-					<NetworkSource>
-						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
-							<Parts>
-								<Call UId="275">
-									<CallInfo BlockType="FB" Name="EmergencyStop">
-										<Instance UId="276" Scope="GlobalVariable">
-											<Component Name="InstEStop1_Vis"/>
-										</Instance>
-										<Parameter Name="inEStopStatus" Section="Input" Type="Bool"/>
-										<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>
-										<Parameter Name="inLocation" Section="Input" Type="String[14]"/>
-										<Parameter Name="inConfigContactType" Section="Input" Type="Bool"/>
 										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
+										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
+										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
+										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
+										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
 									</CallInfo>
 								</Call>
-								<Access UId="277" Scope="GlobalVariable">
+								<Part UId="280" Name="Contact"/>
+								<Access UId="281" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="InstCA121CA121EZC1_FC"/>
-										<Component Name="outEStopHealthy"/>
+										<Component Name="InstCA121DPS1"/>
+										<Component Name="outDpsToZca"/>
+										<Component Name="started"/>
 									</Symbol>
 								</Access>
-								<Access UId="279" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>String</ConstantType>
-										<ConstantValue>'EStop1'</ConstantValue>
-									</Constant>
+								<Part UId="284" Name="Contact"/>
+								<Access UId="285" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121DPS1"/>
+										<Component Name="outDpsToZca"/>
+										<Component Name="AllStarted"/>
+									</Symbol>
 								</Access>
-								<Access UId="281" Scope="LiteralConstant">
+								<Part UId="288" Name="Contact"/>
+								<Access UId="289" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121AUX1"/>
+										<Component Name="outFault"/>
+									</Symbol>
+								</Access>
+								<Access UId="292" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121EZC1_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="294" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252310_PNAG_B"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+								<Access UId="296" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="298" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="DataFromSafety"/>
+										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>1</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+								<Access UId="300" Scope="LiteralConstant">
 									<Constant>
 										<ConstantType>Bool</ConstantType>
-										<ConstantValue>false</ConstantValue>
+										<ConstantValue>true</ConstantValue>
 									</Constant>
 								</Access>
-								<Access UId="283" Scope="GlobalVariable">
+								<Access UId="302" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="inEzcToPlc" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>1</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+								<Access UId="304" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="DataToSafety"/>
+										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>1</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="275">
+									<Powerrail/>
+									<NameCon UId="278" Name="en"/>
+									<NameCon UId="280" Name="in"/>
+									<NameCon UId="284" Name="in"/>
+									<NameCon UId="288" Name="in"/>
+								</Wire>
+								<Wire UId="282">
+									<IdentCon UId="281"/>
+									<NameCon UId="280" Name="operand"/>
+								</Wire>
+								<Wire UId="283">
+									<NameCon UId="280" Name="out"/>
+									<NameCon UId="278" Name="inPowerSupplyGroupStarted"/>
+								</Wire>
+								<Wire UId="286">
+									<IdentCon UId="285"/>
+									<NameCon UId="284" Name="operand"/>
+								</Wire>
+								<Wire UId="287">
+									<NameCon UId="284" Name="out"/>
+									<NameCon UId="278" Name="inPowerSupplyGroupAllStarted"/>
+								</Wire>
+								<Wire UId="290">
+									<IdentCon UId="289"/>
+									<NameCon UId="288" Name="operand"/>
+								</Wire>
+								<Wire UId="291">
+									<NameCon UId="288" Name="out"/>
+									<NameCon UId="278" Name="inSupplyAuxOk"/>
+								</Wire>
+								<Wire UId="293">
+									<IdentCon UId="292"/>
+									<NameCon UId="278" Name="inSupplyEzcDCOk"/>
+								</Wire>
+								<Wire UId="295">
+									<IdentCon UId="294"/>
+									<NameCon UId="278" Name="inAsiBusFault"/>
+								</Wire>
+								<Wire UId="297">
+									<IdentCon UId="296"/>
+									<NameCon UId="278" Name="inMainPanelToEzc"/>
+								</Wire>
+								<Wire UId="299">
+									<IdentCon UId="298"/>
+									<NameCon UId="278" Name="inPowerGroupSafetyStatusToEzc"/>
+								</Wire>
+								<Wire UId="301">
+									<IdentCon UId="300"/>
+									<NameCon UId="278" Name="inConvStartWarning"/>
+								</Wire>
+								<Wire UId="303">
+									<IdentCon UId="302"/>
+									<NameCon UId="278" Name="outEzcToMainPanel"/>
+								</Wire>
+								<Wire UId="305">
+									<IdentCon UId="304"/>
+									<NameCon UId="278" Name="outEzcStatusToSafety"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="276" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="277" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121EZC1</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="349" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="353">
+									<CallInfo BlockType="FB" Name="EzcBox">
+										<Instance UId="354" Scope="GlobalVariable">
+											<Component Name="InstCA121EZC2"/>
+										</Instance>
+										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
+										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
+										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
+										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
+										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
+										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
+										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
+									</CallInfo>
+								</Call>
+								<Part UId="355" Name="Contact"/>
+								<Access UId="356" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121DPS2"/>
+										<Component Name="outDpsToZca"/>
+										<Component Name="started"/>
+									</Symbol>
+								</Access>
+								<Part UId="359" Name="Contact"/>
+								<Access UId="360" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121DPS2"/>
+										<Component Name="outDpsToZca"/>
+										<Component Name="AllStarted"/>
+									</Symbol>
+								</Access>
+								<Part UId="363" Name="Contact"/>
+								<Access UId="364" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121AUX2"/>
+										<Component Name="outFault"/>
+									</Symbol>
+								</Access>
+								<Access UId="367" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121EZC2_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="369" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253110_PNAG_A"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+								<Access UId="371" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="373" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="DataFromSafety"/>
+										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>2</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+								<Access UId="375" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="377" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="inEzcToPlc" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>2</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+								<Access UId="379" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="DataToSafety"/>
+										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>2</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="350">
+									<Powerrail/>
+									<NameCon UId="353" Name="en"/>
+									<NameCon UId="355" Name="in"/>
+									<NameCon UId="359" Name="in"/>
+									<NameCon UId="363" Name="in"/>
+								</Wire>
+								<Wire UId="357">
+									<IdentCon UId="356"/>
+									<NameCon UId="355" Name="operand"/>
+								</Wire>
+								<Wire UId="358">
+									<NameCon UId="355" Name="out"/>
+									<NameCon UId="353" Name="inPowerSupplyGroupStarted"/>
+								</Wire>
+								<Wire UId="361">
+									<IdentCon UId="360"/>
+									<NameCon UId="359" Name="operand"/>
+								</Wire>
+								<Wire UId="362">
+									<NameCon UId="359" Name="out"/>
+									<NameCon UId="353" Name="inPowerSupplyGroupAllStarted"/>
+								</Wire>
+								<Wire UId="365">
+									<IdentCon UId="364"/>
+									<NameCon UId="363" Name="operand"/>
+								</Wire>
+								<Wire UId="366">
+									<NameCon UId="363" Name="out"/>
+									<NameCon UId="353" Name="inSupplyAuxOk"/>
+								</Wire>
+								<Wire UId="368">
+									<IdentCon UId="367"/>
+									<NameCon UId="353" Name="inSupplyEzcDCOk"/>
+								</Wire>
+								<Wire UId="370">
+									<IdentCon UId="369"/>
+									<NameCon UId="353" Name="inAsiBusFault"/>
+								</Wire>
+								<Wire UId="372">
+									<IdentCon UId="371"/>
+									<NameCon UId="353" Name="inMainPanelToEzc"/>
+								</Wire>
+								<Wire UId="374">
+									<IdentCon UId="373"/>
+									<NameCon UId="353" Name="inPowerGroupSafetyStatusToEzc"/>
+								</Wire>
+								<Wire UId="376">
+									<IdentCon UId="375"/>
+									<NameCon UId="353" Name="inConvStartWarning"/>
+								</Wire>
+								<Wire UId="378">
+									<IdentCon UId="377"/>
+									<NameCon UId="353" Name="outEzcToMainPanel"/>
+								</Wire>
+								<Wire UId="380">
+									<IdentCon UId="379"/>
+									<NameCon UId="353" Name="outEzcStatusToSafety"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="351" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="352" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121EZC2</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="424" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="428">
+									<CallInfo BlockType="FB" Name="EzcBox">
+										<Instance UId="429" Scope="GlobalVariable">
+											<Component Name="InstCA121EZC3"/>
+										</Instance>
+										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
+										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
+										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
+										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
+										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
+										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
+										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
+									</CallInfo>
+								</Call>
+								<Part UId="430" Name="Contact"/>
+								<Access UId="431" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121DPS3"/>
+										<Component Name="outDpsToZca"/>
+										<Component Name="started"/>
+									</Symbol>
+								</Access>
+								<Part UId="434" Name="Contact"/>
+								<Access UId="435" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121DPS3"/>
+										<Component Name="outDpsToZca"/>
+										<Component Name="AllStarted"/>
+									</Symbol>
+								</Access>
+								<Part UId="438" Name="Contact"/>
+								<Access UId="439" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121AUX3"/>
+										<Component Name="outFault"/>
+									</Symbol>
+								</Access>
+								<Part UId="441" Name="Contact"/>
+								<Access UId="442" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121AUX4"/>
+										<Component Name="outFault"/>
+									</Symbol>
+								</Access>
+								<Part UId="445" Name="Contact"/>
+								<Access UId="446" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121AUX5"/>
+										<Component Name="outFault"/>
+									</Symbol>
+								</Access>
+								<Access UId="450" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121EZC3_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="452" Scope="GlobalVariable">
 									<Symbol>
 										<Component Name="InstU251910_PNAG_C"/>
 										<Component Name="outVisuInterface"/>
@@ -671,159 +511,3039 @@
 										<Component Name="summary"/>
 									</Symbol>
 								</Access>
-								<Part UId="285" Name="Contact"/>
-								<Access UId="286" Scope="GlobalVariable">
+								<Access UId="454" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="EStop1"/>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
 									</Symbol>
 								</Access>
-								<Part UId="288" Name="Contact"/>
-								<Access UId="289" Scope="GlobalVariable">
+								<Access UId="456" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="EStop1_NONSAFE"/>
+										<Component Name="DataFromSafety"/>
+										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>3</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
 									</Symbol>
 								</Access>
-								<Part UId="291" Name="O">
-									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
-								</Part>
-								<Part UId="295" Name="Contact"/>
-								<Access UId="296" Scope="GlobalVariable">
+								<Access UId="458" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="460" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="InstEStop1_Vis"/>
-										<Component Name="outEstopLamp"/>
+										<Component Name="InstCC110"/>
+										<Component Name="inEzcToPlc" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>3</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
 									</Symbol>
 								</Access>
-								<Part UId="298" Name="Coil"/>
-								<Access UId="299" Scope="GlobalVariable">
+								<Access UId="462" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="EStop1_LT_R"/>
-									</Symbol>
-								</Access>
-								<Part UId="302" Name="Contact">
-									<Negated Name="operand"/>
-								</Part>
-								<Access UId="303" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstEStop1_Vis"/>
-										<Component Name="outEstopLamp"/>
-									</Symbol>
-								</Access>
-								<Part UId="305" Name="Contact"/>
-								<Access UId="306" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop1_NONSAFE"/>
-									</Symbol>
-								</Access>
-								<Part UId="308" Name="Coil"/>
-								<Access UId="309" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop1_LT_G"/>
+										<Component Name="DataToSafety"/>
+										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>3</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
 									</Symbol>
 								</Access>
 							</Parts>
 							<Wires>
-								<Wire UId="272">
+								<Wire UId="425">
 									<Powerrail/>
-									<NameCon UId="275" Name="en"/>
-									<NameCon UId="285" Name="in"/>
-									<NameCon UId="288" Name="in"/>
-									<NameCon UId="295" Name="in"/>
-									<NameCon UId="302" Name="in"/>
+									<NameCon UId="428" Name="en"/>
+									<NameCon UId="430" Name="in"/>
+									<NameCon UId="434" Name="in"/>
+									<NameCon UId="438" Name="in"/>
 								</Wire>
-								<Wire UId="278">
-									<IdentCon UId="277"/>
-									<NameCon UId="275" Name="inZoneStatus"/>
+								<Wire UId="432">
+									<IdentCon UId="431"/>
+									<NameCon UId="430" Name="operand"/>
 								</Wire>
-								<Wire UId="280">
-									<IdentCon UId="279"/>
-									<NameCon UId="275" Name="inLocation"/>
+								<Wire UId="433">
+									<NameCon UId="430" Name="out"/>
+									<NameCon UId="428" Name="inPowerSupplyGroupStarted"/>
 								</Wire>
-								<Wire UId="282">
-									<IdentCon UId="281"/>
-									<NameCon UId="275" Name="inConfigContactType"/>
+								<Wire UId="436">
+									<IdentCon UId="435"/>
+									<NameCon UId="434" Name="operand"/>
 								</Wire>
-								<Wire UId="284">
-									<IdentCon UId="283"/>
-									<NameCon UId="275" Name="inAsiBusFault"/>
+								<Wire UId="437">
+									<NameCon UId="434" Name="out"/>
+									<NameCon UId="428" Name="inPowerSupplyGroupAllStarted"/>
 								</Wire>
-								<Wire UId="287">
-									<IdentCon UId="286"/>
-									<NameCon UId="285" Name="operand"/>
+								<Wire UId="440">
+									<IdentCon UId="439"/>
+									<NameCon UId="438" Name="operand"/>
 								</Wire>
-								<Wire UId="290">
-									<IdentCon UId="289"/>
-									<NameCon UId="288" Name="operand"/>
+								<Wire UId="443">
+									<IdentCon UId="442"/>
+									<NameCon UId="441" Name="operand"/>
 								</Wire>
-								<Wire UId="292">
-									<NameCon UId="285" Name="out"/>
-									<NameCon UId="291" Name="in1"/>
+								<Wire UId="444">
+									<NameCon UId="438" Name="out"/>
+									<NameCon UId="441" Name="in"/>
 								</Wire>
-								<Wire UId="293">
-									<NameCon UId="288" Name="out"/>
-									<NameCon UId="291" Name="in2"/>
+								<Wire UId="447">
+									<IdentCon UId="446"/>
+									<NameCon UId="445" Name="operand"/>
 								</Wire>
-								<Wire UId="294">
-									<NameCon UId="291" Name="out"/>
-									<NameCon UId="275" Name="inEStopStatus"/>
+								<Wire UId="448">
+									<NameCon UId="441" Name="out"/>
+									<NameCon UId="445" Name="in"/>
 								</Wire>
-								<Wire UId="297">
-									<IdentCon UId="296"/>
-									<NameCon UId="295" Name="operand"/>
+								<Wire UId="449">
+									<NameCon UId="445" Name="out"/>
+									<NameCon UId="428" Name="inSupplyAuxOk"/>
 								</Wire>
-								<Wire UId="300">
-									<IdentCon UId="299"/>
-									<NameCon UId="298" Name="operand"/>
+								<Wire UId="451">
+									<IdentCon UId="450"/>
+									<NameCon UId="428" Name="inSupplyEzcDCOk"/>
 								</Wire>
-								<Wire UId="301">
-									<NameCon UId="295" Name="out"/>
-									<NameCon UId="298" Name="in"/>
+								<Wire UId="453">
+									<IdentCon UId="452"/>
+									<NameCon UId="428" Name="inAsiBusFault"/>
 								</Wire>
-								<Wire UId="304">
-									<IdentCon UId="303"/>
-									<NameCon UId="302" Name="operand"/>
+								<Wire UId="455">
+									<IdentCon UId="454"/>
+									<NameCon UId="428" Name="inMainPanelToEzc"/>
 								</Wire>
-								<Wire UId="307">
-									<IdentCon UId="306"/>
-									<NameCon UId="305" Name="operand"/>
+								<Wire UId="457">
+									<IdentCon UId="456"/>
+									<NameCon UId="428" Name="inPowerGroupSafetyStatusToEzc"/>
 								</Wire>
-								<Wire UId="310">
-									<IdentCon UId="309"/>
-									<NameCon UId="308" Name="operand"/>
+								<Wire UId="459">
+									<IdentCon UId="458"/>
+									<NameCon UId="428" Name="inConvStartWarning"/>
 								</Wire>
-								<Wire UId="311">
-									<NameCon UId="302" Name="out"/>
-									<NameCon UId="305" Name="in"/>
+								<Wire UId="461">
+									<IdentCon UId="460"/>
+									<NameCon UId="428" Name="outEzcToMainPanel"/>
 								</Wire>
-								<Wire UId="312">
-									<NameCon UId="305" Name="out"/>
-									<NameCon UId="308" Name="in"/>
+								<Wire UId="463">
+									<IdentCon UId="462"/>
+									<NameCon UId="428" Name="outEzcStatusToSafety"/>
 								</Wire>
 							</Wires>
 						</FlgNet>
 					</NetworkSource>
 				</AttributeList>
 				<ObjectList>
-					<MultilingualText ID="273" CompositionName="Title">
+					<MultilingualText ID="426" CompositionName="Title">
 						<ObjectList>
-							<MultilingualTextItem ID="274" CompositionName="Items">
+							<MultilingualTextItem ID="427" CompositionName="Items">
 								<AttributeList>
 									<Culture>en-US</Culture>
-									<Text>EStop1_Vis</Text>
+									<Text>CA121EZC3</Text>
 								</AttributeList>
 							</MultilingualTextItem>
 						</ObjectList>
 					</MultilingualText>
 				</ObjectList>
 			</SW.Blocks.CompileUnit>
-			<SW.Blocks.CompileUnit ID="313" CompositionName="CompileUnits">
+			<SW.Blocks.CompileUnit ID="507" CompositionName="CompileUnits">
 				<AttributeList>
 					<NetworkSource>
 						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
 							<Parts>
-								<Call UId="317">
+								<Call UId="511">
+									<CallInfo BlockType="FB" Name="EzcBox">
+										<Instance UId="512" Scope="GlobalVariable">
+											<Component Name="InstCA121EZC4"/>
+										</Instance>
+										<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>
+										<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>
+										<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>
+										<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>
+										<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>
+										<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>
+										<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>
+									</CallInfo>
+								</Call>
+								<Access UId="513" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="515" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="517" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="519" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121EZC4_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="521" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253110_PNAG_A"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+								<Access UId="523" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="525" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="DataFromSafety"/>
+										<Component Name="CA121EZCxSafetyStatusToPowerGroup" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>4</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+								<Access UId="527" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="529" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="inEzcToPlc" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>4</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+								<Access UId="531" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="DataToSafety"/>
+										<Component Name="CA121EZCxPowerGroupToSafetyStatus" AccessModifier="Array">
+											<Access Scope="LiteralConstant">
+												<Constant>
+													<ConstantType>DInt</ConstantType>
+													<ConstantValue>4</ConstantValue>
+												</Constant>
+											</Access>
+										</Component>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="508">
+									<Powerrail/>
+									<NameCon UId="511" Name="en"/>
+								</Wire>
+								<Wire UId="514">
+									<IdentCon UId="513"/>
+									<NameCon UId="511" Name="inPowerSupplyGroupStarted"/>
+								</Wire>
+								<Wire UId="516">
+									<IdentCon UId="515"/>
+									<NameCon UId="511" Name="inPowerSupplyGroupAllStarted"/>
+								</Wire>
+								<Wire UId="518">
+									<IdentCon UId="517"/>
+									<NameCon UId="511" Name="inSupplyAuxOk"/>
+								</Wire>
+								<Wire UId="520">
+									<IdentCon UId="519"/>
+									<NameCon UId="511" Name="inSupplyEzcDCOk"/>
+								</Wire>
+								<Wire UId="522">
+									<IdentCon UId="521"/>
+									<NameCon UId="511" Name="inAsiBusFault"/>
+								</Wire>
+								<Wire UId="524">
+									<IdentCon UId="523"/>
+									<NameCon UId="511" Name="inMainPanelToEzc"/>
+								</Wire>
+								<Wire UId="526">
+									<IdentCon UId="525"/>
+									<NameCon UId="511" Name="inPowerGroupSafetyStatusToEzc"/>
+								</Wire>
+								<Wire UId="528">
+									<IdentCon UId="527"/>
+									<NameCon UId="511" Name="inConvStartWarning"/>
+								</Wire>
+								<Wire UId="530">
+									<IdentCon UId="529"/>
+									<NameCon UId="511" Name="outEzcToMainPanel"/>
+								</Wire>
+								<Wire UId="532">
+									<IdentCon UId="531"/>
+									<NameCon UId="511" Name="outEzcStatusToSafety"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="509" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="510" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121EZC4</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="576" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="580">
+									<CallInfo BlockType="FB" Name="AuxBox">
+										<Instance UId="581" Scope="GlobalVariable">
+											<Component Name="InstCA121AUX1"/>
+										</Instance>
+										<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="582" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121AUX1_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="584" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC1"/>
+										<Component Name="outEzcToAux"/>
+									</Symbol>
+								</Access>
+								<Access UId="586" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="577">
+									<Powerrail/>
+									<NameCon UId="580" Name="en"/>
+								</Wire>
+								<Wire UId="583">
+									<IdentCon UId="582"/>
+									<NameCon UId="580" Name="inSupplyAuxDCOk"/>
+								</Wire>
+								<Wire UId="585">
+									<IdentCon UId="584"/>
+									<NameCon UId="580" Name="inEzcToAux"/>
+								</Wire>
+								<Wire UId="587">
+									<IdentCon UId="586"/>
+									<NameCon UId="580" Name="inAsiBusFault"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="578" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="579" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121AUX1</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="631" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="635">
+									<CallInfo BlockType="FB" Name="AuxBox">
+										<Instance UId="636" Scope="GlobalVariable">
+											<Component Name="InstCA121AUX2"/>
+										</Instance>
+										<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="637" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121AUX2_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="639" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC2"/>
+										<Component Name="outEzcToAux"/>
+									</Symbol>
+								</Access>
+								<Access UId="641" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="632">
+									<Powerrail/>
+									<NameCon UId="635" Name="en"/>
+								</Wire>
+								<Wire UId="638">
+									<IdentCon UId="637"/>
+									<NameCon UId="635" Name="inSupplyAuxDCOk"/>
+								</Wire>
+								<Wire UId="640">
+									<IdentCon UId="639"/>
+									<NameCon UId="635" Name="inEzcToAux"/>
+								</Wire>
+								<Wire UId="642">
+									<IdentCon UId="641"/>
+									<NameCon UId="635" Name="inAsiBusFault"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="633" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="634" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121AUX2</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="686" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="690">
+									<CallInfo BlockType="FB" Name="AuxBox">
+										<Instance UId="691" Scope="GlobalVariable">
+											<Component Name="InstCA121AUX3"/>
+										</Instance>
+										<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="692" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121AUX3_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="694" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC3"/>
+										<Component Name="outEzcToAux"/>
+									</Symbol>
+								</Access>
+								<Access UId="696" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="687">
+									<Powerrail/>
+									<NameCon UId="690" Name="en"/>
+								</Wire>
+								<Wire UId="693">
+									<IdentCon UId="692"/>
+									<NameCon UId="690" Name="inSupplyAuxDCOk"/>
+								</Wire>
+								<Wire UId="695">
+									<IdentCon UId="694"/>
+									<NameCon UId="690" Name="inEzcToAux"/>
+								</Wire>
+								<Wire UId="697">
+									<IdentCon UId="696"/>
+									<NameCon UId="690" Name="inAsiBusFault"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="688" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="689" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121AUX3</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="741" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="745">
+									<CallInfo BlockType="FB" Name="AuxBox">
+										<Instance UId="746" Scope="GlobalVariable">
+											<Component Name="InstCA121AUX4"/>
+										</Instance>
+										<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="747" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121AUX4_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="749" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC3"/>
+										<Component Name="outEzcToAux"/>
+									</Symbol>
+								</Access>
+								<Access UId="751" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="742">
+									<Powerrail/>
+									<NameCon UId="745" Name="en"/>
+								</Wire>
+								<Wire UId="748">
+									<IdentCon UId="747"/>
+									<NameCon UId="745" Name="inSupplyAuxDCOk"/>
+								</Wire>
+								<Wire UId="750">
+									<IdentCon UId="749"/>
+									<NameCon UId="745" Name="inEzcToAux"/>
+								</Wire>
+								<Wire UId="752">
+									<IdentCon UId="751"/>
+									<NameCon UId="745" Name="inAsiBusFault"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="743" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="744" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121AUX4</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="796" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="800">
+									<CallInfo BlockType="FB" Name="AuxBox">
+										<Instance UId="801" Scope="GlobalVariable">
+											<Component Name="InstCA121AUX5"/>
+										</Instance>
+										<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="802" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121AUX5_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="804" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC3"/>
+										<Component Name="outEzcToAux"/>
+									</Symbol>
+								</Access>
+								<Access UId="806" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="797">
+									<Powerrail/>
+									<NameCon UId="800" Name="en"/>
+								</Wire>
+								<Wire UId="803">
+									<IdentCon UId="802"/>
+									<NameCon UId="800" Name="inSupplyAuxDCOk"/>
+								</Wire>
+								<Wire UId="805">
+									<IdentCon UId="804"/>
+									<NameCon UId="800" Name="inEzcToAux"/>
+								</Wire>
+								<Wire UId="807">
+									<IdentCon UId="806"/>
+									<NameCon UId="800" Name="inAsiBusFault"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="798" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="799" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121AUX5</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="851" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="855">
+									<CallInfo BlockType="FB" Name="DpsBox">
+										<Instance UId="856" Scope="GlobalVariable">
+											<Component Name="InstCA121DPS1"/>
+										</Instance>
+										<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>
+										<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>
+										<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone2Ready" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone2Active" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="857" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121DPS1_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="859" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC1"/>
+										<Component Name="outEzcToPowerSupply"/>
+									</Symbol>
+								</Access>
+								<Access UId="861" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="863" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+								<Access UId="865" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="867" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="869" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="852">
+									<Powerrail/>
+									<NameCon UId="855" Name="en"/>
+								</Wire>
+								<Wire UId="858">
+									<IdentCon UId="857"/>
+									<NameCon UId="855" Name="inField48VSupply1Ok"/>
+								</Wire>
+								<Wire UId="860">
+									<IdentCon UId="859"/>
+									<NameCon UId="855" Name="inZcaToDps"/>
+								</Wire>
+								<Wire UId="862">
+									<IdentCon UId="861"/>
+									<NameCon UId="855" Name="inPncgZone1Ready"/>
+								</Wire>
+								<Wire UId="864">
+									<IdentCon UId="863"/>
+									<NameCon UId="855" Name="inAsiBusFault"/>
+								</Wire>
+								<Wire UId="866">
+									<IdentCon UId="865"/>
+									<NameCon UId="855" Name="inPncgZone1Active"/>
+								</Wire>
+								<Wire UId="868">
+									<IdentCon UId="867"/>
+									<NameCon UId="855" Name="inPncgZone2Ready"/>
+								</Wire>
+								<Wire UId="870">
+									<IdentCon UId="869"/>
+									<NameCon UId="855" Name="inPncgZone2Active"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="853" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="854" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121DPS1</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="931" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="935">
+									<CallInfo BlockType="FB" Name="DpsBox">
+										<Instance UId="936" Scope="GlobalVariable">
+											<Component Name="InstCA121DPS2"/>
+										</Instance>
+										<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>
+										<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>
+										<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone2Ready" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone2Active" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="937" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121DPS2_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="939" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC2"/>
+										<Component Name="outEzcToPowerSupply"/>
+									</Symbol>
+								</Access>
+								<Access UId="941" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="943" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+								<Access UId="945" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="947" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="949" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="932">
+									<Powerrail/>
+									<NameCon UId="935" Name="en"/>
+								</Wire>
+								<Wire UId="938">
+									<IdentCon UId="937"/>
+									<NameCon UId="935" Name="inField48VSupply1Ok"/>
+								</Wire>
+								<Wire UId="940">
+									<IdentCon UId="939"/>
+									<NameCon UId="935" Name="inZcaToDps"/>
+								</Wire>
+								<Wire UId="942">
+									<IdentCon UId="941"/>
+									<NameCon UId="935" Name="inPncgZone1Ready"/>
+								</Wire>
+								<Wire UId="944">
+									<IdentCon UId="943"/>
+									<NameCon UId="935" Name="inAsiBusFault"/>
+								</Wire>
+								<Wire UId="946">
+									<IdentCon UId="945"/>
+									<NameCon UId="935" Name="inPncgZone1Active"/>
+								</Wire>
+								<Wire UId="948">
+									<IdentCon UId="947"/>
+									<NameCon UId="935" Name="inPncgZone2Ready"/>
+								</Wire>
+								<Wire UId="950">
+									<IdentCon UId="949"/>
+									<NameCon UId="935" Name="inPncgZone2Active"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="933" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="934" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121DPS2</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1011" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1015">
+									<CallInfo BlockType="FB" Name="DpsBox">
+										<Instance UId="1016" Scope="GlobalVariable">
+											<Component Name="InstCA121DPS3"/>
+										</Instance>
+										<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>
+										<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>
+										<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone2Ready" Section="Input" Type="Bool"/>
+										<Parameter Name="inPncgZone2Active" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1017" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="CA121DPS3_CR_ESM"/>
+									</Symbol>
+								</Access>
+								<Access UId="1019" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCA121EZC3"/>
+										<Component Name="outEzcToPowerSupply"/>
+									</Symbol>
+								</Access>
+								<Access UId="1021" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="1023" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+								<Access UId="1025" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="1027" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="1029" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1012">
+									<Powerrail/>
+									<NameCon UId="1015" Name="en"/>
+								</Wire>
+								<Wire UId="1018">
+									<IdentCon UId="1017"/>
+									<NameCon UId="1015" Name="inField48VSupply1Ok"/>
+								</Wire>
+								<Wire UId="1020">
+									<IdentCon UId="1019"/>
+									<NameCon UId="1015" Name="inZcaToDps"/>
+								</Wire>
+								<Wire UId="1022">
+									<IdentCon UId="1021"/>
+									<NameCon UId="1015" Name="inPncgZone1Ready"/>
+								</Wire>
+								<Wire UId="1024">
+									<IdentCon UId="1023"/>
+									<NameCon UId="1015" Name="inAsiBusFault"/>
+								</Wire>
+								<Wire UId="1026">
+									<IdentCon UId="1025"/>
+									<NameCon UId="1015" Name="inPncgZone1Active"/>
+								</Wire>
+								<Wire UId="1028">
+									<IdentCon UId="1027"/>
+									<NameCon UId="1015" Name="inPncgZone2Ready"/>
+								</Wire>
+								<Wire UId="1030">
+									<IdentCon UId="1029"/>
+									<NameCon UId="1015" Name="inPncgZone2Active"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1013" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1014" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121DPS3</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1091" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1095">
+									<CallInfo BlockType="FB" Name="ProfinetDeviceHealthSelector">
+										<Instance UId="1096" Scope="GlobalVariable">
+											<Component Name="InstU251910_PNAG_C_Health"/>
+										</Instance>
+										<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>
+										<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1097" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="ProfinetDeviceHealth_DB"/>
+										<Component Name="outData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1099" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251910_PNAG_C~PN-IO"/>
+									</Symbol>
+								</Access>
+								<Call UId="1101">
+									<CallInfo BlockType="FB" Name="PnagBox">
+										<Instance UId="1102" Scope="GlobalVariable">
+											<Component Name="InstU251910_PNAG_C"/>
+										</Instance>
+										<Parameter Name="inAsiGatewayBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToPnag" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiCmdReceive" Section="Input" Type="&quot;typeAsiCommandReceive&quot;"/>
+										<Parameter Name="inFlagsChn0" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>
+										<Parameter Name="inFlagsChn1" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>
+										<Parameter Name="outAsiCmdSend" Section="Output" Type="&quot;typeAsiCommandSend&quot;"/>
+										<Parameter Name="outGlobalFaultReset" Section="Output" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1103" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1105" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251910_PNAG_CCommandIn"/>
+									</Symbol>
+								</Access>
+								<Access UId="1107" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251910_PNAG_CFlagsChn0"/>
+									</Symbol>
+								</Access>
+								<Access UId="1109" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251910_PNAG_CFlagsChn1"/>
+									</Symbol>
+								</Access>
+								<Access UId="1111" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251910_PNAG_CCommandOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1113" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251910_PNAG_CGlobalFaultReset"/>
+									</Symbol>
+								</Access>
+								<Part UId="1116" Name="Contact"/>
+								<Access UId="1117" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C_Health"/>
+										<Component Name="outFaulty"/>
+									</Symbol>
+								</Access>
+								<Part UId="1119" Name="O">
+									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+								</Part>
+								<Part UId="1121" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1122" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C_Health"/>
+										<Component Name="outDisabled"/>
+									</Symbol>
+								</Access>
+								<Part UId="1126" Name="Contact"/>
+								<Access UId="1127" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C_Health"/>
+										<Component Name="outProblem"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1092">
+									<Powerrail/>
+									<NameCon UId="1095" Name="en"/>
+									<NameCon UId="1116" Name="in"/>
+									<NameCon UId="1126" Name="in"/>
+								</Wire>
+								<Wire UId="1098">
+									<IdentCon UId="1097"/>
+									<NameCon UId="1095" Name="inData"/>
+								</Wire>
+								<Wire UId="1100">
+									<IdentCon UId="1099"/>
+									<NameCon UId="1095" Name="inLADDR"/>
+								</Wire>
+								<Wire UId="1104">
+									<IdentCon UId="1103"/>
+									<NameCon UId="1101" Name="inMainPanelToPnag"/>
+								</Wire>
+								<Wire UId="1106">
+									<IdentCon UId="1105"/>
+									<NameCon UId="1101" Name="inAsiCmdReceive"/>
+								</Wire>
+								<Wire UId="1108">
+									<IdentCon UId="1107"/>
+									<NameCon UId="1101" Name="inFlagsChn0"/>
+								</Wire>
+								<Wire UId="1110">
+									<IdentCon UId="1109"/>
+									<NameCon UId="1101" Name="inFlagsChn1"/>
+								</Wire>
+								<Wire UId="1112">
+									<IdentCon UId="1111"/>
+									<NameCon UId="1101" Name="outAsiCmdSend"/>
+								</Wire>
+								<Wire UId="1114">
+									<IdentCon UId="1113"/>
+									<NameCon UId="1101" Name="outGlobalFaultReset"/>
+								</Wire>
+								<Wire UId="1115">
+									<NameCon UId="1095" Name="eno"/>
+									<NameCon UId="1101" Name="en"/>
+								</Wire>
+								<Wire UId="1118">
+									<IdentCon UId="1117"/>
+									<NameCon UId="1116" Name="operand"/>
+								</Wire>
+								<Wire UId="1120">
+									<NameCon UId="1116" Name="out"/>
+									<NameCon UId="1119" Name="in1"/>
+								</Wire>
+								<Wire UId="1123">
+									<IdentCon UId="1122"/>
+									<NameCon UId="1121" Name="operand"/>
+								</Wire>
+								<Wire UId="1124">
+									<NameCon UId="1119" Name="out"/>
+									<NameCon UId="1121" Name="in"/>
+								</Wire>
+								<Wire UId="1125">
+									<NameCon UId="1121" Name="out"/>
+									<NameCon UId="1101" Name="inAsiGatewayBusFault"/>
+								</Wire>
+								<Wire UId="1128">
+									<IdentCon UId="1127"/>
+									<NameCon UId="1126" Name="operand"/>
+								</Wire>
+								<Wire UId="1129">
+									<NameCon UId="1126" Name="out"/>
+									<NameCon UId="1119" Name="in2"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1093" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1094" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>U251910_PNAG_C</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1194" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1198">
+									<CallInfo BlockType="FB" Name="ProfinetDeviceHealthSelector">
+										<Instance UId="1199" Scope="GlobalVariable">
+											<Component Name="InstU252310_PNAG_B_Health"/>
+										</Instance>
+										<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>
+										<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1200" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="ProfinetDeviceHealth_DB"/>
+										<Component Name="outData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1202" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252310_PNAG_B~PN-IO"/>
+									</Symbol>
+								</Access>
+								<Call UId="1204">
+									<CallInfo BlockType="FB" Name="PnagBox">
+										<Instance UId="1205" Scope="GlobalVariable">
+											<Component Name="InstU252310_PNAG_B"/>
+										</Instance>
+										<Parameter Name="inAsiGatewayBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToPnag" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiCmdReceive" Section="Input" Type="&quot;typeAsiCommandReceive&quot;"/>
+										<Parameter Name="inFlagsChn0" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>
+										<Parameter Name="inFlagsChn1" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>
+										<Parameter Name="outAsiCmdSend" Section="Output" Type="&quot;typeAsiCommandSend&quot;"/>
+										<Parameter Name="outGlobalFaultReset" Section="Output" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1206" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1208" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252310_PNAG_BCommandIn"/>
+									</Symbol>
+								</Access>
+								<Access UId="1210" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252310_PNAG_BFlagsChn0"/>
+									</Symbol>
+								</Access>
+								<Access UId="1212" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252310_PNAG_BFlagsChn1"/>
+									</Symbol>
+								</Access>
+								<Access UId="1214" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252310_PNAG_BCommandOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1216" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252310_PNAG_BGlobalFaultReset"/>
+									</Symbol>
+								</Access>
+								<Part UId="1219" Name="Contact"/>
+								<Access UId="1220" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252310_PNAG_B_Health"/>
+										<Component Name="outFaulty"/>
+									</Symbol>
+								</Access>
+								<Part UId="1222" Name="O">
+									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+								</Part>
+								<Part UId="1224" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1225" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252310_PNAG_B_Health"/>
+										<Component Name="outDisabled"/>
+									</Symbol>
+								</Access>
+								<Part UId="1229" Name="Contact"/>
+								<Access UId="1230" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252310_PNAG_B_Health"/>
+										<Component Name="outProblem"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1195">
+									<Powerrail/>
+									<NameCon UId="1198" Name="en"/>
+									<NameCon UId="1219" Name="in"/>
+									<NameCon UId="1229" Name="in"/>
+								</Wire>
+								<Wire UId="1201">
+									<IdentCon UId="1200"/>
+									<NameCon UId="1198" Name="inData"/>
+								</Wire>
+								<Wire UId="1203">
+									<IdentCon UId="1202"/>
+									<NameCon UId="1198" Name="inLADDR"/>
+								</Wire>
+								<Wire UId="1207">
+									<IdentCon UId="1206"/>
+									<NameCon UId="1204" Name="inMainPanelToPnag"/>
+								</Wire>
+								<Wire UId="1209">
+									<IdentCon UId="1208"/>
+									<NameCon UId="1204" Name="inAsiCmdReceive"/>
+								</Wire>
+								<Wire UId="1211">
+									<IdentCon UId="1210"/>
+									<NameCon UId="1204" Name="inFlagsChn0"/>
+								</Wire>
+								<Wire UId="1213">
+									<IdentCon UId="1212"/>
+									<NameCon UId="1204" Name="inFlagsChn1"/>
+								</Wire>
+								<Wire UId="1215">
+									<IdentCon UId="1214"/>
+									<NameCon UId="1204" Name="outAsiCmdSend"/>
+								</Wire>
+								<Wire UId="1217">
+									<IdentCon UId="1216"/>
+									<NameCon UId="1204" Name="outGlobalFaultReset"/>
+								</Wire>
+								<Wire UId="1218">
+									<NameCon UId="1198" Name="eno"/>
+									<NameCon UId="1204" Name="en"/>
+								</Wire>
+								<Wire UId="1221">
+									<IdentCon UId="1220"/>
+									<NameCon UId="1219" Name="operand"/>
+								</Wire>
+								<Wire UId="1223">
+									<NameCon UId="1219" Name="out"/>
+									<NameCon UId="1222" Name="in1"/>
+								</Wire>
+								<Wire UId="1226">
+									<IdentCon UId="1225"/>
+									<NameCon UId="1224" Name="operand"/>
+								</Wire>
+								<Wire UId="1227">
+									<NameCon UId="1222" Name="out"/>
+									<NameCon UId="1224" Name="in"/>
+								</Wire>
+								<Wire UId="1228">
+									<NameCon UId="1224" Name="out"/>
+									<NameCon UId="1204" Name="inAsiGatewayBusFault"/>
+								</Wire>
+								<Wire UId="1231">
+									<IdentCon UId="1230"/>
+									<NameCon UId="1229" Name="operand"/>
+								</Wire>
+								<Wire UId="1232">
+									<NameCon UId="1229" Name="out"/>
+									<NameCon UId="1222" Name="in2"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1196" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1197" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>U252310_PNAG_B</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1297" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1301">
+									<CallInfo BlockType="FB" Name="ProfinetDeviceHealthSelector">
+										<Instance UId="1302" Scope="GlobalVariable">
+											<Component Name="InstU253110_PNAG_A_Health"/>
+										</Instance>
+										<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>
+										<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1303" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="ProfinetDeviceHealth_DB"/>
+										<Component Name="outData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1305" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253110_PNAG_A~PN-IO"/>
+									</Symbol>
+								</Access>
+								<Call UId="1307">
+									<CallInfo BlockType="FB" Name="PnagBox">
+										<Instance UId="1308" Scope="GlobalVariable">
+											<Component Name="InstU253110_PNAG_A"/>
+										</Instance>
+										<Parameter Name="inAsiGatewayBusFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inMainPanelToPnag" Section="Input" Type="Bool"/>
+										<Parameter Name="inAsiCmdReceive" Section="Input" Type="&quot;typeAsiCommandReceive&quot;"/>
+										<Parameter Name="inFlagsChn0" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>
+										<Parameter Name="inFlagsChn1" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>
+										<Parameter Name="outAsiCmdSend" Section="Output" Type="&quot;typeAsiCommandSend&quot;"/>
+										<Parameter Name="outGlobalFaultReset" Section="Output" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1309" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1311" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253110_PNAG_ACommandIn"/>
+									</Symbol>
+								</Access>
+								<Access UId="1313" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253110_PNAG_AFlagsChn0"/>
+									</Symbol>
+								</Access>
+								<Access UId="1315" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253110_PNAG_AFlagsChn1"/>
+									</Symbol>
+								</Access>
+								<Access UId="1317" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253110_PNAG_ACommandOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1319" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253110_PNAG_AGlobalFaultReset"/>
+									</Symbol>
+								</Access>
+								<Part UId="1322" Name="Contact"/>
+								<Access UId="1323" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253110_PNAG_A_Health"/>
+										<Component Name="outFaulty"/>
+									</Symbol>
+								</Access>
+								<Part UId="1325" Name="O">
+									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+								</Part>
+								<Part UId="1327" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1328" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253110_PNAG_A_Health"/>
+										<Component Name="outDisabled"/>
+									</Symbol>
+								</Access>
+								<Part UId="1332" Name="Contact"/>
+								<Access UId="1333" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253110_PNAG_A_Health"/>
+										<Component Name="outProblem"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1298">
+									<Powerrail/>
+									<NameCon UId="1301" Name="en"/>
+									<NameCon UId="1322" Name="in"/>
+									<NameCon UId="1332" Name="in"/>
+								</Wire>
+								<Wire UId="1304">
+									<IdentCon UId="1303"/>
+									<NameCon UId="1301" Name="inData"/>
+								</Wire>
+								<Wire UId="1306">
+									<IdentCon UId="1305"/>
+									<NameCon UId="1301" Name="inLADDR"/>
+								</Wire>
+								<Wire UId="1310">
+									<IdentCon UId="1309"/>
+									<NameCon UId="1307" Name="inMainPanelToPnag"/>
+								</Wire>
+								<Wire UId="1312">
+									<IdentCon UId="1311"/>
+									<NameCon UId="1307" Name="inAsiCmdReceive"/>
+								</Wire>
+								<Wire UId="1314">
+									<IdentCon UId="1313"/>
+									<NameCon UId="1307" Name="inFlagsChn0"/>
+								</Wire>
+								<Wire UId="1316">
+									<IdentCon UId="1315"/>
+									<NameCon UId="1307" Name="inFlagsChn1"/>
+								</Wire>
+								<Wire UId="1318">
+									<IdentCon UId="1317"/>
+									<NameCon UId="1307" Name="outAsiCmdSend"/>
+								</Wire>
+								<Wire UId="1320">
+									<IdentCon UId="1319"/>
+									<NameCon UId="1307" Name="outGlobalFaultReset"/>
+								</Wire>
+								<Wire UId="1321">
+									<NameCon UId="1301" Name="eno"/>
+									<NameCon UId="1307" Name="en"/>
+								</Wire>
+								<Wire UId="1324">
+									<IdentCon UId="1323"/>
+									<NameCon UId="1322" Name="operand"/>
+								</Wire>
+								<Wire UId="1326">
+									<NameCon UId="1322" Name="out"/>
+									<NameCon UId="1325" Name="in1"/>
+								</Wire>
+								<Wire UId="1329">
+									<IdentCon UId="1328"/>
+									<NameCon UId="1327" Name="operand"/>
+								</Wire>
+								<Wire UId="1330">
+									<NameCon UId="1325" Name="out"/>
+									<NameCon UId="1327" Name="in"/>
+								</Wire>
+								<Wire UId="1331">
+									<NameCon UId="1327" Name="out"/>
+									<NameCon UId="1307" Name="inAsiGatewayBusFault"/>
+								</Wire>
+								<Wire UId="1334">
+									<IdentCon UId="1333"/>
+									<NameCon UId="1332" Name="operand"/>
+								</Wire>
+								<Wire UId="1335">
+									<NameCon UId="1332" Name="out"/>
+									<NameCon UId="1325" Name="in2"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1299" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1300" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>U253110_PNAG_A</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1400" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1404">
+									<CallInfo BlockType="FB" Name="ProfinetDeviceHealthSelector">
+										<Instance UId="1405" Scope="GlobalVariable">
+											<Component Name="InstU251845_ECG_03_Health"/>
+										</Instance>
+										<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>
+										<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1406" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="ProfinetDeviceHealth_DB"/>
+										<Component Name="outData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1408" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03~PNCG"/>
+									</Symbol>
+								</Access>
+								<Call UId="1410">
+									<CallInfo BlockType="FB" Name="Pncg">
+										<Instance UId="1411" Scope="GlobalVariable">
+											<Component Name="InstU251845_ECG_03"/>
+										</Instance>
+										<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>
+										<Parameter Name="inMandatoryStatus" Section="Input" Type="&quot;typeMandatoryInput&quot;"/>
+										<Parameter Name="inMandatoryHandshake" Section="Input" Type="&quot;typeMandatoryHandShake&quot;"/>
+										<Parameter Name="inVisuNodeIndex" Section="Input" Type="Byte"/>
+										<Parameter Name="inVisuZoneIndex" Section="Input" Type="Byte"/>
+										<Parameter Name="inStatusInfo" Section="Input" Type="&quot;typeEccStatus&quot;"/>
+										<Parameter Name="inWarningsInfo" Section="Input" Type="&quot;typeEccWarning&quot;"/>
+										<Parameter Name="inFaultsInfo" Section="Input" Type="&quot;typeEccFault&quot;"/>
+										<Parameter Name="inCommandArea1" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea2" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea3" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea4" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea5" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea6" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inResetFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inCanChannel" Section="Input" Type="&quot;typeCANChannelInput&quot;"/>
+										<Parameter Name="inBusSlaveOk" Section="Input" Type="Bool"/>
+										<Parameter Name="outCanChannel" Section="Output" Type="&quot;typeCANChannelOutput&quot;"/>
+										<Parameter Name="outMandatoryCmd" Section="Output" Type="&quot;typeMandatoryOutput&quot;"/>
+										<Parameter Name="outMandatoryHandshake" Section="Output" Type="&quot;typeMandatoryHandShake&quot;"/>
+										<Parameter Name="outCommandArea1" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea2" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea3" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea4" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea5" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea6" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="inoutParameterData" Section="InOut" Type="&quot;typeNodeParameters&quot;"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1412" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="GlobalData"/>
+										<Component Name="inoutGlobalData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1414" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03ManStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1416" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03ManHSin"/>
+									</Symbol>
+								</Access>
+								<Access UId="1418" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03VisuNode"/>
+									</Symbol>
+								</Access>
+								<Access UId="1420" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03VisuZoneIndex"/>
+									</Symbol>
+								</Access>
+								<Access UId="1422" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03VisuStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1424" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03VisuWarnings"/>
+									</Symbol>
+								</Access>
+								<Access UId="1426" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03VisuFaults"/>
+									</Symbol>
+								</Access>
+								<Access UId="1428" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea1In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1430" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea2In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1432" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea3In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1434" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea4In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1436" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea5In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1438" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea6In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1440" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+										<Component Name="resetZoneFault"/>
+									</Symbol>
+								</Access>
+								<Access UId="1442" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CANChannelIn"/>
+									</Symbol>
+								</Access>
+								<Part UId="1445" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1446" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251845_ECG_03_Health"/>
+										<Component Name="outFaulty"/>
+									</Symbol>
+								</Access>
+								<Part UId="1448" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1449" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251845_ECG_03_Health"/>
+										<Component Name="outProblem"/>
+									</Symbol>
+								</Access>
+								<Part UId="1452" Name="O">
+									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+								</Part>
+								<Part UId="1455" Name="Contact"/>
+								<Access UId="1456" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251845_ECG_03_Health"/>
+										<Component Name="outDisabled"/>
+									</Symbol>
+								</Access>
+								<Access UId="1459" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CANChannelOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1461" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03ManCommand"/>
+									</Symbol>
+								</Access>
+								<Access UId="1463" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03ManHSOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1465" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea1Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1467" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea2Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1469" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea3Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1471" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea4Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1473" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea5Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1475" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U251845_ECG_03CmdArea6Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1477" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="dbPncgParameterData"/>
+										<Component Name="U251845_ECG_03"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1401">
+									<Powerrail/>
+									<NameCon UId="1404" Name="en"/>
+									<NameCon UId="1445" Name="in"/>
+									<NameCon UId="1455" Name="in"/>
+								</Wire>
+								<Wire UId="1407">
+									<IdentCon UId="1406"/>
+									<NameCon UId="1404" Name="inData"/>
+								</Wire>
+								<Wire UId="1409">
+									<IdentCon UId="1408"/>
+									<NameCon UId="1404" Name="inLADDR"/>
+								</Wire>
+								<Wire UId="1413">
+									<IdentCon UId="1412"/>
+									<NameCon UId="1410" Name="inoutGlobalData"/>
+								</Wire>
+								<Wire UId="1415">
+									<IdentCon UId="1414"/>
+									<NameCon UId="1410" Name="inMandatoryStatus"/>
+								</Wire>
+								<Wire UId="1417">
+									<IdentCon UId="1416"/>
+									<NameCon UId="1410" Name="inMandatoryHandshake"/>
+								</Wire>
+								<Wire UId="1419">
+									<IdentCon UId="1418"/>
+									<NameCon UId="1410" Name="inVisuNodeIndex"/>
+								</Wire>
+								<Wire UId="1421">
+									<IdentCon UId="1420"/>
+									<NameCon UId="1410" Name="inVisuZoneIndex"/>
+								</Wire>
+								<Wire UId="1423">
+									<IdentCon UId="1422"/>
+									<NameCon UId="1410" Name="inStatusInfo"/>
+								</Wire>
+								<Wire UId="1425">
+									<IdentCon UId="1424"/>
+									<NameCon UId="1410" Name="inWarningsInfo"/>
+								</Wire>
+								<Wire UId="1427">
+									<IdentCon UId="1426"/>
+									<NameCon UId="1410" Name="inFaultsInfo"/>
+								</Wire>
+								<Wire UId="1429">
+									<IdentCon UId="1428"/>
+									<NameCon UId="1410" Name="inCommandArea1"/>
+								</Wire>
+								<Wire UId="1431">
+									<IdentCon UId="1430"/>
+									<NameCon UId="1410" Name="inCommandArea2"/>
+								</Wire>
+								<Wire UId="1433">
+									<IdentCon UId="1432"/>
+									<NameCon UId="1410" Name="inCommandArea3"/>
+								</Wire>
+								<Wire UId="1435">
+									<IdentCon UId="1434"/>
+									<NameCon UId="1410" Name="inCommandArea4"/>
+								</Wire>
+								<Wire UId="1437">
+									<IdentCon UId="1436"/>
+									<NameCon UId="1410" Name="inCommandArea5"/>
+								</Wire>
+								<Wire UId="1439">
+									<IdentCon UId="1438"/>
+									<NameCon UId="1410" Name="inCommandArea6"/>
+								</Wire>
+								<Wire UId="1441">
+									<IdentCon UId="1440"/>
+									<NameCon UId="1410" Name="inResetFault"/>
+								</Wire>
+								<Wire UId="1443">
+									<IdentCon UId="1442"/>
+									<NameCon UId="1410" Name="inCanChannel"/>
+								</Wire>
+								<Wire UId="1444">
+									<NameCon UId="1404" Name="eno"/>
+									<NameCon UId="1410" Name="en"/>
+								</Wire>
+								<Wire UId="1447">
+									<IdentCon UId="1446"/>
+									<NameCon UId="1445" Name="operand"/>
+								</Wire>
+								<Wire UId="1450">
+									<IdentCon UId="1449"/>
+									<NameCon UId="1448" Name="operand"/>
+								</Wire>
+								<Wire UId="1451">
+									<NameCon UId="1445" Name="out"/>
+									<NameCon UId="1448" Name="in"/>
+								</Wire>
+								<Wire UId="1453">
+									<NameCon UId="1448" Name="out"/>
+									<NameCon UId="1452" Name="in1"/>
+								</Wire>
+								<Wire UId="1454">
+									<NameCon UId="1452" Name="out"/>
+									<NameCon UId="1410" Name="inBusSlaveOk"/>
+								</Wire>
+								<Wire UId="1457">
+									<IdentCon UId="1456"/>
+									<NameCon UId="1455" Name="operand"/>
+								</Wire>
+								<Wire UId="1458">
+									<NameCon UId="1455" Name="out"/>
+									<NameCon UId="1452" Name="in2"/>
+								</Wire>
+								<Wire UId="1460">
+									<IdentCon UId="1459"/>
+									<NameCon UId="1410" Name="outCanChannel"/>
+								</Wire>
+								<Wire UId="1462">
+									<IdentCon UId="1461"/>
+									<NameCon UId="1410" Name="outMandatoryCmd"/>
+								</Wire>
+								<Wire UId="1464">
+									<IdentCon UId="1463"/>
+									<NameCon UId="1410" Name="outMandatoryHandshake"/>
+								</Wire>
+								<Wire UId="1466">
+									<IdentCon UId="1465"/>
+									<NameCon UId="1410" Name="outCommandArea1"/>
+								</Wire>
+								<Wire UId="1468">
+									<IdentCon UId="1467"/>
+									<NameCon UId="1410" Name="outCommandArea2"/>
+								</Wire>
+								<Wire UId="1470">
+									<IdentCon UId="1469"/>
+									<NameCon UId="1410" Name="outCommandArea3"/>
+								</Wire>
+								<Wire UId="1472">
+									<IdentCon UId="1471"/>
+									<NameCon UId="1410" Name="outCommandArea4"/>
+								</Wire>
+								<Wire UId="1474">
+									<IdentCon UId="1473"/>
+									<NameCon UId="1410" Name="outCommandArea5"/>
+								</Wire>
+								<Wire UId="1476">
+									<IdentCon UId="1475"/>
+									<NameCon UId="1410" Name="outCommandArea6"/>
+								</Wire>
+								<Wire UId="1478">
+									<IdentCon UId="1477"/>
+									<NameCon UId="1410" Name="inoutParameterData"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1402" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1403" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>U251845_ECG_03</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1641" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1645">
+									<CallInfo BlockType="FB" Name="ProfinetDeviceHealthSelector">
+										<Instance UId="1646" Scope="GlobalVariable">
+											<Component Name="InstU252245_ECG_02_Health"/>
+										</Instance>
+										<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>
+										<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1647" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="ProfinetDeviceHealth_DB"/>
+										<Component Name="outData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1649" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02~PNCG"/>
+									</Symbol>
+								</Access>
+								<Call UId="1651">
+									<CallInfo BlockType="FB" Name="Pncg">
+										<Instance UId="1652" Scope="GlobalVariable">
+											<Component Name="InstU252245_ECG_02"/>
+										</Instance>
+										<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>
+										<Parameter Name="inMandatoryStatus" Section="Input" Type="&quot;typeMandatoryInput&quot;"/>
+										<Parameter Name="inMandatoryHandshake" Section="Input" Type="&quot;typeMandatoryHandShake&quot;"/>
+										<Parameter Name="inVisuNodeIndex" Section="Input" Type="Byte"/>
+										<Parameter Name="inVisuZoneIndex" Section="Input" Type="Byte"/>
+										<Parameter Name="inStatusInfo" Section="Input" Type="&quot;typeEccStatus&quot;"/>
+										<Parameter Name="inWarningsInfo" Section="Input" Type="&quot;typeEccWarning&quot;"/>
+										<Parameter Name="inFaultsInfo" Section="Input" Type="&quot;typeEccFault&quot;"/>
+										<Parameter Name="inCommandArea1" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea2" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea3" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea4" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea5" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea6" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inResetFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inCanChannel" Section="Input" Type="&quot;typeCANChannelInput&quot;"/>
+										<Parameter Name="inBusSlaveOk" Section="Input" Type="Bool"/>
+										<Parameter Name="outCanChannel" Section="Output" Type="&quot;typeCANChannelOutput&quot;"/>
+										<Parameter Name="outMandatoryCmd" Section="Output" Type="&quot;typeMandatoryOutput&quot;"/>
+										<Parameter Name="outMandatoryHandshake" Section="Output" Type="&quot;typeMandatoryHandShake&quot;"/>
+										<Parameter Name="outCommandArea1" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea2" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea3" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea4" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea5" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea6" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="inoutParameterData" Section="InOut" Type="&quot;typeNodeParameters&quot;"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1653" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="GlobalData"/>
+										<Component Name="inoutGlobalData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1655" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02ManStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1657" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02ManHSin"/>
+									</Symbol>
+								</Access>
+								<Access UId="1659" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02VisuNode"/>
+									</Symbol>
+								</Access>
+								<Access UId="1661" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02VisuZoneIndex"/>
+									</Symbol>
+								</Access>
+								<Access UId="1663" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02VisuStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1665" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02VisuWarnings"/>
+									</Symbol>
+								</Access>
+								<Access UId="1667" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02VisuFaults"/>
+									</Symbol>
+								</Access>
+								<Access UId="1669" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea1In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1671" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea2In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1673" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea3In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1675" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea4In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1677" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea5In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1679" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea6In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1681" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+										<Component Name="resetZoneFault"/>
+									</Symbol>
+								</Access>
+								<Access UId="1683" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CANChannelIn"/>
+									</Symbol>
+								</Access>
+								<Part UId="1686" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1687" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252245_ECG_02_Health"/>
+										<Component Name="outFaulty"/>
+									</Symbol>
+								</Access>
+								<Part UId="1689" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1690" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252245_ECG_02_Health"/>
+										<Component Name="outProblem"/>
+									</Symbol>
+								</Access>
+								<Part UId="1693" Name="O">
+									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+								</Part>
+								<Part UId="1696" Name="Contact"/>
+								<Access UId="1697" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU252245_ECG_02_Health"/>
+										<Component Name="outDisabled"/>
+									</Symbol>
+								</Access>
+								<Access UId="1700" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CANChannelOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1702" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02ManCommand"/>
+									</Symbol>
+								</Access>
+								<Access UId="1704" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02ManHSOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1706" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea1Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1708" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea2Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1710" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea3Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1712" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea4Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1714" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea5Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1716" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U252245_ECG_02CmdArea6Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1718" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="dbPncgParameterData"/>
+										<Component Name="U252245_ECG_02"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1642">
+									<Powerrail/>
+									<NameCon UId="1645" Name="en"/>
+									<NameCon UId="1686" Name="in"/>
+									<NameCon UId="1696" Name="in"/>
+								</Wire>
+								<Wire UId="1648">
+									<IdentCon UId="1647"/>
+									<NameCon UId="1645" Name="inData"/>
+								</Wire>
+								<Wire UId="1650">
+									<IdentCon UId="1649"/>
+									<NameCon UId="1645" Name="inLADDR"/>
+								</Wire>
+								<Wire UId="1654">
+									<IdentCon UId="1653"/>
+									<NameCon UId="1651" Name="inoutGlobalData"/>
+								</Wire>
+								<Wire UId="1656">
+									<IdentCon UId="1655"/>
+									<NameCon UId="1651" Name="inMandatoryStatus"/>
+								</Wire>
+								<Wire UId="1658">
+									<IdentCon UId="1657"/>
+									<NameCon UId="1651" Name="inMandatoryHandshake"/>
+								</Wire>
+								<Wire UId="1660">
+									<IdentCon UId="1659"/>
+									<NameCon UId="1651" Name="inVisuNodeIndex"/>
+								</Wire>
+								<Wire UId="1662">
+									<IdentCon UId="1661"/>
+									<NameCon UId="1651" Name="inVisuZoneIndex"/>
+								</Wire>
+								<Wire UId="1664">
+									<IdentCon UId="1663"/>
+									<NameCon UId="1651" Name="inStatusInfo"/>
+								</Wire>
+								<Wire UId="1666">
+									<IdentCon UId="1665"/>
+									<NameCon UId="1651" Name="inWarningsInfo"/>
+								</Wire>
+								<Wire UId="1668">
+									<IdentCon UId="1667"/>
+									<NameCon UId="1651" Name="inFaultsInfo"/>
+								</Wire>
+								<Wire UId="1670">
+									<IdentCon UId="1669"/>
+									<NameCon UId="1651" Name="inCommandArea1"/>
+								</Wire>
+								<Wire UId="1672">
+									<IdentCon UId="1671"/>
+									<NameCon UId="1651" Name="inCommandArea2"/>
+								</Wire>
+								<Wire UId="1674">
+									<IdentCon UId="1673"/>
+									<NameCon UId="1651" Name="inCommandArea3"/>
+								</Wire>
+								<Wire UId="1676">
+									<IdentCon UId="1675"/>
+									<NameCon UId="1651" Name="inCommandArea4"/>
+								</Wire>
+								<Wire UId="1678">
+									<IdentCon UId="1677"/>
+									<NameCon UId="1651" Name="inCommandArea5"/>
+								</Wire>
+								<Wire UId="1680">
+									<IdentCon UId="1679"/>
+									<NameCon UId="1651" Name="inCommandArea6"/>
+								</Wire>
+								<Wire UId="1682">
+									<IdentCon UId="1681"/>
+									<NameCon UId="1651" Name="inResetFault"/>
+								</Wire>
+								<Wire UId="1684">
+									<IdentCon UId="1683"/>
+									<NameCon UId="1651" Name="inCanChannel"/>
+								</Wire>
+								<Wire UId="1685">
+									<NameCon UId="1645" Name="eno"/>
+									<NameCon UId="1651" Name="en"/>
+								</Wire>
+								<Wire UId="1688">
+									<IdentCon UId="1687"/>
+									<NameCon UId="1686" Name="operand"/>
+								</Wire>
+								<Wire UId="1691">
+									<IdentCon UId="1690"/>
+									<NameCon UId="1689" Name="operand"/>
+								</Wire>
+								<Wire UId="1692">
+									<NameCon UId="1686" Name="out"/>
+									<NameCon UId="1689" Name="in"/>
+								</Wire>
+								<Wire UId="1694">
+									<NameCon UId="1689" Name="out"/>
+									<NameCon UId="1693" Name="in1"/>
+								</Wire>
+								<Wire UId="1695">
+									<NameCon UId="1693" Name="out"/>
+									<NameCon UId="1651" Name="inBusSlaveOk"/>
+								</Wire>
+								<Wire UId="1698">
+									<IdentCon UId="1697"/>
+									<NameCon UId="1696" Name="operand"/>
+								</Wire>
+								<Wire UId="1699">
+									<NameCon UId="1696" Name="out"/>
+									<NameCon UId="1693" Name="in2"/>
+								</Wire>
+								<Wire UId="1701">
+									<IdentCon UId="1700"/>
+									<NameCon UId="1651" Name="outCanChannel"/>
+								</Wire>
+								<Wire UId="1703">
+									<IdentCon UId="1702"/>
+									<NameCon UId="1651" Name="outMandatoryCmd"/>
+								</Wire>
+								<Wire UId="1705">
+									<IdentCon UId="1704"/>
+									<NameCon UId="1651" Name="outMandatoryHandshake"/>
+								</Wire>
+								<Wire UId="1707">
+									<IdentCon UId="1706"/>
+									<NameCon UId="1651" Name="outCommandArea1"/>
+								</Wire>
+								<Wire UId="1709">
+									<IdentCon UId="1708"/>
+									<NameCon UId="1651" Name="outCommandArea2"/>
+								</Wire>
+								<Wire UId="1711">
+									<IdentCon UId="1710"/>
+									<NameCon UId="1651" Name="outCommandArea3"/>
+								</Wire>
+								<Wire UId="1713">
+									<IdentCon UId="1712"/>
+									<NameCon UId="1651" Name="outCommandArea4"/>
+								</Wire>
+								<Wire UId="1715">
+									<IdentCon UId="1714"/>
+									<NameCon UId="1651" Name="outCommandArea5"/>
+								</Wire>
+								<Wire UId="1717">
+									<IdentCon UId="1716"/>
+									<NameCon UId="1651" Name="outCommandArea6"/>
+								</Wire>
+								<Wire UId="1719">
+									<IdentCon UId="1718"/>
+									<NameCon UId="1651" Name="inoutParameterData"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1643" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1644" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>U252245_ECG_02</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="1882" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="1886">
+									<CallInfo BlockType="FB" Name="ProfinetDeviceHealthSelector">
+										<Instance UId="1887" Scope="GlobalVariable">
+											<Component Name="InstU253045_ECG_01_Health"/>
+										</Instance>
+										<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>
+										<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1888" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="ProfinetDeviceHealth_DB"/>
+										<Component Name="outData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1890" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01~PNCG"/>
+									</Symbol>
+								</Access>
+								<Call UId="1892">
+									<CallInfo BlockType="FB" Name="Pncg">
+										<Instance UId="1893" Scope="GlobalVariable">
+											<Component Name="InstU253045_ECG_01"/>
+										</Instance>
+										<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>
+										<Parameter Name="inMandatoryStatus" Section="Input" Type="&quot;typeMandatoryInput&quot;"/>
+										<Parameter Name="inMandatoryHandshake" Section="Input" Type="&quot;typeMandatoryHandShake&quot;"/>
+										<Parameter Name="inVisuNodeIndex" Section="Input" Type="Byte"/>
+										<Parameter Name="inVisuZoneIndex" Section="Input" Type="Byte"/>
+										<Parameter Name="inStatusInfo" Section="Input" Type="&quot;typeEccStatus&quot;"/>
+										<Parameter Name="inWarningsInfo" Section="Input" Type="&quot;typeEccWarning&quot;"/>
+										<Parameter Name="inFaultsInfo" Section="Input" Type="&quot;typeEccFault&quot;"/>
+										<Parameter Name="inCommandArea1" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea2" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea3" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea4" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea5" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inCommandArea6" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>
+										<Parameter Name="inResetFault" Section="Input" Type="Bool"/>
+										<Parameter Name="inCanChannel" Section="Input" Type="&quot;typeCANChannelInput&quot;"/>
+										<Parameter Name="inBusSlaveOk" Section="Input" Type="Bool"/>
+										<Parameter Name="outCanChannel" Section="Output" Type="&quot;typeCANChannelOutput&quot;"/>
+										<Parameter Name="outMandatoryCmd" Section="Output" Type="&quot;typeMandatoryOutput&quot;"/>
+										<Parameter Name="outMandatoryHandshake" Section="Output" Type="&quot;typeMandatoryHandShake&quot;"/>
+										<Parameter Name="outCommandArea1" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea2" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea3" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea4" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea5" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="outCommandArea6" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>
+										<Parameter Name="inoutParameterData" Section="InOut" Type="&quot;typeNodeParameters&quot;"/>
+									</CallInfo>
+								</Call>
+								<Access UId="1894" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="GlobalData"/>
+										<Component Name="inoutGlobalData"/>
+									</Symbol>
+								</Access>
+								<Access UId="1896" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01ManStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1898" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01ManHSin"/>
+									</Symbol>
+								</Access>
+								<Access UId="1900" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01VisuNode"/>
+									</Symbol>
+								</Access>
+								<Access UId="1902" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01VisuZoneIndex"/>
+									</Symbol>
+								</Access>
+								<Access UId="1904" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01VisuStatus"/>
+									</Symbol>
+								</Access>
+								<Access UId="1906" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01VisuWarnings"/>
+									</Symbol>
+								</Access>
+								<Access UId="1908" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01VisuFaults"/>
+									</Symbol>
+								</Access>
+								<Access UId="1910" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea1In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1912" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea2In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1914" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea3In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1916" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea4In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1918" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea5In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1920" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea6In"/>
+									</Symbol>
+								</Access>
+								<Access UId="1922" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstCC110"/>
+										<Component Name="outPlcStatus"/>
+										<Component Name="resetZoneFault"/>
+									</Symbol>
+								</Access>
+								<Access UId="1924" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CANChannelIn"/>
+									</Symbol>
+								</Access>
+								<Part UId="1927" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1928" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253045_ECG_01_Health"/>
+										<Component Name="outFaulty"/>
+									</Symbol>
+								</Access>
+								<Part UId="1930" Name="Contact">
+									<Negated Name="operand"/>
+								</Part>
+								<Access UId="1931" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253045_ECG_01_Health"/>
+										<Component Name="outProblem"/>
+									</Symbol>
+								</Access>
+								<Part UId="1934" Name="O">
+									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+								</Part>
+								<Part UId="1937" Name="Contact"/>
+								<Access UId="1938" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU253045_ECG_01_Health"/>
+										<Component Name="outDisabled"/>
+									</Symbol>
+								</Access>
+								<Access UId="1941" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CANChannelOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1943" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01ManCommand"/>
+									</Symbol>
+								</Access>
+								<Access UId="1945" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01ManHSOut"/>
+									</Symbol>
+								</Access>
+								<Access UId="1947" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea1Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1949" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea2Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1951" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea3Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1953" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea4Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1955" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea5Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1957" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="U253045_ECG_01CmdArea6Out"/>
+									</Symbol>
+								</Access>
+								<Access UId="1959" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="dbPncgParameterData"/>
+										<Component Name="U253045_ECG_01"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="1883">
+									<Powerrail/>
+									<NameCon UId="1886" Name="en"/>
+									<NameCon UId="1927" Name="in"/>
+									<NameCon UId="1937" Name="in"/>
+								</Wire>
+								<Wire UId="1889">
+									<IdentCon UId="1888"/>
+									<NameCon UId="1886" Name="inData"/>
+								</Wire>
+								<Wire UId="1891">
+									<IdentCon UId="1890"/>
+									<NameCon UId="1886" Name="inLADDR"/>
+								</Wire>
+								<Wire UId="1895">
+									<IdentCon UId="1894"/>
+									<NameCon UId="1892" Name="inoutGlobalData"/>
+								</Wire>
+								<Wire UId="1897">
+									<IdentCon UId="1896"/>
+									<NameCon UId="1892" Name="inMandatoryStatus"/>
+								</Wire>
+								<Wire UId="1899">
+									<IdentCon UId="1898"/>
+									<NameCon UId="1892" Name="inMandatoryHandshake"/>
+								</Wire>
+								<Wire UId="1901">
+									<IdentCon UId="1900"/>
+									<NameCon UId="1892" Name="inVisuNodeIndex"/>
+								</Wire>
+								<Wire UId="1903">
+									<IdentCon UId="1902"/>
+									<NameCon UId="1892" Name="inVisuZoneIndex"/>
+								</Wire>
+								<Wire UId="1905">
+									<IdentCon UId="1904"/>
+									<NameCon UId="1892" Name="inStatusInfo"/>
+								</Wire>
+								<Wire UId="1907">
+									<IdentCon UId="1906"/>
+									<NameCon UId="1892" Name="inWarningsInfo"/>
+								</Wire>
+								<Wire UId="1909">
+									<IdentCon UId="1908"/>
+									<NameCon UId="1892" Name="inFaultsInfo"/>
+								</Wire>
+								<Wire UId="1911">
+									<IdentCon UId="1910"/>
+									<NameCon UId="1892" Name="inCommandArea1"/>
+								</Wire>
+								<Wire UId="1913">
+									<IdentCon UId="1912"/>
+									<NameCon UId="1892" Name="inCommandArea2"/>
+								</Wire>
+								<Wire UId="1915">
+									<IdentCon UId="1914"/>
+									<NameCon UId="1892" Name="inCommandArea3"/>
+								</Wire>
+								<Wire UId="1917">
+									<IdentCon UId="1916"/>
+									<NameCon UId="1892" Name="inCommandArea4"/>
+								</Wire>
+								<Wire UId="1919">
+									<IdentCon UId="1918"/>
+									<NameCon UId="1892" Name="inCommandArea5"/>
+								</Wire>
+								<Wire UId="1921">
+									<IdentCon UId="1920"/>
+									<NameCon UId="1892" Name="inCommandArea6"/>
+								</Wire>
+								<Wire UId="1923">
+									<IdentCon UId="1922"/>
+									<NameCon UId="1892" Name="inResetFault"/>
+								</Wire>
+								<Wire UId="1925">
+									<IdentCon UId="1924"/>
+									<NameCon UId="1892" Name="inCanChannel"/>
+								</Wire>
+								<Wire UId="1926">
+									<NameCon UId="1886" Name="eno"/>
+									<NameCon UId="1892" Name="en"/>
+								</Wire>
+								<Wire UId="1929">
+									<IdentCon UId="1928"/>
+									<NameCon UId="1927" Name="operand"/>
+								</Wire>
+								<Wire UId="1932">
+									<IdentCon UId="1931"/>
+									<NameCon UId="1930" Name="operand"/>
+								</Wire>
+								<Wire UId="1933">
+									<NameCon UId="1927" Name="out"/>
+									<NameCon UId="1930" Name="in"/>
+								</Wire>
+								<Wire UId="1935">
+									<NameCon UId="1930" Name="out"/>
+									<NameCon UId="1934" Name="in1"/>
+								</Wire>
+								<Wire UId="1936">
+									<NameCon UId="1934" Name="out"/>
+									<NameCon UId="1892" Name="inBusSlaveOk"/>
+								</Wire>
+								<Wire UId="1939">
+									<IdentCon UId="1938"/>
+									<NameCon UId="1937" Name="operand"/>
+								</Wire>
+								<Wire UId="1940">
+									<NameCon UId="1937" Name="out"/>
+									<NameCon UId="1934" Name="in2"/>
+								</Wire>
+								<Wire UId="1942">
+									<IdentCon UId="1941"/>
+									<NameCon UId="1892" Name="outCanChannel"/>
+								</Wire>
+								<Wire UId="1944">
+									<IdentCon UId="1943"/>
+									<NameCon UId="1892" Name="outMandatoryCmd"/>
+								</Wire>
+								<Wire UId="1946">
+									<IdentCon UId="1945"/>
+									<NameCon UId="1892" Name="outMandatoryHandshake"/>
+								</Wire>
+								<Wire UId="1948">
+									<IdentCon UId="1947"/>
+									<NameCon UId="1892" Name="outCommandArea1"/>
+								</Wire>
+								<Wire UId="1950">
+									<IdentCon UId="1949"/>
+									<NameCon UId="1892" Name="outCommandArea2"/>
+								</Wire>
+								<Wire UId="1952">
+									<IdentCon UId="1951"/>
+									<NameCon UId="1892" Name="outCommandArea3"/>
+								</Wire>
+								<Wire UId="1954">
+									<IdentCon UId="1953"/>
+									<NameCon UId="1892" Name="outCommandArea4"/>
+								</Wire>
+								<Wire UId="1956">
+									<IdentCon UId="1955"/>
+									<NameCon UId="1892" Name="outCommandArea5"/>
+								</Wire>
+								<Wire UId="1958">
+									<IdentCon UId="1957"/>
+									<NameCon UId="1892" Name="outCommandArea6"/>
+								</Wire>
+								<Wire UId="1960">
+									<IdentCon UId="1959"/>
+									<NameCon UId="1892" Name="inoutParameterData"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="1884" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="1885" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>U253045_ECG_01</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="2123" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="2127">
+									<CallInfo BlockType="FB" Name="RptrBox">
+										<Instance UId="2128" Scope="GlobalVariable">
+											<Component Name="InstCA121RPTR_C1"/>
+										</Instance>
+										<Parameter Name="inTemperatureRptrOk" Section="Input" Type="Bool"/>
+										<Parameter Name="inPnagToRptr" Section="Input" Type="&quot;typePnagToRptr;"/>
+										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="2129" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="2131" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outPnagToRptr"/>
+									</Symbol>
+								</Access>
+								<Access UId="2133" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="InstU251910_PNAG_C"/>
+										<Component Name="outVisuInterface"/>
+										<Component Name="status"/>
+										<Component Name="summary"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="2124">
+									<Powerrail/>
+									<NameCon UId="2127" Name="en"/>
+								</Wire>
+								<Wire UId="2130">
+									<IdentCon UId="2129"/>
+									<NameCon UId="2127" Name="inTemperatureRptrOk"/>
+								</Wire>
+								<Wire UId="2132">
+									<IdentCon UId="2131"/>
+									<NameCon UId="2127" Name="inPnagToRptr"/>
+								</Wire>
+								<Wire UId="2134">
+									<IdentCon UId="2133"/>
+									<NameCon UId="2127" Name="inAsiBusFault"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="2125" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="2126" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>CA121RPTR_C1</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="2178" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="2182">
+									<CallInfo BlockType="FB" Name="FortressGateSwitch">
+										<Instance UId="2183" Scope="GlobalVariable">
+											<Component Name="Inst000010_GS"/>
+										</Instance>
+										<Parameter Name="inRequestAccess" Section="Input" Type="Bool"/>
+										<Parameter Name="inAccessGranted" Section="Input" Type="Bool"/>
+										<Parameter Name="inUnlockSwitch" Section="Input" Type="Bool"/>
+										<Parameter Name="inGateMonitor" Section="Input" Type="Bool"/>
+										<Parameter Name="inResetRequest" Section="Input" Type="Bool"/>
+										<Parameter Name="outGateSolenoid" Section="Output" Type="Bool"/>
+										<Parameter Name="outGateSwitchLamp" Section="Output" Type="Bool"/>
+										<Parameter Name="outResetLamp" Section="Output" Type="Bool"/>
+										<Parameter Name="outRequestLamp" Section="Output" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="2184" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_RQ_PB"/>
+									</Symbol>
+								</Access>
+								<Access UId="2186" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="2188" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_G_SW"/>
+									</Symbol>
+								</Access>
+								<Access UId="2190" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_GateMon"/>
+									</Symbol>
+								</Access>
+								<Access UId="2192" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_RS_PB"/>
+									</Symbol>
+								</Access>
+								<Access UId="2194" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_Sol_Drive"/>
+									</Symbol>
+								</Access>
+								<Access UId="2196" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_G_LT"/>
+									</Symbol>
+								</Access>
+								<Access UId="2198" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_RS_LT"/>
+									</Symbol>
+								</Access>
+								<Access UId="2200" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_RQ_LT"/>
+									</Symbol>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="2179">
+									<Powerrail/>
+									<NameCon UId="2182" Name="en"/>
+								</Wire>
+								<Wire UId="2185">
+									<IdentCon UId="2184"/>
+									<NameCon UId="2182" Name="inRequestAccess"/>
+								</Wire>
+								<Wire UId="2187">
+									<IdentCon UId="2186"/>
+									<NameCon UId="2182" Name="inAccessGranted"/>
+								</Wire>
+								<Wire UId="2189">
+									<IdentCon UId="2188"/>
+									<NameCon UId="2182" Name="inUnlockSwitch"/>
+								</Wire>
+								<Wire UId="2191">
+									<IdentCon UId="2190"/>
+									<NameCon UId="2182" Name="inGateMonitor"/>
+								</Wire>
+								<Wire UId="2193">
+									<IdentCon UId="2192"/>
+									<NameCon UId="2182" Name="inResetRequest"/>
+								</Wire>
+								<Wire UId="2195">
+									<IdentCon UId="2194"/>
+									<NameCon UId="2182" Name="outGateSolenoid"/>
+								</Wire>
+								<Wire UId="2197">
+									<IdentCon UId="2196"/>
+									<NameCon UId="2182" Name="outGateSwitchLamp"/>
+								</Wire>
+								<Wire UId="2199">
+									<IdentCon UId="2198"/>
+									<NameCon UId="2182" Name="outResetLamp"/>
+								</Wire>
+								<Wire UId="2201">
+									<IdentCon UId="2200"/>
+									<NameCon UId="2182" Name="outRequestLamp"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="2180" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="2181" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>000010_GS</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="2202" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="2206">
+									<CallInfo BlockType="FB" Name="FortressGateSwitchSafety">
+										<Instance UId="2207" Scope="GlobalVariable">
+											<Component Name="Inst000010_GS Gate Switch Safety"/>
+										</Instance>
+										<Parameter Name="inEstopPB1" Section="Input" Type="Bool"/>
+										<Parameter Name="inEstopPB2" Section="Input" Type="Bool"/>
+										<Parameter Name="inHead1" Section="Input" Type="Bool"/>
+										<Parameter Name="inHead2" Section="Input" Type="Bool"/>
+										<Parameter Name="inAck" Section="Input" Type="Bool"/>
+										<Parameter Name="inQbad" Section="Input" Type="Bool"/>
+										<Parameter Name="inAccessGranted" Section="Input" Type="Bool"/>
+									</CallInfo>
+								</Call>
+								<Access UId="2208" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_Estop_1"/>
+									</Symbol>
+								</Access>
+								<Access UId="2210" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_Estop_2"/>
+									</Symbol>
+								</Access>
+								<Access UId="2212" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_Sol_1"/>
+									</Symbol>
+								</Access>
+								<Access UId="2214" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="000010_GS_Sol_2"/>
+									</Symbol>
+								</Access>
+								<Access UId="2216" Scope="LocalVariable">
+									<Symbol>
+										<Component Name="tempEstopReset"/>
+									</Symbol>
+								</Access>
+								<Access UId="2218" Scope="GlobalVariable">
+									<Symbol>
+										<Component Name="F01657_SafetyModule_1"/>
+										<Component Name="QBAD"/>
+									</Symbol>
+								</Access>
+								<Access UId="2220" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>true</ConstantValue>
+									</Constant>
+								</Access>
+							</Parts>
+							<Wires>
+								<Wire UId="2203">
+									<Powerrail/>
+									<NameCon UId="2206" Name="en"/>
+								</Wire>
+								<Wire UId="2209">
+									<IdentCon UId="2208"/>
+									<NameCon UId="2206" Name="inEstopPB1"/>
+								</Wire>
+								<Wire UId="2211">
+									<IdentCon UId="2210"/>
+									<NameCon UId="2206" Name="inEstopPB2"/>
+								</Wire>
+								<Wire UId="2213">
+									<IdentCon UId="2212"/>
+									<NameCon UId="2206" Name="inHead1"/>
+								</Wire>
+								<Wire UId="2215">
+									<IdentCon UId="2214"/>
+									<NameCon UId="2206" Name="inHead2"/>
+								</Wire>
+								<Wire UId="2217">
+									<IdentCon UId="2216"/>
+									<NameCon UId="2206" Name="inAck"/>
+								</Wire>
+								<Wire UId="2219">
+									<IdentCon UId="2218"/>
+									<NameCon UId="2206" Name="inQbad"/>
+								</Wire>
+								<Wire UId="2221">
+									<IdentCon UId="2220"/>
+									<NameCon UId="2206" Name="inAccessGranted"/>
+								</Wire>
+							</Wires>
+						</FlgNet>
+					</NetworkSource>
+				</AttributeList>
+				<ObjectList>
+					<MultilingualText ID="2204" CompositionName="Title">
+						<ObjectList>
+							<MultilingualTextItem ID="2205" CompositionName="Items">
+								<AttributeList>
+									<Culture>en-US</Culture>
+									<Text>000010_GS_FS</Text>
+								</AttributeList>
+							</MultilingualTextItem>
+						</ObjectList>
+					</MultilingualText>
+				</ObjectList>
+			</SW.Blocks.CompileUnit>
+			<SW.Blocks.CompileUnit ID="2222" CompositionName="CompileUnits">
+				<AttributeList>
+					<NetworkSource>
+						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+							<Parts>
+								<Call UId="2226">
 									<CallInfo BlockType="FB" Name="EmergencyStop">
-										<Instance UId="318" Scope="GlobalVariable">
-											<Component Name="InstEStop2_Vis"/>
+										<Instance UId="2227" Scope="GlobalVariable">
+											<Component Name="Inst000010_GS_Vis"/>
 										</Instance>
 										<Parameter Name="inEStopStatus" Section="Input" Type="Bool"/>
 										<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>
@@ -832,357 +3552,147 @@
 										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
 									</CallInfo>
 								</Call>
-								<Access UId="319" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstCA121CA121EZC1_FC"/>
-										<Component Name="outEStopHealthy"/>
-									</Symbol>
-								</Access>
-								<Access UId="321" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>String</ConstantType>
-										<ConstantValue>'EStop2'</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="323" Scope="LiteralConstant">
+								<Access UId="2228" Scope="LiteralConstant">
 									<Constant>
 										<ConstantType>Bool</ConstantType>
 										<ConstantValue>false</ConstantValue>
 									</Constant>
 								</Access>
-								<Access UId="325" Scope="GlobalVariable">
+								<Access UId="2230" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>String</ConstantType>
+										<ConstantValue>'000010'</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="2232" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Access UId="2234" Scope="LiteralConstant">
+									<Constant>
+										<ConstantType>Bool</ConstantType>
+										<ConstantValue>false</ConstantValue>
+									</Constant>
+								</Access>
+								<Part UId="2236" Name="Contact"/>
+								<Access UId="2237" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="InstU253110_PNAG_A"/>
-										<Component Name="outVisuInterface"/>
-										<Component Name="status"/>
-										<Component Name="summary"/>
+										<Component Name="000010_GS_Estop_1"/>
 									</Symbol>
 								</Access>
-								<Part UId="327" Name="Contact"/>
-								<Access UId="328" Scope="GlobalVariable">
+								<Part UId="2239" Name="Contact"/>
+								<Access UId="2240" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="EStop2"/>
+										<Component Name="000010_GS_Estop_2"/>
 									</Symbol>
 								</Access>
-								<Part UId="330" Name="Contact"/>
-								<Access UId="331" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop2_NONSAFE"/>
-									</Symbol>
-								</Access>
-								<Part UId="333" Name="O">
+								<Part UId="2242" Name="O">
 									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
 								</Part>
-								<Part UId="337" Name="Contact"/>
-								<Access UId="338" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstEStop2_Vis"/>
-										<Component Name="outEstopLamp"/>
-									</Symbol>
-								</Access>
-								<Part UId="340" Name="Coil"/>
-								<Access UId="341" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop2_LT_R"/>
-									</Symbol>
-								</Access>
-								<Part UId="344" Name="Contact">
-									<Negated Name="operand"/>
-								</Part>
-								<Access UId="345" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstEStop2_Vis"/>
-										<Component Name="outEstopLamp"/>
-									</Symbol>
-								</Access>
-								<Part UId="347" Name="Contact"/>
-								<Access UId="348" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop2_NONSAFE"/>
-									</Symbol>
-								</Access>
-								<Part UId="350" Name="Coil"/>
-								<Access UId="351" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop2_LT_G"/>
-									</Symbol>
-								</Access>
 							</Parts>
 							<Wires>
-								<Wire UId="314">
+								<Wire UId="2223">
 									<Powerrail/>
-									<NameCon UId="317" Name="en"/>
-									<NameCon UId="327" Name="in"/>
-									<NameCon UId="330" Name="in"/>
-									<NameCon UId="337" Name="in"/>
-									<NameCon UId="344" Name="in"/>
+									<NameCon UId="2226" Name="en"/>
+									<NameCon UId="2236" Name="in"/>
+									<NameCon UId="2239" Name="in"/>
 								</Wire>
-								<Wire UId="320">
-									<IdentCon UId="319"/>
-									<NameCon UId="317" Name="inZoneStatus"/>
+								<Wire UId="2229">
+									<IdentCon UId="2228"/>
+									<NameCon UId="2226" Name="inZoneStatus"/>
 								</Wire>
-								<Wire UId="322">
-									<IdentCon UId="321"/>
-									<NameCon UId="317" Name="inLocation"/>
+								<Wire UId="2231">
+									<IdentCon UId="2230"/>
+									<NameCon UId="2226" Name="inLocation"/>
 								</Wire>
-								<Wire UId="324">
-									<IdentCon UId="323"/>
-									<NameCon UId="317" Name="inConfigContactType"/>
+								<Wire UId="2233">
+									<IdentCon UId="2232"/>
+									<NameCon UId="2226" Name="inConfigContactType"/>
 								</Wire>
-								<Wire UId="326">
-									<IdentCon UId="325"/>
-									<NameCon UId="317" Name="inAsiBusFault"/>
+								<Wire UId="2235">
+									<IdentCon UId="2234"/>
+									<NameCon UId="2226" Name="inAsiBusFault"/>
 								</Wire>
-								<Wire UId="329">
-									<IdentCon UId="328"/>
-									<NameCon UId="327" Name="operand"/>
+								<Wire UId="2238">
+									<IdentCon UId="2237"/>
+									<NameCon UId="2236" Name="operand"/>
 								</Wire>
-								<Wire UId="332">
-									<IdentCon UId="331"/>
-									<NameCon UId="330" Name="operand"/>
+								<Wire UId="2241">
+									<IdentCon UId="2240"/>
+									<NameCon UId="2239" Name="operand"/>
 								</Wire>
-								<Wire UId="334">
-									<NameCon UId="327" Name="out"/>
-									<NameCon UId="333" Name="in1"/>
+								<Wire UId="2243">
+									<NameCon UId="2236" Name="out"/>
+									<NameCon UId="2242" Name="in1"/>
 								</Wire>
-								<Wire UId="335">
-									<NameCon UId="330" Name="out"/>
-									<NameCon UId="333" Name="in2"/>
+								<Wire UId="2244">
+									<NameCon UId="2239" Name="out"/>
+									<NameCon UId="2242" Name="in2"/>
 								</Wire>
-								<Wire UId="336">
-									<NameCon UId="333" Name="out"/>
-									<NameCon UId="317" Name="inEStopStatus"/>
-								</Wire>
-								<Wire UId="339">
-									<IdentCon UId="338"/>
-									<NameCon UId="337" Name="operand"/>
-								</Wire>
-								<Wire UId="342">
-									<IdentCon UId="341"/>
-									<NameCon UId="340" Name="operand"/>
-								</Wire>
-								<Wire UId="343">
-									<NameCon UId="337" Name="out"/>
-									<NameCon UId="340" Name="in"/>
-								</Wire>
-								<Wire UId="346">
-									<IdentCon UId="345"/>
-									<NameCon UId="344" Name="operand"/>
-								</Wire>
-								<Wire UId="349">
-									<IdentCon UId="348"/>
-									<NameCon UId="347" Name="operand"/>
-								</Wire>
-								<Wire UId="352">
-									<IdentCon UId="351"/>
-									<NameCon UId="350" Name="operand"/>
-								</Wire>
-								<Wire UId="353">
-									<NameCon UId="344" Name="out"/>
-									<NameCon UId="347" Name="in"/>
-								</Wire>
-								<Wire UId="354">
-									<NameCon UId="347" Name="out"/>
-									<NameCon UId="350" Name="in"/>
+								<Wire UId="2245">
+									<NameCon UId="2242" Name="out"/>
+									<NameCon UId="2226" Name="inEStopStatus"/>
 								</Wire>
 							</Wires>
 						</FlgNet>
 					</NetworkSource>
 				</AttributeList>
 				<ObjectList>
-					<MultilingualText ID="315" CompositionName="Title">
+					<MultilingualText ID="2224" CompositionName="Title">
 						<ObjectList>
-							<MultilingualTextItem ID="316" CompositionName="Items">
+							<MultilingualTextItem ID="2225" CompositionName="Items">
 								<AttributeList>
 									<Culture>en-US</Culture>
-									<Text>EStop2_Vis</Text>
+									<Text>000010_GS_Vis</Text>
 								</AttributeList>
 							</MultilingualTextItem>
 						</ObjectList>
 					</MultilingualText>
 				</ObjectList>
 			</SW.Blocks.CompileUnit>
-			<SW.Blocks.CompileUnit ID="355" CompositionName="CompileUnits">
+			<SW.Blocks.CompileUnit ID="2246" CompositionName="CompileUnits">
 				<AttributeList>
 					<NetworkSource>
 						<FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
 							<Parts>
-								<Call UId="359">
-									<CallInfo BlockType="FB" Name="EmergencyStop">
-										<Instance UId="360" Scope="GlobalVariable">
-											<Component Name="InstEStop3_Vis"/>
-										</Instance>
-										<Parameter Name="inEStopStatus" Section="Input" Type="Bool"/>
-										<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>
-										<Parameter Name="inLocation" Section="Input" Type="String[14]"/>
-										<Parameter Name="inConfigContactType" Section="Input" Type="Bool"/>
-										<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>
-									</CallInfo>
+								<Call UId="2250">
+									<CallInfo BlockType="FC" Name="Jacob's Magic_SetConfigs"/>
 								</Call>
-								<Access UId="361" Scope="GlobalVariable">
+								<Part UId="2251" Name="Contact"/>
+								<Access UId="2252" Scope="GlobalVariable">
 									<Symbol>
-										<Component Name="InstCA121CA121EZC1_FC"/>
-										<Component Name="outEStopHealthy"/>
-									</Symbol>
-								</Access>
-								<Access UId="363" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>String</ConstantType>
-										<ConstantValue>'EStop3'</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="365" Scope="LiteralConstant">
-									<Constant>
-										<ConstantType>Bool</ConstantType>
-										<ConstantValue>false</ConstantValue>
-									</Constant>
-								</Access>
-								<Access UId="367" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstU253110_PNAG_A"/>
-										<Component Name="outVisuInterface"/>
-										<Component Name="status"/>
-										<Component Name="summary"/>
-									</Symbol>
-								</Access>
-								<Part UId="369" Name="Contact"/>
-								<Access UId="370" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop3"/>
-									</Symbol>
-								</Access>
-								<Part UId="372" Name="Contact"/>
-								<Access UId="373" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop3_NONSAFE"/>
-									</Symbol>
-								</Access>
-								<Part UId="375" Name="O">
-									<TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
-								</Part>
-								<Part UId="379" Name="Contact"/>
-								<Access UId="380" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstEStop3_Vis"/>
-										<Component Name="outEstopLamp"/>
-									</Symbol>
-								</Access>
-								<Part UId="382" Name="Coil"/>
-								<Access UId="383" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop3_LT_R"/>
-									</Symbol>
-								</Access>
-								<Part UId="386" Name="Contact">
-									<Negated Name="operand"/>
-								</Part>
-								<Access UId="387" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="InstEStop3_Vis"/>
-										<Component Name="outEstopLamp"/>
-									</Symbol>
-								</Access>
-								<Part UId="389" Name="Contact"/>
-								<Access UId="390" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop3_NONSAFE"/>
-									</Symbol>
-								</Access>
-								<Part UId="392" Name="Coil"/>
-								<Access UId="393" Scope="GlobalVariable">
-									<Symbol>
-										<Component Name="EStop3_LT_G"/>
+										<Component Name="GlobalData"/>
+										<Component Name="inGlobalData"/>
+										<Component Name="checksumPulse"/>
 									</Symbol>
 								</Access>
 							</Parts>
 							<Wires>
-								<Wire UId="356">
+								<Wire UId="2247">
 									<Powerrail/>
-									<NameCon UId="359" Name="en"/>
-									<NameCon UId="369" Name="in"/>
-									<NameCon UId="372" Name="in"/>
-									<NameCon UId="379" Name="in"/>
-									<NameCon UId="386" Name="in"/>
+									<NameCon UId="2251" Name="in"/>
 								</Wire>
-								<Wire UId="362">
-									<IdentCon UId="361"/>
-									<NameCon UId="359" Name="inZoneStatus"/>
+								<Wire UId="2253">
+									<IdentCon UId="2252"/>
+									<NameCon UId="2251" Name="operand"/>
 								</Wire>
-								<Wire UId="364">
-									<IdentCon UId="363"/>
-									<NameCon UId="359" Name="inLocation"/>
-								</Wire>
-								<Wire UId="366">
-									<IdentCon UId="365"/>
-									<NameCon UId="359" Name="inConfigContactType"/>
-								</Wire>
-								<Wire UId="368">
-									<IdentCon UId="367"/>
-									<NameCon UId="359" Name="inAsiBusFault"/>
-								</Wire>
-								<Wire UId="371">
-									<IdentCon UId="370"/>
-									<NameCon UId="369" Name="operand"/>
-								</Wire>
-								<Wire UId="374">
-									<IdentCon UId="373"/>
-									<NameCon UId="372" Name="operand"/>
-								</Wire>
-								<Wire UId="376">
-									<NameCon UId="369" Name="out"/>
-									<NameCon UId="375" Name="in1"/>
-								</Wire>
-								<Wire UId="377">
-									<NameCon UId="372" Name="out"/>
-									<NameCon UId="375" Name="in2"/>
-								</Wire>
-								<Wire UId="378">
-									<NameCon UId="375" Name="out"/>
-									<NameCon UId="359" Name="inEStopStatus"/>
-								</Wire>
-								<Wire UId="381">
-									<IdentCon UId="380"/>
-									<NameCon UId="379" Name="operand"/>
-								</Wire>
-								<Wire UId="384">
-									<IdentCon UId="383"/>
-									<NameCon UId="382" Name="operand"/>
-								</Wire>
-								<Wire UId="385">
-									<NameCon UId="379" Name="out"/>
-									<NameCon UId="382" Name="in"/>
-								</Wire>
-								<Wire UId="388">
-									<IdentCon UId="387"/>
-									<NameCon UId="386" Name="operand"/>
-								</Wire>
-								<Wire UId="391">
-									<IdentCon UId="390"/>
-									<NameCon UId="389" Name="operand"/>
-								</Wire>
-								<Wire UId="394">
-									<IdentCon UId="393"/>
-									<NameCon UId="392" Name="operand"/>
-								</Wire>
-								<Wire UId="395">
-									<NameCon UId="386" Name="out"/>
-									<NameCon UId="389" Name="in"/>
-								</Wire>
-								<Wire UId="396">
-									<NameCon UId="389" Name="out"/>
-									<NameCon UId="392" Name="in"/>
+								<Wire UId="2254">
+									<NameCon UId="2251" Name="out"/>
+									<NameCon UId="2250" Name="en"/>
 								</Wire>
 							</Wires>
 						</FlgNet>
 					</NetworkSource>
 				</AttributeList>
 				<ObjectList>
-					<MultilingualText ID="357" CompositionName="Title">
+					<MultilingualText ID="2248" CompositionName="Title">
 						<ObjectList>
-							<MultilingualTextItem ID="358" CompositionName="Items">
+							<MultilingualTextItem ID="2249" CompositionName="Items">
 								<AttributeList>
 									<Culture>en-US</Culture>
-									<Text>EStop3_Vis</Text>
+									<Text>Call Jacob's Magic_SetConfigs</Text>
 								</AttributeList>
 							</MultilingualTextItem>
 						</ObjectList>

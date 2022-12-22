@@ -12,202 +12,1810 @@
 				<AttributeList>
 					<NetworkSource>
 						<StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v3">
-							<Token UId="27" Text="REGION"/>
-							<Blank UId="28"/>
-							<Text UId="29">InstCA121CA121EZC1</Text>
-							<Blank UId="30" Num="3"/>
-							<NewLine UId="31"/>
-							<Blank UId="32" Num="3"/>
-							<Access UId="33" Scope="GlobalVariable">
-								<Symbol UId="34">
-									<Component UId="35" Name="InstCA121CA121EZC1"/>
-									<Token UId="36" Text="."/>
-									<Component UId="37" Name="inConfig"/>
-									<Token UId="38" Text="."/>
-									<Component UId="39" Name="ezcName"/>
+							<Token UId="16" Text="REGION"/>
+							<Blank UId="17"/>
+							<Text UId="18">InstCC110</Text>
+							<Blank UId="19" Num="3"/>
+							<NewLine UId="20"/>
+							<Blank UId="21" Num="3"/>
+							<Access UId="22" Scope="GlobalVariable">
+								<Symbol UId="23">
+									<Component UId="24" Name="InstCC110"/>
+									<Token UId="25" Text="."/>
+									<Component UId="26" Name="inConfig"/>
+									<Token UId="27" Text="."/>
+									<Component UId="28" Name="resetConveyorsFromPanel"/>
 								</Symbol>
 							</Access>
-							<Blank UId="41"/>
-							<Token UId="42" Text=":="/>
-							<Blank UId="43"/>
-							<Access UId="44" Scope="LiteralConstant">
-								<Constant UId="45">
-									<ConstantValue UId="46">'CA121EZC1'</ConstantValue>
+							<Blank UId="30"/>
+							<Token UId="31" Text=":="/>
+							<Blank UId="32"/>
+							<Access UId="33" Scope="LiteralConstant">
+								<Constant UId="34">
+									<ConstantValue UId="35">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="47" Text=";"/>
-							<NewLine UId="48"/>
-							<Blank UId="49" Num="3"/>
-							<Access UId="50" Scope="GlobalVariable">
-								<Symbol UId="51">
-									<Component UId="52" Name="InstCA121CA121EZC1"/>
-									<Token UId="53" Text="."/>
-									<Component UId="54" Name="inConfig"/>
-									<Token UId="55" Text="."/>
-									<Component UId="56" Name="panelNumber"/>
+							<Token UId="36" Text=";"/>
+							<NewLine UId="37"/>
+							<Blank UId="38" Num="3"/>
+							<Access UId="39" Scope="GlobalVariable">
+								<Symbol UId="40">
+									<Component UId="41" Name="InstCC110"/>
+									<Token UId="42" Text="."/>
+									<Component UId="43" Name="inConfig"/>
+									<Token UId="44" Text="."/>
+									<Component UId="45" Name="disableCompressedAirAlarm"/>
 								</Symbol>
 							</Access>
-							<Blank UId="58"/>
-							<Token UId="59" Text=":="/>
-							<Blank UId="60"/>
-							<Access UId="61" Scope="LiteralConstant">
-								<Constant UId="62">
-									<ConstantValue UId="63">1</ConstantValue>
+							<Blank UId="47"/>
+							<Token UId="48" Text=":="/>
+							<Blank UId="49"/>
+							<Access UId="50" Scope="LiteralConstant">
+								<Constant UId="51">
+									<ConstantValue UId="52">false</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="64" Text=";"/>
-							<NewLine UId="65"/>
-							<Blank UId="66" Num="3"/>
-							<NewLine UId="67"/>
-							<Token UId="68" Text="END_REGION"/>
-							<NewLine UId="69"/>
-							<Token UId="94" Text="REGION"/>
-							<Blank UId="95"/>
-							<Text UId="96">InstCA121CA121EZC2</Text>
-							<Blank UId="97" Num="3"/>
+							<Token UId="53" Text=";"/>
+							<NewLine UId="54"/>
+							<Blank UId="55" Num="3"/>
+							<Access UId="56" Scope="GlobalVariable">
+								<Symbol UId="57">
+									<Component UId="58" Name="InstCC110"/>
+									<Token UId="59" Text="."/>
+									<Component UId="60" Name="inConfig"/>
+									<Token UId="61" Text="."/>
+									<Component UId="62" Name="enableEzc">
+										<Token UId="63" Text="["/>
+										<Access UId="64" Scope="LiteralConstant">
+											<Constant UId="65">
+												<ConstantValue UId="66">1</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="67" Text="]"/>
+									</Component>
+								</Symbol>
+							</Access>
+							<Blank UId="69"/>
+							<Token UId="70" Text=":="/>
+							<Blank UId="71"/>
+							<Access UId="72" Scope="LiteralConstant">
+								<Constant UId="73">
+									<ConstantValue UId="74">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="75" Text=";"/>
+							<NewLine UId="76"/>
+							<Blank UId="77" Num="3"/>
+							<Access UId="78" Scope="GlobalVariable">
+								<Symbol UId="79">
+									<Component UId="80" Name="InstCC110"/>
+									<Token UId="81" Text="."/>
+									<Component UId="82" Name="inConfig"/>
+									<Token UId="83" Text="."/>
+									<Component UId="84" Name="enableEzc">
+										<Token UId="85" Text="["/>
+										<Access UId="86" Scope="LiteralConstant">
+											<Constant UId="87">
+												<ConstantValue UId="88">2</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="89" Text="]"/>
+									</Component>
+								</Symbol>
+							</Access>
+							<Blank UId="91"/>
+							<Token UId="92" Text=":="/>
+							<Blank UId="93"/>
+							<Access UId="94" Scope="LiteralConstant">
+								<Constant UId="95">
+									<ConstantValue UId="96">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="97" Text=";"/>
 							<NewLine UId="98"/>
 							<Blank UId="99" Num="3"/>
 							<Access UId="100" Scope="GlobalVariable">
 								<Symbol UId="101">
-									<Component UId="102" Name="InstCA121CA121EZC2"/>
+									<Component UId="102" Name="InstCC110"/>
 									<Token UId="103" Text="."/>
 									<Component UId="104" Name="inConfig"/>
 									<Token UId="105" Text="."/>
-									<Component UId="106" Name="ezcName"/>
+									<Component UId="106" Name="enableEzc">
+										<Token UId="107" Text="["/>
+										<Access UId="108" Scope="LiteralConstant">
+											<Constant UId="109">
+												<ConstantValue UId="110">3</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="111" Text="]"/>
+									</Component>
 								</Symbol>
 							</Access>
-							<Blank UId="108"/>
-							<Token UId="109" Text=":="/>
-							<Blank UId="110"/>
-							<Access UId="111" Scope="LiteralConstant">
-								<Constant UId="112">
-									<ConstantValue UId="113">'CA121EZC2'</ConstantValue>
+							<Blank UId="113"/>
+							<Token UId="114" Text=":="/>
+							<Blank UId="115"/>
+							<Access UId="116" Scope="LiteralConstant">
+								<Constant UId="117">
+									<ConstantValue UId="118">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="114" Text=";"/>
-							<NewLine UId="115"/>
-							<Blank UId="116" Num="3"/>
-							<Access UId="117" Scope="GlobalVariable">
-								<Symbol UId="118">
-									<Component UId="119" Name="InstCA121CA121EZC2"/>
-									<Token UId="120" Text="."/>
-									<Component UId="121" Name="inConfig"/>
-									<Token UId="122" Text="."/>
-									<Component UId="123" Name="panelNumber"/>
+							<Token UId="119" Text=";"/>
+							<NewLine UId="120"/>
+							<Blank UId="121" Num="3"/>
+							<Access UId="122" Scope="GlobalVariable">
+								<Symbol UId="123">
+									<Component UId="124" Name="InstCC110"/>
+									<Token UId="125" Text="."/>
+									<Component UId="126" Name="inConfig"/>
+									<Token UId="127" Text="."/>
+									<Component UId="128" Name="enableEzc">
+										<Token UId="129" Text="["/>
+										<Access UId="130" Scope="LiteralConstant">
+											<Constant UId="131">
+												<ConstantValue UId="132">4</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="133" Text="]"/>
+									</Component>
 								</Symbol>
 							</Access>
-							<Blank UId="125"/>
-							<Token UId="126" Text=":="/>
-							<Blank UId="127"/>
-							<Access UId="128" Scope="LiteralConstant">
-								<Constant UId="129">
-									<ConstantValue UId="130">1</ConstantValue>
+							<Blank UId="135"/>
+							<Token UId="136" Text=":="/>
+							<Blank UId="137"/>
+							<Access UId="138" Scope="LiteralConstant">
+								<Constant UId="139">
+									<ConstantValue UId="140">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="131" Text=";"/>
-							<NewLine UId="132"/>
-							<Blank UId="133" Num="3"/>
-							<NewLine UId="134"/>
-							<Token UId="135" Text="END_REGION"/>
-							<NewLine UId="136"/>
-							<Token UId="161" Text="REGION"/>
-							<Blank UId="162"/>
-							<Text UId="163">InstCA121CA121EZC3</Text>
-							<Blank UId="164" Num="3"/>
-							<NewLine UId="165"/>
-							<Blank UId="166" Num="3"/>
-							<Access UId="167" Scope="GlobalVariable">
-								<Symbol UId="168">
-									<Component UId="169" Name="InstCA121CA121EZC3"/>
-									<Token UId="170" Text="."/>
-									<Component UId="171" Name="inConfig"/>
-									<Token UId="172" Text="."/>
-									<Component UId="173" Name="ezcName"/>
+							<Token UId="141" Text=";"/>
+							<NewLine UId="142"/>
+							<Blank UId="143" Num="3"/>
+							<Access UId="144" Scope="GlobalVariable">
+								<Symbol UId="145">
+									<Component UId="146" Name="InstCC110"/>
+									<Token UId="147" Text="."/>
+									<Component UId="148" Name="inConfig"/>
+									<Token UId="149" Text="."/>
+									<Component UId="150" Name="enableEzc">
+										<Token UId="151" Text="["/>
+										<Access UId="152" Scope="LiteralConstant">
+											<Constant UId="153">
+												<ConstantValue UId="154">5</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="155" Text="]"/>
+									</Component>
 								</Symbol>
 							</Access>
-							<Blank UId="175"/>
-							<Token UId="176" Text=":="/>
-							<Blank UId="177"/>
-							<Access UId="178" Scope="LiteralConstant">
-								<Constant UId="179">
-									<ConstantValue UId="180">'CA121EZC3'</ConstantValue>
+							<Blank UId="157"/>
+							<Token UId="158" Text=":="/>
+							<Blank UId="159"/>
+							<Access UId="160" Scope="LiteralConstant">
+								<Constant UId="161">
+									<ConstantValue UId="162">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="181" Text=";"/>
-							<NewLine UId="182"/>
-							<Blank UId="183" Num="3"/>
-							<Access UId="184" Scope="GlobalVariable">
-								<Symbol UId="185">
-									<Component UId="186" Name="InstCA121CA121EZC3"/>
-									<Token UId="187" Text="."/>
-									<Component UId="188" Name="inConfig"/>
-									<Token UId="189" Text="."/>
-									<Component UId="190" Name="panelNumber"/>
+							<Token UId="163" Text=";"/>
+							<NewLine UId="164"/>
+							<Blank UId="165" Num="3"/>
+							<Access UId="166" Scope="GlobalVariable">
+								<Symbol UId="167">
+									<Component UId="168" Name="InstCC110"/>
+									<Token UId="169" Text="."/>
+									<Component UId="170" Name="inConfig"/>
+									<Token UId="171" Text="."/>
+									<Component UId="172" Name="enableEzc">
+										<Token UId="173" Text="["/>
+										<Access UId="174" Scope="LiteralConstant">
+											<Constant UId="175">
+												<ConstantValue UId="176">6</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="177" Text="]"/>
+									</Component>
 								</Symbol>
 							</Access>
-							<Blank UId="192"/>
-							<Token UId="193" Text=":="/>
-							<Blank UId="194"/>
-							<Access UId="195" Scope="LiteralConstant">
-								<Constant UId="196">
-									<ConstantValue UId="197">1</ConstantValue>
+							<Blank UId="179"/>
+							<Token UId="180" Text=":="/>
+							<Blank UId="181"/>
+							<Access UId="182" Scope="LiteralConstant">
+								<Constant UId="183">
+									<ConstantValue UId="184">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="198" Text=";"/>
-							<NewLine UId="199"/>
-							<Blank UId="200" Num="3"/>
-							<NewLine UId="201"/>
-							<Token UId="202" Text="END_REGION"/>
-							<NewLine UId="203"/>
-							<Token UId="228" Text="REGION"/>
-							<Blank UId="229"/>
-							<Text UId="230">InstCA121CA121EZC4</Text>
+							<Token UId="185" Text=";"/>
+							<NewLine UId="186"/>
+							<Blank UId="187" Num="3"/>
+							<Access UId="188" Scope="GlobalVariable">
+								<Symbol UId="189">
+									<Component UId="190" Name="InstCC110"/>
+									<Token UId="191" Text="."/>
+									<Component UId="192" Name="inConfig"/>
+									<Token UId="193" Text="."/>
+									<Component UId="194" Name="enableEzc">
+										<Token UId="195" Text="["/>
+										<Access UId="196" Scope="LiteralConstant">
+											<Constant UId="197">
+												<ConstantValue UId="198">7</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="199" Text="]"/>
+									</Component>
+								</Symbol>
+							</Access>
+							<Blank UId="201"/>
+							<Token UId="202" Text=":="/>
+							<Blank UId="203"/>
+							<Access UId="204" Scope="LiteralConstant">
+								<Constant UId="205">
+									<ConstantValue UId="206">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="207" Text=";"/>
+							<NewLine UId="208"/>
+							<Blank UId="209" Num="3"/>
+							<Access UId="210" Scope="GlobalVariable">
+								<Symbol UId="211">
+									<Component UId="212" Name="InstCC110"/>
+									<Token UId="213" Text="."/>
+									<Component UId="214" Name="inConfig"/>
+									<Token UId="215" Text="."/>
+									<Component UId="216" Name="enableEzc">
+										<Token UId="217" Text="["/>
+										<Access UId="218" Scope="LiteralConstant">
+											<Constant UId="219">
+												<ConstantValue UId="220">8</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="221" Text="]"/>
+									</Component>
+								</Symbol>
+							</Access>
+							<Blank UId="223"/>
+							<Token UId="224" Text=":="/>
+							<Blank UId="225"/>
+							<Access UId="226" Scope="LiteralConstant">
+								<Constant UId="227">
+									<ConstantValue UId="228">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="229" Text=";"/>
+							<NewLine UId="230"/>
 							<Blank UId="231" Num="3"/>
-							<NewLine UId="232"/>
-							<Blank UId="233" Num="3"/>
-							<Access UId="234" Scope="GlobalVariable">
-								<Symbol UId="235">
-									<Component UId="236" Name="InstCA121CA121EZC4"/>
+							<Access UId="232" Scope="GlobalVariable">
+								<Symbol UId="233">
+									<Component UId="234" Name="InstCC110"/>
+									<Token UId="235" Text="."/>
+									<Component UId="236" Name="inConfig"/>
 									<Token UId="237" Text="."/>
-									<Component UId="238" Name="inConfig"/>
-									<Token UId="239" Text="."/>
-									<Component UId="240" Name="ezcName"/>
+									<Component UId="238" Name="enableEzc">
+										<Token UId="239" Text="["/>
+										<Access UId="240" Scope="LiteralConstant">
+											<Constant UId="241">
+												<ConstantValue UId="242">9</ConstantValue>
+											</Constant>
+										</Access>
+										<Token UId="243" Text="]"/>
+									</Component>
 								</Symbol>
 							</Access>
-							<Blank UId="242"/>
-							<Token UId="243" Text=":="/>
-							<Blank UId="244"/>
-							<Access UId="245" Scope="LiteralConstant">
-								<Constant UId="246">
-									<ConstantValue UId="247">'CA121EZC4'</ConstantValue>
+							<Blank UId="245"/>
+							<Token UId="246" Text=":="/>
+							<Blank UId="247"/>
+							<Access UId="248" Scope="LiteralConstant">
+								<Constant UId="249">
+									<ConstantValue UId="250">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="248" Text=";"/>
-							<NewLine UId="249"/>
-							<Blank UId="250" Num="3"/>
-							<Access UId="251" Scope="GlobalVariable">
-								<Symbol UId="252">
-									<Component UId="253" Name="InstCA121CA121EZC4"/>
-									<Token UId="254" Text="."/>
-									<Component UId="255" Name="inConfig"/>
-									<Token UId="256" Text="."/>
-									<Component UId="257" Name="panelNumber"/>
+							<Token UId="251" Text=";"/>
+							<NewLine UId="252"/>
+							<Blank UId="253" Num="3"/>
+							<Access UId="254" Scope="GlobalVariable">
+								<Symbol UId="255">
+									<Component UId="256" Name="InstCC110"/>
+									<Token UId="257" Text="."/>
+									<Component UId="258" Name="inConfig"/>
+									<Token UId="259" Text="."/>
+									<Component UId="260" Name="enableEzc[10]"/>
 								</Symbol>
 							</Access>
-							<Blank UId="259"/>
-							<Token UId="260" Text=":="/>
-							<Blank UId="261"/>
-							<Access UId="262" Scope="LiteralConstant">
-								<Constant UId="263">
-									<ConstantValue UId="264">1</ConstantValue>
+							<Blank UId="262"/>
+							<Token UId="263" Text=":="/>
+							<Blank UId="264"/>
+							<Access UId="265" Scope="LiteralConstant">
+								<Constant UId="266">
+									<ConstantValue UId="267">true</ConstantValue>
 								</Constant>
 							</Access>
-							<Token UId="265" Text=";"/>
-							<NewLine UId="266"/>
-							<Blank UId="267" Num="3"/>
-							<NewLine UId="268"/>
-							<Token UId="269" Text="END_REGION"/>
-							<NewLine UId="270"/>
+							<Token UId="268" Text=";"/>
+							<NewLine UId="269"/>
+							<Blank UId="270" Num="3"/>
+							<NewLine UId="271"/>
+							<Token UId="272" Text="END_REGION"/>
+							<NewLine UId="273"/>
+							<Token UId="306" Text="REGION"/>
+							<Blank UId="307"/>
+							<Text UId="308">InstCA121EZC1</Text>
+							<Blank UId="309" Num="3"/>
+							<NewLine UId="310"/>
+							<Blank UId="311" Num="3"/>
+							<Access UId="312" Scope="GlobalVariable">
+								<Symbol UId="313">
+									<Component UId="314" Name="InstCA121EZC1"/>
+									<Token UId="315" Text="."/>
+									<Component UId="316" Name="inConfig"/>
+									<Token UId="317" Text="."/>
+									<Component UId="318" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="320"/>
+							<Token UId="321" Text=":="/>
+							<Blank UId="322"/>
+							<Access UId="323" Scope="LiteralConstant">
+								<Constant UId="324">
+									<ConstantValue UId="325">'EZC1'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="326" Text=";"/>
+							<NewLine UId="327"/>
+							<Blank UId="328" Num="3"/>
+							<Access UId="329" Scope="GlobalVariable">
+								<Symbol UId="330">
+									<Component UId="331" Name="InstCA121EZC1"/>
+									<Token UId="332" Text="."/>
+									<Component UId="333" Name="inConfig"/>
+									<Token UId="334" Text="."/>
+									<Component UId="335" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="337"/>
+							<Token UId="338" Text=":="/>
+							<Blank UId="339"/>
+							<Access UId="340" Scope="LiteralConstant">
+								<Constant UId="341">
+									<ConstantValue UId="342">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="343" Text=";"/>
+							<NewLine UId="344"/>
+							<Blank UId="345" Num="3"/>
+							<NewLine UId="346"/>
+							<Token UId="347" Text="END_REGION"/>
+							<NewLine UId="348"/>
+							<Token UId="381" Text="REGION"/>
+							<Blank UId="382"/>
+							<Text UId="383">InstCA121EZC2</Text>
+							<Blank UId="384" Num="3"/>
+							<NewLine UId="385"/>
+							<Blank UId="386" Num="3"/>
+							<Access UId="387" Scope="GlobalVariable">
+								<Symbol UId="388">
+									<Component UId="389" Name="InstCA121EZC2"/>
+									<Token UId="390" Text="."/>
+									<Component UId="391" Name="inConfig"/>
+									<Token UId="392" Text="."/>
+									<Component UId="393" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="395"/>
+							<Token UId="396" Text=":="/>
+							<Blank UId="397"/>
+							<Access UId="398" Scope="LiteralConstant">
+								<Constant UId="399">
+									<ConstantValue UId="400">'EZC2'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="401" Text=";"/>
+							<NewLine UId="402"/>
+							<Blank UId="403" Num="3"/>
+							<Access UId="404" Scope="GlobalVariable">
+								<Symbol UId="405">
+									<Component UId="406" Name="InstCA121EZC2"/>
+									<Token UId="407" Text="."/>
+									<Component UId="408" Name="inConfig"/>
+									<Token UId="409" Text="."/>
+									<Component UId="410" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="412"/>
+							<Token UId="413" Text=":="/>
+							<Blank UId="414"/>
+							<Access UId="415" Scope="LiteralConstant">
+								<Constant UId="416">
+									<ConstantValue UId="417">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="418" Text=";"/>
+							<NewLine UId="419"/>
+							<Blank UId="420" Num="3"/>
+							<NewLine UId="421"/>
+							<Token UId="422" Text="END_REGION"/>
+							<NewLine UId="423"/>
+							<Token UId="464" Text="REGION"/>
+							<Blank UId="465"/>
+							<Text UId="466">InstCA121EZC3</Text>
+							<Blank UId="467" Num="3"/>
+							<NewLine UId="468"/>
+							<Blank UId="469" Num="3"/>
+							<Access UId="470" Scope="GlobalVariable">
+								<Symbol UId="471">
+									<Component UId="472" Name="InstCA121EZC3"/>
+									<Token UId="473" Text="."/>
+									<Component UId="474" Name="inConfig"/>
+									<Token UId="475" Text="."/>
+									<Component UId="476" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="478"/>
+							<Token UId="479" Text=":="/>
+							<Blank UId="480"/>
+							<Access UId="481" Scope="LiteralConstant">
+								<Constant UId="482">
+									<ConstantValue UId="483">'EZC3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="484" Text=";"/>
+							<NewLine UId="485"/>
+							<Blank UId="486" Num="3"/>
+							<Access UId="487" Scope="GlobalVariable">
+								<Symbol UId="488">
+									<Component UId="489" Name="InstCA121EZC3"/>
+									<Token UId="490" Text="."/>
+									<Component UId="491" Name="inConfig"/>
+									<Token UId="492" Text="."/>
+									<Component UId="493" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="495"/>
+							<Token UId="496" Text=":="/>
+							<Blank UId="497"/>
+							<Access UId="498" Scope="LiteralConstant">
+								<Constant UId="499">
+									<ConstantValue UId="500">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="501" Text=";"/>
+							<NewLine UId="502"/>
+							<Blank UId="503" Num="3"/>
+							<NewLine UId="504"/>
+							<Token UId="505" Text="END_REGION"/>
+							<NewLine UId="506"/>
+							<Token UId="533" Text="REGION"/>
+							<Blank UId="534"/>
+							<Text UId="535">InstCA121EZC4</Text>
+							<Blank UId="536" Num="3"/>
+							<NewLine UId="537"/>
+							<Blank UId="538" Num="3"/>
+							<Access UId="539" Scope="GlobalVariable">
+								<Symbol UId="540">
+									<Component UId="541" Name="InstCA121EZC4"/>
+									<Token UId="542" Text="."/>
+									<Component UId="543" Name="inConfig"/>
+									<Token UId="544" Text="."/>
+									<Component UId="545" Name="ezcName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="547"/>
+							<Token UId="548" Text=":="/>
+							<Blank UId="549"/>
+							<Access UId="550" Scope="LiteralConstant">
+								<Constant UId="551">
+									<ConstantValue UId="552">'EZC4'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="553" Text=";"/>
+							<NewLine UId="554"/>
+							<Blank UId="555" Num="3"/>
+							<Access UId="556" Scope="GlobalVariable">
+								<Symbol UId="557">
+									<Component UId="558" Name="InstCA121EZC4"/>
+									<Token UId="559" Text="."/>
+									<Component UId="560" Name="inConfig"/>
+									<Token UId="561" Text="."/>
+									<Component UId="562" Name="panelNumber"/>
+								</Symbol>
+							</Access>
+							<Blank UId="564"/>
+							<Token UId="565" Text=":="/>
+							<Blank UId="566"/>
+							<Access UId="567" Scope="LiteralConstant">
+								<Constant UId="568">
+									<ConstantValue UId="569">1</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="570" Text=";"/>
+							<NewLine UId="571"/>
+							<Blank UId="572" Num="3"/>
+							<NewLine UId="573"/>
+							<Token UId="574" Text="END_REGION"/>
+							<NewLine UId="575"/>
+							<Token UId="588" Text="REGION"/>
+							<Blank UId="589"/>
+							<Text UId="590">InstCA121AUX1</Text>
+							<Blank UId="591" Num="3"/>
+							<NewLine UId="592"/>
+							<Blank UId="593" Num="3"/>
+							<Access UId="594" Scope="GlobalVariable">
+								<Symbol UId="595">
+									<Component UId="596" Name="InstCA121AUX1"/>
+									<Token UId="597" Text="."/>
+									<Component UId="598" Name="inConfig"/>
+									<Token UId="599" Text="."/>
+									<Component UId="600" Name="auxName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="602"/>
+							<Token UId="603" Text=":="/>
+							<Blank UId="604"/>
+							<Access UId="605" Scope="LiteralConstant">
+								<Constant UId="606">
+									<ConstantValue UId="607">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="608" Text=";"/>
+							<NewLine UId="609"/>
+							<Blank UId="610" Num="3"/>
+							<Access UId="611" Scope="GlobalVariable">
+								<Symbol UId="612">
+									<Component UId="613" Name="InstCA121AUX1"/>
+									<Token UId="614" Text="."/>
+									<Component UId="615" Name="inConfig"/>
+									<Token UId="616" Text="."/>
+									<Component UId="617" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="619"/>
+							<Token UId="620" Text=":="/>
+							<Blank UId="621"/>
+							<Access UId="622" Scope="TypedConstant">
+								<Constant UId="623">
+									<ConstantValue UId="624">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="625" Text=";"/>
+							<NewLine UId="626"/>
+							<Blank UId="627" Num="3"/>
+							<NewLine UId="628"/>
+							<Token UId="629" Text="END_REGION"/>
+							<NewLine UId="630"/>
+							<Token UId="643" Text="REGION"/>
+							<Blank UId="644"/>
+							<Text UId="645">InstCA121AUX2</Text>
+							<Blank UId="646" Num="3"/>
+							<NewLine UId="647"/>
+							<Blank UId="648" Num="3"/>
+							<Access UId="649" Scope="GlobalVariable">
+								<Symbol UId="650">
+									<Component UId="651" Name="InstCA121AUX2"/>
+									<Token UId="652" Text="."/>
+									<Component UId="653" Name="inConfig"/>
+									<Token UId="654" Text="."/>
+									<Component UId="655" Name="auxName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="657"/>
+							<Token UId="658" Text=":="/>
+							<Blank UId="659"/>
+							<Access UId="660" Scope="LiteralConstant">
+								<Constant UId="661">
+									<ConstantValue UId="662">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="663" Text=";"/>
+							<NewLine UId="664"/>
+							<Blank UId="665" Num="3"/>
+							<Access UId="666" Scope="GlobalVariable">
+								<Symbol UId="667">
+									<Component UId="668" Name="InstCA121AUX2"/>
+									<Token UId="669" Text="."/>
+									<Component UId="670" Name="inConfig"/>
+									<Token UId="671" Text="."/>
+									<Component UId="672" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="674"/>
+							<Token UId="675" Text=":="/>
+							<Blank UId="676"/>
+							<Access UId="677" Scope="TypedConstant">
+								<Constant UId="678">
+									<ConstantValue UId="679">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="680" Text=";"/>
+							<NewLine UId="681"/>
+							<Blank UId="682" Num="3"/>
+							<NewLine UId="683"/>
+							<Token UId="684" Text="END_REGION"/>
+							<NewLine UId="685"/>
+							<Token UId="698" Text="REGION"/>
+							<Blank UId="699"/>
+							<Text UId="700">InstCA121AUX3</Text>
+							<Blank UId="701" Num="3"/>
+							<NewLine UId="702"/>
+							<Blank UId="703" Num="3"/>
+							<Access UId="704" Scope="GlobalVariable">
+								<Symbol UId="705">
+									<Component UId="706" Name="InstCA121AUX3"/>
+									<Token UId="707" Text="."/>
+									<Component UId="708" Name="inConfig"/>
+									<Token UId="709" Text="."/>
+									<Component UId="710" Name="auxName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="712"/>
+							<Token UId="713" Text=":="/>
+							<Blank UId="714"/>
+							<Access UId="715" Scope="LiteralConstant">
+								<Constant UId="716">
+									<ConstantValue UId="717">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="718" Text=";"/>
+							<NewLine UId="719"/>
+							<Blank UId="720" Num="3"/>
+							<Access UId="721" Scope="GlobalVariable">
+								<Symbol UId="722">
+									<Component UId="723" Name="InstCA121AUX3"/>
+									<Token UId="724" Text="."/>
+									<Component UId="725" Name="inConfig"/>
+									<Token UId="726" Text="."/>
+									<Component UId="727" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="729"/>
+							<Token UId="730" Text=":="/>
+							<Blank UId="731"/>
+							<Access UId="732" Scope="TypedConstant">
+								<Constant UId="733">
+									<ConstantValue UId="734">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="735" Text=";"/>
+							<NewLine UId="736"/>
+							<Blank UId="737" Num="3"/>
+							<NewLine UId="738"/>
+							<Token UId="739" Text="END_REGION"/>
+							<NewLine UId="740"/>
+							<Token UId="753" Text="REGION"/>
+							<Blank UId="754"/>
+							<Text UId="755">InstCA121AUX4</Text>
+							<Blank UId="756" Num="3"/>
+							<NewLine UId="757"/>
+							<Blank UId="758" Num="3"/>
+							<Access UId="759" Scope="GlobalVariable">
+								<Symbol UId="760">
+									<Component UId="761" Name="InstCA121AUX4"/>
+									<Token UId="762" Text="."/>
+									<Component UId="763" Name="inConfig"/>
+									<Token UId="764" Text="."/>
+									<Component UId="765" Name="auxName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="767"/>
+							<Token UId="768" Text=":="/>
+							<Blank UId="769"/>
+							<Access UId="770" Scope="LiteralConstant">
+								<Constant UId="771">
+									<ConstantValue UId="772">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="773" Text=";"/>
+							<NewLine UId="774"/>
+							<Blank UId="775" Num="3"/>
+							<Access UId="776" Scope="GlobalVariable">
+								<Symbol UId="777">
+									<Component UId="778" Name="InstCA121AUX4"/>
+									<Token UId="779" Text="."/>
+									<Component UId="780" Name="inConfig"/>
+									<Token UId="781" Text="."/>
+									<Component UId="782" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="784"/>
+							<Token UId="785" Text=":="/>
+							<Blank UId="786"/>
+							<Access UId="787" Scope="TypedConstant">
+								<Constant UId="788">
+									<ConstantValue UId="789">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="790" Text=";"/>
+							<NewLine UId="791"/>
+							<Blank UId="792" Num="3"/>
+							<NewLine UId="793"/>
+							<Token UId="794" Text="END_REGION"/>
+							<NewLine UId="795"/>
+							<Token UId="808" Text="REGION"/>
+							<Blank UId="809"/>
+							<Text UId="810">InstCA121AUX5</Text>
+							<Blank UId="811" Num="3"/>
+							<NewLine UId="812"/>
+							<Blank UId="813" Num="3"/>
+							<Access UId="814" Scope="GlobalVariable">
+								<Symbol UId="815">
+									<Component UId="816" Name="InstCA121AUX5"/>
+									<Token UId="817" Text="."/>
+									<Component UId="818" Name="inConfig"/>
+									<Token UId="819" Text="."/>
+									<Component UId="820" Name="auxName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="822"/>
+							<Token UId="823" Text=":="/>
+							<Blank UId="824"/>
+							<Access UId="825" Scope="LiteralConstant">
+								<Constant UId="826">
+									<ConstantValue UId="827">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="828" Text=";"/>
+							<NewLine UId="829"/>
+							<Blank UId="830" Num="3"/>
+							<Access UId="831" Scope="GlobalVariable">
+								<Symbol UId="832">
+									<Component UId="833" Name="InstCA121AUX5"/>
+									<Token UId="834" Text="."/>
+									<Component UId="835" Name="inConfig"/>
+									<Token UId="836" Text="."/>
+									<Component UId="837" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="839"/>
+							<Token UId="840" Text=":="/>
+							<Blank UId="841"/>
+							<Access UId="842" Scope="TypedConstant">
+								<Constant UId="843">
+									<ConstantValue UId="844">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="845" Text=";"/>
+							<NewLine UId="846"/>
+							<Blank UId="847" Num="3"/>
+							<NewLine UId="848"/>
+							<Token UId="849" Text="END_REGION"/>
+							<NewLine UId="850"/>
+							<Token UId="871" Text="REGION"/>
+							<Blank UId="872"/>
+							<Text UId="873">InstCA121DPS1</Text>
+							<Blank UId="874" Num="3"/>
+							<NewLine UId="875"/>
+							<Blank UId="876" Num="3"/>
+							<Access UId="877" Scope="GlobalVariable">
+								<Symbol UId="878">
+									<Component UId="879" Name="InstCA121DPS1"/>
+									<Token UId="880" Text="."/>
+									<Component UId="881" Name="inConfig"/>
+									<Token UId="882" Text="."/>
+									<Component UId="883" Name="splitPowergroupCommandZones"/>
+								</Symbol>
+							</Access>
+							<Blank UId="885"/>
+							<Token UId="886" Text=":="/>
+							<Blank UId="887"/>
+							<Access UId="888" Scope="LiteralConstant">
+								<Constant UId="889">
+									<ConstantValue UId="890">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="891" Text=";"/>
+							<NewLine UId="892"/>
+							<Blank UId="893" Num="3"/>
+							<Access UId="894" Scope="GlobalVariable">
+								<Symbol UId="895">
+									<Component UId="896" Name="InstCA121DPS1"/>
+									<Token UId="897" Text="."/>
+									<Component UId="898" Name="inConfig"/>
+									<Token UId="899" Text="."/>
+									<Component UId="900" Name="panelName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="902"/>
+							<Token UId="903" Text=":="/>
+							<Blank UId="904"/>
+							<Access UId="905" Scope="LiteralConstant">
+								<Constant UId="906">
+									<ConstantValue UId="907">'CA121DPS1'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="908" Text=";"/>
+							<NewLine UId="909"/>
+							<Blank UId="910" Num="3"/>
+							<Access UId="911" Scope="GlobalVariable">
+								<Symbol UId="912">
+									<Component UId="913" Name="InstCA121DPS1"/>
+									<Token UId="914" Text="."/>
+									<Component UId="915" Name="inConfig"/>
+									<Token UId="916" Text="."/>
+									<Component UId="917" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="919"/>
+							<Token UId="920" Text=":="/>
+							<Blank UId="921"/>
+							<Access UId="922" Scope="TypedConstant">
+								<Constant UId="923">
+									<ConstantValue UId="924">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="925" Text=";"/>
+							<NewLine UId="926"/>
+							<Blank UId="927" Num="3"/>
+							<NewLine UId="928"/>
+							<Token UId="929" Text="END_REGION"/>
+							<NewLine UId="930"/>
+							<Token UId="951" Text="REGION"/>
+							<Blank UId="952"/>
+							<Text UId="953">InstCA121DPS2</Text>
+							<Blank UId="954" Num="3"/>
+							<NewLine UId="955"/>
+							<Blank UId="956" Num="3"/>
+							<Access UId="957" Scope="GlobalVariable">
+								<Symbol UId="958">
+									<Component UId="959" Name="InstCA121DPS2"/>
+									<Token UId="960" Text="."/>
+									<Component UId="961" Name="inConfig"/>
+									<Token UId="962" Text="."/>
+									<Component UId="963" Name="splitPowergroupCommandZones"/>
+								</Symbol>
+							</Access>
+							<Blank UId="965"/>
+							<Token UId="966" Text=":="/>
+							<Blank UId="967"/>
+							<Access UId="968" Scope="LiteralConstant">
+								<Constant UId="969">
+									<ConstantValue UId="970">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="971" Text=";"/>
+							<NewLine UId="972"/>
+							<Blank UId="973" Num="3"/>
+							<Access UId="974" Scope="GlobalVariable">
+								<Symbol UId="975">
+									<Component UId="976" Name="InstCA121DPS2"/>
+									<Token UId="977" Text="."/>
+									<Component UId="978" Name="inConfig"/>
+									<Token UId="979" Text="."/>
+									<Component UId="980" Name="panelName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="982"/>
+							<Token UId="983" Text=":="/>
+							<Blank UId="984"/>
+							<Access UId="985" Scope="LiteralConstant">
+								<Constant UId="986">
+									<ConstantValue UId="987">'CA121DPS2'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="988" Text=";"/>
+							<NewLine UId="989"/>
+							<Blank UId="990" Num="3"/>
+							<Access UId="991" Scope="GlobalVariable">
+								<Symbol UId="992">
+									<Component UId="993" Name="InstCA121DPS2"/>
+									<Token UId="994" Text="."/>
+									<Component UId="995" Name="inConfig"/>
+									<Token UId="996" Text="."/>
+									<Component UId="997" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="999"/>
+							<Token UId="1000" Text=":="/>
+							<Blank UId="1001"/>
+							<Access UId="1002" Scope="TypedConstant">
+								<Constant UId="1003">
+									<ConstantValue UId="1004">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1005" Text=";"/>
+							<NewLine UId="1006"/>
+							<Blank UId="1007" Num="3"/>
+							<NewLine UId="1008"/>
+							<Token UId="1009" Text="END_REGION"/>
+							<NewLine UId="1010"/>
+							<Token UId="1031" Text="REGION"/>
+							<Blank UId="1032"/>
+							<Text UId="1033">InstCA121DPS3</Text>
+							<Blank UId="1034" Num="3"/>
+							<NewLine UId="1035"/>
+							<Blank UId="1036" Num="3"/>
+							<Access UId="1037" Scope="GlobalVariable">
+								<Symbol UId="1038">
+									<Component UId="1039" Name="InstCA121DPS3"/>
+									<Token UId="1040" Text="."/>
+									<Component UId="1041" Name="inConfig"/>
+									<Token UId="1042" Text="."/>
+									<Component UId="1043" Name="splitPowergroupCommandZones"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1045"/>
+							<Token UId="1046" Text=":="/>
+							<Blank UId="1047"/>
+							<Access UId="1048" Scope="LiteralConstant">
+								<Constant UId="1049">
+									<ConstantValue UId="1050">false</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1051" Text=";"/>
+							<NewLine UId="1052"/>
+							<Blank UId="1053" Num="3"/>
+							<Access UId="1054" Scope="GlobalVariable">
+								<Symbol UId="1055">
+									<Component UId="1056" Name="InstCA121DPS3"/>
+									<Token UId="1057" Text="."/>
+									<Component UId="1058" Name="inConfig"/>
+									<Token UId="1059" Text="."/>
+									<Component UId="1060" Name="panelName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1062"/>
+							<Token UId="1063" Text=":="/>
+							<Blank UId="1064"/>
+							<Access UId="1065" Scope="LiteralConstant">
+								<Constant UId="1066">
+									<ConstantValue UId="1067">'CA121DPS3'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1068" Text=";"/>
+							<NewLine UId="1069"/>
+							<Blank UId="1070" Num="3"/>
+							<Access UId="1071" Scope="GlobalVariable">
+								<Symbol UId="1072">
+									<Component UId="1073" Name="InstCA121DPS3"/>
+									<Token UId="1074" Text="."/>
+									<Component UId="1075" Name="inConfig"/>
+									<Token UId="1076" Text="."/>
+									<Component UId="1077" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1079"/>
+							<Token UId="1080" Text=":="/>
+							<Blank UId="1081"/>
+							<Access UId="1082" Scope="TypedConstant">
+								<Constant UId="1083">
+									<ConstantValue UId="1084">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1085" Text=";"/>
+							<NewLine UId="1086"/>
+							<Blank UId="1087" Num="3"/>
+							<NewLine UId="1088"/>
+							<Token UId="1089" Text="END_REGION"/>
+							<NewLine UId="1090"/>
+							<Token UId="1130" Text="REGION"/>
+							<Blank UId="1131"/>
+							<Text UId="1132">InstU251910_PNAG_C</Text>
+							<Blank UId="1133" Num="3"/>
+							<NewLine UId="1134"/>
+							<Blank UId="1135" Num="3"/>
+							<Access UId="1136" Scope="GlobalVariable">
+								<Symbol UId="1137">
+									<Component UId="1138" Name="InstU251910_PNAG_C"/>
+									<Token UId="1139" Text="."/>
+									<Component UId="1140" Name="inConfig"/>
+									<Token UId="1141" Text="."/>
+									<Component UId="1142" Name="pnagName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1144"/>
+							<Token UId="1145" Text=":="/>
+							<Blank UId="1146"/>
+							<Access UId="1147" Scope="LiteralConstant">
+								<Constant UId="1148">
+									<ConstantValue UId="1149">'PNAG_C'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1150" Text=";"/>
+							<NewLine UId="1151"/>
+							<Blank UId="1152" Num="3"/>
+							<Access UId="1153" Scope="GlobalVariable">
+								<Symbol UId="1154">
+									<Component UId="1155" Name="InstU251910_PNAG_C"/>
+									<Token UId="1156" Text="."/>
+									<Component UId="1157" Name="inConfig"/>
+									<Token UId="1158" Text="."/>
+									<Component UId="1159" Name="asiGatewayDiag"/>
+									<Token UId="1160" Text="."/>
+									<Component UId="1161" Name="enableChn0"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1163"/>
+							<Token UId="1164" Text=":="/>
+							<Blank UId="1165"/>
+							<Access UId="1166" Scope="LiteralConstant">
+								<Constant UId="1167">
+									<ConstantValue UId="1168">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1169" Text=";"/>
+							<NewLine UId="1170"/>
+							<Blank UId="1171" Num="3"/>
+							<Access UId="1172" Scope="GlobalVariable">
+								<Symbol UId="1173">
+									<Component UId="1174" Name="InstU251910_PNAG_C"/>
+									<Token UId="1175" Text="."/>
+									<Component UId="1176" Name="inConfig"/>
+									<Token UId="1177" Text="."/>
+									<Component UId="1178" Name="asiGatewayDiag"/>
+									<Token UId="1179" Text="."/>
+									<Component UId="1180" Name="enableChn1"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1182"/>
+							<Token UId="1183" Text=":="/>
+							<Blank UId="1184"/>
+							<Access UId="1185" Scope="LiteralConstant">
+								<Constant UId="1186">
+									<ConstantValue UId="1187">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1188" Text=";"/>
+							<NewLine UId="1189"/>
+							<Blank UId="1190" Num="3"/>
+							<NewLine UId="1191"/>
+							<Token UId="1192" Text="END_REGION"/>
+							<NewLine UId="1193"/>
+							<Token UId="1233" Text="REGION"/>
+							<Blank UId="1234"/>
+							<Text UId="1235">InstU252310_PNAG_B</Text>
+							<Blank UId="1236" Num="3"/>
+							<NewLine UId="1237"/>
+							<Blank UId="1238" Num="3"/>
+							<Access UId="1239" Scope="GlobalVariable">
+								<Symbol UId="1240">
+									<Component UId="1241" Name="InstU252310_PNAG_B"/>
+									<Token UId="1242" Text="."/>
+									<Component UId="1243" Name="inConfig"/>
+									<Token UId="1244" Text="."/>
+									<Component UId="1245" Name="pnagName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1247"/>
+							<Token UId="1248" Text=":="/>
+							<Blank UId="1249"/>
+							<Access UId="1250" Scope="LiteralConstant">
+								<Constant UId="1251">
+									<ConstantValue UId="1252">'PNAG_B'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1253" Text=";"/>
+							<NewLine UId="1254"/>
+							<Blank UId="1255" Num="3"/>
+							<Access UId="1256" Scope="GlobalVariable">
+								<Symbol UId="1257">
+									<Component UId="1258" Name="InstU252310_PNAG_B"/>
+									<Token UId="1259" Text="."/>
+									<Component UId="1260" Name="inConfig"/>
+									<Token UId="1261" Text="."/>
+									<Component UId="1262" Name="asiGatewayDiag"/>
+									<Token UId="1263" Text="."/>
+									<Component UId="1264" Name="enableChn0"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1266"/>
+							<Token UId="1267" Text=":="/>
+							<Blank UId="1268"/>
+							<Access UId="1269" Scope="LiteralConstant">
+								<Constant UId="1270">
+									<ConstantValue UId="1271">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1272" Text=";"/>
+							<NewLine UId="1273"/>
+							<Blank UId="1274" Num="3"/>
+							<Access UId="1275" Scope="GlobalVariable">
+								<Symbol UId="1276">
+									<Component UId="1277" Name="InstU252310_PNAG_B"/>
+									<Token UId="1278" Text="."/>
+									<Component UId="1279" Name="inConfig"/>
+									<Token UId="1280" Text="."/>
+									<Component UId="1281" Name="asiGatewayDiag"/>
+									<Token UId="1282" Text="."/>
+									<Component UId="1283" Name="enableChn1"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1285"/>
+							<Token UId="1286" Text=":="/>
+							<Blank UId="1287"/>
+							<Access UId="1288" Scope="LiteralConstant">
+								<Constant UId="1289">
+									<ConstantValue UId="1290">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1291" Text=";"/>
+							<NewLine UId="1292"/>
+							<Blank UId="1293" Num="3"/>
+							<NewLine UId="1294"/>
+							<Token UId="1295" Text="END_REGION"/>
+							<NewLine UId="1296"/>
+							<Token UId="1336" Text="REGION"/>
+							<Blank UId="1337"/>
+							<Text UId="1338">InstU253110_PNAG_A</Text>
+							<Blank UId="1339" Num="3"/>
+							<NewLine UId="1340"/>
+							<Blank UId="1341" Num="3"/>
+							<Access UId="1342" Scope="GlobalVariable">
+								<Symbol UId="1343">
+									<Component UId="1344" Name="InstU253110_PNAG_A"/>
+									<Token UId="1345" Text="."/>
+									<Component UId="1346" Name="inConfig"/>
+									<Token UId="1347" Text="."/>
+									<Component UId="1348" Name="pnagName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1350"/>
+							<Token UId="1351" Text=":="/>
+							<Blank UId="1352"/>
+							<Access UId="1353" Scope="LiteralConstant">
+								<Constant UId="1354">
+									<ConstantValue UId="1355">'PNAG_A'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1356" Text=";"/>
+							<NewLine UId="1357"/>
+							<Blank UId="1358" Num="3"/>
+							<Access UId="1359" Scope="GlobalVariable">
+								<Symbol UId="1360">
+									<Component UId="1361" Name="InstU253110_PNAG_A"/>
+									<Token UId="1362" Text="."/>
+									<Component UId="1363" Name="inConfig"/>
+									<Token UId="1364" Text="."/>
+									<Component UId="1365" Name="asiGatewayDiag"/>
+									<Token UId="1366" Text="."/>
+									<Component UId="1367" Name="enableChn0"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1369"/>
+							<Token UId="1370" Text=":="/>
+							<Blank UId="1371"/>
+							<Access UId="1372" Scope="LiteralConstant">
+								<Constant UId="1373">
+									<ConstantValue UId="1374">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1375" Text=";"/>
+							<NewLine UId="1376"/>
+							<Blank UId="1377" Num="3"/>
+							<Access UId="1378" Scope="GlobalVariable">
+								<Symbol UId="1379">
+									<Component UId="1380" Name="InstU253110_PNAG_A"/>
+									<Token UId="1381" Text="."/>
+									<Component UId="1382" Name="inConfig"/>
+									<Token UId="1383" Text="."/>
+									<Component UId="1384" Name="asiGatewayDiag"/>
+									<Token UId="1385" Text="."/>
+									<Component UId="1386" Name="enableChn1"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1388"/>
+							<Token UId="1389" Text=":="/>
+							<Blank UId="1390"/>
+							<Access UId="1391" Scope="LiteralConstant">
+								<Constant UId="1392">
+									<ConstantValue UId="1393">true</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1394" Text=";"/>
+							<NewLine UId="1395"/>
+							<Blank UId="1396" Num="3"/>
+							<NewLine UId="1397"/>
+							<Token UId="1398" Text="END_REGION"/>
+							<NewLine UId="1399"/>
+							<Token UId="1479" Text="REGION"/>
+							<Blank UId="1480"/>
+							<Text UId="1481">InstU251845_ECG_03</Text>
+							<Blank UId="1482" Num="3"/>
+							<NewLine UId="1483"/>
+							<Blank UId="1484" Num="3"/>
+							<Access UId="1485" Scope="GlobalVariable">
+								<Symbol UId="1486">
+									<Component UId="1487" Name="InstU251845_ECG_03"/>
+									<Token UId="1488" Text="."/>
+									<Component UId="1489" Name="inConfig"/>
+									<Token UId="1490" Text="."/>
+									<Component UId="1491" Name="name"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1493"/>
+							<Token UId="1494" Text=":="/>
+							<Blank UId="1495"/>
+							<Access UId="1496" Scope="LiteralConstant">
+								<Constant UId="1497">
+									<ConstantValue UId="1498">'ECG_03'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1499" Text=";"/>
+							<NewLine UId="1500"/>
+							<Blank UId="1501" Num="3"/>
+							<Access UId="1502" Scope="GlobalVariable">
+								<Symbol UId="1503">
+									<Component UId="1504" Name="InstU251845_ECG_03"/>
+									<Token UId="1505" Text="."/>
+									<Component UId="1506" Name="inConfig"/>
+									<Token UId="1507" Text="."/>
+									<Component UId="1508" Name="numberOfEccs"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1510"/>
+							<Token UId="1511" Text=":="/>
+							<Blank UId="1512"/>
+							<Access UId="1513" Scope="LiteralConstant">
+								<Constant UId="1514">
+									<ConstantValue UId="1515">0</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1516" Text=";"/>
+							<NewLine UId="1517"/>
+							<Blank UId="1518" Num="3"/>
+							<Access UId="1519" Scope="GlobalVariable">
+								<Symbol UId="1520">
+									<Component UId="1521" Name="InstU251845_ECG_03"/>
+									<Token UId="1522" Text="."/>
+									<Component UId="1523" Name="inConfig"/>
+									<Token UId="1524" Text="."/>
+									<Component UId="1525" Name="panelMaskPncg"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1527"/>
+							<Token UId="1528" Text=":="/>
+							<Blank UId="1529"/>
+							<Access UId="1530" Scope="TypedConstant">
+								<Constant UId="1531">
+									<ConstantValue UId="1532">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1533" Text=";"/>
+							<NewLine UId="1534"/>
+							<Blank UId="1535" Num="3"/>
+							<Access UId="1536" Scope="GlobalVariable">
+								<Symbol UId="1537">
+									<Component UId="1538" Name="InstU251845_ECG_03"/>
+									<Token UId="1539" Text="."/>
+									<Component UId="1540" Name="inConfig"/>
+									<Token UId="1541" Text="."/>
+									<Component UId="1542" Name="panelMaskCommandArea1"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1544"/>
+							<Token UId="1545" Text=":="/>
+							<Blank UId="1546"/>
+							<Access UId="1547" Scope="TypedConstant">
+								<Constant UId="1548">
+									<ConstantValue UId="1549">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1550" Text=";"/>
+							<NewLine UId="1551"/>
+							<Blank UId="1552" Num="3"/>
+							<Access UId="1553" Scope="GlobalVariable">
+								<Symbol UId="1554">
+									<Component UId="1555" Name="InstU251845_ECG_03"/>
+									<Token UId="1556" Text="."/>
+									<Component UId="1557" Name="inConfig"/>
+									<Token UId="1558" Text="."/>
+									<Component UId="1559" Name="panelMaskCommandArea2"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1561"/>
+							<Token UId="1562" Text=":="/>
+							<Blank UId="1563"/>
+							<Access UId="1564" Scope="TypedConstant">
+								<Constant UId="1565">
+									<ConstantValue UId="1566">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1567" Text=";"/>
+							<NewLine UId="1568"/>
+							<Blank UId="1569" Num="3"/>
+							<Access UId="1570" Scope="GlobalVariable">
+								<Symbol UId="1571">
+									<Component UId="1572" Name="InstU251845_ECG_03"/>
+									<Token UId="1573" Text="."/>
+									<Component UId="1574" Name="inConfig"/>
+									<Token UId="1575" Text="."/>
+									<Component UId="1576" Name="panelMaskCommandArea3"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1578"/>
+							<Token UId="1579" Text=":="/>
+							<Blank UId="1580"/>
+							<Access UId="1581" Scope="TypedConstant">
+								<Constant UId="1582">
+									<ConstantValue UId="1583">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1584" Text=";"/>
+							<NewLine UId="1585"/>
+							<Blank UId="1586" Num="3"/>
+							<Access UId="1587" Scope="GlobalVariable">
+								<Symbol UId="1588">
+									<Component UId="1589" Name="InstU251845_ECG_03"/>
+									<Token UId="1590" Text="."/>
+									<Component UId="1591" Name="inConfig"/>
+									<Token UId="1592" Text="."/>
+									<Component UId="1593" Name="panelMaskCommandArea4"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1595"/>
+							<Token UId="1596" Text=":="/>
+							<Blank UId="1597"/>
+							<Access UId="1598" Scope="TypedConstant">
+								<Constant UId="1599">
+									<ConstantValue UId="1600">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1601" Text=";"/>
+							<NewLine UId="1602"/>
+							<Blank UId="1603" Num="3"/>
+							<Access UId="1604" Scope="GlobalVariable">
+								<Symbol UId="1605">
+									<Component UId="1606" Name="InstU251845_ECG_03"/>
+									<Token UId="1607" Text="."/>
+									<Component UId="1608" Name="inConfig"/>
+									<Token UId="1609" Text="."/>
+									<Component UId="1610" Name="panelMaskCommandArea5"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1612"/>
+							<Token UId="1613" Text=":="/>
+							<Blank UId="1614"/>
+							<Access UId="1615" Scope="TypedConstant">
+								<Constant UId="1616">
+									<ConstantValue UId="1617">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1618" Text=";"/>
+							<NewLine UId="1619"/>
+							<Blank UId="1620" Num="3"/>
+							<Access UId="1621" Scope="GlobalVariable">
+								<Symbol UId="1622">
+									<Component UId="1623" Name="InstU251845_ECG_03"/>
+									<Token UId="1624" Text="."/>
+									<Component UId="1625" Name="inConfig"/>
+									<Token UId="1626" Text="."/>
+									<Component UId="1627" Name="panelMaskCommandArea6"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1629"/>
+							<Token UId="1630" Text=":="/>
+							<Blank UId="1631"/>
+							<Access UId="1632" Scope="TypedConstant">
+								<Constant UId="1633">
+									<ConstantValue UId="1634">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1635" Text=";"/>
+							<NewLine UId="1636"/>
+							<Blank UId="1637" Num="3"/>
+							<NewLine UId="1638"/>
+							<Token UId="1639" Text="END_REGION"/>
+							<NewLine UId="1640"/>
+							<Token UId="1720" Text="REGION"/>
+							<Blank UId="1721"/>
+							<Text UId="1722">InstU252245_ECG_02</Text>
+							<Blank UId="1723" Num="3"/>
+							<NewLine UId="1724"/>
+							<Blank UId="1725" Num="3"/>
+							<Access UId="1726" Scope="GlobalVariable">
+								<Symbol UId="1727">
+									<Component UId="1728" Name="InstU252245_ECG_02"/>
+									<Token UId="1729" Text="."/>
+									<Component UId="1730" Name="inConfig"/>
+									<Token UId="1731" Text="."/>
+									<Component UId="1732" Name="name"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1734"/>
+							<Token UId="1735" Text=":="/>
+							<Blank UId="1736"/>
+							<Access UId="1737" Scope="LiteralConstant">
+								<Constant UId="1738">
+									<ConstantValue UId="1739">'ECG_02'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1740" Text=";"/>
+							<NewLine UId="1741"/>
+							<Blank UId="1742" Num="3"/>
+							<Access UId="1743" Scope="GlobalVariable">
+								<Symbol UId="1744">
+									<Component UId="1745" Name="InstU252245_ECG_02"/>
+									<Token UId="1746" Text="."/>
+									<Component UId="1747" Name="inConfig"/>
+									<Token UId="1748" Text="."/>
+									<Component UId="1749" Name="numberOfEccs"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1751"/>
+							<Token UId="1752" Text=":="/>
+							<Blank UId="1753"/>
+							<Access UId="1754" Scope="LiteralConstant">
+								<Constant UId="1755">
+									<ConstantValue UId="1756">0</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1757" Text=";"/>
+							<NewLine UId="1758"/>
+							<Blank UId="1759" Num="3"/>
+							<Access UId="1760" Scope="GlobalVariable">
+								<Symbol UId="1761">
+									<Component UId="1762" Name="InstU252245_ECG_02"/>
+									<Token UId="1763" Text="."/>
+									<Component UId="1764" Name="inConfig"/>
+									<Token UId="1765" Text="."/>
+									<Component UId="1766" Name="panelMaskPncg"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1768"/>
+							<Token UId="1769" Text=":="/>
+							<Blank UId="1770"/>
+							<Access UId="1771" Scope="TypedConstant">
+								<Constant UId="1772">
+									<ConstantValue UId="1773">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1774" Text=";"/>
+							<NewLine UId="1775"/>
+							<Blank UId="1776" Num="3"/>
+							<Access UId="1777" Scope="GlobalVariable">
+								<Symbol UId="1778">
+									<Component UId="1779" Name="InstU252245_ECG_02"/>
+									<Token UId="1780" Text="."/>
+									<Component UId="1781" Name="inConfig"/>
+									<Token UId="1782" Text="."/>
+									<Component UId="1783" Name="panelMaskCommandArea1"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1785"/>
+							<Token UId="1786" Text=":="/>
+							<Blank UId="1787"/>
+							<Access UId="1788" Scope="TypedConstant">
+								<Constant UId="1789">
+									<ConstantValue UId="1790">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1791" Text=";"/>
+							<NewLine UId="1792"/>
+							<Blank UId="1793" Num="3"/>
+							<Access UId="1794" Scope="GlobalVariable">
+								<Symbol UId="1795">
+									<Component UId="1796" Name="InstU252245_ECG_02"/>
+									<Token UId="1797" Text="."/>
+									<Component UId="1798" Name="inConfig"/>
+									<Token UId="1799" Text="."/>
+									<Component UId="1800" Name="panelMaskCommandArea2"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1802"/>
+							<Token UId="1803" Text=":="/>
+							<Blank UId="1804"/>
+							<Access UId="1805" Scope="TypedConstant">
+								<Constant UId="1806">
+									<ConstantValue UId="1807">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1808" Text=";"/>
+							<NewLine UId="1809"/>
+							<Blank UId="1810" Num="3"/>
+							<Access UId="1811" Scope="GlobalVariable">
+								<Symbol UId="1812">
+									<Component UId="1813" Name="InstU252245_ECG_02"/>
+									<Token UId="1814" Text="."/>
+									<Component UId="1815" Name="inConfig"/>
+									<Token UId="1816" Text="."/>
+									<Component UId="1817" Name="panelMaskCommandArea3"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1819"/>
+							<Token UId="1820" Text=":="/>
+							<Blank UId="1821"/>
+							<Access UId="1822" Scope="TypedConstant">
+								<Constant UId="1823">
+									<ConstantValue UId="1824">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1825" Text=";"/>
+							<NewLine UId="1826"/>
+							<Blank UId="1827" Num="3"/>
+							<Access UId="1828" Scope="GlobalVariable">
+								<Symbol UId="1829">
+									<Component UId="1830" Name="InstU252245_ECG_02"/>
+									<Token UId="1831" Text="."/>
+									<Component UId="1832" Name="inConfig"/>
+									<Token UId="1833" Text="."/>
+									<Component UId="1834" Name="panelMaskCommandArea4"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1836"/>
+							<Token UId="1837" Text=":="/>
+							<Blank UId="1838"/>
+							<Access UId="1839" Scope="TypedConstant">
+								<Constant UId="1840">
+									<ConstantValue UId="1841">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1842" Text=";"/>
+							<NewLine UId="1843"/>
+							<Blank UId="1844" Num="3"/>
+							<Access UId="1845" Scope="GlobalVariable">
+								<Symbol UId="1846">
+									<Component UId="1847" Name="InstU252245_ECG_02"/>
+									<Token UId="1848" Text="."/>
+									<Component UId="1849" Name="inConfig"/>
+									<Token UId="1850" Text="."/>
+									<Component UId="1851" Name="panelMaskCommandArea5"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1853"/>
+							<Token UId="1854" Text=":="/>
+							<Blank UId="1855"/>
+							<Access UId="1856" Scope="TypedConstant">
+								<Constant UId="1857">
+									<ConstantValue UId="1858">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1859" Text=";"/>
+							<NewLine UId="1860"/>
+							<Blank UId="1861" Num="3"/>
+							<Access UId="1862" Scope="GlobalVariable">
+								<Symbol UId="1863">
+									<Component UId="1864" Name="InstU252245_ECG_02"/>
+									<Token UId="1865" Text="."/>
+									<Component UId="1866" Name="inConfig"/>
+									<Token UId="1867" Text="."/>
+									<Component UId="1868" Name="panelMaskCommandArea6"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1870"/>
+							<Token UId="1871" Text=":="/>
+							<Blank UId="1872"/>
+							<Access UId="1873" Scope="TypedConstant">
+								<Constant UId="1874">
+									<ConstantValue UId="1875">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1876" Text=";"/>
+							<NewLine UId="1877"/>
+							<Blank UId="1878" Num="3"/>
+							<NewLine UId="1879"/>
+							<Token UId="1880" Text="END_REGION"/>
+							<NewLine UId="1881"/>
+							<Token UId="1961" Text="REGION"/>
+							<Blank UId="1962"/>
+							<Text UId="1963">InstU253045_ECG_01</Text>
+							<Blank UId="1964" Num="3"/>
+							<NewLine UId="1965"/>
+							<Blank UId="1966" Num="3"/>
+							<Access UId="1967" Scope="GlobalVariable">
+								<Symbol UId="1968">
+									<Component UId="1969" Name="InstU253045_ECG_01"/>
+									<Token UId="1970" Text="."/>
+									<Component UId="1971" Name="inConfig"/>
+									<Token UId="1972" Text="."/>
+									<Component UId="1973" Name="name"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1975"/>
+							<Token UId="1976" Text=":="/>
+							<Blank UId="1977"/>
+							<Access UId="1978" Scope="LiteralConstant">
+								<Constant UId="1979">
+									<ConstantValue UId="1980">'ECG_01'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1981" Text=";"/>
+							<NewLine UId="1982"/>
+							<Blank UId="1983" Num="3"/>
+							<Access UId="1984" Scope="GlobalVariable">
+								<Symbol UId="1985">
+									<Component UId="1986" Name="InstU253045_ECG_01"/>
+									<Token UId="1987" Text="."/>
+									<Component UId="1988" Name="inConfig"/>
+									<Token UId="1989" Text="."/>
+									<Component UId="1990" Name="numberOfEccs"/>
+								</Symbol>
+							</Access>
+							<Blank UId="1992"/>
+							<Token UId="1993" Text=":="/>
+							<Blank UId="1994"/>
+							<Access UId="1995" Scope="LiteralConstant">
+								<Constant UId="1996">
+									<ConstantValue UId="1997">0</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="1998" Text=";"/>
+							<NewLine UId="1999"/>
+							<Blank UId="2000" Num="3"/>
+							<Access UId="2001" Scope="GlobalVariable">
+								<Symbol UId="2002">
+									<Component UId="2003" Name="InstU253045_ECG_01"/>
+									<Token UId="2004" Text="."/>
+									<Component UId="2005" Name="inConfig"/>
+									<Token UId="2006" Text="."/>
+									<Component UId="2007" Name="panelMaskPncg"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2009"/>
+							<Token UId="2010" Text=":="/>
+							<Blank UId="2011"/>
+							<Access UId="2012" Scope="TypedConstant">
+								<Constant UId="2013">
+									<ConstantValue UId="2014">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2015" Text=";"/>
+							<NewLine UId="2016"/>
+							<Blank UId="2017" Num="3"/>
+							<Access UId="2018" Scope="GlobalVariable">
+								<Symbol UId="2019">
+									<Component UId="2020" Name="InstU253045_ECG_01"/>
+									<Token UId="2021" Text="."/>
+									<Component UId="2022" Name="inConfig"/>
+									<Token UId="2023" Text="."/>
+									<Component UId="2024" Name="panelMaskCommandArea1"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2026"/>
+							<Token UId="2027" Text=":="/>
+							<Blank UId="2028"/>
+							<Access UId="2029" Scope="TypedConstant">
+								<Constant UId="2030">
+									<ConstantValue UId="2031">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2032" Text=";"/>
+							<NewLine UId="2033"/>
+							<Blank UId="2034" Num="3"/>
+							<Access UId="2035" Scope="GlobalVariable">
+								<Symbol UId="2036">
+									<Component UId="2037" Name="InstU253045_ECG_01"/>
+									<Token UId="2038" Text="."/>
+									<Component UId="2039" Name="inConfig"/>
+									<Token UId="2040" Text="."/>
+									<Component UId="2041" Name="panelMaskCommandArea2"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2043"/>
+							<Token UId="2044" Text=":="/>
+							<Blank UId="2045"/>
+							<Access UId="2046" Scope="TypedConstant">
+								<Constant UId="2047">
+									<ConstantValue UId="2048">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2049" Text=";"/>
+							<NewLine UId="2050"/>
+							<Blank UId="2051" Num="3"/>
+							<Access UId="2052" Scope="GlobalVariable">
+								<Symbol UId="2053">
+									<Component UId="2054" Name="InstU253045_ECG_01"/>
+									<Token UId="2055" Text="."/>
+									<Component UId="2056" Name="inConfig"/>
+									<Token UId="2057" Text="."/>
+									<Component UId="2058" Name="panelMaskCommandArea3"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2060"/>
+							<Token UId="2061" Text=":="/>
+							<Blank UId="2062"/>
+							<Access UId="2063" Scope="TypedConstant">
+								<Constant UId="2064">
+									<ConstantValue UId="2065">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2066" Text=";"/>
+							<NewLine UId="2067"/>
+							<Blank UId="2068" Num="3"/>
+							<Access UId="2069" Scope="GlobalVariable">
+								<Symbol UId="2070">
+									<Component UId="2071" Name="InstU253045_ECG_01"/>
+									<Token UId="2072" Text="."/>
+									<Component UId="2073" Name="inConfig"/>
+									<Token UId="2074" Text="."/>
+									<Component UId="2075" Name="panelMaskCommandArea4"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2077"/>
+							<Token UId="2078" Text=":="/>
+							<Blank UId="2079"/>
+							<Access UId="2080" Scope="TypedConstant">
+								<Constant UId="2081">
+									<ConstantValue UId="2082">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2083" Text=";"/>
+							<NewLine UId="2084"/>
+							<Blank UId="2085" Num="3"/>
+							<Access UId="2086" Scope="GlobalVariable">
+								<Symbol UId="2087">
+									<Component UId="2088" Name="InstU253045_ECG_01"/>
+									<Token UId="2089" Text="."/>
+									<Component UId="2090" Name="inConfig"/>
+									<Token UId="2091" Text="."/>
+									<Component UId="2092" Name="panelMaskCommandArea5"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2094"/>
+							<Token UId="2095" Text=":="/>
+							<Blank UId="2096"/>
+							<Access UId="2097" Scope="TypedConstant">
+								<Constant UId="2098">
+									<ConstantValue UId="2099">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2100" Text=";"/>
+							<NewLine UId="2101"/>
+							<Blank UId="2102" Num="3"/>
+							<Access UId="2103" Scope="GlobalVariable">
+								<Symbol UId="2104">
+									<Component UId="2105" Name="InstU253045_ECG_01"/>
+									<Token UId="2106" Text="."/>
+									<Component UId="2107" Name="inConfig"/>
+									<Token UId="2108" Text="."/>
+									<Component UId="2109" Name="panelMaskCommandArea6"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2111"/>
+							<Token UId="2112" Text=":="/>
+							<Blank UId="2113"/>
+							<Access UId="2114" Scope="TypedConstant">
+								<Constant UId="2115">
+									<ConstantValue UId="2116">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2117" Text=";"/>
+							<NewLine UId="2118"/>
+							<Blank UId="2119" Num="3"/>
+							<NewLine UId="2120"/>
+							<Token UId="2121" Text="END_REGION"/>
+							<NewLine UId="2122"/>
+							<Token UId="2135" Text="REGION"/>
+							<Blank UId="2136"/>
+							<Text UId="2137">InstCA121RPTR_C1</Text>
+							<Blank UId="2138" Num="3"/>
+							<NewLine UId="2139"/>
+							<Blank UId="2140" Num="3"/>
+							<Access UId="2141" Scope="GlobalVariable">
+								<Symbol UId="2142">
+									<Component UId="2143" Name="InstCA121RPTR_C1"/>
+									<Token UId="2144" Text="."/>
+									<Component UId="2145" Name="inConfig"/>
+									<Token UId="2146" Text="."/>
+									<Component UId="2147" Name="rptrName"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2149"/>
+							<Token UId="2150" Text=":="/>
+							<Blank UId="2151"/>
+							<Access UId="2152" Scope="LiteralConstant">
+								<Constant UId="2153">
+									<ConstantValue UId="2154">'CA121RPTRC1'</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2155" Text=";"/>
+							<NewLine UId="2156"/>
+							<Blank UId="2157" Num="3"/>
+							<Access UId="2158" Scope="GlobalVariable">
+								<Symbol UId="2159">
+									<Component UId="2160" Name="InstCA121RPTR_C1"/>
+									<Token UId="2161" Text="."/>
+									<Component UId="2162" Name="inConfig"/>
+									<Token UId="2163" Text="."/>
+									<Component UId="2164" Name="panelMask"/>
+								</Symbol>
+							</Access>
+							<Blank UId="2166"/>
+							<Token UId="2167" Text=":="/>
+							<Blank UId="2168"/>
+							<Access UId="2169" Scope="TypedConstant">
+								<Constant UId="2170">
+									<ConstantValue UId="2171">2#0000_0000_0000_0000_0000_0000_0000_0001</ConstantValue>
+								</Constant>
+							</Access>
+							<Token UId="2172" Text=";"/>
+							<NewLine UId="2173"/>
+							<Blank UId="2174" Num="3"/>
+							<NewLine UId="2175"/>
+							<Token UId="2176" Text="END_REGION"/>
+							<NewLine UId="2177"/>
 						</StructuredText>
 					</NetworkSource>
 				</AttributeList>
