@@ -1,3 +1,4 @@
+"""
 import clr
 clr.AddReference('C:\\Program Files\\Siemens\\Automation\\Portal V17\PublicAPI\\V17\\Siemens.Engineering.dll')
 import Siemens.Engineering
@@ -18,7 +19,7 @@ class GsdDevice():
         self.startDiscovery()
             
     def addModule(self,TypeIdentifier,Name,Slot=None):
-        """
+        
         Can add new Modules with this command
         self.Rack.PlugNew(TypeIdentifier,Name,Slot)
         With the TypeIdentifier being
@@ -26,7 +27,7 @@ class GsdDevice():
                 First part being the GSDML or GSD File (all caps)
                 Second part being the module type (See 5.8.2 "Get type identifier of devices and device items")
                 Third part being the module name
-        """
+        
         #TypeIdentifier = "{GsdName}/{GsdType}/{GsdId}".format(GsdName=self.GsdName,GsdType=GsdType,GsdId=GsdId)
         if Slot != None:
             if self.Device.DeviceItems[0].CanPlugNew(TypeIdentifier,Name,Slot):
@@ -158,14 +159,14 @@ class GsdDevice():
         return False
     
 class ungroupedDevice(GsdDevice):
-    """
+    
     Creates and Service UnGrouped Devices. Inherits all methods from the GsdDevice class but sets the creation method
     CreateWithItem("GSD:GSDML-V2.33-ABB-FPNO-20180516.XML/DAP",Drive_Name,Drive_Name)
         Needs To Be UpperCase
         Need to Have "/DAP" appended after 
         Save GsdName for other functions
         Save Device for other functions
-    """
+    
     def __init__(self,project,typeIdentifier,name,deviceName = None):
         if deviceName == None:
             deviceName = name
@@ -181,9 +182,9 @@ class ungroupedDevice(GsdDevice):
         super().__init__(Device)
         
 class groupedDevice(GsdDevice):
-    """
+    
     Creates and Service Grouped Devices. Inherits all methods from the GsdDevice class but sets the creation method 
-    """
+    
     def __init__(self,project,typeIdentifier,name,deviceName = None):
         if deviceName == None:
             deviceName = name
@@ -258,7 +259,7 @@ class tags():
         else:
             print("Name '{0}' Already In Use At This Address '{1}'".format(name,self.data["name"][name]))        
 
-"""
+
 class createAbbAcs380Drive():
     def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + zone + "_FMD"
@@ -285,7 +286,7 @@ class createAbbAcs380Drive():
         tags.addTag(unitName+"_In","In","{0}.0".format(inStart),"typeABBACS380InputsPP04","PP04 Inputs For Drive Flags","FMD PPO Tags")
         tags.addTag(unitName+"_Out","Out","{0}.0".format(outStart),"typeABBACS380OutputsPP04","PP04 Outputs For Drive Control","FMD PPO Tags")
         
-"""
+
   
 class createScannerSickCLV6xx():
     def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
@@ -328,6 +329,7 @@ class createHmi():
         Object.networkInterface.SetAttribute("InterfaceOperatingMode",2)
         Object.setIp(ip,subnet)
         
+        
 class createMoviMot():
     def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
         unitName = unitNumber + "_MMD"
@@ -346,6 +348,7 @@ class createMoviMot():
             tags.addTag(unitName + "_Out","Out","{0}.0".format(MM3PDout),"typeProfinetMoviMotOutputs","Output Flags","MMD Tags")
         self.LAD = False
         self.SCL = False
+
 
 class createFortressGate():
     def __init__(self,project,tags,unitNumber,ip,subnet,zone = ""):
@@ -392,6 +395,8 @@ class createFortressGate():
         self.LAD = True
         self.SCL = False
         self.Failsafe_FIODBName = self.Object.Objects["Safety Module_1"]["Safety Module"]["Object"].GetAttribute("Failsafe_FIODBName")
+
+
 
 class createPlc(GsdDevice):
     def __init__(self,plc):
@@ -450,7 +455,7 @@ class createPlc(GsdDevice):
     def getName(self,name):
         self.cpu.GetAttribute("Name")
         
-        """
+        
 class Pnag(GsdDevice):
     def __init__(self,Device,tags):
         super().__init__(Device)
@@ -558,9 +563,7 @@ class Pnag(GsdDevice):
             
     def export(self):
         pass
-        """
-        
-        """
+
 class Pncg(GsdDevice):
     def __init__(self,Device,tags):
         super().__init__(Device)
@@ -583,7 +586,7 @@ class Pncg(GsdDevice):
         
     def export(self):
         pass
-        """
+        
 class object():
     def __init__(self):
         self.project = Siemens.Engineering.TiaPortal.GetProcesses()[0].Attach().Projects[0]
@@ -629,10 +632,10 @@ class object():
         #self.test() 
         
     def addHalfNodeASI(self,tagName,address,devices):
-        """
+        
         ASI_A2_21A_I1
         ASI_B1_18A_O4
-        """
+        
         for x in devices:
             if x[-1:] == address.split("_")[1][:1]:
                 #print(x[-1:]," ",x," ", address.split("_")[1][:1]," ",address)
@@ -927,7 +930,7 @@ def main():
     
 #main()
 
-"""
+
 import clr
 import System
 clr.AddReference('C:\\Program Files\\Siemens\\Automation\\Portal V17\PublicAPI\\V17\\Siemens.Engineering.dll')

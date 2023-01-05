@@ -5,7 +5,7 @@
 			<Interface>
 				<Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v5">
 					<Section Name="Static">
-						<Member Name="U251845_ECG_03" Datatype="&quot;typeNodeParameters&quot;">
+						<Member Name="U251845_PNCG_03" Datatype="&quot;typeNodeParameters&quot;">
 							<AttributeList>
 								<BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute>
 								<BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute>
@@ -13,7 +13,7 @@
 								<BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
 							</AttributeList>
 						</Member>
-						<Member Name="U252245_ECG_02" Datatype="&quot;typeNodeParameters&quot;">
+						<Member Name="U252245_PNCG_02" Datatype="&quot;typeNodeParameters&quot;">
 							<AttributeList>
 								<BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute>
 								<BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute>
@@ -21,7 +21,7 @@
 								<BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
 							</AttributeList>
 						</Member>
-						<Member Name="U253045_ECG_01" Datatype="&quot;typeNodeParameters&quot;">
+						<Member Name="U253045_PNCG_01" Datatype="&quot;typeNodeParameters&quot;">
 							<AttributeList>
 								<BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute>
 								<BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute>

@@ -29,6 +29,17 @@ class swBlock(xmlHeader):
         self.createSubElement(AttributeList,"Culture").text = "en-US"
         self.Comment =  self.createSubElement(AttributeList,"Text")
         
+    def addNetwork(self,ObjectList):
+        SWBlocksCompileUnit = self.createSubElement(ObjectList, "SW.Blocks.CompileUnit","ID")
+        SWBlocksCompileUnit.set("CompositionName", "CompileUnits")
+        AttributeList = self.createSubElement(SWBlocksCompileUnit,"AttributeList")
+        
+        NetworkSource = self.createSubElement(AttributeList,"NetworkSource")
+        FlgNet = self.createSubElement(NetworkSource,"FlgNet")
+        FlgNet.set("xmlns","http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4")
+        self.Parts = self.createSubElement(FlgNet,"Parts")
+        self.Wires = self.createSubElement(FlgNet,"Wires")
+        
     def addCall(self):
         Call = self.createSubElement(self.Parts,"Call","UId")
         self.CallId = Call.get("UId")
@@ -108,6 +119,15 @@ class swBlock(xmlHeader):
             self.addConnection(id,"out",OR,"in" + str(x + 1))
         self.addConnection(OR,"out",destinationCallId,destinationName)
         
+    def ORspawn(self,operands,destinationName):
+        OR = self.addOR(str(len(operands)))
+        for x in range(len(operands)):
+            id = self.spawnPart(operands[x],"Contact")
+            self.addEN(id,"in")
+            self.addConnection(id,"out",OR,"in" + str(x + 1))
+        destinationCallId = self.spawnPart(destinationName,"Coil")
+        self.addConnection(OR,"out",destinationCallId,"in")
+        
     def AND(self,operands,destinationCallId,destinationName):
         list = [] 
         for x in range(len(operands)):
@@ -118,6 +138,18 @@ class swBlock(xmlHeader):
             else:
                 self.addConnection(list[x-1],"out",id,"in")
         self.addConnection(list[-1],"out",destinationCallId,destinationName)
+        
+    def ANDspawn(self,operands,destinationName):
+        list = [] 
+        for x in range(len(operands)):
+            id = self.spawnPart(operands[x],"Contact")
+            list.append(id)
+            if x == 0:
+                self.addEN(id,"in")
+            else:
+                self.addConnection(list[x-1],"out",id,"in")
+        destinationCallId = self.spawnPart(destinationName,"Coil")
+        self.addConnection(list[-1],"out",destinationCallId,"in")
         
     def addConnection(self,AccessIdOut,AccessIdOutName,AccessIdIn,AccessIdInName):
         Wire = self.createSubElement(self.Wires,"Wire","UId")

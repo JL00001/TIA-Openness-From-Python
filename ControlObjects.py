@@ -3,8 +3,9 @@ clr.AddReference('C:\\Program Files\\Siemens\\Automation\\Portal V17\PublicAPI\\
 import Siemens.Engineering
 import System
 import os
+import re
 
-import OpennessTest
+import device
 import xmlHeader
 import sclObject
 import xmlObjects
@@ -42,14 +43,19 @@ class controlCabnetObject(father):
         self.dataSorted = {
                             "controlAreaObject":[],
                             "ezcObject":[],
-                            "asiEstopObject":[],
-                            "auxBoxObject":[],
-                            "dpsBoxObject":[],
                             "Pnag":[],
                             "Pncg":[],
+                            "dpsBoxObject":[],
+                            "auxBoxObject":[],
+                            "asiEstopObject":[],
                             "rptrObject":[],
                             "AbbAcs380DriveObject":[],
-                            "FortressGateobject":[]
+                            "MoviMotObject":[],
+                            "FortressGateobject":[],
+                            "ScannerSickCLV6xxObject":[],
+                            "ConnectionBoxObject":[],
+                            "PnpnObject":[],
+                            "HmiObject":[],
                             }
         self.__getProjectVariables()
         self.__setUpImportVariables()
@@ -61,12 +67,12 @@ class controlCabnetObject(father):
         #Software
         for x in self.project.Devices:
             if x.TypeIdentifier != None and 'S71500' in x.TypeIdentifier:
-                GsdDevice = OpennessTest.GsdDevice(x)
+                GsdDevice = device.GsdDevice(x)
                 break
         self.software = Siemens.Engineering.IEngineeringServiceProvider(GsdDevice.Device.DeviceItems[1]).GetService[Siemens.Engineering.HW.Features.SoftwareContainer]().Software
         
         #Tags
-        self.tags = OpennessTest.tags(self.software)
+        self.tags = device.tags(self.software)
         
         #Network Devices
         for x in self.project.Devices:
@@ -116,11 +122,12 @@ class controlCabnetObject(father):
         self.dbPncgParameterData = globalDB.globalDB("dbPncgParameterData",self.DefaultDBsSw)
         
     def save(self):
-        xmlObjects.Plc(self.name,self.dataSorted.keys(),self.xml.ObjectList,self.scl,self.blockGroupSw)
+        #xmlObjects.Plc(self.name,self.dataSorted.keys(),self.xml.ObjectList,self.scl,self.blockGroupSw)
+        self.export()
         for x in self.dataSorted.keys():
             for y in self.dataSorted[x]:
                 y.export()
-        xmlObjects.CallSetConfig(self.scl.Name,self.xml.ObjectList)
+        CallSetConfigObject(self.scl.Name,self.xml.ObjectList)
         self.xml.save()
         self.blockGroupSw.Blocks.Import(System.IO.FileInfo("{0}/{1}.xml".format(os.getcwd(),self.xml.Name)),Siemens.Engineering.ImportOptions.Override)
         
@@ -134,8 +141,42 @@ class controlCabnetObject(father):
         self.dbPncgParameterData.save()
         
         ICompilable = Siemens.Engineering.IEngineeringServiceProvider(self.software.BlockGroup.Groups.Find("Project").Groups.Find("DefaultDBs")).GetService[Siemens.Engineering.Compiler.ICompilable]()
-        ICompilable.Compile()
+        #ICompilable.Compile()
+            
+    def export(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
         
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","Plc")
+        
+        XmlExport.loadParameterStr('<Parameter Name="inWcsCommsHealthy" Section="Input" Type="Bool" />',"InstDciManager.outConnected")
+        XmlExport.loadParameterStr('<Parameter Name="inSafetyStatusToPlc" Section="Input" Type="&quot;typeSafetyStatusToMainPanel&quot;" />',"DataFromSafety.SafetyStatusToPLC")
+        XmlExport.loadParameterStr('<Parameter Name="inInternal24VOk" Section="Input" Type="Bool" />',"{0}_PWR_ON".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="inPBLampTest" Section="Input" Type="Bool" />',"{0}_PWR_ON".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="outLampStarted" Section="Output" Type="Bool" />',"{0}_LT_ST".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="outLampGeneralFault" Section="Output" Type="Bool" />',"{0}_LT_J".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="outLampEmergencyStop" Section="Output" Type="Bool" />',"{0}_LT_ES".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="outLampMotorFault" Section="Output" Type="Bool" />',"{0}_LT_MF".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="outLampHostCommFault" Section="Output" Type="Bool" />',"{0}_LT_HOST".format(self.name))
+        XmlExport.loadParameterStr('<Parameter Name="outLampLowAirFault" Section="Output" Type="Bool" />',"{0}_LT_AIR".format(self.name))
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.resetConveyorsFromPanel",True)
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.disableCompressedAirAlarm",False)
+            for x in range(len(self.dataSorted["ezcObject"])):
+                self.scl.GlobalVariableEqualBool("{0}.inConfig.enableEzc[{1}]".format(XmlExport.Component.get("Name"),str(x + 1)),True)
+                if x == 9:
+                    break
+            self.scl.endRegion()
+            
+        if self.blockGroupSw != None:
+            self.blockGroupSw.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+            
     def _genDefaultDBs(self):
         for x in self.dataSorted["controlAreaObject"]:
             if len(x.controlAreaDataSorted["EZCs"]) > 0 :
@@ -147,7 +188,7 @@ class controlCabnetObject(father):
 
         for x in self.dataSorted["Pncg"]:
             self.dbPncgParameterData.addMember(x.Device.Name,'"typeNodeParameters"')
-        
+            
     def createControlArea(self,name):
         if name not in self.data.keys():
             object = controlAreaObject(name,self)
@@ -160,78 +201,132 @@ class controlCabnetObject(father):
     def addPlc(self):
         for x in self.project.Devices:
             if x.TypeIdentifier != None and 'S71500' in x.TypeIdentifier:
-                OpennessTest.createPlc(x).setConfig()
+                self.plcObject = plcObject(x,self)
                 break
+                
+    def setPlcConfig(self):
+        self.plcObject.setConfig()
             
     def addAbbAcs380Drive(self,unitNumber,ip,zone=""):
         if unitNumber not in self.data.keys():
-            #OpennessTest.createAbbAcs380Drive(self.project,self.tags,unitNumber,ip,self.subnet,zone)
-            #xmlObjects.AbbAcs380Drive(unitNumber,self.xml.ObjectList,zone,self.scl,self.blockGroupSw)
-            name = unitNumber + zone + "_FMD"
-            object = AbbAcs380DriveObject(unitNumber,name,self,ip,zone)
-            self.data[name] = object
+            object = AbbAcs380DriveObject(unitNumber,self,ip,zone)
+            self.data[object.name] = object.name
             self.dataSorted["AbbAcs380DriveObject"].append(object)
+            return object
             
         else:
             raise NameError("A Device Already Has That Name")
             
     def addScannerSickCLV6xx(self,unitNumber,ip,zone=""):
         if unitNumber not in self.data.keys():
-            OpennessTest.createScannerSickCLV6xx(self.project,self.tags,unitNumber,ip,self.subnet,zone)
-            xmlObjects.ScannerSickCLV6xx(unitNumber,self.xml.ObjectList,zone,self.scl,self.blockGroupSw)
+            object = ScannerSickCLV6xxObject(unitNumber,self,ip,zone)
+            self.data[object.name] = object.name
+            self.dataSorted["ScannerSickCLV6xxObject"].append(object)
+            return object
             
         else:
             raise NameError("A Device Already Has That Name")
             
     def addPnpn(self,unitNumber,ip,zone=""):
         if unitNumber not in self.data.keys():
-            OpennessTest.createPnpn(self.project,self.tags,unitNumber,ip,self.subnet,zone)
+            object = PnpnObject(unitNumber,self,ip,zone)
+            self.data[object.name] = object.name
+            self.dataSorted["PnpnObject"].append(object)
+            return object
             
         else:
             raise NameError("A Device Already Has That Name")
             
     def addConnectionBox(self,unitNumber,ip,zone=""):
         if unitNumber not in self.data.keys():
-            OpennessTest.createConnectionBox(self.project,self.tags,unitNumber,ip,self.subnet,zone)
+            if re.search("U[0-9]{6}_Conn_Box_[0-9]{1}",unitNumber) != None:
+                object = ConnectionBoxObject(unitNumber,self,ip,zone)
+                self.data[object.name] = object.name
+                self.dataSorted["ConnectionBoxObject"].append(object)
+                return object
+                
+            else:
+                raise NameError("Improper Connection Box Name Format")
             
         else:
             raise NameError("A Device Already Has That Name")
             
-    def addHmi(self,unitNumber,ip,zone=""):
-        if unitNumber not in self.data.keys():
-            OpennessTest.createHmi(self.project,self.tags,unitNumber,ip,self.subnet,zone)
+    def addHmi(self,name,ip,zone=""):
+        if name not in self.data.keys():
+            object = HmiObject(name,self,ip,zone)
+            self.data[object.name] = object.name
+            self.dataSorted["HmiObject"].append(object)
+            return object
             
         else:
             raise NameError("A Device Already Has That Name")
         
     def addMoviMot(self,unitNumber,ip,zone=""):
         if unitNumber not in self.data.keys():
-            OpennessTest.createMoviMot(self.project,self.tags,unitNumber,ip,self.subnet,zone)
-            xmlObjects.MoviMot(unitNumber,self.xml.ObjectList,zone,self.scl,self.blockGroupSw)
+            object = MoviMotObject(unitNumber,self,ip,zone)
+            self.data[object.name] = object.name
+            self.dataSorted["MoviMotObject"].append(object)
+            return object
             
         else:
             raise NameError("A Device Already Has That Name")
             
     def addFortressGate(self,unitNumber,ip,zone=""):
         if unitNumber not in self.data.keys():
-            #gate = OpennessTest.createFortressGate(self.project,self.tags,unitNumber,ip,self.subnet,zone)
-            #xmlObjects.FortressGate(unitNumber,gate.Failsafe_FIODBName,self.xml.ObjectList,zone,self.scl,self.blockGroupSw)
-            name = unitNumber + zone + "_GS"
-            object = FortressGateobject(unitNumber,name,self,ip,zone)
-            self.data[name] = object
+            object = FortressGateObject(unitNumber,self,ip,zone)
+            self.data[object.name] = object
             self.dataSorted["FortressGateobject"].append(object)
+            return object
             
         else:
             raise NameError("A Device Already Has That Name")
             
-    def spawnTest(self):
+    def spawnTestDevices(self):
+        try:
+            self.project.UngroupedDevicesGroup.Devices.Find("U000000_FMD").Delete()
+        except:
+            pass
+        try:
+            self.project.UngroupedDevicesGroup.Devices.Find("U000010_SC").Delete()
+        except:
+            pass
+        try:
+            self.project.UngroupedDevicesGroup.Devices.Find("U000020_PNPN").Delete()
+        except:
+            pass
+        try:
+            self.project.UngroupedDevicesGroup.Devices.Find("U000030_Conn_Box_1").Delete()
+        except:
+            pass
+        try:
+            self.project.UngroupedDevicesGroup.Devices.Find("U000050_MMD").Delete()
+        except:
+            pass
+        try:
+            self.project.UngroupedDevicesGroup.Devices.Find("U000060_GS").Delete()
+        except:
+            pass
         self.addAbbAcs380Drive("U000000","172.16.210.66")
         self.addScannerSickCLV6xx("U000010","172.16.210.67")
         self.addPnpn("U000020","172.16.210.68")
-        self.addConnectionBox("U000030","172.16.210.69")
-        self.addHmi("U000040","172.16.210.70")
+        self.addConnectionBox("U000030_Conn_Box_1","172.16.210.69")
+        #self.addHmi("U000040","172.16.210.70")
         self.addMoviMot("U000050","172.16.210.71")
         self.addFortressGate("U000060","172.16.210.72")
+        
+    def spawnTestPanels(self):
+        ca = self.createControlArea("CA121")
+        ca.adoptNetworkDevice("U251910_PNAG_C")
+        ca.adoptNetworkDevice("U251845_PNCG_03")
+        ezc = ca.addEzc("ASI_C1_01A")
+        estop1 = ezc.addAsiEstop("EStop1","ASI_C1_29")
+        aux1 = ezc.addAuxBox("ASI_C1_01A_I2")
+        dps1 = ezc.addDpsBox("ASI_C1_01A_I4")
+        rptr1 = ezc.addRptrBox("ASI_C1")
+            
+    def testAll(self):
+        self.spawnTestDevices()
+        self.spawnTestPanels()
             
 class controlAreaObject(father):
     def __init__(self,name,parent):
@@ -267,19 +362,15 @@ class controlAreaObject(father):
                 object = Pncg(Device,self)
                 self.dataSorted["Pncg"].append(object)
                 self.controlAreaDataSorted["Pncg"].append(object)
-            
             self.networkDevices[objectName[-1]] = object
             self.data[object.name] = object
-            
             self.controlAreaData[object.name] = object
-            
-            
             return object
         else:
-            raise KeyError
+            print("Device : {0} Not Found. \nAvailable options are \n {1}".format(objectName,"\n ".join(list(self.parent.networkDevices.keys()))))
+            raise KeyError("See Above Printout")
         
     def addEzc(self,asiAddress):
-        import re
         name = "{0}EZC{1}".format(self.name,str(len(self.controlAreaDataSorted["EZCs"]) + 1))
         if re.search("^ASI_[A-Z][1-2]_([0-9]|[0-2][0-9]|3[01])[A-B]$",asiAddress) != None:
             if name not in self.data.keys():
@@ -294,26 +385,81 @@ class controlAreaObject(father):
         else:
             raise ValueError("Malformed ASI Address")
         
-    def addRptrBox(self,asiNetwork):
-        import re
-        if re.search("^ASI_[A-Z][1-2]$",asiNetwork) != None:
-            name = "{0}RPTR{1}".format(self.name,re.findall("_[A-Z][0-9]{1,3}$",asiNetwork)[0])
-            if name not in self.data.keys():
-                object = rptrObject(name,self,asiNetwork)
-                self.data[name] = object
-                self.dataSorted["rptrObject"].append(object)
-                self.controlAreaData[name] = object
-                self.controlAreaDataSorted["RPTRs"].append(object)
-                return object
-            else:
-                raise KeyError
-        else:
-            raise ValueError("Malformed ASI Address")
-        
     def export(self):
         pass
         
-class Pnag(OpennessTest.GsdDevice):
+class plcObject(device.GsdDevice):
+    def __init__(self,plc,parent):
+        self.name = parent.contolCabnet
+        self.tags = parent.tags
+        super().__init__(plc)
+        self.cpu = plc.DeviceItems[1]
+        self.localInputAddress = self.Objects["20000PLC"]["20000PLC"]["Object"].Addresses[0].StartAddress
+        self.localOutputAddress = self.Objects["21000PLC"]["21000PLC"]["Object"].Addresses[0].StartAddress
+        
+        self.tags.addTag("{0}_PWR_ON".format(self.name),"In","{0}.0".format(self.localInputAddress),"Bool","Control Cabinet Power On","Control Panel IO")
+        self.tags.addTag("{0}_PWR_ON".format(self.name),"In","{0}.1".format(self.localInputAddress),"Bool","Control Cabinet Power On","Control Panel IO")
+        self.tags.addTag("{0}_DC_OK".format(self.name),"In","{0}.2".format(self.localInputAddress),"Bool","Control Cabinet DC Power OK","Control Panel IO")
+        self.tags.addTag("{0}_FIRE".format(self.name),"In","{0}.3".format(self.localInputAddress),"Bool","Fire Alarm OK","Control Panel IO")
+        
+        self.tags.addTag("{0}_LT_ST".format(self.name),"Out","{0}.0".format(self.localOutputAddress),"Bool","Started Light","Control Panel IO")
+        self.tags.addTag("{0}_LT_MF".format(self.name),"Out","{0}.1".format(self.localOutputAddress),"Bool","Motor Fault Light","Control Panel IO")
+        self.tags.addTag("{0}_LT_J".format(self.name),"Out","{0}.2".format(self.localOutputAddress),"Bool","Jam Fault Light","Control Panel IO")
+        self.tags.addTag("{0}_LT_AIR".format(self.name),"Out","{0}.3".format(self.localOutputAddress),"Bool","Low Air Light","Control Panel IO")
+        self.tags.addTag("{0}_LT_ES".format(self.name),"Out","{0}.4".format(self.localOutputAddress),"Bool","E-Stop Actuated Light","Control Panel IO")
+        self.tags.addTag("{0}_LT_HOST".format(self.name),"Out","{0}.5".format(self.localOutputAddress),"Bool","Host Communication Fault Light","Control Panel IO")
+        
+    def setConfig(self):
+        self.checkIECV22LLDPMode(self.Objects[self.cpu.Name]["PROFINET interface_1"]["Object"])
+        self.checkIECV22LLDPMode(self.Objects[self.cpu.Name]["PROFINET interface_2"]["Object"])
+        
+        cpuHardware = Siemens.Engineering.IEngineeringServiceProvider(self.cpu).GetService[Siemens.Engineering.HW.Features.PlcAccessLevelProvider]()
+        
+        self.CentralFSourceAddress = self.cpu.GetAttribute("Failsafe_CentralFSourceAddress")
+        self.testThenSetAttribute("Failsafe_CentralFSourceAddress",System.UInt64(1),cpuHardware)
+        self.testThenSetAttribute("Failsafe_LowerBoundForFDestinationAddresses",System.UInt64(100),cpuHardware)
+        self.testThenSetAttribute("Failsafe_UpperBoundForFDestinationAddresses",System.UInt64(199),cpuHardware)
+        self.testThenSetAttribute("CycleEnableMinimumCycleTime",System.Boolean(False),cpuHardware)
+        self.testThenSetAttribute("WebserverActivate",System.Boolean(False),cpuHardware)
+        self.testThenSetAttribute("ProtectionEnablePutGetCommunication",System.Boolean(False),cpuHardware)
+        self.testThenSetAttribute("TimeOfDayLocalTimeZone",System.UInt64(11),cpuHardware)
+        
+        self.Objects[self.cpu.Name]["PROFINET interface_1"]["Object"].SetAttribute("MediaRedundancyRole",Siemens.Engineering.HW.MediaRedundancyRole.Manager)
+        
+        #DNS
+        if self.testThenSetAttribute("PnDnsConfigNameResolve",Siemens.Engineering.HW.PnDnsConfigNameResolve.Project,self.cpu):
+            self.setAttribute("PnDnsConfiguration",System.Array[str]([System.String("8.8.8.8"),System.String("4.4.4.4")]),self.cpu)
+        
+        #OPC
+        opc = self.cpu.DeviceItems[2]
+
+        self.testThenSetAttribute("OpcUaSecurityPolicies",System.UInt64(120),opc)
+        self.testThenSetAttribute("OpcUaGuestAuthentication",System.Boolean(False),opc)
+        self.testThenSetAttribute("OpcUaPasswordAuthentication",System.Boolean(True),opc)
+        
+        opcUaUserManagement = Siemens.Engineering.IEngineeringServiceProvider(opc).GetService[Siemens.Engineering.HW.Features.OpcUaUserManagement]()
+        if opcUaUserManagement.OpcUaUsers.Find("VizUser") == None:
+            opcUaUserManagement.OpcUaUsers.Create("VizUser",System.Security.SecureString("&Iconics2022"))
+            print("Creating OPC UA User 'VizUser'")
+            
+        if opcUaUserManagement.OpcUaUsers.Find("LoggingUser") == None:
+            opcUaUserManagement.OpcUaUsers.Create("LoggingUser",System.Security.SecureString("&Dematic17"))
+            print("Creating OPC UA User 'LoggingUser'")
+            
+        self.testThenSetAttribute("OpcUaMaxMonitoredItems",System.UInt32(50000),opcUaUserManagement)
+        in1 = self.cpu.DeviceItems[4]
+        #enable NTP
+        self.testThenSetAttribute("TimeSynchronizationNtp",System.Boolean(True),in1)
+        self.testThenSetAttribute("TimeSynchronizationServer1",System.String("time.windows.com"),cpuHardware)
+        self.testThenSetAttribute("TimeSynchronizationUpdateInterval",System.UInt64(3600),cpuHardware)
+        
+    def setName(self,name):
+        self.cpu.SetAttribute("Name",System.String(name))
+        
+    def getName(self,name):
+        self.cpu.GetAttribute("Name")
+        
+class Pnag(device.GsdDevice):
     def __init__(self,Device,parent):
         super().__init__(Device)
         self.tags = parent.tags
@@ -340,6 +486,8 @@ class Pnag(OpennessTest.GsdDevice):
         
         self.CommandIfIn = self.Objects["34 Bytes Command If"]["34 Bytes Command If"]["Object"].Addresses[0].StartAddress
         self.CommandIfOut = self.Objects["34 Bytes Command If"]["34 Bytes Command If"]["Object"].Addresses[1].StartAddress
+        
+        self.PROFIsafeAdress = str(self.Objects["8 Byte PROFIsafe data"]["8 Byte PROFIsafe data"]["Object"].Addresses[0].StartAddress)
         self.createTags()
         
     def createTags(self):
@@ -359,7 +507,6 @@ class Pnag(OpennessTest.GsdDevice):
             self.tags.addTag(self.Device.Name+"GlobalFaultReset","Out","{0}.4".format(self.FieldBusBitsAddress),"Bool","{0} ASi Gateway Global Fault Reset".format(self.Device.Name),self.Device.Name,True)
             
     def addHalfNodeASI(self,tagName,address):
-        import re
         if re.search("^ASI_[A-Z][1-2]_([0-9]|[0-2][0-9]|3[01])[A-B]_(I|O)[1-4]$",address) != None:
             split = address.split("_")
             circuit = split[1][-1:]
@@ -425,9 +572,57 @@ class Pnag(OpennessTest.GsdDevice):
             self.tags.addTag(name,InOrOut,logicalAddress,"Bool",comment,"AS-i I/O")
             
     def export(self):
-        xmlObjects.PnagBox(self.contolCabnet,self.name,self.xml.ObjectList,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
         
-class Pncg(OpennessTest.GsdDevice):
+        XmlExport.addCall()
+        blockA = XmlExport.CallId
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name + "_Health")
+        XmlExport.CallInfo.set("Name","ProfinetDeviceHealthSelector")
+        XmlExport.loadParameterStr('<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>',"ProfinetDeviceHealth_DB.outData")
+        XmlExport.loadParameterStr('<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>',self.name + "~PN-IO")
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+        
+        XmlExport.addCall()
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","PnagBox")
+        XmlExport.addParameter("inAsiGatewayBusFault","Input","Bool")
+        XmlExport.loadParameterStr('<Parameter Name="inMainPanelToPnag" Section="Input" Type="Bool"/>','Inst' + self.contolCabnet + '.outPlcStatus')
+        XmlExport.loadParameterStr('<Parameter Name="inAsiCmdReceive" Section="Input" Type="&quot;typeAsiCommandReceive&quot;"/>',self.name + 'CommandIn')
+        XmlExport.loadParameterStr('<Parameter Name="inFlagsChn0" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>',self.name + 'FlagsChn0')
+        XmlExport.loadParameterStr('<Parameter Name="inFlagsChn1" Section="Input" Type="&quot;typeAsiChannelFlags&quot;"/>',self.name + 'FlagsChn1')
+        XmlExport.loadParameterStr('<Parameter Name="outAsiCmdSend" Section="Output" Type="&quot;typeAsiCommandSend&quot;"/>',self.name + 'CommandOut')
+        XmlExport.loadParameterStr('<Parameter Name="outGlobalFaultReset" Section="Output" Type="Bool"/>', self.name + "GlobalFaultReset")
+        XmlExport.addConnection(blockA,"eno",XmlExport.CallId,"en")
+        
+        a = XmlExport.spawnPart("Inst" + self.name + "_Health.outFaulty","Contact")
+        XmlExport.addEN(a,"in")
+        
+        OR = XmlExport.addOR("2")
+        XmlExport.addConnection(a,"out",OR,"in1")
+        
+        b = XmlExport.spawnPart("Inst" + self.name + "_Health.outDisabled","Contact",True)
+        XmlExport.addConnection(OR,"out",b,"in")
+        XmlExport.addConnection(b,"out",XmlExport.CallId,"inAsiGatewayBusFault")
+        
+        c = XmlExport.spawnPart("Inst" + self.name + "_Health.outProblem","Contact")
+        XmlExport.addEN(c,"in")
+        XmlExport.addConnection(c,"out",OR,"in2")
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.pnagName", self.name[-6:])
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.asiGatewayDiag.enableChn0",True)
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.asiGatewayDiag.enableChn1",True)
+            self.scl.endRegion()
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+        
+class Pncg(device.GsdDevice):
     def __init__(self,Device,parent):
         super().__init__(Device)
         self.tags = parent.tags
@@ -436,23 +631,143 @@ class Pncg(OpennessTest.GsdDevice):
         self.xml = parent.xml
         self.scl = parent.scl
         self.software = parent.software
+        self.connectedDps = {
+                                "1":[],
+                                "2":[],
+                                "3":[],
+                                "4":[],
+                                "5":[],
+                                "6":[]
+                            }
         self.createTags()
         
     def createTags(self):
         self.CANChannelIn = self.Objects["CAN Channel Module_1"]["CAN Channel Submodule"]["Object"].Addresses[0].StartAddress
         self.CANChannelOut = self.Objects["CAN Channel Module_1"]["CAN Channel Submodule"]["Object"].Addresses[1].StartAddress
-        self.tags.addTag(self.Device.Name+"CANChannelIn","In","{0}.0".format(self.CANChannelIn),"Bool","{0} PNCG CAN Channel Input".format(self.Device.Name),self.Device.Name,True)
-        self.tags.addTag(self.Device.Name+"CANChannelOut","Out","{0}.0".format(self.CANChannelOut),"Bool","{0} PNCG CAN Channel Output".format(self.Device.Name),self.Device.Name,True)
+        self.tags.addTag(self.Device.Name+"CANChannelIn","In","{0}.0".format(self.CANChannelIn),"Bool","{0} CAN Channel Input".format(self.Device.Name),self.Device.Name,True)
+        self.tags.addTag(self.Device.Name+"CANChannelOut","Out","{0}.0".format(self.CANChannelOut),"Bool","{0} CAN Channel Output".format(self.Device.Name),self.Device.Name,True)
         for x in range(1,7):
             if "Command Module_{0}".format(x) not in self.Objects:
                 newSlot = self.addModule("GSD:GSDML-V2.33-DEMATIC-PNCG-20171211.XML/M/Command","Command Module_{0}".format(str(x)))
                 inAddress = newSlot.DeviceItems[0].Addresses[0].StartAddress
                 outAddress = newSlot.DeviceItems[0].Addresses[1].StartAddress
-                self.tags.addTag("{0}CmdArea{1}In".format(self.Device.Name,str(x)),"In","{0}.0".format(inAddress),"typeCommandAreaInput","{0} PNCG Command Area {1} Input".format(self.Device.Name,str(x)),self.Device.Name,True)
-                self.tags.addTag("{0}CmdArea{1}Out".format(self.Device.Name,str(x)),"Out","{0}.0".format(outAddress),"typeCommandAreaOutput","{0} PNCG Command Area {1} Output".format(self.Device.Name,str(x)),self.Device.Name,True)
+                self.tags.addTag("{0}CmdArea{1}In".format(self.Device.Name,str(x)),"In","{0}.0".format(inAddress),"typeCommandAreaInput","{0} Command Area {1} Input".format(self.Device.Name,str(x)),self.Device.Name,True)
+                self.tags.addTag("{0}CmdArea{1}Out".format(self.Device.Name,str(x)),"Out","{0}.0".format(outAddress),"typeCommandAreaOutput","{0} Command Area {1} Output".format(self.Device.Name,str(x)),self.Device.Name,True)
         
+    def adoptDps(self,dps,cmdAreaNumber):
+        if cmdAreaNumber in self.connectedDps.keys():
+            self.connectedDps[cmdAreaNumber].append(dps)
+        else:
+            raise KeyError("DPS CmdArea Number Not Valid")
+            
     def export(self):
-        xmlObjects.PncgBox(self.contolCabnet,self.name,self.xml.ObjectList,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        blockA = XmlExport.CallId
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name + "_Health")
+        XmlExport.CallInfo.set("Name","ProfinetDeviceHealthSelector")
+        XmlExport.loadParameterStr('<Parameter Name="inData" Section="Input" Type="&quot;typeProfinetDeviceHealth&quot;"/>',"ProfinetDeviceHealth_DB.outData")
+        XmlExport.loadParameterStr('<Parameter Name="inLADDR" Section="Input" Type="HW_INTERFACE"/>',self.name + "~PNCG")
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+        
+        XmlExport.addCall()
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","Pncg")
+        
+        XmlExport.loadParameterStr('<Parameter Name="inoutGlobalData" Section="InOut" Type="&quot;typeInOutGlobalData&quot;"/>',"GlobalData.inoutGlobalData")
+        
+        XmlExport.loadParameterStr('<Parameter Name="inMandatoryStatus" Section="Input" Type="&quot;typeMandatoryInput&quot;"/>',self.name + "ManStatus")
+        XmlExport.loadParameterStr('<Parameter Name="inMandatoryHandshake" Section="Input" Type="&quot;typeMandatoryHandShake&quot;"/>',self.name + "ManHSin")
+        XmlExport.loadParameterStr('<Parameter Name="inVisuNodeIndex" Section="Input" Type="Byte"/>',self.name + "VisuNode")
+        XmlExport.loadParameterStr('<Parameter Name="inVisuZoneIndex" Section="Input" Type="Byte"/>',self.name + "VisuZoneIndex")
+        XmlExport.loadParameterStr('<Parameter Name="inStatusInfo" Section="Input" Type="&quot;typeEccStatus&quot;"/>',self.name + "VisuStatus")
+        XmlExport.loadParameterStr('<Parameter Name="inWarningsInfo" Section="Input" Type="&quot;typeEccWarning&quot;"/>',self.name + "VisuWarnings")
+        XmlExport.loadParameterStr('<Parameter Name="inFaultsInfo" Section="Input" Type="&quot;typeEccFault&quot;"/>',self.name + "VisuFaults")
+        XmlExport.loadParameterStr('<Parameter Name="inCommandArea1" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',self.name + 'CmdArea1In')
+        XmlExport.loadParameterStr('<Parameter Name="inCommandArea2" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',self.name + 'CmdArea2In')
+        XmlExport.loadParameterStr('<Parameter Name="inCommandArea3" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',self.name + 'CmdArea3In')
+        XmlExport.loadParameterStr('<Parameter Name="inCommandArea4" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',self.name + 'CmdArea4In')
+        XmlExport.loadParameterStr('<Parameter Name="inCommandArea5" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',self.name + 'CmdArea5In')
+        XmlExport.loadParameterStr('<Parameter Name="inCommandArea6" Section="Input" Type="&quot;typeCommandAreaInput&quot;"/>',self.name + 'CmdArea6In')
+        XmlExport.loadParameterStr('<Parameter Name="inResetFault" Section="Input" Type="Bool"/>','Inst' + self.contolCabnet + '.outPlcStatus.resetZoneFault')
+        XmlExport.loadParameterStr('<Parameter Name="inCanChannel" Section="Input" Type="&quot;typeCANChannelInput&quot;"/>',self.name + "CANChannelIn")
+        
+        XmlExport.addParameter("inBusSlaveOk","Input","Bool")
+        
+        XmlExport.addConnection(blockA,"eno",XmlExport.CallId,"en")
+        
+        a = XmlExport.spawnPart("Inst" + self.name + "_Health.outFaulty","Contact",True)
+        XmlExport.addEN(a,"in")
+        
+        b = XmlExport.spawnPart("Inst" + self.name + "_Health.outProblem","Contact",True)
+        XmlExport.addConnection(a,"out",b,"in")
+        
+        OR = XmlExport.addOR("2")
+        XmlExport.addConnection(b,"out",OR,"in1")
+        XmlExport.addConnection(OR,"out",XmlExport.CallId,"inBusSlaveOk")
+        
+        c = XmlExport.spawnPart("Inst" + self.name + "_Health.outDisabled","Contact")
+        XmlExport.addEN(c,"in")
+        XmlExport.addConnection(c,"out",OR,"in2")
+        
+        XmlExport.loadParameterStr('<Parameter Name="outCanChannel" Section="Output" Type="&quot;typeCANChannelOutput&quot;"/>',self.name + "CANChannelOut")
+        XmlExport.loadParameterStr('<Parameter Name="outMandatoryCmd" Section="Output" Type="&quot;typeMandatoryOutput&quot;"/>',self.name + "ManCommand")
+        XmlExport.loadParameterStr('<Parameter Name="outMandatoryHandshake" Section="Output" Type="&quot;typeMandatoryHandShake&quot;"/>',self.name + "ManHSOut")
+        XmlExport.loadParameterStr('<Parameter Name="outCommandArea1" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',self.name + 'CmdArea1Out')
+        XmlExport.loadParameterStr('<Parameter Name="outCommandArea2" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',self.name + 'CmdArea2Out')
+        XmlExport.loadParameterStr('<Parameter Name="outCommandArea3" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',self.name + 'CmdArea3Out')
+        XmlExport.loadParameterStr('<Parameter Name="outCommandArea4" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',self.name + 'CmdArea4Out')
+        XmlExport.loadParameterStr('<Parameter Name="outCommandArea5" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',self.name + 'CmdArea5Out')
+        XmlExport.loadParameterStr('<Parameter Name="outCommandArea6" Section="Output" Type="&quot;typeCommandAreaOutput&quot;"/>',self.name + 'CmdArea6Out')
+        XmlExport.loadParameterStr('<Parameter Name="inoutParameterData" Section="InOut" Type="&quot;typeNodeParameters&quot;"/>',"dbPncgParameterData." + self.name)
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.name", self.name[8:])
+            self.scl.GlobalVariableEqualConstant(XmlExport.Component.get("Name") + ".inConfig.numberOfEccs", "0")
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskPncg", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskCommandArea1", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskCommandArea2", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskCommandArea3", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskCommandArea4", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskCommandArea5", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMaskCommandArea6", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.endRegion()
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+        
+        self.dpsLogic("1",XmlExport)
+        self.dpsLogic("2",XmlExport)
+        self.dpsLogic("3",XmlExport)
+        self.dpsLogic("4",XmlExport)
+        self.dpsLogic("5",XmlExport)
+        self.dpsLogic("6",XmlExport)
+            
+    def dpsLogic(self,DpsToCmdArea,XmlExport):
+        if len(self.connectedDps[DpsToCmdArea]) >= 1:
+            if len(self.connectedDps[DpsToCmdArea]) == 1:
+                XmlExport.loadParameterStr('<Parameter Name="inDpsToCmdArea{0}" Section="Input" Type="&quot;typePowerSupplyToPncg&quot;"/>'.format(DpsToCmdArea),"Inst{0}.outDpsZone{1}ToPncg".format(self.connectedDps["1"][0].name,DpsToCmdArea))
+            else:
+                listConnected = []
+                listEnable = []
+                listReset = []
+                listWakeUp = []
+                for x in self.connectedDps[DpsToCmdArea]:
+                    listConnected.append("Inst{0}.outDpsZone1ToPncg.connected".format(x.name))
+                    listEnable.append("Inst{0}.outDpsZone1ToPncg.requestEnable".format(x.name))
+                    listReset.append("Inst{0}.outDpsZone1ToPncg.requestReset".format(x.name))
+                    listWakeUp.append("Inst{0}.outDpsZone1ToPncg.requestWakeUp".format(x.name))
+                XmlExport.ANDspawn(listConnected,"Inst{0}.inDpsToCmdArea{1}.requestEnable".format(self.name,DpsToCmdArea))
+                XmlExport.ORspawn(listEnable,"Inst{0}.inDpsToCmdArea{1}.requestReset".format(self.name,DpsToCmdArea))
+                XmlExport.ORspawn(listReset,"Inst{0}.inDpsToCmdArea{1}.requestWakeUp".format(self.name,DpsToCmdArea))
+                XmlExport.ORspawn(listWakeUp,"Inst{0}.inDpsToCmdArea{1}.requestWakeUp".format(self.name,DpsToCmdArea))
         
 class ezcObject(father):
     def __init__(self,name,parent,asiAddress):
@@ -462,6 +777,7 @@ class ezcObject(father):
                                 "DpsBoxs":[],
                                 "AuxBoxs":[],
                                 "Estops":[],
+                                "RPTRs":[]
                                 }
         self.project = parent.project
         self.software = parent.software
@@ -475,10 +791,11 @@ class ezcObject(father):
         self.controlAreaDataSorted = parent.controlAreaDataSorted
         self.controlArea = parent.name
         self.asiAddress = asiAddress
+        if re.search("^CA[0-9]{1,3}EZC[0-9]{1,3}$",self.name):
+            self.ezcNumber = re.findall("[0-9]{1,3}$", self.name)[0]
         self.createAsiTags()
         
     def addAsiEstop(self,name,asiAddress):
-        import re
         if name not in self.data.keys():
             #Expecting Saftey Address ASI_B2_28
             if re.search("^ASI_[A-Z][1-2]_([0-9]|[0-2][0-9]|3[0-1])$",asiAddress) != None:
@@ -496,7 +813,6 @@ class ezcObject(father):
             raise KeyError
             
     def addAuxBox(self,asiAddress):
-        import re
         name = "{0}AUX{1}".format(self.controlArea,str(len(self.controlAreaDataSorted["AuxBoxs"]) + 1))
         if name not in self.data.keys():
             #Expecting Normal Half Nodes ASI_B2_01A or B
@@ -515,7 +831,6 @@ class ezcObject(father):
             raise KeyError
         
     def addDpsBox(self,asiAddress):
-        import re
         name = "{0}DPS{1}".format(self.controlArea,str(len(self.controlAreaDataSorted["DpsBoxs"]) + 1))
         if name not in self.data.keys():
             #Expecting Normal Half Nodes ASI_B2_01A or B
@@ -532,6 +847,24 @@ class ezcObject(father):
                 raise ValueError("Malformed ASI Address")
         else:
             raise KeyError
+            
+    def addRptrBox(self,asiNetwork):
+        #Expecting ASI_C1 or ASI_A2
+        if re.search("^ASI_[A-Z][1-2]$",asiNetwork) != None:
+            name = "{0}RPTR{1}".format(self.name,re.findall("_[A-Z][0-9]{1,3}$",asiNetwork)[0])
+            if name not in self.data.keys():
+                object = rptrObject(name,self,asiNetwork)
+                self.data[name] = object
+                self.dataSorted["rptrObject"].append(object)
+                self.controlAreaData[name] = object
+                self.controlAreaDataSorted["RPTRs"].append(object)
+                self.ezcData[name] = object
+                self.ezcDataSorted["RPTRs"].append(object)
+                return object
+            else:
+                raise KeyError
+        else:
+            raise ValueError("Malformed ASI Address")
         
     def createAsiTags(self):
         if self.networkName in self.networkDevices:
@@ -541,14 +874,110 @@ class ezcObject(father):
             raise KeyError("ASI Network Not Found In This Area")
         
     def export(self):
+        self.EzcBox()
+        self.EzcBox_FS()
+        
+    def EzcBox_FS(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name + "_FS"
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name + "_FS")
+        XmlExport.CallInfo.set("Name","EZC_FS")
+        
+        XmlExport.loadParameterStr('<Parameter Name="inZoneReset" Section="Input" Type="Bool"/>',"tempEstopReset","LocalVariable")
+        XmlExport.loadParameterStr('<Parameter Name="inPowerGroupSafetyStatusToSafety" Section="Input" Type="&quot;typePowerGroupStatusToSafety&quot;"/>',"DataToSafety.{0}EZCxPowerGroupToSafetyStatus[{1}]".format(self.controlArea,self.ezcNumber))
+        XmlExport.loadParameterStr('<Parameter Name="inContactorFeedBack" Section="Input" Type="Bool"/>',self.name + "_CR_ESM")
+        XmlExport.loadParameterStr('<Parameter Name="inQBAD" Section="Input" Type="Bool"/>',"F{0}_8BytePROFIsafedata.QBAD".format(self.pnag.PROFIsafeAdress.zfill(5)))
+        
+        XmlExport.addParameter("inLocal","Input","Bool")
+        
+        id = XmlExport.spawnPart("AlwaysFALSE","Contact")
+        XmlExport.addEN(id,"in")
+        XmlExport.addConnection(id,"out",XmlExport.CallId,"inLocal")
+        
+        XmlExport.addParameter("inInterlocks","Input","Bool")
+        
+        id = XmlExport.spawnPart("AlwaysFALSE","Contact")
+        XmlExport.addEN(id,"in")
+        XmlExport.addConnection(id,"out",XmlExport.CallId,"inInterlocks")
+        
+        if self.scl != None:
+            pass
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+    
+    def EzcBox(self):
         dpsNames = []
         auxNames = []
         for x in self.ezcDataSorted["DpsBoxs"]:
             dpsNames.append(x.name)
         for x in self.ezcDataSorted["AuxBoxs"]:
             auxNames.append(x.name)
-        xmlObjects.EzcBox(self.contolCabnet,self.controlArea,self.name,self.pnagName,dpsNames,auxNames,self.xml.ObjectList,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
         
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","EzcBox")
+        XmlExport.Comment.text = self.name
+        
+        if len(dpsNames) > 0:
+            XmlExport.addParameter("inPowerSupplyGroupStarted","Input","Bool")
+            XmlExport.addParameter("inPowerSupplyGroupAllStarted","Input","Bool")
+            if len(dpsNames) > 1:
+                list = []
+                for x in dpsNames:
+                    list.append("Inst" + x + ".outDpsToZca.started")
+                XmlExport.OR(list,XmlExport.CallId,"inPowerSupplyGroupStarted")
+                list = []
+                for x in dpsNames:
+                    list.append("Inst" + x + ".outDpsToZca.AllStarted")
+                XmlExport.AND(list,XmlExport.CallId,"inPowerSupplyGroupAllStarted")
+            else:
+                id = XmlExport.spawnPart("Inst" + dpsNames[0] + ".outDpsToZca.started","Contact")
+                XmlExport.addEN(id,"in")
+                XmlExport.addConnection(id,"out",XmlExport.CallId,"inPowerSupplyGroupStarted")
+                
+                id = XmlExport.spawnPart("Inst" + dpsNames[0] + ".outDpsToZca.AllStarted","Contact")
+                XmlExport.addEN(id,"in")
+                XmlExport.addConnection(id,"out",XmlExport.CallId,"inPowerSupplyGroupAllStarted")
+        else:
+            XmlExport.loadParameterStr('<Parameter Name="inPowerSupplyGroupStarted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+            XmlExport.loadParameterStr('<Parameter Name="inPowerSupplyGroupAllStarted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        if len(auxNames) > 0:
+            XmlExport.addParameter("inSupplyAuxOk","Input","Bool")
+            list = []
+            for x in range(len(auxNames)):
+                id = XmlExport.spawnPart("Inst" + auxNames[x] + ".outFault","Contact")
+                list.append(id)
+                if x == 0:
+                    XmlExport.addEN(id,"in")
+                else:
+                    XmlExport.addConnection(list[x-1],"out",id,"in")
+            XmlExport.addConnection(list[-1],"out",XmlExport.CallId,"inSupplyAuxOk")
+        else:
+            XmlExport.loadParameterStr('<Parameter Name="inSupplyAuxOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        XmlExport.loadParameterStr('<Parameter Name="inSupplyEzcDCOk" Section="Input" Type="Bool"/>',self.name + "_CR_ESM")
+        XmlExport.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + self.pnagName + ".outVisuInterface.status.summary")
+        XmlExport.loadParameterStr('<Parameter Name="inMainPanelToEzc" Section="Input" Type="&quot;typeAreaToZoneControl&quot;"/>','Inst' + self.contolCabnet + '.outPlcStatus')
+        XmlExport.loadParameterStr('<Parameter Name="inPowerGroupSafetyStatusToEzc" Section="Input" Type="&quot;typeSafetyStatusToPowerGroup&quot;"/>','DataFromSafety.' + self.controlArea +'EZCxSafetyStatusToPowerGroup[' + self.ezcNumber + ']')
+        XmlExport.loadParameterStr('<Parameter Name="inConvStartWarning" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        XmlExport.loadParameterStr('<Parameter Name="outEzcToMainPanel" Section="Output" Type="&quot;typeZoneToAreaControl&quot;"/>','Inst' + self.contolCabnet + '.inEzcToPlc[' + self.ezcNumber + ']')
+        XmlExport.loadParameterStr('<Parameter Name="outEzcStatusToSafety" Section="Output" Type="&quot;typePowerGroupStatusToSafety&quot;"/>','DataToSafety.' + self.controlArea +'EZCxPowerGroupToSafetyStatus[' + self.ezcNumber + ']')
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.ezcName",re.findall("EZC[0-9]{1,3}$", self.name)[0])
+            self.scl.GlobalVariableEqualConstant(XmlExport.Component.get("Name") + ".inConfig.panelNumber","1")
+            self.scl.endRegion()
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+    
 class rptrObject(father):
     def __init__(self,name,parent,asiNetwork):
         super(rptrObject,self).__init__(name,parent)
@@ -563,7 +992,27 @@ class rptrObject(father):
         self.pnagName =  self.networkDevices[self.networkName].Device.Name
         
     def export(self):
-        xmlObjects.RptrBox(self.name,self.pnagName,self.xml.ObjectList,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","RptrBox")
+        
+        XmlExport.loadParameterStr('<Parameter Name="inTemperatureRptrOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        XmlExport.loadParameterStr('<Parameter Name="inPnagToRptr" Section="Input" Type="&quot;typePnagToRptr;"/>',"Inst" + self.pnagName + ".outPnagToRptr")
+        XmlExport.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + self.pnagName + ".outVisuInterface.status.summary")
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.rptrName", re.findall("RPTR_[A-Z][1-2]$", XmlExport.Component.get("Name"))[0].replace("_", ""))
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.endRegion()
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
         
 class auxBoxObject(father):
     def __init__(self,name,asiAddress,parent):
@@ -590,41 +1039,31 @@ class auxBoxObject(father):
             raise KeyError("ASI Network Not Found In This Area")
     
     def export(self):
-        xmlObjects.AuxBox(self.contolCabnet,self.controlArea,self.ezcName,self.name,self.pnagName,self.xml.ObjectList,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","AuxBox")
+        
+        XmlExport.loadParameterStr('<Parameter Name="inSupplyAuxDCOk" Section="Input" Type="Bool"/>',self.name +'_CR_ESM')
+        XmlExport.loadParameterStr('<Parameter Name="inEzcToAux" Section="Input" Type="&quot;typeZoneControlToAux&quot;"/>',"Inst" + self.ezcName +'.outEzcToAux')
+        XmlExport.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + self.pnagName + ".outVisuInterface.status.summary")
+        
+        
+        if self.scl != None:
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.auxName",re.findall("AUX[0-9]{1,3}$", XmlExport.Component.get("Name"))[0])
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.endRegion()
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
         
 class asiEstopObject(father):
     def __init__(self,name,asiAddress,parent):
         super(asiEstopObject,self).__init__(name,parent)
-        self.project = parent.project
-        self.software = parent.software
-        self.networkDevices = parent.networkDevices
-        self.controlArea = parent.controlArea
-        self.contolCabnet = parent.contolCabnet
-        self.contolCabnet = parent.contolCabnet
-        self.xml = parent.xml
-        self.scl = parent.scl
-        self.asiAddress = asiAddress
-        self.ezcName = parent.name
-        self.controlAreaDataSorted = parent.controlAreaDataSorted
-        self.createAsiTags(asiAddress)
-        
-    def createAsiTags(self,asiAddress):
-        networkName = asiAddress.split("_")[1][:1]
-        if networkName in self.networkDevices:
-            self.pnag = self.networkDevices[networkName]
-            self.pnag.addHalfNodeASI(self.name + "_NONSAFE",self.asiAddress + "A_I1")
-            self.pnag.addHalfNodeASI(self.name + "_LT_R",self.asiAddress + "A_O1")
-            self.pnag.addHalfNodeASI(self.name + "_LT_G",self.asiAddress + "A_O2")
-            
-        else:
-            raise KeyError("ASI Network Not Found In This Area")
-    
-    def export(self):
-        xmlObjects.EStopVis(self.controlArea,self.pnag.Device.Name,self.ezcName,self.name,self.xml.ObjectList,self.scl,self.software)
-        
-class dpsBoxObject(father):
-    def __init__(self,name,asiAddress,parent):
-        super(dpsBoxObject,self).__init__(name,parent)
         self.project = parent.project
         self.software = parent.software
         self.networkDevices = parent.networkDevices
@@ -642,31 +1081,139 @@ class dpsBoxObject(father):
     def createAsiTags(self,asiAddress):
         if self.networkName in self.networkDevices:
             self.pnag = self.networkDevices[self.networkName]
+            self.pnag.addHalfNodeASI(self.name + "_NONSAFE",self.asiAddress + "A_I1")
+            self.pnag.addHalfNodeASI(self.name + "_LT_R",self.asiAddress + "A_O1")
+            self.pnag.addHalfNodeASI(self.name + "_LT_G",self.asiAddress + "A_O2")
+            
+        else:
+            raise KeyError("ASI Network Not Found In This Area")
+    
+    def export(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name + "_Vis")
+        
+        XmlExport.CallInfo.set("Name","EmergencyStop")
+        XmlExport.Comment.text = self.name + "_Vis"
+        XmlExport.addParameter("inEStopStatus","Input","Bool")
+        XmlExport.loadParameterStr('<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>','Inst' + self.controlArea + self.ezcName + '_FC.outEStopHealthy')
+        XmlExport.loadParameterStr('<Parameter Name="inLocation" Section="Input" Type="String[14]"/>','',"LiteralConstant","String",self.name.split("_")[0])
+        XmlExport.loadParameterStr('<Parameter Name="inConfigContactType" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        XmlExport.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>','Inst' + self.pnagName + '.outVisuInterface.status.summary')
+        
+        x = XmlExport.spawnPart(self.name,"Contact")
+        XmlExport.addEN(x,"in")
+        y = XmlExport.spawnPart(self.name + "_NONSAFE","Contact")
+        XmlExport.addEN(y,"in")
+        z = XmlExport.addOR("2")
+        XmlExport.addConnection(x,"out",z,"in1")
+        XmlExport.addConnection(y,"out",z,"in2")
+        XmlExport.addConnection(z,"out",XmlExport.CallId,"inEStopStatus")
+        
+        a = XmlExport.spawnPart(XmlExport.Component.get("Name") + ".outEstopLamp","Contact")
+        XmlExport.addEN(a,"in")
+        b = XmlExport.spawnPart(self.name + "_LT_R","Coil")
+        XmlExport.addConnection(a,"out",b,"in")
+        
+        c = XmlExport.spawnPart(XmlExport.Component.get("Name") + ".outEstopLamp","Contact",True)
+        XmlExport.addEN(c,"in")
+        d = XmlExport.spawnPart(self.name + "_NONSAFE","Contact")
+        e = XmlExport.spawnPart(self.name + "_LT_G","Coil")
+        XmlExport.addConnection(c,"out",d,"in")
+        XmlExport.addConnection(d,"out",e,"in")
+        
+        if self.scl != None:
+            #SCL ConFig
+            pass
+        
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+        
+class dpsBoxObject(father):
+    def __init__(self,name,asiAddress,parent):
+        super(dpsBoxObject,self).__init__(name,parent)
+        self.project = parent.project
+        self.software = parent.software
+        self.networkDevices = parent.networkDevices
+        self.controlArea = parent.controlArea
+        self.contolCabnet = parent.contolCabnet
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.asiAddress = asiAddress
+        self.ezcName = parent.name
+        self.networkName = asiAddress.split("_")[1][:1]
+        self.pnagName =  self.networkDevices[self.networkName].Device.Name
+        self.controlAreaDataSorted = parent.controlAreaDataSorted
+        self.connectedPncg = None
+        self.cmdAreaNumber = None
+        self.createAsiTags(asiAddress)
+        
+    def adoptPncg(self,pncg,cmdAreaNumber):
+        self.connectedPncg = pncg
+        if cmdAreaNumber in self.connectedPncg.connectedDps.keys():
+            self.connectedPncg.adoptDps(self,cmdAreaNumber)
+            self.cmdAreaNumber = cmdAreaNumber
+        else:
+            raise KeyError("DPS CmdArea Number Not Valid")
+        
+    def createAsiTags(self,asiAddress):
+        if self.networkName in self.networkDevices:
+            self.pnag = self.networkDevices[self.networkName]
             self.pnag.addHalfNodeASI(self.name + "_CR_ESM",self.asiAddress)
         else:
             raise KeyError("ASI Network Not Found In This Area")
     
     def export(self):
-        xmlObjects.DpsBox(self.contolCabnet,self.controlArea,self.ezcName,self.name,self.pnagName,self.xml.ObjectList,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Comment.text = self.name
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","DpsBox")
+        XmlExport.loadParameterStr('<Parameter Name="inField48VSupply1Ok" Section="Input" Type="Bool"/>', self.name + '_CR_ESM')
+        XmlExport.loadParameterStr('<Parameter Name="inZcaToDps" Section="Input" Type="&quot;typeZcaToDpsMpsEsz&quot;"/>','Inst' + self.ezcName +'.outEzcToPowerSupply')
+        XmlExport.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',"Inst" + self.pnagName + ".outVisuInterface.status.summary")
+        if self.connectedPncg != None and self.cmdAreaNumber != None:
+            XmlExport.loadParameterStr('<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>',"Inst{0}.outCommandAreaStatus[{1}].areaReady".format(self.connectedPncg.name,self.cmdAreaNumber))
+            XmlExport.loadParameterStr('<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>',"Inst{0}.outCommandAreaStatus[{1}].areaEnabled".format(self.connectedPncg.name,self.cmdAreaNumber))
+        else:
+            XmlExport.loadParameterStr('<Parameter Name="inPncgZone1Ready" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+            XmlExport.loadParameterStr('<Parameter Name="inPncgZone1Active" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        XmlExport.loadParameterStr('<Parameter Name="inPncgZone2Ready" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        XmlExport.loadParameterStr('<Parameter Name="inPncgZone2Active" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.splitPowergroupCommandZones",False)
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.panelName", self.name)
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMask", '2#0000_0000_0000_0000_0000_0000_0000_0001')
+            self.scl.endRegion()
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
         
 class AbbAcs380DriveObject(father):
-    def __init__(self,unitNumber,name,parent,ip,zone=""):
-        super(AbbAcs380DriveObject,self).__init__(name,parent)
+    def __init__(self,unitNumber,parent,ip,zone=""):
+        self.unitNumber = unitNumber
+        self.zone = zone
+        self.name = self.unitNumber + self.zone + "_FMD"
+        super(AbbAcs380DriveObject,self).__init__(self.name,parent)
         self.project = parent.project
         self.software = parent.blockGroupSw
         self.xml = parent.xml
         self.scl = parent.scl
         self.tags = parent.tags
         self.subnet = parent.subnet
-        self.name = name
-        self.unitNumber = unitNumber
         self.ip = ip
-        self.zone = zone
         self.hardwareSetup()
         
     def hardwareSetup(self):
         typeIdentifier = "GSD:GSDML-V2.33-ABB-FPNO-20180516.XML"
-        Object = OpennessTest.ungroupedDevice(self.project,typeIdentifier + "/DAP",self.name)
+        Object = device.ungroupedDevice(self.project,typeIdentifier + "/DAP",self.name)
         PPO4 = Object.addModule(typeIdentifier + "/M/ID_MODULE_PPO4","PPO Type 4_1",1)
         Object.getNetworkInterface(Object.Objects[self.name]["Interface"]["Object"])
         Object.setIp(self.ip,self.subnet)
@@ -676,27 +1223,98 @@ class AbbAcs380DriveObject(father):
         self.tags.addTag(self.name+"_Out","Out","{0}.0".format(outStart),"typeABBACS380OutputsPP04","PP04 Outputs For Drive Control","FMD PPO Tags")
         
     def export(self):
-        xmlObjects.AbbAcs380Drive(self.unitNumber,self.xml.ObjectList,self.zone,self.scl,self.software)
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
         
-class FortressGateobject(father):
-    def __init__(self,unitNumber,name,parent,ip,zone=""):
-        super(FortressGateobject,self).__init__(name,parent)
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.unitNumber + self.zone + "_Drive1")
+        XmlExport.CallInfo.set("Name","AbbAcs380Drive")
+        XmlExport.Comment.text = self.name
+        
+        XmlExport.loadParameterStr('<Parameter Name="inDriveStatus" Section="Input" Type="&quot;typeABBACS380InputsPP04&quot;" />',self.name + "_In")
+        XmlExport.loadParameterStr('<Parameter Name="inConveyorStatus" Section="Input" Type="&quot;typePortStatus1Unit&quot;" />',"Inst" + self.unitNumber + self.zone + ".outStatus")
+        XmlExport.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;" />',"Inst" + self.unitNumber + self.zone + ".outPort12Motor")
+        XmlExport.loadParameterStr('<Parameter Name="outDriveCommand" Section="Output" Type="&quot;typeABBACS380OutputsPP04&quot;" />',self.name + "_Out")
+        
+        if self.scl != None:
+            #SCL ConFig
+            pass
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+       
+class MoviMotObject(father):
+    def __init__(self,unitNumber,parent,ip,zone=""):
+        self.unitNumber = unitNumber
+        self.zone = zone
+        self.name = self.unitNumber + self.zone + "_MMD"
+        super(MoviMotObject,self).__init__(self.name,parent)
         self.project = parent.project
         self.software = parent.blockGroupSw
         self.xml = parent.xml
         self.scl = parent.scl
         self.tags = parent.tags
         self.subnet = parent.subnet
-        self.name = name
-        self.unitNumber = unitNumber
         self.ip = ip
-        self.zone = zone
+        self.hardwareSetup()
         
+    def hardwareSetup(self):
+        typeIdentifier = "GSD:GSDML-V2.25-SEW-MFE52A-20161017-102525.XML"
+        Object = device.ungroupedDevice(self.project,typeIdentifier + "/DAP/MFE PDEV MRP 3MM",self.name)
+        Object.deleteModule("Slot not used_3")
+        Slot3 = Object.addModule(typeIdentifier + "/M/11","4/6 DI_1",3)
+        Object.getNetworkInterface(Object.Objects[self.name]["Ethernet Interface"]["Object"])
+        Object.setIp(self.ip,self.subnet)
+        IOin = Object.Objects["4/6 DI_1"]["4/6 DI"]["Object"].Addresses[0].StartAddress
+        MM3PDin = Object.Objects["MOVIMOT 3PD_1"]["MOVIMOT 3PD"]["Object"].Addresses[0].StartAddress
+        MM3PDout = Object.Objects["MOVIMOT 3PD_1"]["MOVIMOT 3PD"]["Object"].Addresses[1].StartAddress
+        if IOin != -1 and MM3PDin != -1 and MM3PDout != -1:
+            self.tags.addTag(self.unitNumber + "_PE_P","In","{0}.0".format(IOin),"Bool","4/6 DI Input 1","MMD Tags")
+            self.tags.addTag(self.name + "_In","In","{0}.0".format(MM3PDin),"typeProfinetMoviMotInputs","Input Commands","MMD Tags")
+            self.tags.addTag(self.name + "_Out","Out","{0}.0".format(MM3PDout),"typeProfinetMoviMotOutputs","Output Flags","MMD Tags")
+        
+    def export(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.unitNumber + self.zone + "_Drive1")
+        XmlExport.CallInfo.set("Name","ProfinetMoviMot")
+        XmlExport.Comment.text = self.name
+        
+        XmlExport.loadParameterStr('<Parameter Name="inIsolatorSwitchOk" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        XmlExport.loadParameterStr('<Parameter Name="inDriveStatus" Section="Input" Type="&quot;typeProfinetMoviMotInputs&quot;" />',self.unitNumber + self.zone+ "_MMD_In")
+        XmlExport.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;"/>',"Inst" + self.unitNumber + self.zone + ".outPort12Motor")
+        
+        XmlExport.loadParameterStr('<Parameter Name="outDriveControl" Section="Output" Type="&quot;typeProfinetMoviMotOutputs&quot;" />',self.unitNumber + self.zone + "_MMD_Out")
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.driveIndex","1")
+            self.scl.endRegion()
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+
+class FortressGateObject(father):
+    def __init__(self,unitNumber,parent,ip,zone=""):
+        self.unitNumber = unitNumber
+        self.zone = zone
+        self.name = self.unitNumber + self.zone + "_GS"
+        super(FortressGateObject,self).__init__(self.name,parent)
+        self.project = parent.project
+        self.software = parent.blockGroupSw
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.tags = parent.tags
+        self.subnet = parent.subnet
+        self.ip = ip
         self.hardwareSetup()
         
     def hardwareSetup(self):
         typeIdentifier = "GSD:GSDML-V2.35-FORTRESS-PROLOK-20190704.XML"
-        self.Object = OpennessTest.ungroupedDevice(self.project,typeIdentifier + "/DAP",self.name)
+        self.Object = device.ungroupedDevice(self.project,typeIdentifier + "/DAP",self.name)
         safetyModule = self.Object.addModule(typeIdentifier + "/M/ID_MODULE_F_IO_3DIN1DOUT","Safety Module_1",1)
         io = self.Object.addModule(typeIdentifier + "/M/ID_MODULE_IO","Unsafe IO Data_1",2)
         self.Object.getNetworkInterface(self.Object.Objects[self.name]["Interface"]["Object"])
@@ -737,46 +1355,358 @@ class FortressGateobject(father):
         self.Failsafe_FIODBName = self.Object.Objects["Safety Module_1"]["Safety Module"]["Object"].GetAttribute("Failsafe_FIODBName")
         
     def export(self):
-        xmlObjects.FortressGate(self.unitNumber,self.Failsafe_FIODBName,self.xml.ObjectList,self.zone,self.scl,self.software)
+        self.FortressGateSwitch()
+        self.FortressGateSwitchSafety()
+        self.FortressGateSwitchVis()
+    
+    def FortressGateSwitch(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name)
+        XmlExport.CallInfo.set("Name","FortressGateSwitch")
+        XmlExport.loadParameterStr('<Parameter Name="inRequestAccess" Section="Input" Type="Bool"/>',self.name + "_RQ_PB")
+        XmlExport.loadParameterStr('<Parameter Name="inAccessGranted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        XmlExport.loadParameterStr('<Parameter Name="inUnlockSwitch" Section="Input" Type="Bool"/>',self.name + "_G_SW")
+        XmlExport.loadParameterStr('<Parameter Name="inGateMonitor" Section="Input" Type="Bool"/>',self.name + "_GateMon")
+        XmlExport.loadParameterStr('<Parameter Name="inResetRequest" Section="Input" Type="Bool"/>',self.name + "_RS_PB")
+        XmlExport.loadParameterStr('<Parameter Name="outGateSolenoid" Section="Output" Type="Bool"/>',self.name + "_Sol_Drive")
+        XmlExport.loadParameterStr('<Parameter Name="outGateSwitchLamp" Section="Output" Type="Bool"/>',self.name + "_G_LT")
+        XmlExport.loadParameterStr('<Parameter Name="outResetLamp" Section="Output" Type="Bool"/>',self.name + "_RS_LT")
+        XmlExport.loadParameterStr('<Parameter Name="outRequestLamp" Section="Output" Type="Bool"/>',self.name + "_RQ_LT")
+        
+        if self.scl != None:
+            #SCL ConFig
+            pass
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+            
+    def FortressGateSwitchSafety(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name + "_FS")
+        XmlExport.CallInfo.set("Name","FortressGateSwitchSafety")
+        XmlExport.loadParameterStr('<Parameter Name="inEstopPB1" Section="Input" Type="Bool"/>',self.name + "_Estop_1")
+        XmlExport.loadParameterStr('<Parameter Name="inEstopPB2" Section="Input" Type="Bool"/>',self.name + "_Estop_2")
+        XmlExport.loadParameterStr('<Parameter Name="inHead1" Section="Input" Type="Bool"/>',self.name + "_Sol_1")
+        XmlExport.loadParameterStr('<Parameter Name="inHead2" Section="Input" Type="Bool"/>',self.name + "_Sol_2")
+        XmlExport.loadParameterStr('<Parameter Name="inAck" Section="Input" Type="Bool"/>',"tempEstopReset","LocalVariable")
+        XmlExport.loadParameterStr('<Parameter Name="inQbad" Section="Input" Type="Bool"/>',self.Failsafe_FIODBName + ".QBAD")
+        XmlExport.loadParameterStr('<Parameter Name="inAccessGranted" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","true")
+        
+        if self.scl != None:
+            #SCL ConFig
+            pass
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+            
+    def FortressGateSwitchVis(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.Comment.text = self.name + "_Vis"
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.name + "_Vis")
+        
+        XmlExport.CallInfo.set("Name","EmergencyStop")
+        XmlExport.addParameter("inEStopStatus","Input","Bool")
+        XmlExport.loadParameterStr('<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        XmlExport.loadParameterStr('<Parameter Name="inLocation" Section="Input" Type="String[14]"/>','',"LiteralConstant","String",self.unitNumber)
+        XmlExport.loadParameterStr('<Parameter Name="inConfigContactType" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        XmlExport.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
+        
+        x = XmlExport.spawnPart(self.name + "_Estop_1","Contact")
+        XmlExport.addEN(x,"in")
+        y = XmlExport.spawnPart(self.name + "_Estop_2","Contact")
+        XmlExport.addEN(y,"in")
+        z = XmlExport.addOR("2")
+        XmlExport.addConnection(x,"out",z,"in1")
+        XmlExport.addConnection(y,"out",z,"in2")
+        XmlExport.addConnection(z,"out",XmlExport.CallId,"inEStopStatus")
+        
+        if self.scl != None:
+            #SCL ConFig
+            pass
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
+        
+class ScannerSickCLV6xxObject(father):
+    def __init__(self,unitNumber,parent,ip,zone=""):
+        self.unitNumber = unitNumber
+        self.zone = zone
+        self.unitName = self.unitNumber + self.zone
+        self.name = self.unitNumber + self.zone + "_SC"
+        super(ScannerSickCLV6xxObject,self).__init__(self.name,parent)
+        self.project = parent.project
+        self.software = parent.blockGroupSw
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.tags = parent.tags
+        self.subnet = parent.subnet
+        self.unitNumber = unitNumber
+        self.unitName = self.unitNumber + self.zone
+        self.ip = ip
+        self.zone = zone
+        self.hardwareSetup()
+        
+    def hardwareSetup(self):
+        typeIdentifier = "GSD:GSDML-V2.3-SICK-CLV62XCLV65X_VIA_CDF600-20150312.XML"
+        Object = device.ungroupedDevice(self.project,typeIdentifier + "/DAP",self.unitNumber + "_SC")
+        Object.getNetworkInterface(Object.Objects[self.unitNumber + "_SC"]["Interface"]["Object"])
+        Object.setIp(self.ip,self.subnet)
+        Ctrl_Bits_in_1 = Object.Objects["Ctrl Bits in_1"]["Ctrl Bits in"]["Object"].Addresses[0].StartAddress
+        Ctrl_Bits_out_1 = Object.Objects["Ctrl Bits out_1"]["Ctrl Bits out"]["Object"].Addresses[0].StartAddress
+        Byte_Input_1 = Object.Objects[" 32 Byte Input_1"][" 32 Byte Input"]["Object"].Addresses[0].StartAddress
+        Byte_Output_1 = Object.Objects[" 32 Byte Output_1"][" 32 Byte Output"]["Object"].Addresses[0].StartAddress
+        self.tags.addTag(self.unitName + "_Scanner_StatusWord","In","{0}.0".format(Ctrl_Bits_in_1),"typeScannerSickStatusInput","Scanner Status Signals","Scanner Tags")
+        self.tags.addTag(self.unitName + "_Scanner_CtrlWord","Out","{0}.0".format(Ctrl_Bits_out_1),"typeScannerSickCtrlOutput","Scanner Ctrl Signals","Scanner Tags")
+        self.tags.addTag(self.unitName + "_Scanner_Data_IN","In","{0}.0".format(Byte_Input_1),"typeScannerSickDataInput","Scanner Data Input","Scanner Tags")
+        self.tags.addTag(self.unitName + "_Scanner_Data_OUT","Out","{0}.0".format(Byte_Output_1),"typeScannerSickDataOutput","Scanner Data Output","Scanner Tags")
+        
+    def export(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.unitName + "_Scanner")
+        XmlExport.CallInfo.set("Name","ScannerSickCLV6xx")
+        XmlExport.Comment.text = self.unitName + "_Scanner"      
+        
+        XmlExport.loadParameterStr('<Parameter Name="inScannerStatusWord" Section="Input" Type="&quot;typeScannerSickStatusInput&quot;" />',self.unitNumber + "_Scanner_StatusWord")
+        XmlExport.loadParameterStr('<Parameter Name="inScannerData" Section="Input" Type="&quot;typeScannerSickDataInput&quot;" />',self.unitNumber + "_Scanner_Data_IN")
+        XmlExport.loadParameterStr('<Parameter Name="inConveyorStatus" Section="Input" Type="&quot;typePortStatus1Unit&quot;" />',"Inst" + self.unitName + ".outStatus.place")
+        XmlExport.addParameter("inReadEnable","Input","Bool")
+        x = XmlExport.spawnPart(self.unitName + "_PE_P","Contact",True)
+        XmlExport.addEN(x,"in")
+        XmlExport.addConnection(x,"out",XmlExport.CallId,"inReadEnable")
+        XmlExport.loadParameterStr('<Parameter Name="inResetFault" Section="Input" Type="Bool" />',"Inst" + self.unitName + ".outResetFault")
+        XmlExport.loadParameterStr('<Parameter Name="inConveyorRunning" Section="Input" Type="Bool" />',"Inst" + self.unitName + ".outPort12Motor.running")
+        
+        XmlExport.loadParameterStr('<Parameter Name="outScannerCtrlWord" Section="Output" Type="Bool" />',self.unitNumber + "_Scanner_CtrlWord")
+        XmlExport.loadParameterStr('<Parameter Name="outScannerData" Section="Output" Type="&quot;typeScannerSickDataOutput&quot;" />',self.unitNumber + "_Scanner_Data_OUT")
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(XmlExport.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.scannerId",'0')
+            self.scl.GlobalVariableEqualConstant(XmlExport.Component.get("Name") + ".inConfig.dataLength","10")
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.noReadTimeout","T#4S")
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.retainTime","T#0s")
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.triggerControl",True)            
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.canBusEnabled",False)
+            self.scl.GlobalVariableEqualLiteralConstant(XmlExport.Component.get("Name") + ".inConfig.noReadFaultLimit","3")
+            self.scl.GlobalVariableEqualConstant(XmlExport.Component.get("Name") + ".inConfig.successfulReadThreshold","80")
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.hmiControlZones.controlMask","2#0000_0000_0000_0000_0000_0000_0000_0001")
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.panelMask","2#0000_0000_0000_0000_0000_0000_0000_0001")
+            self.scl.GlobalVariableEqualBool(XmlExport.Component.get("Name") + ".inConfig.jamPresets.autoResetEnable",False)
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.jamPresets.jamTime","T#3S")
+            self.scl.GlobalVariableEqualTypedConstant(XmlExport.Component.get("Name") + ".inConfig.jamPresets.autoResetTime","T#5S")
+            self.scl.endRegion()
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(XmlExport.Component.get('Name'),True,1,XmlExport.CallInfo.get("Name"))
 
-CC = controlCabnetObject("CC110")
-CC.createControlArea("CA121")
+class ConnectionBoxObject(father):
+    def __init__(self,unitNumber,parent,ip,zone=""):
+        self.unitNumber = unitNumber
+        self.zone = zone
+        self.unitName = self.unitNumber + self.zone
+        self.name = self.unitNumber + self.zone
+        super(ConnectionBoxObject,self).__init__(self.name,parent)
+        self.project = parent.project
+        self.software = parent.blockGroupSw
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.tags = parent.tags
+        self.subnet = parent.subnet
+        self.ip = ip
+        self.zone = zone
+        self.connectionNumber = re.search("U[0-9]{6}_Conn_Box_[0-9]{1}",self.name).group()[-1:]
+        self.hardwareSetup()
+        
+    def hardwareSetup(self):
+        typeIdentifier = "OrderNumber:6AV2 125-2AE23-0AX0"
+        Object = device.ungroupedDevice(self.project,typeIdentifier + "/V5.2",self.unitName)
+        Object.getNetworkInterface(Object.Objects[self.unitName]["SCALANCE interface_1"]["Object"])
+        Object.setIp(self.ip,self.subnet)
+        
+    def export(self):
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(self.name)
+            self.scl.GlobalVariableEqualConstant('HMI.ConnectionPoints[{0}].connectionId'.format(self.connectionNumber),self.connectionNumber)
+            self.scl.GlobalVariableEqualConstant('HMI.ConnectionPoints[{0}].controlZone.controlMask'.format(self.connectionNumber),"2#0000_0000_0000_0000_0000_0000_0000_0001")
+            self.scl.endRegion()
 
-CC["CA121"].adoptNetworkDevice("U251910_PNAG_C")
-CC["CA121"].adoptNetworkDevice("U252310_PNAG_B")
-CC["CA121"].adoptNetworkDevice("U253110_PNAG_A")
+class AsiABBDriveNAType01Object(father):
+    def __init__(self,unitNumber,asiAddress,parent,zone=""):
+        self.unitNumber = unitNumber
+        self.zone = zone
+        self.unitName = self.unitNumber + self.zone
+        self.name = self.unitNumber + self.zone + "_AMD"
+        super(AsiABBDriveNAType01Object,self).__init__(self.name,parent)
+        self.project = parent.project
+        self.software = parent.blockGroupSw
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.tags = parent.tags
+        self.subnet = parent.subnet
+        self.unitNumber = unitNumber
+        self.unitName = self.unitNumber + self.zone
+        self.zone = zone
+        elf.asiAddress = asiAddress
+        self.ezcName = parent.name
+        self.networkName = asiAddress.split("_")[1][:1]
+        self.createAsiTags()
+        
+    def createAsiTags(self):
+        if networkName in self.networkDevices:
+            self.pnag = self.networkDevices[networkName]
+            #self.pnag.addHalfNodeASI(self.name + "_NONSAFE",self.asiAddress + "A_I1")
+            #self.pnag.addHalfNodeASI(self.name + "_LT_R",self.asiAddress + "A_O1")
+            #self.pnag.addHalfNodeASI(self.name + "_LT_G",self.asiAddress + "A_O2")
+        
+        
+    def export(self):
+        XmlExport = swBlock.swBlock(self.xml.ObjectList)
+        
+        XmlExport.addCall()
+        XmlExport.addEN(XmlExport.CallId,"en")
+        XmlExport.Component.set("Name","Inst" + self.unitName + "_Drive1")
+        XmlExport.CallInfo.set("Name","AsiABBDriveNAType01")
+        XmlExport.loadParameterStr('<Parameter Name="inDriveFlags" Section="Input" Type="&quot;typeDriveFlags&quot;"/>',"Inst" + self.unitName + ".outPort12Motor")
+        XmlExport.loadParameterStr('<Parameter Name="inAutoManSw" Section="Input" Type="Bool"/>',"Inst" + self.unitName + "_SS_AUT")
+        XmlExport.loadParameterStr('<Parameter Name="inDriveRunning" Section="Input" Type="Bool"/>',"Inst" + self.unitName + "_RNG")
+        XmlExport.loadParameterStr('<Parameter Name="inDriveFault" Section="Input" Type="Bool"/>',"Inst" + self.unitName + "_FLTD")
+        XmlExport.loadParameterStr('<Parameter Name="outMotorFwd" Section="Output" Type="Bool"/>',"Inst" + self.unitName + "_RUN_FWD")
+        XmlExport.loadParameterStr('<Parameter Name="outMotorRev" Section="Output" Type="Bool"/>',"Inst" + self.unitName + "_RUN_REV")
+        XmlExport.loadParameterStr('<Parameter Name="outMotorFast" Section="Output" Type="Bool"/>',"Inst" + self.unitName + "_REF_1")
+        XmlExport.loadParameterStr('<Parameter Name="outMotorFaultReset" Section="Output" Type="Bool"/>',"Inst" + self.unitName + "_CLR_FLT")
+        
+        if self.scl != None:
+            #SCL ConFig
+            self.scl.addRegion(self.Component.get("Name"))
+            self.scl.GlobalVariableEqualLiteralConstant(self.Component.get("Name") + ".inConfig.driveIndex","1")
+            self.scl.endRegion()
+            
+        if self.software != None:
+            self.software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
 
-CC["CA121"].adoptNetworkDevice("U251845_ECG_03")
-CC["CA121"].adoptNetworkDevice("U252245_ECG_02")
-CC["CA121"].adoptNetworkDevice("U253045_ECG_01")
+class HmiObject(father):
+    def __init__(self,name,parent,ip,zone=""):
+        self.zone = zone
+        self.name = name + self.zone
+        super(HmiObject,self).__init__(self.name,parent)
+        self.project = parent.project
+        self.software = parent.blockGroupSw
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.tags = parent.tags
+        self.subnet = parent.subnet
+        self.ip = ip
+        self.zone = zone
+        self.hardwareSetup()
+        
+    def hardwareSetup(self):
+        Object = device.GsdDevice(self.project.Devices.CreateFrom(self.project.ProjectLibrary.MasterCopyFolder.MasterCopies.Find("Systems-HMI1")))
+        Object.Device.SetAttribute("Name",self.name)
+        Object.startDiscovery()
+        Object.getNetworkInterface(Object.Objects[self.name + ".IE_CP_1"]["PROFINET Interface_1"]["Object"])
+        Object.networkInterface.SetAttribute("InterfaceOperatingMode",2)
+        Object.setIp(self.ip,self.subnet)
+        
+    def export(self):
+        if self.scl != None:
+            #SCL ConFig
+            pass
 
-CA111EZC1 = CC["CA121"].addEzc("ASI_B2_01A")
-CA111EZC2 = CC["CA121"].addEzc("ASI_A2_01A")
-CA111EZC3 = CC["CA121"].addEzc("ASI_C2_01A")
-CA111EZC4 = CC["CA121"].addEzc("ASI_A2_02A")
+class PnpnObject(father):
+    def __init__(self,name,parent,ip,zone=""):
+        self.zone = zone
+        self.name = name + self.zone + "_PNPN"
+        super(PnpnObject,self).__init__(self.name,parent)
+        self.project = parent.project
+        self.software = parent.blockGroupSw
+        self.xml = parent.xml
+        self.scl = parent.scl
+        self.tags = parent.tags
+        self.subnet = parent.subnet
+        self.ip = ip
+        self.hardwareSetup()
+        
+    def hardwareSetup(self):
+        typeIdentifier = "OrderNumber:6ES7 158-3AD10-0XA0"
+        Object = device.ungroupedDevice(self.project,typeIdentifier + "/V4.2",self.name,self.name)
+        Object.getNetworkInterface(Object.Objects[self.name]["PROFINET interface X1"]["Object"])
+        Object.setIp(self.ip,self.subnet)
+        
+    def export(self):
+        if self.scl != None:
+            #SCL ConFig
+            pass
 
-#CA111EZC1.addAsiEstop("EStop1","ASI_C1_28")
-#CA111EZC1.addAsiEstop("EStop2","ASI_A1_05")
-#CA111EZC1.addAsiEstop("EStop3","ASI_A1_28")
-CA111EZC1.addAuxBox("ASI_C1_15A_I3")
-CA111EZC1.addDpsBox("ASI_C1_15A_I2")
+class CallSetConfigObject(swBlock.swBlock):
+    def __init__(self,Name,ObjectList):
+        super(CallSetConfigObject,self).__init__(ObjectList)
+        Call = self.createSubElement(self.Parts,"Call","UId")
+        self.CallId = Call.get("UId")
+        self.CallInfo = self.createSubElement(Call,"CallInfo")
+        self.CallInfo.set("BlockType","FC")
+        self.CallInfo.set("Name",Name)
+        id = self.spawnPart("GlobalData.inGlobalData.checksumPulse","Contact")
+        self.addEN(id,"in")
+        self.addConnection(id,"out",self.CallId,"en")
+        self.Comment.text = "Call " + Name
 
-CC["CA121"].addRptrBox("ASI_C1")
+CC = controlCabnetObject("CC210")
 
-CA111EZC2.addAuxBox("ASI_C1_16A_I3")
-CA111EZC2.addDpsBox("ASI_C1_16A_I2")
+#CC.spawnTestDevices()
 
-CA111EZC3.addAuxBox("ASI_C1_17A_I3")
-CA111EZC3.addAuxBox("ASI_C1_17A_I4")
-CA111EZC3.addAuxBox("ASI_C1_18A_I3")
-CA111EZC3.addDpsBox("ASI_C1_18A_I4")
+CA211 = CC.createControlArea("CA211")
 
+CA211.adoptNetworkDevice("U251910_PNAG_C")
+CA211.adoptNetworkDevice("U252310_PNAG_B")
+CA211.adoptNetworkDevice("U253110_PNAG_A")
 
+PNCG_03 = CA211.adoptNetworkDevice("U251845_PNCG_03")
+CA211.adoptNetworkDevice("U252245_PNCG_02")
+CA211.adoptNetworkDevice("U253045_PNCG_01")
 
-#CC.addAbbAcs380Drive("U000000","172.16.110.66")
-CC.addFortressGate("000010","172.16.110.67")
+CA121EZC1 = CA211.addEzc("ASI_A2_02A")
+#CA121EZC2 = CA211.addEzc("ASI_A2_02B")
+#CA121EZC3 = CA211.addEzc("ASI_A2_03A")
+#CA121EZC4 = CA211.addEzc("ASI_A2_03B")
 
+#EStop1 = CA121EZC1.addAsiEstop("EStop1","ASI_C1_28")
+#EStop2 = CA121EZC1.addAsiEstop("EStop2","ASI_A1_05")
+#EStop3 = CA121EZC1.addAsiEstop("EStop3","ASI_A1_28")
+#AUX1 = CA121EZC1.addAuxBox("ASI_C1_15A_I3")
+#AUX2 = CA121EZC1.addDpsBox("ASI_C1_15A_I2")
 
+#RPTR1 = CA121EZC1.addRptrBox("ASI_C1")
+
+#AUX3 = CA121EZC2.addAuxBox("ASI_C1_16A_I3")
+DPS1 = CA121EZC1.addDpsBox("ASI_C1_16A_I2")
+DPS2 = CA121EZC1.addDpsBox("ASI_C1_16A_I2")
+DPS3 = CA121EZC1.addDpsBox("ASI_C1_16A_I3")
+DPS4 = CA121EZC1.addDpsBox("ASI_C1_16A_I4")
+DPS1.adoptPncg(PNCG_03,"1")
+DPS2.adoptPncg(PNCG_03,"1")
+DPS3.adoptPncg(PNCG_03,"1")
+DPS4.adoptPncg(PNCG_03,"1")
+
+#CA111EZC3.addAuxBox("ASI_C1_17A_I3")
+#CA111EZC3.addAuxBox("ASI_C1_17A_I4")
+#CA111EZC3.addAuxBox("ASI_C1_18A_I3")
+#CA111EZC3.addDpsBox("ASI_C1_18A_I4")
 
 CC.save()
 

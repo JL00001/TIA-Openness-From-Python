@@ -1,5 +1,6 @@
 from swBlock import swBlock
 
+"""
 class AbbAcs380Drive(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
@@ -22,6 +23,7 @@ class AbbAcs380Drive(swBlock):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
+
 class AsiABBDriveNAType01(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
         super().__init__(ObjectList)
@@ -71,6 +73,7 @@ class MoviMot(swBlock):
             
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
         
 class ScannerSickCLV6xx(swBlock):
     def __init__(self,unitNumber,ObjectList,zone="",scl=None,software=None):
@@ -204,11 +207,11 @@ class FortressGateSwitchVis(swBlock):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
+        
+        
 class EStopVis(swBlock):
     def __init__(self,ControlArea,Pnag,Ezc,unitName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
-        
-        inAsiBusFault = 'Inst{0}.outVisuInterface.status.summary'.format(Pnag)
         
         self.addCall()
         self.addEN(self.CallId,"en")
@@ -220,7 +223,7 @@ class EStopVis(swBlock):
         self.loadParameterStr('<Parameter Name="inZoneStatus" Section="Input" Type="Bool"/>','Inst' + ControlArea + Ezc + '_FC.outEStopHealthy')
         self.loadParameterStr('<Parameter Name="inLocation" Section="Input" Type="String[14]"/>','',"LiteralConstant","String",unitName.split("_")[0])
         self.loadParameterStr('<Parameter Name="inConfigContactType" Section="Input" Type="Bool"/>','',"LiteralConstant","Bool","false")
-        self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>',inAsiBusFault)
+        self.loadParameterStr('<Parameter Name="inAsiBusFault" Section="Input" Type="Bool"/>','Inst' + Pnag + '.outVisuInterface.status.summary')
         
         x = self.spawnPart(unitName,"Contact")
         self.addEN(x,"in")
@@ -263,6 +266,7 @@ class CallSetConfig(swBlock):
         self.addConnection(id,"out",self.CallId,"en")
         self.Comment.text = "Call " + Name
         
+        
 class Plc(swBlock):
     def __init__(self,CabnetNumber,EZCName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
@@ -286,6 +290,7 @@ class Plc(swBlock):
             
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
+        
         
 class PnagBox(swBlock):
     def __init__(self,CabnetNumber,PnagName,ObjectList,scl=None,software=None):
@@ -420,6 +425,8 @@ class EzcBox(swBlock):
     def createAux(self): 
         for x in self.Aux:
             AuxBox(self.CabnetNumber,self.ControlArea,self.EZCName,x,self.ObjectList,self.scl,self.software)
+            
+    
 
 class DpsBox(swBlock):
     def __init__(self,CabnetNumber,ControlArea,EZCName,DpsName,PnagName,ObjectList,scl=None,software=None):
@@ -448,6 +455,7 @@ class DpsBox(swBlock):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
+       
 class PncgBox(swBlock):
     def __init__(self,CabnetNumber,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
@@ -530,6 +538,7 @@ class PncgBox(swBlock):
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
         
+       
 class RptrBox(swBlock):
     def __init__(self,RptrName,PncgName,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
@@ -575,7 +584,7 @@ class AuxBox(swBlock):
         
         if software != None:
             software.Blocks.CreateInstanceDB(self.Component.get('Name'),True,1,self.CallInfo.get("Name"))
-        
+         """
 class ResetPanelBox(swBlock):
     def __init__(self,ControlArea,LineName,ASiNetwork,PBs,BCs,ObjectList,scl=None,software=None):
         super().__init__(ObjectList)
@@ -605,11 +614,6 @@ class ResetPanelBox(swBlock):
         
         BCs.insert(0, self.Component.get("Name") + ".outIndicatorLight")
         """
-        for x in range(len(BCs)):
-            id  = 
-            if x == 0:
-                
-        """
         
 class ConnectionBox(swBlock):
     def __init__(self,Name,ConnectionNumber,ObjectList,zone="",scl=None,software=None):
@@ -627,7 +631,7 @@ class ConnectionBox(swBlock):
         
         if software != None:
             pass
-        
+        """
 class Test(swBlock):
     def __init__(self,ObjectList,scl=None):
         super().__init__(ObjectList)
