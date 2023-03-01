@@ -631,7 +631,7 @@ class ConnectionBox(swBlock):
         
         if software != None:
             pass
-        """
+        
 class Test(swBlock):
     def __init__(self,ObjectList,scl=None):
         super().__init__(ObjectList)
@@ -649,3 +649,4 @@ class Test(swBlock):
                 dps = dps + 2
             if x != "InstU251845_ECG_03":
                 super().__init__(ObjectList)
+                """

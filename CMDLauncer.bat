@@ -1,3 +1,3 @@
 cd %CD%
-python OpennessTest.py
+python ControlObjects.py
 cmd /k

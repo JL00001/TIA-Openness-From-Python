@@ -949,3 +949,67 @@ globalLib = tia.GlobalLibraries.Open(System.IO.FileInfo("T:\\PROJECTS\\Dollar Tr
 globalLib.UpdateCheck(project,Siemens.Engineering.Library.Types.UpdateCheckMode.ReportOutOfDateOnly)
 
 """
+
+
+for x in project.Devices:
+    if x.TypeIdentifier == "GSD:GSDML-V2.33-DEMATIC-PNCG-20171211.XML/D":
+        for y in x.DeviceItems:
+            if "PNCG" not in y.Name:
+                p = re.compile("^([A-Z]){2}([0-9]){6}|^U([0-9]){6}")
+                m = p.match(y.Name)
+                if m:
+                    print(y.Name)
+                    p = re.compile("([0-9]){6}")
+                    m = p.search(y.Name)
+                    unit = m.group()
+                    try:
+                        y.set_Name("U{0}_ECC".format(unit))
+                    except Siemens.Engineering.EngineeringTargetInvocationException:
+                        run = True
+                        num = 2
+                        while(run):
+                            try:
+                                y.set_Name("U{0}_ECC_{1}".format(unit,str(num)))
+                                run = False
+                            except Siemens.Engineering.EngineeringTargetInvocationException:
+                                num = num + 1
+                    print(y.Name)
+                else:
+                    pass
+                    
+# Iterate over each Device in project.Devices
+for x in project.Devices:
+    # Check if the device's TypeIdentifier matches a certain string
+    if x.TypeIdentifier == "GSD:GSDML-V2.33-DEMATIC-PNCG-20171211.XML/D":
+        # Iterate over each DeviceItem in the DeviceItems list of that Device
+        for y in x.DeviceItems:
+            # Check if the DeviceItem's Name contains the string "PNCG"
+            if "PNCG" not in y.Name:
+                # Use regular expressions to match the format of the Name string and extract a 6-digit number from it
+                p = re.compile("^([A-Z]){2}([0-9]){6}|^U([0-9]){6}")
+                m = p.match(y.Name)
+                if m:
+                    # Print the Name of the DeviceItem
+                    print(y.Name)
+                    # Extract the 6-digit number from the Name using regular expressions
+                    p = re.compile("([0-9]){6}")
+                    m = p.search(y.Name)
+                    unit = m.group()
+                    try:
+                        # Rename the DeviceItem to "U{unit}_ECC"
+                        y.set_Name("U{0}_ECC".format(unit))
+                    except Siemens.Engineering.EngineeringTargetInvocationException:
+                        # If the rename fails due to an exception, keep adding a suffix to the new name until it succeeds
+                        run = True
+                        num = 2
+                        while(run):
+                            try:
+                                y.set_Name("U{0}_ECC_{1}".format(unit,str(num)))
+                                run = False
+                            except Siemens.Engineering.EngineeringTargetInvocationException:
+                                num = num + 1
+                    # Print the new Name of the DeviceItem
+                    print(y.Name)
+                else:
+                    # If there is no match, continue to the next DeviceItem
+                    pass

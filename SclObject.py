@@ -139,6 +139,14 @@ class sclObject(xmlHeader):
         self.createSubElement(self.StructuredText,"Token","UId").set("Text",";")
         self.NewLine()
         
+    def GlobalVariableEqualGlobalVariable(self,GlobalVariable1,GlobalVariable2):
+        self.addGlobalVariable(GlobalVariable1)
+        self.createSubElement(self.StructuredText,"Blank","UId")
+        self.createSubElement(self.StructuredText,"Token","UId").set("Text",":=")
+        self.createSubElement(self.StructuredText,"Blank","UId")
+        self.addGlobalVariable(GlobalVariable2)
+        self.createSubElement(self.StructuredText,"Token","UId").set("Text",";")
+        self.NewLine()
 
 
 

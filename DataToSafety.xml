@@ -13,14 +13,6 @@
 								<BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
 							</AttributeList>
 						</Member>
-						<Member Name="CA211EZCxPowerGroupToSafetyStatus" Datatype="Array[1..1] of &quot;typePowerGroupStatusToSafety&quot;">
-							<AttributeList>
-								<BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute>
-								<BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute>
-								<BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute>
-								<BooleanAttribute Name="SetPoint" SystemDefined="true">false</BooleanAttribute>
-							</AttributeList>
-						</Member>
 					</Section>
 				</Sections>
 			</Interface>

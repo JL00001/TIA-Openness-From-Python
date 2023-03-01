@@ -40,14 +40,15 @@ class swBlock(xmlHeader):
         self.Parts = self.createSubElement(FlgNet,"Parts")
         self.Wires = self.createSubElement(FlgNet,"Wires")
         
-    def addCall(self):
+    def addCall(self,isBD=True):
         Call = self.createSubElement(self.Parts,"Call","UId")
         self.CallId = Call.get("UId")
         self.CallInfo = self.createSubElement(Call,"CallInfo")
         self.CallInfo.set("BlockType","FB")
-        Instance = self.createSubElement(self.CallInfo,"Instance","UId")
-        Instance.set("Scope","GlobalVariable")
-        self.Component = self.createSubElement(Instance,"Component")  
+        if isBD:
+            Instance = self.createSubElement(self.CallInfo,"Instance","UId")
+            Instance.set("Scope","GlobalVariable")
+            self.Component = self.createSubElement(Instance,"Component")  
         
     def addParameter(self,parameterName,inOutType,dataType):
         Parameter = self.createSubElement(self.CallInfo,"Parameter")
@@ -103,7 +104,7 @@ class swBlock(xmlHeader):
     def spawnPart(self,name,type,negated=False):
         part = self.createSubElement(self.Parts,"Part","UId")
         part.set("Name",type)
-        if negated and type == "Contact":
+        if negated:
             Negated = self.createSubElement(part,"Negated")
             Negated.set("Name","operand")
         partId = part.get("UId")
@@ -149,6 +150,18 @@ class swBlock(xmlHeader):
             else:
                 self.addConnection(list[x-1],"out",id,"in")
         destinationCallId = self.spawnPart(destinationName,"Coil")
+        self.addConnection(list[-1],"out",destinationCallId,"in")
+        
+    def NANDspawn(self,operands,destinationName):
+        list = [] 
+        for x in range(len(operands)):
+            id = self.spawnPart(operands[x],"Contact",True)
+            list.append(id)
+            if x == 0:
+                self.addEN(id,"in")
+            else:
+                self.addConnection(list[x-1],"out",id,"in")
+        destinationCallId = self.spawnPart(destinationName,"Coil",True)
         self.addConnection(list[-1],"out",destinationCallId,"in")
         
     def addConnection(self,AccessIdOut,AccessIdOutName,AccessIdIn,AccessIdInName):
